@@ -15,20 +15,20 @@
 # limitations under the License.
 #
 import webapp2
-import handlers
+import handlers.handlers as hh
 
 app = webapp2.WSGIApplication([
 
-    ('/', handlers.StarsHandler),
-    ('/about', handlers.AboutMeHandler),
-    ('/stars', handlers.StarsHandler),
-    ('/players', handlers.PlayersHandler),
-    ('/twitterdata', handlers.TwitterHomeHandler),
-    ('/twitterdata/search', handlers.SearchHandler),
-    ('/twitterdata/searchtips', handlers.SearchTipsHandler),
-    ('/twitterdata/results/(.*)', handlers.ResultsHandler),
-    ('/twitterdata/map', handlers.MapHandler),
-    ('/particles', handlers.ParticleHandler),
-    ('/bouncingballs', handlers.BouncingHandler)
+    ('/', hh.StarsHandler),
+    ('/about', hh.AboutMeHandler),
+    ('/stars', hh.StarsHandler),
+    ('/players', hh.PlayersHandler),
+    ('/twitterdata', hh.TwitterHomeHandler),
+    ('/twitterdata/search', hh.SearchHandler),
+    ('/twitterdata/searchtips', hh.SearchTipsHandler),
+    ('/twitterdata/results/(.*)', hh.ResultsHandler),
+    ('/twitterdata/map', hh.MapHandler),
+    ('/particles', hh.ParticleHandler),
+    ('/bouncingballs', hh.BouncingHandler)
 
 ], debug=True)
