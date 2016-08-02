@@ -68,7 +68,7 @@ body {
 //            deleteDrop(drop)
         }
 
-        if (drop.iters > 100) {
+        if (drop.iters > 1000 / (Math.log(drops.length)/Math.log(2) + 1)) {
             drops.push({
                 x: drop.x,
                 y: drop.y,

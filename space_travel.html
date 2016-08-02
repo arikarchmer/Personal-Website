@@ -91,10 +91,10 @@ var canvas = document.getElementById("canvas");
     }
 
     function start() {
-        var drop = {x: canvas.width / 2, y: canvas.height / 2, vy: 2 * Math.random() - 1, vx: 2 * Math.random() - 1, r: 1, c: 'white', iters: 0};
+        var drop = {x: canvas.width / 2, y: canvas.height / 2, vy: 0.5 * Math.random() - 0.25, vx: 0.5 * Math.random() - 0.25, r: 1, c: 'white', iters: 0};
         drops.push(drop);
         beginAnimation();
     }
 
-    setInterval(start, 10);
+    setInterval(start, 25);
 </script>
