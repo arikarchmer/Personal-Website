@@ -1,0 +1,59 @@
+<html>
+<head>
+  <title>Play</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200|Bad+Script|Loved+by+the+King' rel='stylesheet' type='text/css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<style>
+body {
+    background-color: black;
+    color: white;
+    font: 24px "Source Code Pro";
+}
+#canvas {
+    position: absolute;
+    background-color: black;
+}
+</style>
+<body>
+<canvas id="canvas"></canvas>
+</body>
+<script>
+
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    canvas.height = $(window).height();
+    canvas.width = $(window).width();
+
+    var obstacle_locations = [];
+
+    function initField() {
+        for (var i = 1; i < 12; i++) {
+            obstacle_locations.push({x: canvas.width * (1/14) + i * canvas.width * (1/14), y: 100});
+        }
+        for (var j = 1; j < 9; j++) {
+            obstacle_locations.push({x: canvas.width * (1/11) + j * canvas.width * (1/11), y: 200});
+        }
+        for (var k = 1; k < 12; i++) {
+            obstacle_locations.push({x: canvas.width * (1/14) + k * canvas.width * (1/14), y: 300});
+        }
+        for (var l = 1; l < 9; j++) {
+            obstacle_locations.push({x: canvas.width * (1/11) + l * canvas.width * (1/11), y: 400});
+        }
+        for (var m = 0; m < obstacle_locations.length; m++) {
+            var obs = obstacle_locations[m];
+            ctx.strokeStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(obs.x, obs.y, 10, 0, 2 * Math.PI, false);
+            ctx.stroke();
+        }
+    }
+
+    initField();
+
+</script>

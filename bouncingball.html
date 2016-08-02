@@ -87,6 +87,7 @@ body {
     }
 
     var exec = false;
+    var colors = ['hotpink', 'aquamarine', 'red'];
     canvas.addEventListener('click', function(e) {
         for (var i = 0; i < 10; i++) {
             var drop = {
@@ -97,7 +98,7 @@ body {
                 vx: 10 * Math.random() - 5,
                 a: 1,
                 r: 10,
-                c: 'white',
+                c: colors[Math.floor(Math.random() * 3)],
                 iters: 0
             };
             drops.push(drop);

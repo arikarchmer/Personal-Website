@@ -17,6 +17,13 @@ class Score(db.Model):
     score = db.IntegerProperty()
 
 
+class BellCurveSimHandler(webapp2.RequestHandler):
+
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('bellcurvesim.html')
+        self.response.write(page.render())
+
+
 class SpaceTravelHandler(webapp2.RequestHandler):
 
     def get(self):
