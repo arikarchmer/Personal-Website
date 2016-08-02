@@ -17,6 +17,13 @@ class Score(db.Model):
     score = db.IntegerProperty()
 
 
+class SpaceTravelHandler(webapp2.RequestHandler):
+
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('space_travel.html')
+        self.response.write(page.render())
+
+
 class BouncingHandler(webapp2.RequestHandler):
 
     def get(self):

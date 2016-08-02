@@ -12,8 +12,7 @@
 body {
     background-color: black;
     color: white;
-}
-#count {
+    font: 24px "Source Code Pro";
 }
 #canvas {
     position: absolute;
@@ -24,7 +23,7 @@ body {
 <canvas id="canvas"></canvas>
 <div class="row">
     <div class="col-sm-1">
-        <h1 id="count"></h1>
+        <h1>click</h1>
     </div>
 </div>
 </body>
@@ -53,19 +52,16 @@ body {
 
         if (drop.x > canvas.width) {
             drop.vx = -drop.vx;
-//            deleteDrop(drop)
         }
         if (drop.x < 0) {
              drop.vx = -drop.vx;
-//            deleteDrop(drop)
         }
         if (drop.y > canvas.height) {
              drop.vy = -drop.vy;
-//            deleteDrop(drop)
+             drop.vy = drop.vy + 3;
         }
         if (drop.y < 0) {
              drop.vy = -drop.vy;
-//            deleteDrop(drop)
         }
     }
 
@@ -102,7 +98,7 @@ body {
                 y: e.offsetY,
                 vy: 10 * Math.random() - 10,
                 vx: 10 * Math.random() - 5,
-                r: 2,
+                r: 3,
                 c: 'white',
                 iters: 0
             };

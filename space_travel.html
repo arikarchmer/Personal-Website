@@ -29,8 +29,7 @@ body {
 </div>
 </body>
 <script>
-
-    var canvas = document.getElementById("canvas");
+var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
 
     canvas.height = $(window).height();
@@ -47,46 +46,23 @@ body {
 
     function animateDrop(drop) {
 //        drop.vy = drop.vy + 0.1;
+        drop.r = drop.r + 0.0001;
         drop.y = drop.y + drop.vy;
         drop.x = drop.x + drop.vx;
         drop.iters = drop.iters + 1;
 
         if (drop.x > canvas.width) {
-            drop.vx = -drop.vx;
-//            deleteDrop(drop)
+            deleteDrop(drop);
         }
         if (drop.x < 0) {
-             drop.vx = -drop.vx;
-//            deleteDrop(drop)
+            deleteDrop(drop);
         }
         if (drop.y > canvas.height) {
-             drop.vy = -drop.vy;
-//            deleteDrop(drop)
+            deleteDrop(drop);
         }
         if (drop.y < 0) {
-             drop.vy = -drop.vy;
-//            deleteDrop(drop)
+           deleteDrop(drop);
         }
-
-        if (drop.iters > 100) {
-            drops.push({
-                x: drop.x,
-                y: drop.y,
-                vy: 10 * Math.random() - 5,
-                vx: 10 * Math.random() - 5,
-                r: 1,
-                c: 'white',
-                iters: 0
-            });
-            drop.iters = 0;
-        }
-
-        if (drops.length > 16384) {
-            drops.splice(1, 16384);
-        }
-
-        document.getElementById('count').innerHTML = drops.length;
-
     }
 
     function draw() {
@@ -103,9 +79,10 @@ body {
 
     function animation() {
         draw();
-        setTimeout(animation, 0.001);
+        setTimeout(animation, 1);
     }
 
+    exec = false;
     function beginAnimation() {
         if (!exec) {
             exec = true;
@@ -113,18 +90,11 @@ body {
         }
     }
 
-    var exec = false;
-    var drop = {
-        id: 1,
-        x: canvas.width / 2,
-        y: canvas.height / 2,
-        vy: 10 * Math.random() - 5,
-        vx: 10 * Math.random() - 5,
-        r: 1,
-        c: 'white',
-        iters: 0
-    };
-    drops.push(drop);
-    beginAnimation();
+    function start() {
+        var drop = {x: canvas.width / 2, y: canvas.height / 2, vy: 2 * Math.random() - 1, vx: 2 * Math.random() - 1, r: 1, c: 'white', iters: 0};
+        drops.push(drop);
+        beginAnimation();
+    }
 
+    setInterval(start, 10);
 </script>
