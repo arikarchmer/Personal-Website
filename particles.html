@@ -68,7 +68,7 @@ body {
 //            deleteDrop(drop)
         }
 
-        if (drop.iters > 1000 / (Math.log(drops.length)/Math.log(2) + 1)) {
+        if (drop.iters > 250) {
             drops.push({
                 x: drop.x,
                 y: drop.y,
@@ -81,8 +81,8 @@ body {
             drop.iters = 0;
         }
 
-        if (drops.length > 16384) {
-            drops.splice(1, 16384);
+        if (drops.length > 2048) {
+            drops.splice(0, 2048);
         }
 
         document.getElementById('count').innerHTML = drops.length;

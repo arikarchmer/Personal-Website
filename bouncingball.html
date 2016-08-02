@@ -45,7 +45,7 @@ body {
     }
 
     function animateDrop(drop) {
-        drop.vy = drop.vy + 1;
+        drop.vy = drop.vy + drop.a;
         drop.y = drop.y + drop.vy;
         drop.x = drop.x + drop.vx;
         drop.iters = drop.iters + 1;
@@ -54,14 +54,11 @@ body {
             drop.vx = -drop.vx;
         }
         if (drop.x < 0) {
-             drop.vx = -drop.vx;
+            drop.vx = -drop.vx;
         }
-        if (drop.y > canvas.height) {
-             drop.vy = -drop.vy;
-             drop.vy = drop.vy + 3;
-        }
-        if (drop.y < 0) {
-             drop.vy = -drop.vy;
+        if (drop.y + 2 * drop.r >= canvas.height) {
+            drop.vy = -drop.vy;
+            drop.a = drop.a + 0.5;
         }
     }
 
@@ -70,10 +67,10 @@ body {
         for (var i = 0; i < drops.length; i++) {
             var drop = drops[i];
             animateDrop(drop);
-            ctx.fillStyle = drop.c;
+            ctx.strokeStyle = drop.c;
             ctx.beginPath();
             ctx.arc(drop.x, drop.y, drop.r, 0, 2 * Math.PI, false);
-            ctx.fill();
+            ctx.stroke();
         }
     }
 
@@ -96,9 +93,10 @@ body {
                 id: 1,
                 x: e.offsetX,
                 y: e.offsetY,
-                vy: 10 * Math.random() - 10,
+                vy: 10 * Math.random() - 15,
                 vx: 10 * Math.random() - 5,
-                r: 3,
+                a: 1,
+                r: 10,
                 c: 'white',
                 iters: 0
             };
