@@ -1,0 +1,469 @@
+<html>
+<head>
+  <title>stars</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Space+Mono' rel='stylesheet' type='text/css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<style>
+body {
+    background-color: black;
+    color: white;
+    font: 12px "Space Mono";
+}
+input[type=text] {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    font: 12px "Space Mono";
+    padding: 5px 5px;
+}
+#name {
+    transition: border-bottom-color 1500ms;
+}
+#guy {
+    transition: color 1500ms;
+}
+</style>
+<body>
+  <div class="modal fade text-center" id="starter" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="color: white;background-color: black;padding: 20px 20px;border-top: none">
+          <form role="form">
+              <h4>This is a story of...</h4>
+            <div class="form-group">
+                <label for="name"><span class="glyphicon glyphicon-user" id="guy"></span></label>
+                <input id="name" type="text" class="from-control text-left"  placeholder="Player 1" style="color:white">
+                <button type="button" onclick="rules()" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-off"></span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="rules" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="color: white;background-color: black;padding: 20px 20px;border-top: none">
+          <form role="form">
+              <h4>Now listen up...</h4>
+              <br>
+            <div class="form-group text-center">
+                <p>This is you:</p>
+                <img src="/static/star/images/You.png">
+                <br><br><br>
+                <p>This is a star:</p>
+                <img src="/static/star/images/stars/white.png" class="img-circle">
+                <br><br><br>
+                <p>This is not you (bad guys):</p>
+                <img src="/static/star/images/stars/red.png" class="img-circle">
+                <br><br><br>
+                <p>This is a power up star (a very special star):</p>
+                <img src="/static/star/images/stars/green.png" class="img-circle">
+                <br><br><br>
+                <button type="button" onclick="demo()" class="btb btn-success btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade text-center"  id="demo" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="color: white;background-color: black;padding: 20px 20px;border-top: none">
+            <h4>Move your mouse to gather stars.</h4>
+            <br><br><br>
+            <canvas id="myCanvas3" width="150" height="100" style="background-color:black"></canvas>
+            <br><br><br>
+            <button type="button" onclick="clickStart()" class="btb btn-success btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade text-center"  id="clickStart" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="color: white;background-color: black;padding: 20px 20px;border-top: none">
+            <br><br><br>
+            <h4>Click to start.</h4>
+            <br><br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade text-center"  id="levelUp" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="color: white;background-color: black;padding: 20px 20px;border-top: none">
+            <h2>You beat the level. Congratulations!</h2>
+            <br>
+            <h4>Are you ready to move on?</h4>
+            <br>
+            <button type="button" onclick="levelUp()" class="btb btn-success btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade text-center"  id="loss" data-backdrop="static" data-keyboard="false" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="color: white;background-color: black;padding: 20px 20px;border-top: none">
+            <h2>GAME OVER</h2>
+            <h6 id="score"></h6>
+            <br>
+            <h4>Play again?</h4>
+            <br>
+            <button type="button" onclick="restart()" class="btb btn-success btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="text-center">
+    <div class="col-sm-1">
+        <canvas id="myCanvas2" width="100" height="100" style="background-color:black"></canvas>
+    </div>
+    <div class="col-sm-11">
+        <canvas id="myCanvas" width="javascript: getWindowHeight()" height="getWindowWidth()" style="background-color:black"></canvas>
+    </div>
+    <br><br><br><br><br>
+    <h3 id="power"></h3>
+</div>
+<script>
+
+    var GAME_DATA = {colors: undefined, level: undefined, level_length: undefined, size: undefined, score: undefined, begin: undefined};
+
+    var COLORS = ["red", "white"];
+    var LEVEL = 1;
+    var STARS_NUM = 200;
+    var LEVEL_LENGTH = 10;
+    var SIZE = 20;
+    var SCORE = 0;
+    var USER = {x: 0, y: 0, r: SIZE, c: "white", name: ""};
+
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    var canvas2 = document.getElementById("myCanvas2");
+    var ctx2 = canvas2.getContext("2d");
+    var canvas3 = document.getElementById("myCanvas3");
+    var ctx3 = canvas3.getContext("2d");
+
+    function getWindowHeight() {
+        return window.innerHeight;
+    }
+
+    function getWindowWidth() {
+        return window.innerWidth;
+    }
+
+    function starter(failed) {
+        if (failed){
+            var form = document.getElementById("name");
+            form.style.borderBottomColor = "red";
+            var guy = document.getElementById("guy");
+            guy.style.color = "red";
+        }
+        $("#starter").modal();
+    }
+
+    function rules() {
+        USER.name = document.getElementById('name').value;
+        if (USER.name == "") {
+            starter(true);
+        } else {
+            $("#rules").modal();
+            $("#starter").modal("toggle");
+        }
+    }
+
+    function demo() {
+        $("#demo").modal();
+        $("#rules").modal("toggle");
+        demoAnimation(0, true);
+    }
+
+    function clickStart() {
+        $("#demo").modal("toggle");
+        $("#clickStart").modal();
+        setTimeout(function() {$("#clickStart").modal("toggle");}, 1000);
+    }
+
+    function demoAnimation(x, draw_star) {
+        clearCanvas(canvas3);
+
+        var s = {x: canvas3.width / 2, y: canvas3.height / 2, r: 4, c: "white"};
+        var rect = {x: x, y: 40, r: 20};
+
+        if (Math.abs(rect.x - s.x) < 20) {
+            draw_star = false;
+        }
+
+        if (draw_star) {
+            ctx3.beginPath();
+            ctx3.arc(s.x, s.y, s.r, 0, 2 * Math.PI, false);
+            ctx3.fillStyle = s.c;
+            ctx3.fill();
+        }
+
+        ctx3.fillStyle = "white";
+        ctx3.fillRect(rect.x, rect.y, rect.r, rect.r);
+
+        x = x + 1;
+
+        if (x < canvas3.width) {
+            setTimeout(demoAnimation.bind(null, x, draw_star), 7);
+        } else {
+            draw_star = true;
+            setTimeout(demoAnimation.bind(null, 0, draw_star), 7);
+        }
+    }
+
+    function createProgressSquare() {
+        clearCanvas(canvas2);
+        ctx2.fillStyle = "white";
+        ctx2.fillRect((canvas2.width / 2) - (SIZE), (canvas2.height / 2) - (SIZE), SIZE * 2, SIZE * 2);
+        ctx2.rect((canvas2.width / 2) - 3 * LEVEL_LENGTH, (canvas2.height / 2) - 3 * LEVEL_LENGTH,
+            6 * LEVEL_LENGTH, 6 * LEVEL_LENGTH);
+        ctx2.strokeStyle = "white";
+        ctx2.stroke();
+        if (SCORE % 10 == 0 && SCORE > 0) {
+            $("#levelUp").modal();
+        }
+    }
+
+    function createStars(num) {
+        var stars = [];
+        for (var i = 0; i < num / 2; i++) {
+            var s = {id: i, x: canvas.width * Math.random(), y: -5, r: 3 + Math.random() * 2, vx: 2 * Math.random() - 1,
+                vy: 2 * Math.random() - 1, c: COLORS[Math.floor(COLORS.length * Math.random())]};
+            stars.push(s);
+        }
+        for (var j = 0; j < num / 2; j++) {
+            var s2 = {id: j, x: -5, y: canvas.height * Math.random(), r: 3 + Math.random() * 2, vx: 2 * Math.random() - 1,
+                vy: 2 * Math.random() - 1, c: COLORS[Math.floor(COLORS.length * Math.random())]};
+            stars.push(s2);
+        }
+        draw(stars);
+        return stars;
+    }
+
+    function draw(stars) {
+        for (var i = 0; i < stars.length; i++) {
+            var s = stars[i];
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, 2 * Math.PI, false);
+            ctx.fillStyle = s.c;
+            ctx.fill();
+//            ctx.strokeStyle = 'white';
+//            ctx.stroke();
+        }
+    }
+
+    function clearCanvas(canvas) {
+        canvas.width = canvas.width;
+    }
+
+    function animate(stars) {
+        for (var i = 0; i < stars.length; i++) {
+            var s = stars[i];
+            s.x = s.x + s.vx;
+            s.y = s.y + s.vy;
+            if (s.x > canvas.width) {
+                s.x = 1;
+                s.y = Math.random() * canvas.height;
+                s.vy = -s.vy;
+            }
+            if (s.x < 0) {
+                s.x = canvas.width - 1;
+                s.y = Math.random() * canvas.height;
+                s.vy = -s.vy;
+            }
+            if (s.y > canvas.height) {
+                s.y = 1;
+                s.x = Math.random() * canvas.width;
+                s.vx = -s.vx;
+            }
+            if (s.y < 0) {
+                s.y = canvas.height;
+                s.x = Math.random() * canvas.width;
+                s.vx = -s.vx;
+            }
+        }
+        clearCanvas(canvas);
+        draw(stars);
+    }
+
+    function getPowerup() {
+        var ups = ['score', 'slow motion'];
+        return {type: ups[Math.floor(Math.random() * 2)]};
+    }
+
+    function launchPowerup(p) {
+        if (p.type == 'sparsity') {
+            document.getElementById('power').innerHTML = "SPARSITY!";
+            STARS.splice(0, (STARS_NUM / 2));
+            setTimeout(function() {
+                for (var i = 0; i < (STARS_NUM / 2); i++) {
+                    var s = {id: i, x: canvas.width * Math.random(), y: canvas.height * Math.random(), r: 3 + Math.random() * 2, vx: 2 * Math.random() - 1,
+                        vy: 2 * Math.random() - 1, c: COLORS[Math.floor(COLORS.length * Math.random())]};
+                    if (collided(USER, s)) {
+                        s.x = s.x + (Math.random() * 2 - 1) * 100;
+                        s.y = s.y + (Math.random() * 2 - 1) * 50;
+                    }
+                    STARS.push(s);
+                }
+            }, 5000);
+        }
+        if (p.type == 'score') {
+            document.getElementById('power').innerHTML = "PLUS 5!";
+            SCORE = SCORE + 5;
+            SIZE = SIZE + 5;
+            createProgressSquare((SIZE + 5));
+        }
+        if (p.type == "slow motion") {
+            document.getElementById('power').innerHTML = "SLOW MOTION!";
+            for (var i = 0; i < STARS.length; i++) {
+                var s = STARS[i];
+                s.vx = s.vx * 0.25;
+                s.vy = s.vy * 0.25;
+            }
+            setTimeout(function() {
+                for (var i = 0; i < STARS.length; i++) {
+                    var s = STARS[i];
+                    if (s.vx < 0.25 && s.vy < 0.25) {
+                        s.vx = s.vx * 4;
+                        s.vy = s.vy * 4;
+                    }
+                }
+            }, 5000)
+        }
+    }
+
+
+    function powerup() {
+        var p = getPowerup();
+        launchPowerup(p);
+    }
+
+    function collided(x, y) {
+        return Math.abs(x.x - y.x) < (SIZE / 2) && Math.abs(x.y - y.y) < (SIZE / 2)
+    }
+
+    function checkHits() {
+        var power = Math.random();
+        var p = STARS[0];
+        if (power < 0.01) {
+            p.c = "green";
+            p.r = 15;
+        }
+        if (collided(USER, p)) {
+            powerup();
+            STARS.splice(STARS[0], 1);
+            setTimeout(function () {
+                document.getElementById('power').innerHTML = "";
+            }, 3000);
+        }
+        for (var i = 0; i < STARS.length; i++) {
+            var s = STARS[i];
+            if (collided(USER, s)) {
+                if (USER.c == s.c) {
+                    STARS.splice(i, 1);
+                    var new_s = {
+                        id: STARS.length + 1, x: canvas.width * Math.random(), y: canvas.height * Math.random(),
+                        r: 3 + Math.random() * 2, vx: 2 * Math.random() - 1, vy: 2 * Math.random() - 1, c: "white"
+                    };
+                    STARS.push(new_s);
+                    SIZE = SIZE + 1;
+                    SCORE = SCORE + 1;
+                    createProgressSquare();
+                } else {
+                    playAgain();
+                }
+            }
+        }
+    }
+
+    function levelUp() {
+        for (var i = 0; i < STARS.length; i++) {
+            var s = STARS[i];
+            s.vx = s.vx + 0.1;
+            s.vy = s.vy + 0.1;
+        }
+        LEVEL = LEVEL + 1;
+        COLORS.push("red");
+        SIZE = 20;
+        BEGIN = false;
+        createProgressSquare();
+        STARS = createStars(200 + 25 * LEVEL);
+    }
+
+    function lossAnimation(y) {
+        clearCanvas(canvas);
+        y = y + 1;
+        for (var i = 0; i < STARS.length; i += 1) {
+            var s = STARS[i];
+            s.y = s.y + 3;
+            if (s.y > canvas.height) {
+                STARS.splice(STARS[i], 1);
+            }
+        } if (STARS.length > 0) {
+            setTimeout(lossAnimation.bind(null, y), 1);
+        }
+        draw(STARS);
+    }
+
+    function playAgain() {
+        lossAnimation(0);
+        setTimeout(function() {$("#loss").modal();}, 1000);
+        document.getElementById('score').innerHTML = "You scored: " + SCORE;
+//        setTimeout(function() {$("#loss").modal();}, 1000);
+//        BEGIN = false;
+    }
+
+    function restart() {
+//        setTimeoutInterval(1000);
+        STARS = createStars(200);
+        COLORS = ["red", "white"];
+        LEVEL = 1;
+        LEVEL_LENGTH = 10;
+        SIZE = 20;
+        SCORE = 0;
+        createProgressSquare();
+        BEGIN = false;
+    }
+
+    var STARS = createStars(200);
+    var BEGIN = false;
+    createProgressSquare();
+    starter();
+
+    canvas.addEventListener('click', function() {
+//        $.getJSON('/test', console.log);
+        BEGIN = true;
+    });
+
+    canvas.addEventListener('mousemove', function(e) {
+        if (!BEGIN) {
+            clearCanvas(canvas);
+            draw(STARS);
+        } else {
+            animate(STARS);
+        }
+        USER = {x: e.offsetX, y: e.offsetY, r: SIZE, c: "white"};
+        ctx.fillStyle = USER.c;
+        ctx.fillRect(USER.x - (SIZE / 2), USER.y - (SIZE / 2), USER.r, USER.r);
+        if (BEGIN) {
+            checkHits();
+        }
+    });
+
+</script>
+
+</body>

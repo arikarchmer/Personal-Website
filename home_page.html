@@ -1,0 +1,51 @@
+<html>
+<head>
+  <title>Welcome</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="/static/td/core.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<style>
+.container-fluid {
+    padding: 40px 40px;
+}
+.bg {
+    background-color: white;
+    color: black;
+    padding: 50px 25px;
+    font: 12px "Courier";
+    line-height: 1;
+    letter-spacing: 1px;
+}
+.img-title {
+    background-color: white;
+    color: black;
+    padding: 10px 10px;
+    font: 20px "Courier";
+    line-height: 1;
+    letter-spacing: 3px;
+    visibility: hidden;
+}
+</style>
+<body>
+<div class="container-fluid bg text-center">
+    <h1>Welcome to Twitter | Data</h1>
+    <br><br><br>
+    <div class="col-sm-2 col-sm-offset-3">
+        <h3 id="tit1" class="img-title">/search</h3>
+        <a href="/twitterdata/search">
+        <img onmouseover="rotate_img(this, 'tit1')" onmouseout="reg_img(this, 'tit1')" src="http://rediscover.archspm.org/wp-content/uploads/sites/6/2013/11/lake.jpg" alt="Searching" class="img-circle" style="width:128px;height:128px;">
+        </a>
+    </div>
+    <div class="col-sm-2 col-sm-offset-2">
+        <h3 id="tit2" class="img-title">/map</h3>
+        <a href="/twitterdata/map">
+        <img onmouseover="rotate_img(this, 'tit2')" onmouseout="reg_img(this, 'tit2')" src="http://m.img.brothersoft.com/android/25/2556ccd1a200e32b7caba58e0f127391_screeshots_0.jpeg" alt="Boston" class="img-circle" style="width:128px;height:128px;">
+        </a>
+    </div>
+</div>
+</body>
+</html>

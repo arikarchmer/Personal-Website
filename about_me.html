@@ -1,0 +1,236 @@
+<html>
+<head>
+  <title>Play</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200|Bad+Script|Loved+by+the+King' rel='stylesheet' type='text/css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<style>
+body {
+    background-color: black;
+    color: ghostwhite;
+    font: 10px "Source Code Pro";
+    letter-spacing: 2px;
+}
+u {
+    text-decoration: none;
+    border-bottom: 2px solid ghostwhite;
+}
+h1 {
+    font: 14px "Source Code Pro";
+    font-weight: 200;
+}
+.text-justify {
+    text-align: justify;
+}
+.title {
+    font: 36px "Source Code Pro";
+}
+#canvas {
+    position: absolute;
+}
+#main_title {
+    font: 84px "Source Code Pro";
+    letter-spacing: 18px;
+}
+#signature {
+    font: 18px "Source Code Pro";
+    font-weight: 200;
+}
+
+</style>
+<body>
+<canvas id="canvas"></canvas>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <p id="main_title" class="title text-justify"><u>F times d</u></p>
+        <p id="signature" class="text-right">by Ari Karchmer</p>
+    </div>
+</div>
+<br><br><br>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3 text-justify">
+        <h1 class="title text-left">About</h1>
+        <h1>
+            Brandeis University, class of 2018. Computer science and math major. Lover of all things soccer.
+            Inhabitant of Brookline, Massachusetts.
+        </h1>
+    </div>
+</div>
+<br><br><br>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3 text-justify">
+        <h1 class="title text-left">Projects</h1>
+        <h1>
+            <a href="/stars"><i>STARSPACE</i></a>: a unique and entertaining web game that features you,
+            the masterful spaceship pilot, and your quest to collect massive stars before your alien counterparts do the same.
+        </h1>
+        <h1>
+            <a href="/twitterdata"><i>TwitterData</i></a>: an analytic tool designed to make locating
+            human thoughts a reality. TwitterData allows you to search entire cities for keywords or phrases,
+            or define precise areas on a map to pinpoint an exact location.
+        </h1>
+    </div>
+</div>
+<br><br><br>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3 text-justify">
+        <h1 class="title text-left">Contact</h1>
+        <h1>
+            Email at karchmer@brandeis.edu and tweet @f_times_d.
+        </h1>
+    </div>
+</div>
+</body>
+<script>
+
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    canvas.height = $(window).height();
+    canvas.width = $(window).width();
+
+     var drops = [];
+
+    function animateDrop(drop) {
+        drop.y = drop.y + drop.vy;
+        drop.x = drop.x + drop.vx;
+        drop.iters = drop.iters + 1;
+
+        if (drop.x > canvas.width) {
+            drop.c = 'black';
+            drop.vx = -drop.vx;
+        }
+        if (drop.x < 0) {
+            drop.c = 'black';
+            drop.vx = -drop.vx;
+        }
+        if (drop.y > canvas.height) {
+            drop.c = 'black';
+            drop.vy = -drop.vy;
+        }
+        if (drop.y < 0) {
+            drop.c = 'black';
+            drop.vy = -drop.vy;
+        }
+
+//        if (drop.iters > 100) {
+//            for (var i = 0; i < 4; i++) {
+//                if (drop.c == 'white') {
+//                    id = id + 1;
+//                    drops.push({
+//                        id: id,
+//                        x: drop.x,
+//                        y: drop.y,
+//                        vy: 2 * Math.random() - 1,
+//                        vx: 2 * Math.random() - 1,
+//                        r: 1,
+//                        c: 'white',
+//                        iters: 0
+//                    })
+//                }
+//            }
+//            drop.c = 'black';
+//            drop.iters = 0;
+//        }
+    }
+
+    function draw() {
+        canvas.width = canvas.width;
+        for (var i = 0; i < drops.length; i++) {
+            var drop = drops[i];
+            animateDrop(drop);
+            ctx.fillStyle = drop.c;
+            ctx.beginPath();
+            ctx.arc(drop.x, drop.y, drop.r, 0, 2 * Math.PI, false);
+            ctx.fill();
+        }
+    }
+
+    function animation() {
+        draw();
+        setTimeout(animation, 1);
+    }
+
+    exec = false;
+    function beginAnimation() {
+        if (!exec) {
+            exec = true;
+            animation();
+        }
+    }
+
+    var id = 0;
+    canvas.addEventListener('mousemove', function(e) {
+        id = id + 1;
+        var x = e.offsetX;
+        var y = e.offsetY;
+        var drop = {id: id, x: x, y: y, vy: 2 * Math.random() - 1, vx: 2 * Math.random() - 1, r: 1, c: 'white', iters: 0};
+        drops.push(drop);
+
+        beginAnimation();
+    }, false);
+
+//    var canvas = document.getElementById("canvas");
+//    var ctx = canvas.getContext("2d");
+//
+//    canvas.height = $(window).height();
+//    canvas.width = $(window).width();
+//
+//    var drops = [];
+//
+//    function animateDrop(drop) {
+//        drop.y = drop.y + drop.vy;
+//        drop.x = drop.x + drop.vx;
+////        drop.iters = drop.iters + 1;
+//
+////        if (drop.iters > 500) {
+////            for (var i = 0; i < 5; i++) {
+////                id = id + 1;
+////                drops.push({id: id, x: drop.x, y: drop.y, vy: 2 * Math.random() - 1, vx: 2 * Math.random() - 1, r: 1, iters: 0})
+////                drops.splice(drop.id, 1)
+////            }
+////            drop.iters = 0;
+////        }
+//    }
+//
+//    function draw() {
+//        canvas.width = canvas.width;
+//        for (var i = 0; i < drops.length; i++) {
+//            var drop = drops[i];
+//            animateDrop(drop);
+//            ctx.fillStyle = 'ghostwhite';
+//            ctx.beginPath();
+//            ctx.arc(drop.x, drop.y, drop.r, 0, 2 * Math.PI, false);
+//            ctx.fill();
+//        }
+//    }
+//
+//    function animation() {
+//        draw();
+//        setTimeout(animation, 1);
+//    }
+//
+//    exec = false;
+//    function beginAnimation() {
+//        if (!exec) {
+//            exec = true;
+//            animation();
+//        }
+//    }
+//
+//    var id = 0;
+//    canvas.addEventListener('mousemove', function(e) {
+//        id = id + 1;
+//        var x = e.offsetX;
+//        var y = e.offsetY;
+//        var drop = {id: id, x: x, y: y, vy: 2 * Math.random() - 1, vx: 2 * Math.random() - 1, r: 1, iters: 0};
+//        drops.push(drop);
+//
+//        beginAnimation();
+//    }, false);
+
+</script>

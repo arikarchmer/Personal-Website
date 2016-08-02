@@ -1,0 +1,504 @@
+<html>
+<head>
+  <title>stars</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Space+Mono' rel='stylesheet' type='text/css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.1.1/d3.min.js"></script>
+  <script src="/static/star/js/star_game.js"></script>
+</head>
+<style>
+body {
+    background-color: black;
+    color: white;
+    font: 12px "Space Mono";
+}
+input[type=text] {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    font: 12px 'Space Mono';
+    padding: 5px 5px;
+}
+td {
+    border-top: none !important;
+}
+tr {
+    width: 100%;
+    display: inline-table;
+    height: 10px;
+    table-layout: fixed;
+}
+table {
+    height:200px;
+    display: -moz-groupbox;
+}
+tbody {
+    overflow-y: scroll;
+    height: 200px;
+    width: 100%;
+    position: absolute;
+    font: 14px 'Space Mono';
+}
+.tooltip {
+    font: 10px 'Space Mono';
+}
+.btn {
+    margin: 5px;
+    border-radius: 12px;
+}
+#name {
+    transition: border-bottom-color 1000ms;
+}
+#guy {
+    transition: color 1000ms;
+}
+</style>
+<body>
+  <div class="modal fade text-center" id="starter" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="color: white;background-color: black;padding: 20px 20px;border-top: none">
+          <form role="form" action="javascript: rules()">
+              <h1>Welcome to STARSPACE</h1>
+              <br>
+              <h4>This is a story of...</h4>
+            <div class="form-group">
+                <label for="name"><span class="glyphicon glyphicon-user" id="guy"></span></label>
+                <input id="name" type="text" class="from-control text-left" autofocus="autofocus" placeholder="Player 1" style="color:white">
+                <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-off"></span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="rules" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="color: white;background-color: black;padding: 20px 20px;border-top: none">
+          <form role="form">
+              <h4>Now listen up...</h4>
+              <br>
+            <div class="form-group text-center">
+                <p>This is you:</p>
+                <img src="/static/star/images/You.png">
+                <br><br>
+                <p>This is a star:</p>
+                <img src="/static/star/images/stars/white.png" class="img-circle">
+                <br><br>
+                <p>This is not you (bad guys):</p>
+                <img src="/static/star/images/stars/red.png" class="img-circle">
+                <br><br>
+                <p>This is a power up star (a very special star):</p>
+                <img src="/static/star/images/stars/green.png" class="img-circle">
+                <br><br>
+                <button type="button" onclick="demo()" class="btn btn-success btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade text-center"  id="demo" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="color: white;background-color: black;padding: 20px 20px;border-top: none">
+            <h4>Move your mouse to gather stars.</h4>
+            <br><br><br>
+            <canvas id="myCanvas3" width="150" height="100" style="background-color:black"></canvas>
+            <br><br><br>
+            <button type="button" onclick="clickStart()" class="btn btn-success btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade text-center"  id="clickStart" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="color: white;background-color: black;padding: 20px 20px;border-top: none">
+            <br><br><br>
+            <h4>Click to start.</h4>
+            <br><br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade text-center"  id="levelUp" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="color: white;background-color: black;padding: 20px 20px;border-top: none">
+            <h2>You beat the level. Congratulations!</h2>
+            <br>
+            <h4>Are you ready to move on?</h4>
+            <br>
+            <button type="button" onclick="levelUp()" class="btn btn-success btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade text-center"  id="loss" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body text-center" style="color: white;background-color: black;padding: 20px 20px;border-top: none">
+            <h1>GAME OVER</h1>
+            <br>
+            <h5 id="score"></h5>
+            <br><br>
+            <button type="button" onclick="restart()" class="btn btn-success btn-sm" data-toggle="tooltip" title="Play again" data-animation="true" data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-repeat"></span></button>
+            <button type="button" onclick="submitScore()" class="btn btn-info btn-sm" data-toggle="tooltip" title="Leaderboard" data-animation="true" data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-globe"></span></button>
+            <button type="button" onclick="play()" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Home" data-animation="true"  data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-home"></span></button>
+            <br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade text-center"  id="leaderboard" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body text-center" style="color: white;background-color: black;padding: 20px 20px;border-top: none">
+            <table class="table text-center">
+                <h1>LEADERBOARD</h1>
+                <tbody id="score_table" style="right: 0px; padding-right: 0px"></tbody>
+                <h3 id="your_score" style="color: springgreen"></h3>
+            </table>
+            <br>
+            <button type="button" onclick="restart()" class="btn btn-success btn-sm" data-toggle="tooltip" title="Play again" data-animation="true" data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-repeat"></span></button>
+            <button type="button" onclick="play()" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Home" data-animation="true" data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-home"></span></button>
+            <br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="text-center">
+    <div class="col-sm-1">
+        <canvas id="myCanvas2" width="100" height="100" style="background-color:transparent"></canvas>
+    </div>
+    <div class="col-sm-11">
+        <canvas id="myCanvas" width="600" height="600" style="background-color:transparent"></canvas>
+    </div>
+    <br><br><br><br><br>
+    <h3 id="power"></h3>
+</div>
+<script>
+
+    var GAME_DATA;
+    var USER = {x: undefined, y: undefined, r: undefined, c: 'white', name: undefined};
+
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    var canvas2 = document.getElementById("myCanvas2");
+    var ctx2 = canvas2.getContext("2d");
+    var canvas3 = document.getElementById("myCanvas3");
+    var ctx3 = canvas3.getContext("2d");
+
+    function init() {
+        GAME_DATA = {
+            powers: undefined, level: 1, level_length: 10, size: 20,
+            score: 0, begin: undefined, rainbow: false
+        };
+    }
+
+    function updateUser(e) {
+        USER.x = e.offsetX;
+        USER.y = e.offsetY;
+        USER.r = GAME_DATA.size;
+    }
+
+    /* modals */
+
+    function starter(failed) {
+        if (failed){
+            var form = document.getElementById("name");
+            form.style.borderBottomColor = "red";
+            var guy = document.getElementById("guy");
+            guy.style.color = "red";
+        }
+        $("#starter").modal();
+    }
+
+    function rules() {
+        USER.name = document.getElementById('name').value;
+
+        if (USER.name.includes('warpspeed')) {
+            StarGame.warpspeed();
+        }
+        if (USER.name.includes('rainbow')) {
+            GAME_DATA.rainbow = true;
+        }
+        if (USER.name == "") {
+            starter(true);
+        } else {
+            $("#starter").modal("toggle");
+            $("#rules").modal();
+
+        }
+    }
+
+    function demo() {
+        $("#demo").modal();
+        $("#rules").modal("toggle");
+        demoAnimation(0, true);
+    }
+
+    function clickStart() {
+        $("#demo").modal("toggle");
+        $("#clickStart").modal();
+        setTimeout(function () {
+            $("#clickStart").modal("toggle");
+        }, 1000);
+    }
+
+    function loss() {
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip({container: 'body'});
+        });
+        $("#loss").modal();
+    }
+
+    function leaderboard() {
+        $("#loss").modal("toggle");
+        $("#leaderboard").modal();
+    }
+
+    /* animations */
+
+    function demoAnimation(x, draw_star) {
+        clearCanvas(canvas3);
+
+        var s = {x: canvas3.width / 2, y: canvas3.height / 2, r: 4, c: "white"};
+        var rect = {x: x, y: 40, r: 20};
+
+        if (Math.abs(rect.x - s.x) < 20) {
+            draw_star = false;
+        }
+
+        if (draw_star) {
+            ctx3.beginPath();
+            ctx3.arc(s.x, s.y, s.r, 0, 2 * Math.PI, false);
+            ctx3.fillStyle = s.c;
+            ctx3.fill();
+        }
+
+        ctx3.fillStyle = "white";
+        ctx3.fillRect(rect.x, rect.y, rect.r, rect.r);
+
+        x = x + 1;
+
+        if (x < canvas3.width) {
+            setTimeout(demoAnimation.bind(null, x, draw_star), 7);
+        } else {
+            draw_star = true;
+            setTimeout(demoAnimation.bind(null, 0, draw_star), 7);
+        }
+    }
+
+    function lossAnimation(y) {
+        y = y + 1;
+        var stars = StarGame.getStars();
+        for (var i = 0; i < stars.length; i += 1) {
+            var s = stars[i];
+            s.y = s.y + 3;
+            if (s.y > canvas.height) {
+                stars.splice(stars[i], 1);
+            }
+        }
+        if (stars.length > 0) {
+            setTimeout(lossAnimation.bind(null, y), 1);
+        }
+        draw(stars);
+    }
+
+    /* GUI */
+
+    function createProgressSquare() {
+        clearCanvas(canvas2);
+        ctx2.fillStyle = "white";
+        ctx2.fillRect((canvas2.width / 2) - (GAME_DATA.size), (canvas2.height / 2) - (GAME_DATA.size), GAME_DATA.size * 2, GAME_DATA.size * 2);
+        ctx2.rect((canvas2.width / 2) - 3 * GAME_DATA.level_length, (canvas2.height / 2) - 3 * GAME_DATA.level_length,
+                6 * GAME_DATA.level_length, 6 * GAME_DATA.level_length);
+        ctx2.strokeStyle = "white";
+        ctx2.stroke();
+        if (GAME_DATA.score >= 10) {
+            $("#levelUp").modal();
+        }
+    }
+
+    function draw(stars) {
+        clearCanvas(canvas);
+        for (var i = 0; i < stars.length; i++) {
+            var s = stars[i];
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, 2 * Math.PI, false);
+            if (GAME_DATA.rainbow && (s.c == 'white' || s.c == 'green')) {
+                ctx.fillStyle = getRandomColor();
+            } else {
+                ctx.fillStyle = s.c;
+            }
+            ctx.fill();
+        }
+    }
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#0';
+        for (var i = 0; i < 5; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    function clearCanvas(canvas) {
+        canvas.width = canvas.width;
+    }
+
+    function getPower() {
+        var stars = StarGame.getStars();
+        var power = Math.random();
+        var p = stars[0];
+        if (power < 0.01) {
+            p.c = "green";
+            p.r = 15;
+        }
+    }
+
+    function launchPower() {
+        var p = GAME_DATA.powers[Math.floor(Math.random() * 3)];
+        if (p == 'sparsity') {
+            StarGame.replaceStar(0);
+//            document.getElementById('power').innerHTML = "SPARSITY!";
+            StarGame.sparsify();
+        }
+        if (p == 'score') {
+            StarGame.replaceStar(0);
+//            document.getElementById('power').innerHTML = "PLUS 5!";
+            GAME_DATA.score = GAME_DATA.score + 5;
+            GAME_DATA.size = GAME_DATA.size + 5;
+            createProgressSquare();
+        }
+        if (p == "slow motion") {
+            StarGame.replaceStar(0);
+//            document.getElementById('power').innerHTML = "SLOW MOTION!";
+            StarGame.slowMotion();
+        }
+    }
+
+    /* game management */
+
+    function levelUp() {
+        var stars = StarGame.getStars();
+        for (var i = 0; i < stars.length; i++) {
+            var s = stars[i];
+            s.vx = s.vx + 0.1;
+            s.vy = s.vy + 0.1;
+        }
+        GAME_DATA.level = GAME_DATA.level + 1;
+        GAME_DATA.size = 20;
+        GAME_DATA.begin = false;
+        GAME_DATA.score = 0;
+        createProgressSquare();
+        StarGame.increaseDifficulty();
+        StarGame.createStars(200 + 25 * GAME_DATA.level);
+    }
+
+    function submitScore() {
+        console.log(USER.name + ", " + GAME_DATA.score);
+        $.getJSON('/players', {name: USER.name, score: getScore()}, function (data) {
+            var ps = d3.select('#score_table').selectAll('tr')
+                    .data(data.leaderboard);
+            ps.text(function (item) {
+                return item.name + ' .......... ' + item.score
+            });
+            ps.enter()
+                    .append('tr')
+                    .text(function (item) {
+                        return item.name + ' .......... ' + item.score
+                    });
+            ps.exit().remove();
+            document.getElementById('your_score').innerHTML = data.latest.name + '..........' + data.latest.score;
+        });
+        leaderboard();
+    }
+
+    function getScore() {
+        return (GAME_DATA.level - 1) * GAME_DATA.level_length + GAME_DATA.score;
+    }
+
+    function playAgain() {
+        lossAnimation(0);
+        setTimeout(loss, 1000);
+        document.getElementById('score').innerHTML = 'Stars collected: ' + getScore();
+    }
+
+    function restart() {
+        init();
+        StarGame.init(GAME_DATA);
+        canvas.height = $(window).height();
+        canvas.width = (10 / 12) * $(window).width();
+        createProgressSquare();
+    }
+
+    function play() {
+        restart();
+        starter(false);
+    }
+
+    /* listeners */
+
+    $(window).resize(function () {
+        canvas.height = $(window).height();
+        canvas.width = (10 / 12) * $(window).width();
+    });
+
+    canvas.addEventListener('click', function () {
+        GAME_DATA.begin = true;
+    });
+
+    canvas.addEventListener('mousemove', function (e) {
+        var stars = StarGame.getStars();
+        if (!GAME_DATA.begin) {
+            draw(stars);
+        }
+        if (GAME_DATA.begin) {
+            StarGame.animate();
+            getPower();
+            draw(stars);
+        }
+        updateUser(e);
+        if (GAME_DATA.rainbow) {
+            ctx.fillStyle = getRandomColor();
+        } else {
+            ctx.fillStyle = USER.c;
+        }
+        ctx.fillRect(USER.x - (USER.r / 2), USER.y - (USER.r / 2), USER.r, USER.r);
+        if (GAME_DATA.begin) {
+            var cond = StarGame.checkCollisions(USER);
+            if (cond) {
+                if (cond.type == 'power') {
+                    launchPower();
+                }
+                if (cond.type == 'hit') {
+                    StarGame.replaceStar(cond.id);
+                    GAME_DATA.score = GAME_DATA.score + 1;
+                    GAME_DATA.size = GAME_DATA.size + 1;
+                    createProgressSquare();
+                }
+                if (cond.type == 'loss') {
+                    playAgain();
+                }
+            }
+        }
+    });
+
+    /* play game */
+
+    play();
+
+</script>
+</body>
