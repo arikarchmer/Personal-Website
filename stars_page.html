@@ -199,9 +199,13 @@ tbody {
     var ctx3 = canvas3.getContext("2d");
 
     function init() {
+        var rainbow = false;
+        if (GAME_DATA && GAME_DATA.rainbow) {
+            rainbow = true;
+        }
         GAME_DATA = {
             powers: undefined, level: 1, level_length: 10, size: 20,
-            score: 0, begin: undefined, rainbow: false
+            score: 0, begin: undefined, rainbow: rainbow
         };
     }
 
@@ -210,6 +214,9 @@ tbody {
         USER.y = e.offsetY;
         USER.r = GAME_DATA.size;
     }
+
+    /* user name */
+
 
     /* modals */
 
@@ -229,9 +236,9 @@ tbody {
         if (USER.name.includes('warpspeed')) {
             StarGame.warpspeed();
         }
-        if (USER.name.includes('rainbow')) {
-            GAME_DATA.rainbow = true;
-        }
+
+        GAME_DATA.rainbow = USER.name.includes('rainbow');
+
         if (USER.name == "") {
             starter(true);
         } else {
@@ -407,21 +414,21 @@ tbody {
         StarGame.createStars(200 + 25 * GAME_DATA.level);
     }
 
+    function table_row(item){
+        return item.name + ' .......... ' + item.score;
+    }
+
     function submitScore() {
         console.log(USER.name + ", " + GAME_DATA.score);
         $.getJSON('/players', {name: USER.name, score: getScore()}, function (data) {
             var ps = d3.select('#score_table').selectAll('tr')
                     .data(data.leaderboard);
-            ps.text(function (item) {
-                return item.name + ' .......... ' + item.score
-            });
+            ps.text(table_row);
             ps.enter()
                     .append('tr')
-                    .text(function (item) {
-                        return item.name + ' .......... ' + item.score
-                    });
+                    .text(table_row);
             ps.exit().remove();
-            document.getElementById('your_score').innerHTML = data.latest.name + '..........' + data.latest.score;
+            document.getElementById('your_score').innerHTML = table_row(data.latest);
         });
         leaderboard();
     }

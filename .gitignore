@@ -1,4 +1,7 @@
 lib/*
 *.pyc
 .idea/*
+static/td/keys.js
+keys.py
+
 

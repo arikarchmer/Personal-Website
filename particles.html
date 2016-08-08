@@ -103,7 +103,7 @@ body {
 
     function animation() {
         draw();
-        setTimeout(animation, 0.001);
+        setTimeout(animation, 1);
     }
 
     function beginAnimation() {
@@ -118,8 +118,8 @@ body {
         id: 1,
         x: canvas.width / 2,
         y: canvas.height / 2,
-        vy: 10 * Math.random() - 5,
-        vx: 10 * Math.random() - 5,
+        vy: 5,
+        vx: 5,
         r: 1,
         c: 'white',
         iters: 0

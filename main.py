@@ -19,7 +19,7 @@ import handlers.handlers as hh
 
 app = webapp2.WSGIApplication([
 
-    ('/', hh.StarsHandler),
+    ('/', hh.AboutMeHandler),
     ('/about', hh.AboutMeHandler),
     ('/stars', hh.StarsHandler),
     ('/players', hh.PlayersHandler),
@@ -31,6 +31,6 @@ app = webapp2.WSGIApplication([
     ('/particles', hh.ParticleHandler),
     ('/bouncingballs', hh.BouncingHandler),
     ('/spacetravel', hh.SpaceTravelHandler),
-    ('/bellcurvesim', hh.BellCurveSimHandler)
+    # ('/bellcurvesim', hh.BellCurveSimHandler)
 
-], debug=False)
+], debug=True)

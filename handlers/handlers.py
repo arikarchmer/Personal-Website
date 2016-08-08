@@ -75,36 +75,6 @@ class PlayersHandler(webapp2.RequestHandler):
         s = [{'name': x.name, 'score': x.score} for x in query.run(limit=100)]
         obj = {'leaderboard': s, 'latest': new_player}
 
-        # obj = {'leaderboard': []}
-
-        # obj = {'leaderboard': [
-        #         {'name': 'Ari', 'score': 100},
-        #         {'name': 'Alan', 'score': 99},
-        #         {'name': 'Daddy', 'score': 80},
-        #         {'name': 'Leo', 'score': 200},
-        #         {'name': 'Ari', 'score': 100},
-        #         {'name': 'Alan', 'score': 99},
-        #         {'name': 'Daddy', 'score': 80},
-        #         {'name': 'Leo', 'score': 200},
-        #         {'name': 'Ari', 'score': 100},
-        #         {'name': 'Alan', 'score': 99},
-        #         {'name': 'Daddy', 'score': 80},
-        #         {'name': 'Leo', 'score': 200},
-        #         {'name': 'Ari', 'score': 100},
-        #         {'name': 'Alan', 'score': 99},
-        #         {'name': 'Daddy', 'score': 80},
-        #         {'name': 'Leo', 'score': 200},
-        #         {'name': 'Ari', 'score': 100},
-        #         {'name': 'Alan', 'score': 99},
-        #         {'name': 'Daddy', 'score': 80},
-        #         {'name': 'Leo', 'score': 200},
-        #         {'name': 'Ari', 'score': 100},
-        #         {'name': 'Alan', 'score': 99},
-        #         {'name': 'Daddy', 'score': 80},
-        #         {'name': 'Leo', 'score': 200}
-        #     ]
-        # }
-
         self.response.write(json.dumps(obj))
 
 

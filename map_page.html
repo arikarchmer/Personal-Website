@@ -10,6 +10,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="/static/td/core.js"></script>
+  <script src="/static/td/keys.js"></script>
 </head>
 <style>
     #map {
@@ -68,8 +69,8 @@
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
-    id: 'twitterdata.0bhma8fj',
-    accessToken: 'pk.eyJ1IjoidHdpdHRlcmRhdGEiLCJhIjoiY2lwNzB0ZjY2MDBka3RjbHk3aG9pMWVhciJ9.2RxefeirjF2hgqOrc25kwQ'
+    id: mapbox_keys.id,
+    accessToken: mapbox_keys.accessToken
     }).addTo(map);
 
     // click listener

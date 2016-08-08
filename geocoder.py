@@ -1,4 +1,3 @@
-#import requests
 import urllib
 import json
 import logging
@@ -15,9 +14,7 @@ class Geocoder():
         logging.info('url='+url)
         response = urllib2.urlopen(url)
         result = response.read()
-        #result = requests.get(url)
         j = json.loads(result)
-        #print len(j['results'])
 
         return {'lat': j['results'][0]['geometry']['location']['lat'],
                 'lng': j['results'][0]['geometry']['location']['lng']}

@@ -34,6 +34,7 @@ var StarGame = function(){
     };
     
     var init = function(game_data) {
+        colors = ['red', 'white', 'white'];
         game_data.powers = ['score', 'slow motion'];
         game_data.begin = false;
         createStars(200, colors);
