@@ -17,6 +17,13 @@ class Score(db.Model):
     score = db.IntegerProperty()
 
 
+class FireworksHandler(webapp2.RequestHandler):
+
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('fireworks.html')
+        self.response.write(page.render())
+
+
 class BellCurveSimHandler(webapp2.RequestHandler):
 
     def get(self):
@@ -113,24 +120,22 @@ class SearchTipsHandler(webapp2.RequestHandler):
 class ResultsHandler(webapp2.RequestHandler):
 
     def get(self, mode):
-        '''
-            if mode='coordinates': ?lat=XX,lng=XX,radius=XX
-            if mode='city_state': ?keyword=XX,city=XX,state=XX
-        '''
+
         searcher = Searcher()
+        flag = True
         if mode == 'city_state':
             k = self.request.get('keyword')
             c = self.request.get('city')
             s = self.request.get('state')
-            print k+c+s
-            if k is None:
-                page = JINJA_ENVIRONMENT.get_template('search_page.html')
-                parameters = {'invalid': True}
-            elif c is None or s is None:
-                items = searcher.search(keyword=k)
-            else:
+            if k and c and s:
                 items = searcher.search(keyword=k, city=c, state=s)
                 info = [k, c, s]
+            else:
+                page = JINJA_ENVIRONMENT.get_template('search_page.html')
+                parameters = {'invalid': True}
+                print 'bad search'
+                flag = False
+
         elif mode == 'coordinates':
             lat = self.request.get('lat')
             lng = self.request.get('lng')
@@ -143,16 +148,17 @@ class ResultsHandler(webapp2.RequestHandler):
                 items = searcher.search(coordinates=coor)
                 info = [lat, lng, r]
 
-        if len(items) == 0:
-            if mode == 'city_state':
-                page = JINJA_ENVIRONMENT.get_template('search_page.html')
-                parameters = {'invalid': True}
-            elif mode == 'coordinates':
-                page = JINJA_ENVIRONMENT.get_template('map_page.html')
-                parameters = {'len': len(items)}
-        else:
-            parameters = {'items': items, 'info': info}
-            page = JINJA_ENVIRONMENT.get_template('results_page.html')
+        if flag:
+            if len(items) == 0:
+                if mode == 'city_state':
+                    page = JINJA_ENVIRONMENT.get_template('search_page.html')
+                    parameters = {'invalid': True}
+                elif mode == 'coordinates':
+                    page = JINJA_ENVIRONMENT.get_template('map_page.html')
+                    parameters = {'len': len(items)}
+            else:
+                parameters = {'items': items, 'info': info}
+                page = JINJA_ENVIRONMENT.get_template('results_page.html')
 
         self.response.write(page.render(parameters))
 

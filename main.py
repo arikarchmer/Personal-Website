@@ -31,6 +31,6 @@ app = webapp2.WSGIApplication([
     ('/particles', hh.ParticleHandler),
     ('/bouncingballs', hh.BouncingHandler),
     ('/spacetravel', hh.SpaceTravelHandler),
-    # ('/bellcurvesim', hh.BellCurveSimHandler)
+    ('/fireworks', hh.FireworksHandler)
 
 ], debug=True)

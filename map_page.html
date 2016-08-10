@@ -56,7 +56,6 @@
                 <h6>fail</h6>
             {% endif %}
           <div id="map"></div>
-          <p id="center" style="font:12px Courier"></p><p id="radius" style="font:12px Courier"></p>
           <button class="btn btn-info" onclick="find()" type="submit"><span class="glyphicon glyphicon-search"></span></button>
           <h1 class="title" onmouseenter="change_message(this, '/map', 'If all the ways I have been along were marked on a map and joined up with a line, it might represent a minotaur.-Pablo Picasso')">/map</h1>
         </div>
@@ -81,16 +80,12 @@
         if (!center) {
             center = e.latlng;
             L.marker(center).addTo(map);
-            document.getElementById('center').innerHTML = "center: " + center;
             return;
         }
         else {
-            // centermarker.removeFrom(map);
             radius =  center.distanceTo(e.latlng);
             circle = L.circle(center, radius);
             circle.addTo(map);
-            document.getElementById('radius').innerHTML = "radius: " + radius + " (meters)";
-            // center = undefined;
         }
     });
 
