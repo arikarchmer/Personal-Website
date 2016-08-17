@@ -96,13 +96,6 @@ class TwitterHomeHandler(webapp2.RequestHandler):
         self.response.write(home_page.render())
 
 
-class SearchHandler(webapp2.RequestHandler):
-
-    def get(self):
-        search_page = JINJA_ENVIRONMENT.get_template('search_page_new.html')
-        self.response.write(search_page.render())
-
-
 class SearchTipsHandler(webapp2.RequestHandler):
 
     def get(self):
@@ -124,7 +117,7 @@ class ResultsHandler(webapp2.RequestHandler):
                 items = searcher.search(keyword=k, city=c, state=s)
                 info = [k, c, s]
             else:
-                page = JINJA_ENVIRONMENT.get_template('search_page_new.html')
+                page = JINJA_ENVIRONMENT.get_template('search_page.html')
                 parameters = {'invalid': True}
                 print 'bad search'
                 flag = False
@@ -135,7 +128,7 @@ class ResultsHandler(webapp2.RequestHandler):
             coor= {'lat': lat, 'lng': lng}
             r = self.request.get('radius')
             if lat is None or lng is None or r is None:
-                page = JINJA_ENVIRONMENT.get_template('map_page_new.html')
+                page = JINJA_ENVIRONMENT.get_template('map_page.html')
                 parameters = {'fail': True}
             else:
                 items = searcher.search(coordinates=coor)
@@ -144,10 +137,10 @@ class ResultsHandler(webapp2.RequestHandler):
         if flag:
             if len(items) == 0:
                 if mode == 'city_state':
-                    page = JINJA_ENVIRONMENT.get_template('search_page_new.html')
+                    page = JINJA_ENVIRONMENT.get_template('search_page.html')
                     parameters = {'invalid': True}
                 elif mode == 'coordinates':
-                    page = JINJA_ENVIRONMENT.get_template('map_page_new.html')
+                    page = JINJA_ENVIRONMENT.get_template('map_page.html')
                     parameters = {'len': len(items)}
             else:
                 parameters = {'items': items, 'info': info}
@@ -159,5 +152,5 @@ class ResultsHandler(webapp2.RequestHandler):
 class MapHandler(webapp2.RequestHandler):
 
     def get(self):
-        map_page = JINJA_ENVIRONMENT.get_template('map_page_new.html')
+        map_page = JINJA_ENVIRONMENT.get_template('map_page.html')
         self.response.write(map_page.render())

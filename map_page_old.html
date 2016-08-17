@@ -1,0 +1,96 @@
+<html>
+<head>
+  <title>Map</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script src="/static/td/core.js"></script>
+  <script src="/static/td/keys.js"></script>
+</head>
+<style>
+    #map {
+        height: 420px;
+    }
+    .container-fluid {
+        padding: 40px 40px;
+    }
+    .header {
+        background-color: white;
+        color: black;
+        padding: 10px 10px;
+        font: 12px "Source Code Pro";
+        line-height: 1;
+        letter-spacing: 1px;
+    }
+    .title {
+        background-color: white;
+        color: black;
+        padding: 10px 10px;
+        font: 40px "Source Code Pro";
+        line-height: 1;
+        letter-spacing: 1px;
+        visibility: visible;
+    }
+</style>
+<body>
+    <div class="header text-left">
+        <div class="col-sm-1 col-sm-offset-8 text-center">
+            <a href="/twitterdata" style="text-decoration:none"><p onmouseover="style.letterSpacing='3px'" onmouseout="style.letterSpacing='1px'">/home</p></a>
+        </div>
+        <div class="col-sm-1 text-center">
+          <a href="/twitterdata/search" style="text-decoration:none"><p onmouseover="style.letterSpacing='3px'" onmouseout="style.letterSpacing='1px'">/search</p></a>
+        </div>
+        <div class="col-sm-1 text-center">
+          <p style="color:black" onmouseover="style.letterSpacing='1px'" onmouseout="style.letterSpacing='3px'"><strong>/map</strong></p>
+      </div>
+    </div>
+    <div class="container-fluid text-center">
+        <div class="col-sm-12">
+            {{len}}
+            {% if fail %}
+                <h6>fail</h6>
+            {% endif %}
+          <div id="map"></div>
+            <br>
+          <button class="btn btn-info" onclick="find()" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+          <h1 class="title" onmouseenter="change_message(this, '/map', 'If all the ways I have been along were marked on a map and joined up with a line, it might represent a minotaur.-Pablo Picasso')">/map</h1>
+        </div>
+    </div>
+</body>
+<script>
+
+    // create map
+    var map = L.map('map').setView([42.3610, -71.0587], 15);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: mapbox_keys.id,
+    accessToken: mapbox_keys.accessToken
+    }).addTo(map);
+
+    // click listener
+    var circle;
+    var center;
+    var radius;
+    map.on('click', function(e) {
+        if (!center) {
+            center = e.latlng;
+            L.marker(center).addTo(map);
+            return;
+        }
+        else {
+            radius =  center.distanceTo(e.latlng);
+            circle = L.circle(center, radius);
+            circle.addTo(map);
+        }
+    });
+
+    function find() {
+        window.location = '/twitterdata/results/coordinates?lat=' + center.lat + '&lng=' + center.lng + '&radius=' + radius;
+    }
+</script>
+</html>

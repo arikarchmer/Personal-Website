@@ -25,7 +25,6 @@ app = webapp2.WSGIApplication([
     ('/players', hh.PlayersHandler),
     ('/twitterdata', hh.TwitterHomeHandler),
     ('/twitterdata/search', hh.SearchHandler),
-    ('/twitterdata/searchtips', hh.SearchTipsHandler),
     ('/twitterdata/results/(.*)', hh.ResultsHandler),
     ('/twitterdata/map', hh.MapHandler),
     ('/particles', hh.ParticleHandler),

@@ -1,0 +1,102 @@
+<html>
+<head>
+  <title>Search</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200|Bad+Script|Loved+by+the+King' rel='stylesheet' type='text/css'>
+  <script src="/static/td/core.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<script>
+function parse_info() {
+    // parse keyword, city, state
+    var info_lst = document.getElementById('info').elements[0].value.split(', ');
+    var keyword = info_lst[0] || '';
+    var city = info_lst[1] || '';
+    var state = info_lst[2] || '';
+    window.location = '/twitterdata/results/city_state?keyword=' + keyword +'&city=' + city + '&state=' + state;
+}
+</script>
+<style>
+input[type=text] {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid black;
+    font: 24px "Source Code Pro";
+    padding: 10px 10px;
+}
+.container-fluid {
+    padding: 40px 40px;
+}
+.title {
+    background-color: white;
+    color: black;
+    padding: 10px 10px;
+    font: 40px "Source Code Pro";
+    line-height: 1;
+    letter-spacing: 1px;
+    visibility: visible;
+}
+.description {
+    background-color: white;
+    color: black;
+    padding: 10px 10px;
+    font: 15px "Source Code Pro";
+    line-height: 1;
+    letter-spacing: 1px;
+    visibility: hidden;
+}
+.bg {
+    background-color: white;
+    color: black;
+    padding: 50px 25px;
+    font: 12px "Source Code Pro";
+    line-height: 1;
+    letter-spacing: 1px;
+}
+.header {
+    background-color: white;
+    color: black;
+    padding: 10px 10px;
+    font: 12px "Source Code Pro";
+    line-height: 1;
+    letter-spacing: 1px;
+}
+</style>
+<body>
+  <div class="header text-left">
+      <div class="col-sm-1 col-sm-offset-8 text-center">
+          <a href="/twitterdata" style="text-decoration:none"><p onmouseover="style.letterSpacing='3px'" onmouseout="style.letterSpacing='1px'">/home</p></a>
+      </div>
+      <div class="col-sm-1 text-center">
+            <p style="color:black" onmouseover="style.letterSpacing='1px'" onmouseout="style.letterSpacing='3px'"><strong>/search</strong></p>
+      </div>
+      <div class="col-sm-1 text-center">
+          <a href="/twitterdata/map" style="text-decoration:none"><p onmouseover="style.letterSpacing='3px'" onmouseout="style.letterSpacing='1px'">/map</p></a>
+      </div>
+  </div>
+  <div class="container-fluid bg text-center">
+      <div class="col-sm-1">
+          <br><br><br><br><br><br><br><br><br><br><br><br>
+          <br><br>
+          <p onmouseover="style.letterSpacing='1px'" onmouseout="style.letterSpacing='3px'"><strong>[search]</strong></p>
+          <br><br>
+          <a href="/twitterdata/searchtips" style="text-decoration:none"><p onmouseover="style.letterSpacing='3px'" onmouseout="style.letterSpacing='1px'">[tips]</p></a>
+      </div>
+      <div class="col-sm-8 col-sm-offset-1">
+          <br><br><br><br><br><br><br><br><br><br><br><br>
+          <form id="info" class="form-inline" action="javascript: parse_info()">
+              <input class="from-control text-center" type="text" name="info" autofocus="autofocus" placeholder="Keyword, City, State" size="36" style="color:slategray">
+          </form>
+          <h1 id="/search" class="title" onmouseenter="change_message(this, '/search', 'I am searching for abstract ways of expressing reality, \n abstract forms that will enlighten my own mystery.-Eric Cantona')">/search</h1>
+          {% if invalid %}
+            <br>
+            <h4 class="invalid" style="color:red">invalid search!</h4>
+          {% endif %}
+      </div>
+  </div>
+</body>
+</html>
