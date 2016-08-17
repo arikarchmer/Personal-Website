@@ -25,6 +25,7 @@ body {
     <div class="col-sm-1">
         <h1>click</h1>
     </div>
+    </div>
 </div>
 </body>
 <script>
@@ -37,28 +38,23 @@ body {
 
      var drops = [];
 
-    function deleteDrop(drop) {
-        drops.splice(drop.id, 1);
-            for (var i = 0; i < drops.length; i++) {
-                drops[i].id = i;
-            }
-    }
-
     function animateDrop(drop) {
-        drop.vy = drop.vy + drop.a;
-        drop.y = drop.y + drop.vy;
-        drop.x = drop.x + drop.vx;
-        drop.iters = drop.iters + 1;
+        if (!drop.static) {
+            drop.vy = drop.vy + drop.a;
+            drop.y = drop.y + drop.vy;
+            drop.x = drop.x + drop.vx;
+            drop.iters = drop.iters + 1;
 
-        if (drop.x > canvas.width) {
-            drop.vx = -drop.vx;
-        }
-        if (drop.x < 0) {
-            drop.vx = -drop.vx;
-        }
-        if (drop.y + 2 * drop.r >= canvas.height) {
-            drop.vy = -drop.vy;
-            drop.a = drop.a + 0.5;
+            if (drop.x > canvas.width) {
+                drop.vx = -drop.vx;
+            }
+            if (drop.x < 0) {
+                drop.vx = -drop.vx;
+            }
+            if (drop.y + 2 * drop.r >= canvas.height) {
+                drop.vy = -drop.vy;
+                drop.a = drop.a + 0.5;
+            }
         }
     }
 
@@ -99,6 +95,7 @@ body {
                 a: 1,
                 r: 10,
                 c: colors[Math.floor(Math.random() * 3)],
+                static: false,
                 iters: 0
             };
             drops.push(drop);

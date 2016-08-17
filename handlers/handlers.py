@@ -24,13 +24,6 @@ class FireworksHandler(webapp2.RequestHandler):
         self.response.write(page.render())
 
 
-class BellCurveSimHandler(webapp2.RequestHandler):
-
-    def get(self):
-        page = JINJA_ENVIRONMENT.get_template('bellcurvesim.html')
-        self.response.write(page.render())
-
-
 class SpaceTravelHandler(webapp2.RequestHandler):
 
     def get(self):
@@ -106,7 +99,7 @@ class TwitterHomeHandler(webapp2.RequestHandler):
 class SearchHandler(webapp2.RequestHandler):
 
     def get(self):
-        search_page = JINJA_ENVIRONMENT.get_template('search_page.html')
+        search_page = JINJA_ENVIRONMENT.get_template('search_page_new.html')
         self.response.write(search_page.render())
 
 
@@ -131,7 +124,7 @@ class ResultsHandler(webapp2.RequestHandler):
                 items = searcher.search(keyword=k, city=c, state=s)
                 info = [k, c, s]
             else:
-                page = JINJA_ENVIRONMENT.get_template('search_page.html')
+                page = JINJA_ENVIRONMENT.get_template('search_page_new.html')
                 parameters = {'invalid': True}
                 print 'bad search'
                 flag = False
@@ -142,7 +135,7 @@ class ResultsHandler(webapp2.RequestHandler):
             coor= {'lat': lat, 'lng': lng}
             r = self.request.get('radius')
             if lat is None or lng is None or r is None:
-                page = JINJA_ENVIRONMENT.get_template('map_page.html')
+                page = JINJA_ENVIRONMENT.get_template('map_page_new.html')
                 parameters = {'fail': True}
             else:
                 items = searcher.search(coordinates=coor)
@@ -151,10 +144,10 @@ class ResultsHandler(webapp2.RequestHandler):
         if flag:
             if len(items) == 0:
                 if mode == 'city_state':
-                    page = JINJA_ENVIRONMENT.get_template('search_page.html')
+                    page = JINJA_ENVIRONMENT.get_template('search_page_new.html')
                     parameters = {'invalid': True}
                 elif mode == 'coordinates':
-                    page = JINJA_ENVIRONMENT.get_template('map_page.html')
+                    page = JINJA_ENVIRONMENT.get_template('map_page_new.html')
                     parameters = {'len': len(items)}
             else:
                 parameters = {'items': items, 'info': info}
@@ -166,5 +159,5 @@ class ResultsHandler(webapp2.RequestHandler):
 class MapHandler(webapp2.RequestHandler):
 
     def get(self):
-        map_page = JINJA_ENVIRONMENT.get_template('map_page.html')
+        map_page = JINJA_ENVIRONMENT.get_template('map_page_new.html')
         self.response.write(map_page.render())

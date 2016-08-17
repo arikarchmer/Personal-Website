@@ -43,7 +43,7 @@ body {
 
     function animateDrop(drop) {
 
-        drop.r = drop.r - 0.005;
+        drop.r = drop.r - 0.01;
         drop.vy = drop.vy + 0.02;
         drop.y = drop.y + drop.vy;
         drop.x = drop.x + drop.vx;
@@ -93,28 +93,21 @@ body {
     }
 
     function start(x, y) {
-        var drop = {x: x, y: y, vy: Math.random() * 2 - 1.5, vx: Math.random() * 2 - 1, r: 1.5, c: color, iters: 0, del: false};
+        var drop = {x: x, y: y, vy: Math.random() * 2 - 2, vx: Math.random() * 2 - 1, r: 2, c: color, iters: 0, del: false};
         drops.push(drop);
         beginAnimation();
     }
 
-    canvas.addEventListener('click', function(e) {
-        for (var i = 0; i < 100   ; i++) {
-            color = getRandomColor();
-            start(e);
-        }
-    });
-
     function fire() {
         var x = canvas.width * Math.random() * 0.6 + 0.2 * canvas.width;
         var y = canvas.height * Math.random() / 2.5 + canvas.height * 0.1;
-        for (var i = 0; i < 50   ; i++) {
+        for (var i = 0; i < 50; i++) {
             color = getRandomColor();
             start(x, y);
         }
     }
 
-    setInterval(fire, 700); // stagger
     setInterval(fire, 500);
+    setInterval(fire, 700); // stagger
 
 </script>

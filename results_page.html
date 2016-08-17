@@ -10,79 +10,63 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <style>
-input[type=text] {
-    border: 0;
-    outline: 0;
-    background: transparent;
-    border-bottom: 2px black;
-    font: 40px "Source Code Pro";
-    padding: 10px 10px;
-}
 td {
     border-top: none !important;
 }
 tr {
     width: 100%;
     display: inline-table;
-    height: 100px;
+    height: 200px;
     table-layout: auto;
 }
 table {
-    height:300px;
+    height:400px;
     display: -moz-groupbox;
 }
 tbody {
     overflow-y: scroll;
     height: 400px;
     width: 100%;
-    position: absolute;
-    font: 12px "Source Code Pro";
+    position: relative;
+    font: 48px "Times New Roman";
 }
-.container-fluid {
-    padding: 40px 40px;
+a {
+    font: 48px "Times New Roman";
 }
-.header {
-    background-color: white;
+a:hover {
+    text-decoration: none;
     color: black;
-    padding: 10px 10px;
-    font: 12px "Source Code Pro";
-    line-height: 1;
-    letter-spacing: 1px;
+    transition: color 500ms;
 }
-.bg {
-    background-color: white;
-    color: black;
-    padding: 50px 25px;
-    font: 12px "Source Code Pro";
-    line-height: 1;
-    letter-spacing: 1px;
+h1 {
+    font: 96px "Times New Roman";
+}
+#text {
+    font: 36px "Times New Roman";
 }
 </style>
 <body>
-<div class="header text-left">
-      <div class="col-sm-1 col-sm-offset-8 text-center">
-          <a href="/twitterdata" style="text-decoration:none"><p onmouseover="style.letterSpacing='3px'" onmouseout="style.letterSpacing='1px'">/home</p></a>
-      </div>
-      <div class="col-sm-1 text-center">
-            <a href="/twitterdata/search" style="text-decoration:none"><p onmouseover="style.letterSpacing='3px'" onmouseout="style.letterSpacing='1px'">/search</p></a>
-      </div>
-      <div class="col-sm-1 text-center">
-          <a href="/twitterdata/map" style="text-decoration:none"><p onmouseover="style.letterSpacing='3px'" onmouseout="style.letterSpacing='1px'">/map</p></a>
-      </div>
-</div>
-<div class="container-fluid bg text-center">
-    <br><br><br>
-  <form id="info" class="form-inline" action="javascript: parse_info()">
-    <input class="from-control text-center" type="text" name ="info" value="{{info[0]}}, {{info[1]}}, {{info[2]}}" size="36" style="color:black">
-  </form>
-    <div class="col-sm-8 col-sm-offset-2">
+<div class="row">
+    <div class="col-sm-4 col-sm-offset-1 text-justify">
+        <h1>Results</h1>
+        <br><br><br>
+        <a href="/twitterdata/search">1. Search</a>
+        <br>
+        <a href="/twitterdata/map">2. Map</a>
+        <br>
+        <a href="/twitterdata">3. Home</a>
+    </div>
+    <br>
+    <div class="col-sm-6">
       <table class="table text-center">
         <tbody>
         {% for i in items %}
           <tr>
               <td>
                 <img src="{{i[5]}}" alt="Searching" class="img-circle" style="width:32px;height:32px;"> <strong>{{i[0]}}</strong>
-                    <span class="badge" style="color:white">{{i[4]}}</span><br> {{i[1]}}
+                    <span class="badge" style="color:white">{{i[4]}}</span>
+                  <br>
+                  <p id="text">{{i[1]}}</p>
               </td>
           </tr>
         {% endfor %}

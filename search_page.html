@@ -13,11 +13,10 @@
 function parse_info() {
     // parse keyword, city, state
     var info_lst = document.getElementById('info').elements[0].value.split(', ');
-    var keyword = info_lst[0];
-    var city = info_lst[1];
-    var state = info_lst[2];
+    var keyword = info_lst[0] || '';
+    var city = info_lst[1] || '';
+    var state = info_lst[2] || '';
     window.location = '/twitterdata/results/city_state?keyword=' + keyword +'&city=' + city + '&state=' + state;
-
 }
 </script>
 <style>
@@ -90,7 +89,7 @@ input[type=text] {
       <div class="col-sm-8 col-sm-offset-1">
           <br><br><br><br><br><br><br><br><br><br><br><br>
           <form id="info" class="form-inline" action="javascript: parse_info()">
-              <input class="from-control text-center" type="text" name="info" placeholder="Keyword, City, State" size="36" style="color:slategray">
+              <input class="from-control text-center" type="text" name="info" autofocus="autofocus" placeholder="Keyword, City, State" size="36" style="color:slategray">
           </form>
           <h1 id="/search" class="title" onmouseenter="change_message(this, '/search', 'I am searching for abstract ways of expressing reality, \n abstract forms that will enlighten my own mystery.-Eric Cantona')">/search</h1>
           {% if invalid %}

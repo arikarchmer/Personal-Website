@@ -32,10 +32,9 @@
     display: -moz-groupbox;
 }
   tbody {
-    overflow-y: scroll;
     height: 200px;
     width: 100%;
-    position: absolute;
+    position: relative;
     font: 12px "Source Code Pro";
 }
   .container-fluid {
@@ -87,7 +86,6 @@
           <br><br>
           <p onmouseover="style.letterSpacing='1px'" onmouseout="style.letterSpacing='3px'"><strong>[tips]</strong></p>
       </div>
-
       <div class="col-sm-9 col-sm-offset-1 text-left">
           <h4>/* Search operators */</h4>
           <br>
@@ -127,14 +125,6 @@
               </tr>
               <tr>
                   <td>
-                      #sunrise
-                  </td>
-                  <td>
-                      ...finds tweets that have a hashtag of sunrise.
-                  </td>
-              </tr>
-              <tr>
-                  <td>
                       @TwitterData
                   </td>
                   <td>
@@ -157,6 +147,14 @@
                       ...finds tweets created in reply to a tweet by the twitter account "TwitterData."
                   </td>
               </tr>
+              <tr>
+                  <td>
+                      #sunrise
+                  </td>
+                  <td>
+                      ...finds tweets that have a hashtag of sunrise.
+                  </td>
+              </tr>
               </tbody>
           </table>
           <h4>/* Locations */</h4>
@@ -167,7 +165,7 @@
                       outside of the United States, then use 'city, country' format.
                       Again, Country may be abbreviated using its two letter short.</p>
           <p>If you are having trouble pinning down the location that you desire,
-                why not try the mapping function of Twitter | Data <a href="/map" style="text-decoration:none">here</a>!</p>
+                why not try the mapping function of TwitterData <a href="/map" style="text-decoration:none">here</a>!</p>
           <br>
           <h4>/* Refining your search */</h4>
           <br>
@@ -175,115 +173,6 @@
                       Simply click on any part of your search shown above the results and edit it there.
                       Hit enter to see the updated results.</p>
       </div>
-      <!--<div class="col-sm-8 col-sm-offset-1 text-center">-->
-          <!--<table class="table text-left">-->
-              <!--<tbody>-->
-              <!--<h1 class="title">[tips]</h1>-->
-              <!--<br>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                    <!--<h4>// Search operators</h4>-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                      <!--world cup-->
-                  <!--</td>-->
-                  <!--<td>-->
-                      <!--finds tweets that mention both "world" and "cup".-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                      <!--"world cup"-->
-                  <!--</td>-->
-                  <!--<td>-->
-                      <!--finds tweets that mention "world cup" in that exact phrasing.-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                      <!--dark OR light-->
-                  <!--</td>-->
-                  <!--<td>-->
-                      <!--finds tweets that mention "dark" or "light," but not both.-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                      <!--left -right-->
-                  <!--</td>-->
-                  <!--<td>-->
-                      <!--finds tweets that mention "left", but not "right"-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                      <!--#sunrise-->
-                  <!--</td>-->
-                  <!--<td>-->
-                      <!--finds tweets that have a hashtag of sunrise.-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                      <!--@TwitterData-->
-                  <!--</td>-->
-                  <!--<td>-->
-                      <!--finds tweets that reference the account "TwitterData."-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                      <!--from:TwitterData-->
-                  <!--</td>-->
-                  <!--<td>-->
-                      <!--finds tweets sent by the twitter account "TwitterData."-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                      <!--to:TwitterData-->
-                  <!--</td>-->
-                  <!--<td>-->
-                      <!--finds tweets created in reply to a tweet by the twitter account "TwitterData."-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                      <!--<h4>// Locations</h4>-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                      <!--It is possible to search for any location in the world, provided there are tweets that fit the search!-->
-                      <!--If you are searching for a location inside the United States, then use 'city, state' format-->
-                      <!--(states may be abbreviated using their two letter short.) If you would like to search for a location-->
-                      <!--outside of the United States, then use 'city, country' format.-->
-                      <!--Again, Country may be abbreviated using its two letter short.-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                      <!--If you are having trouble pinning down the location that you desire,-->
-                      <!--why not try the mapping function of Twitter | Data <a href="/map" style="text-decoration:none">here</a>!-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                      <!--<h4>// Refining your search</h4>-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                  <!--<td>-->
-                      <!--On the results page, it is not necessary to return to the search home page in order to search again.-->
-                      <!--Simply click on any part of your search shown above the results and edit it there.-->
-                      <!--Hit enter to see the updated results.-->
-                  <!--</td>-->
-              <!--</tr>-->
-              <!--</tbody>-->
-          <!--</table>-->
-      <!---->
   </div>
 </body>
 </html>

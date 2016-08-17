@@ -10,42 +10,34 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <style>
-.container-fluid {
-    padding: 40px 40px;
-}
-.bg {
+.option {
     background-color: white;
     color: black;
-    padding: 50px 25px;
-    font: 12px "Source Code Pro";
-    line-height: 1;
-    letter-spacing: 1px;
+    font: 36px "Times New Roman";
 }
-.img-title {
+h1 {
+    font: 96px "Times New Roman";
+}
+body {
     background-color: white;
+}
+a {
+    font: 48px "Times New Roman";
+}
+a:hover {
+    text-decoration: none;
     color: black;
-    padding: 10px 10px;
-    font: 20px "Source Code Pro";
-    line-height: 1;
-    letter-spacing: 3px;
-    visibility: hidden;
+    transition: color 500ms;
 }
 </style>
 <body>
-<div class="container-fluid bg text-center">
-    <h1>Welcome to TwitterData</h1>
-    <br><br><br>
-    <div class="col-sm-2 col-sm-offset-3">
-        <h3 id="tit1" class="img-title">/search</h3>
-        <a href="/twitterdata/search">
-        <img onmouseover="rotate_img(this, 'tit1')" onmouseout="reg_img(this, 'tit1')" src="http://rediscover.archspm.org/wp-content/uploads/sites/6/2013/11/lake.jpg" alt="Searching" class="img-circle" style="width:128px;height:128px;">
-        </a>
-    </div>
-    <div class="col-sm-2 col-sm-offset-2">
-        <h3 id="tit2" class="img-title">/map</h3>
-        <a href="/twitterdata/map">
-        <img onmouseover="rotate_img(this, 'tit2')" onmouseout="reg_img(this, 'tit2')" src="http://m.img.brothersoft.com/android/25/2556ccd1a200e32b7caba58e0f127391_screeshots_0.jpeg" alt="Boston" class="img-circle" style="width:128px;height:128px;">
-        </a>
+<div class="row">
+    <div class="col-sm-4 col-sm-offset-1 text-justify">
+        <h1>Welcome to TwitterData</h1>
+        <br><br><br>
+        <a href="/twitterdata/search">1. Search</a>
+        <br>
+        <a href="/twitterdata/map">2. Map</a>
     </div>
 </div>
 </body>
