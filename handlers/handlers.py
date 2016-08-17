@@ -96,11 +96,11 @@ class TwitterHomeHandler(webapp2.RequestHandler):
         self.response.write(home_page.render())
 
 
-class SearchTipsHandler(webapp2.RequestHandler):
+class SearchHandler(webapp2.RequestHandler):
 
     def get(self):
-        search_tips_page = JINJA_ENVIRONMENT.get_template('search_tips_page.html')
-        self.response.write(search_tips_page.render())
+        search_page = JINJA_ENVIRONMENT.get_template('search_page.html')
+        self.response.write(search_page.render())
 
 
 class ResultsHandler(webapp2.RequestHandler):
