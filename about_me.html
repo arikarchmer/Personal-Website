@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Lobster" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
@@ -11,16 +12,19 @@
 body {
     background-color: whitesmoke;
     color: black;
-    font: 10px "Times New Roman";
-    letter-spacing: 2px;
 }
 u {
     text-decoration: none;
-    border-bottom: 2px solid darkslategray;
+    border-bottom: 2px solid black;
 }
 h1 {
-    font: 30px "Times New Roman";
+    font: 36px "Inconsolata";
+    color: black;
     font-weight: 400;
+    letter-spacing: 1px;
+}
+a {
+    color: blue;
 }
 a:hover {
     text-decoration: none;
@@ -28,109 +32,120 @@ a:hover {
     transition: color 500ms;
 }
 .tooltip {
-    font: 30px 'Times New Roman';
+    font: 18px 'Times New Roman';
 }
 .text-justify {
     text-align: justify;
 }
 .title {
-    font: 50px "Times New Roman";
-    letter-spacing: 4px;
+    font: 24px "Times New Roman";
+    letter-spacing: 2px;
 }
 #canvas {
     position: absolute;
 }
 #main_title {
-    font: 112px "Times New Roman";
-    letter-spacing: 10px;
+    font: 216px "Times New Roman";
+    letter-spacing: 4px;
 }
 #signature {
-    font: 30px "Times New Roman";
-    font-weight: 400;
-    letter-spacing: 2px;
+    font: 36px "Lobster";
+    letter-spacing: 1px;
 }
-
+#title {
+    opacity: 1;
+    transform: rotate(-15deg);
+    transition: opacity 1500ms, transform 1500ms;
+}
 </style>
 <body>
 <canvas id="canvas"></canvas>
 <div class="row">
-    <div class="col-sm-5 col-sm-offset-6">
-        <p id="main_title" class="title text-right"><u>F times d</u></p>
-        <p id="signature" class="text-right">by Ari Karchmer</p>
+    <div id="title" class="col-sm-10 col-sm-offset-2">
+        <br><br><br><br><br>
+        <p id="main_title" class="title text-justify"><u>F times d</u></p>
+        <p id="signature" class="text-justify">by Ari Karchmer</p>
+        <br><br><br><br><br><br><br><br><br><br>
     </div>
 </div>
-<br><br><br><br><br>
+<br><br><br>
 <div class="row">
-    <div class="col-sm-5 col-sm-offset-1 text-justify">
-        <h1 class="title text-left">About</h1>
+    <div id="about" class="col-sm-6 col-sm-offset-1 text-justify">
+        <h1 class="title text-left">1. About</h1>
         <h1>
             Brandeis University, class of 2018. Computer science and math major. Lover of all things soccer.
             Inhabitant of Brookline, Massachusetts.
         </h1>
         <h1>
-            All work found on this page was completed during the summer of 2016.
+            This page, and all work found on this page, was completed during the summer of 2016.
         </h1>
     </div>
 </div>
-<br><br><br><br><br>
+<br><br><br>
 <div class="row">
-    <div class="col-sm-5 col-sm-offset-6 text-justify">
-        <h1 class="title text-left">Projects</h1>
+    <div id="projects" class="col-sm-6 col-sm-offset-1 text-justify">
+        <h1 class="title text-left">2. Projects</h1>
         <h1>
-            <a href="/stars" data-toggle="tooltip" title="July, 2016" data-animation="true" data-placement="left"><i>STARSPACE</i></a>:
+            <a href="/stars"><i>June, 2016: "STARSPACE"</i></a>
             an entertaining web game that features you, the daring spaceship pilot, and your quest to collect massive stars
             before your alien counterparts do the same. Realized with Python, Javascript, HTML, CSS, Bootstrap, Ajax,
             Google App Engine, and a little D3.
         </h1>
         <h1>
-            <a href="/twitterdata" data-toggle="tooltip" title="June, 2016" data-animation="true" data-placement="left"><i>TwitterData</i></a>:
+            <a href="/twitterdata"><i>July, 2016: "TwitterData"</i></a>
             a minimalist web tool for discovering twitter trends by location. TwitterData is useful for searching keywords in specific cities,
             or for making broad searches on a location by drawing a circle on the world map. Realized with Python, a little Javascript,
-            HTML, CSS, Bootstrap, Google App Engine, and the Tweepy api for Twitter.
+            HTML, CSS, Bootstrap, Jinja Templates, Google App Engine, and the Tweepy api for Twitter.
         </h1>
     </div>
 </div>
-<br><br><br><br><br>
+<br><br><br>
 <div class="row">
-    <div class="col-sm-5 col-sm-offset-1 text-justify">
-        <h1 class="title text-left">Hacks</h1>
-        <!--<h1>-->
-            <!--<a href="/bellcurvesim" data-toggle="tooltip" title="08/02/2016" data-animation="true" data-placement="right"><i>Bell Curve Simulation</i></a>-->
-        <!--</h1>-->
+    <div id="hacks" class="col-sm-6 col-sm-offset-1 text-justify">
+        <h1 class="title text-left">3. Hacks</h1>
         <h1>
-            <a href="/fireworks" data-toggle="tooltip" title="08/10/2016" data-animation="true" data-placement="right"><i>Fireworks</i></a>
+            <a href="/fireworks"><i>Fireworks</i></a>
         </h1>
         <h1>
-            <a href="/bouncingballs" data-toggle="tooltip" title="08/01/2016" data-animation="true" data-placement="right"><i>Bouncing Balls</i></a>
+            <a href="/bouncingballs"><i>Bouncing Balls</i></a>
         </h1>
         <h1>
-            <a href="/particles" data-toggle="tooltip" title="08/01/2016" data-animation="true" data-placement="right"><i>Splitting Particles</i></a>
+            <a href="/particles"><i>Splitting Particles</i></a>
         </h1>
         <h1>
-            <a href="/spacetravel" data-toggle="tooltip" title="08/01/2016" data-animation="true" data-placement="right"><i>Space Travel</i></a>
+            <a href="/spacetravel"><i>Space Travel</i></a>
         </h1>
     </div>
 </div>
-<br><br><br><br><br>
+<br><br><br>
 <div class="row">
-    <div class="col-sm-5 col-sm-offset-6 text-justify">
-        <h1 class="title text-left">Contact</h1>
-        <h1>
-            <a href="mailto:ari.karchmer.s@gmail.com">ari.karchmer.s@gmail.com</a>
-        </h1>
-        <h1>
-            <a href="https://twitter.com/intent/tweet?screen_name=f_times_d">@f_times_d</a>
-        </h1>
-        <h1>
-            <a href="https://github.com/arikarchmer">https://github.com/arikarchmer</a>
+    <div id="contact" class="col-sm-6 col-sm-offset-1 text-justify">
+        <h1 class="title text-left">4. Contact</h1>
+        <h1>Please
+            <a href="mailto:ari.karchmer.s@gmail.com">email</a>
+            ,
+            <a href="https://twitter.com/intent/tweet?screen_name=f_times_d">tweet</a>
+            , and
+            <a href="https://github.com/arikarchmer">contribute</a>
+            .
         </h1>
     </div>
 </div>
 </body>
 <script>
 
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip({container: 'body'});
-    });
+    window.addEventListener('scroll', title);
+
+    function title() {
+        var title = document.getElementById("title");
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            title.style.opacity = 0;
+            title.style.transform = 'translate(0px, -100px)';
+
+        } else if (document.body.scrollTop <= 50 || document.documentElement.scrollTop <= 50) {
+            title.style.opacity = 1;
+            title.style.transform = 'rotate(-15deg)';
+        }
+    }
 
 </script>

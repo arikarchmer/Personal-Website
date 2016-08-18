@@ -1,12 +1,13 @@
 import tweepy
 from geocoder import Geocoder
+from keys import Keys
 
 
 class Searcher():
 
     def search(self, keyword=None, city=None, state=None, coordinates=None, radius='5mi'):
-        auth = tweepy.OAuthHandler('GiF4dfJ2YHQIBwjvwOx7LiejC', 'lzMId2A8QG07ckHGJqT7jyeTkupbtmYOA6oUtLCh9Zdj5neY4t')
-        auth.set_access_token('725448716392476672-wqkOEy6iTpSYqpkmexblvTgy05bt0Xq', '3kRMffTzYSVqbisO7BAkLUyzWbopJSgOMuQXIZX8jYpzu')
+        auth = tweepy.OAuthHandler(Keys.twitter_oauth_key1, Keys.twitter_oauth_key2)
+        auth.set_access_token(Keys.twitter_access_token1, Keys.twitter_access_token2)
         api = tweepy.API(auth)
 
         if coordinates is None:

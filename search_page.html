@@ -15,7 +15,7 @@ input[type=text] {
     outline: 0;
     size: 20px;
     width: 100%;
-    height: 256px;
+    height: 128px;
     background: transparent;
     border-bottom: none;
     font: 72px "Times New Roman";
@@ -29,14 +29,15 @@ h1 {
     font: 96px "Times New Roman";
 }
 body {
-    background-color: white;
+    background-color: whitesmoke;
 }
 a {
     font: 48px "Times New Roman";
+    color: blue;
 }
 a:hover {
     text-decoration: none;
-    color: black;
+    color: green;
     transition: color 500ms;
 }
 </style>
@@ -67,8 +68,7 @@ function parse_info() {
             <input class="from-control text-left" type="text" name="info" autofocus="autofocus" placeholder="Keyword, City, State" style="color:slategray">
         </form>
           {% if invalid %}
-            <br>
-            <p class="invalid" style="color:red; font: 72px 'Times New Roman';">Invalid search!</p>
+            <p class="invalid" style="color:red; font: 48px 'Times New Roman';">Invalid search!</p>
           {% endif %}
     </div>
 </div>

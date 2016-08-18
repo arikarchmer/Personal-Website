@@ -2,10 +2,11 @@ import urllib
 import json
 import logging
 import urllib2
+from keys import Keys
 
 class Geocoder():
 
-    key = 'AIzaSyC05pL4bzG6Ynu9pucD4yFNSzFJpqOKq-Q'
+    key = Keys.geo_key
     geo_url = 'https://maps.googleapis.com/maps/api/geocode/json?'
 
     def getCoordinates(self, city, state):

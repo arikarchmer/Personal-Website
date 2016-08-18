@@ -10,13 +10,16 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <style>
+body {
+    background-color: whitesmoke;
+}
 td {
     border-top: none !important;
 }
 tr {
     width: 100%;
     display: inline-table;
-    height: 200px;
+    height: 100px;
     table-layout: auto;
 }
 table {
@@ -27,44 +30,45 @@ tbody {
     overflow-y: scroll;
     height: 400px;
     width: 100%;
-    position: relative;
+    position: absolute;
     font: 48px "Times New Roman";
 }
 a {
     font: 48px "Times New Roman";
+    color: blue;
 }
 a:hover {
     text-decoration: none;
-    color: black;
+    color: green;
     transition: color 500ms;
 }
 h1 {
     font: 96px "Times New Roman";
 }
 #text {
-    font: 36px "Times New Roman";
+    font: 24px "Times New Roman";
 }
 </style>
 <body>
 <div class="row">
     <div class="col-sm-4 col-sm-offset-1 text-justify">
         <h1>Results</h1>
-        <br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br>
         <a href="/twitterdata/search">1. Search</a>
         <br>
         <a href="/twitterdata/map">2. Map</a>
         <br>
         <a href="/twitterdata">3. Home</a>
     </div>
-    <br>
+    <br><br><br><br><br><br>
     <div class="col-sm-6">
       <table class="table text-center">
         <tbody>
         {% for i in items %}
           <tr>
               <td>
-                <img src="{{i[5]}}" alt="Searching" class="img-circle" style="width:32px;height:32px;"> <strong>{{i[0]}}</strong>
-                    <span class="badge" style="color:white">{{i[4]}}</span>
+                <img src="{{i[5]}}" alt="Searching" class="img-circle" style="width:48px;height:48px;"> {{i[0]}}
+                    <span class="badge" style="color:white; font-size: medium">{{i[4]}}</span>
                   <br>
                   <p id="text">{{i[1]}}</p>
               </td>
