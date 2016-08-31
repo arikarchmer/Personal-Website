@@ -3,5 +3,9 @@ lib/*
 .idea/*
 static/td/keys.js
 keys.py
-
+about_me.html
+draw_page.html
+FF_projections.csv
+main_page.html
+search_tips_page.html
 

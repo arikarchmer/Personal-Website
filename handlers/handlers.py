@@ -106,7 +106,7 @@ class StarsHandler(webapp2.RequestHandler):
 class TwitterHomeHandler(webapp2.RequestHandler):
 
     def get(self):
-        home_page = JINJA_ENVIRONMENT.get_template('home_page.html')
+        home_page = JINJA_ENVIRONMENT.get_template('TD_home_page.html')
         self.response.write(home_page.render())
 
 
