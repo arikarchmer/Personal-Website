@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200|Bad+Script|Loved+by+the+King' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200|Cabin' rel='stylesheet' type='text/css'>
   <script src="/static/td/core.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -18,27 +18,27 @@ input[type=text] {
     height: 128px;
     background: transparent;
     border-bottom: none;
-    font: 72px "Times New Roman";
+    font: 72px "Cabin";
 }
 .option {
     background-color: white;
     color: black;
-    font: 36px "Times New Roman";
+    font: 36px "Cabin";
 }
 h1 {
-    font: 96px "Times New Roman";
+    font: 96px "Cabin";
 }
 body {
     background-color: whitesmoke;
 }
 a {
-    font: 48px "Times New Roman";
+    font: 48px "Cabin";
     color: blue;
 }
 a:hover {
     text-decoration: none;
     color: green;
-    transition: color 500ms;
+    transition: color 1s;
 }
 </style>
 <script>
@@ -52,13 +52,6 @@ function parse_info() {
 }
 </script>
 <body>
-    <!--<div class="col-sm-4 col-sm-offset-1 text-justify">-->
-        <!--<h1>Welcome to TwitterData</h1>-->
-        <!--<br><br><br>-->
-        <!--<a href="/twitterdata/search">1. Search</a>-->
-        <!--<br>-->
-        <!--<a href="/twitterdata/map">2. Map</a>-->
-    <!--</div>-->
     <div id="text1" class="col-sm-4 col-sm-offset-1 text-left">
         <h1>Search</h1>
     </div>
@@ -68,10 +61,8 @@ function parse_info() {
             <input class="from-control text-left" type="text" name="info" autofocus="autofocus" placeholder="Keyword, City, State" style="color:slategray">
         </form>
           {% if invalid %}
-            <p class="invalid" style="color:red; font: 48px 'Times New Roman';">Invalid search!</p>
+            <p class="invalid" style="color:red; font: 36px 'Cabin';">Invalid search!</p>
           {% endif %}
     </div>
-</div>
-</div>
 </body>
 </html>

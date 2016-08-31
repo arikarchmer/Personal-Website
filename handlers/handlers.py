@@ -52,6 +52,20 @@ class DrawHandler(webapp2.RequestHandler):
         self.response.write(draw_page.render())
 
 
+class TestHandler(webapp2.RequestHandler):
+
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('new_about.html')
+        self.response.write(page.render())
+
+
+class ProjectPageHandler(webapp2.RequestHandler):
+
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('project_page.html')
+        self.response.write(page.render())
+
+
 class AboutMeHandler(webapp2.RequestHandler):
 
     def get(self):

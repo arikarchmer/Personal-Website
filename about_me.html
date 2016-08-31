@@ -4,24 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Lobster|Cabin|Source+Code+Pro" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <style>
 body {
-    background-color: whitesmoke;
+    background-color: white;
     color: black;
 }
 u {
     text-decoration: none;
-    border-bottom: 2px solid black;
+    border-bottom: 4px solid black;
 }
 h1 {
-    font: 36px "Inconsolata";
+    font: 24px "Source Code Pro";
     color: black;
-    font-weight: 400;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 a {
     color: blue;
@@ -31,15 +30,11 @@ a:hover {
     color: black;
     transition: color 500ms;
 }
-.tooltip {
-    font: 18px 'Times New Roman';
-}
 .text-justify {
     text-align: justify;
 }
 .title {
-    font: 24px "Times New Roman";
-    letter-spacing: 2px;
+    font: 48px "Times New Roman";
 }
 #canvas {
     position: absolute;
@@ -68,12 +63,11 @@ a:hover {
         <br><br><br><br><br><br><br><br><br><br>
     </div>
 </div>
-<br><br><br>
 <div class="row">
-    <div id="about" class="col-sm-6 col-sm-offset-1 text-justify">
+    <div id="about" class="col-sm-7 col-sm-offset-1 text-justify">
         <h1 class="title text-left">1. About</h1>
         <h1>
-            Brandeis University, class of 2018. Computer science and math major. Lover of all things soccer.
+            Brandeis University, class of '18. Computer science and math major. Lover of all things soccer.
             Inhabitant of Brookline, Massachusetts.
         </h1>
         <h1>
@@ -83,16 +77,16 @@ a:hover {
 </div>
 <br><br><br>
 <div class="row">
-    <div id="projects" class="col-sm-6 col-sm-offset-1 text-justify">
+    <div id="projects" class="col-sm-7 col-sm-offset-1 text-justify">
         <h1 class="title text-left">2. Projects</h1>
         <h1>
-            <a href="/stars"><i>June, 2016: "STARSPACE"</i></a>
+            <a href="/stars"><i>July, 2016: "STARSPACE"</i></a>
             an entertaining web game that features you, the daring spaceship pilot, and your quest to collect massive stars
             before your alien counterparts do the same. Realized with Python, Javascript, HTML, CSS, Bootstrap, Ajax,
             Google App Engine, and a little D3.
         </h1>
         <h1>
-            <a href="/twitterdata"><i>July, 2016: "TwitterData"</i></a>
+            <a href="/twitterdata"><i>June, 2016: "TwitterData"</i></a>
             a minimalist web tool for discovering twitter trends by location. TwitterData is useful for searching keywords in specific cities,
             or for making broad searches on a location by drawing a circle on the world map. Realized with Python, a little Javascript,
             HTML, CSS, Bootstrap, Jinja Templates, Google App Engine, and the Tweepy api for Twitter.
@@ -101,7 +95,7 @@ a:hover {
 </div>
 <br><br><br>
 <div class="row">
-    <div id="hacks" class="col-sm-6 col-sm-offset-1 text-justify">
+    <div id="hacks" class="col-sm-7 col-sm-offset-1 text-justify">
         <h1 class="title text-left">3. Hacks</h1>
         <h1>
             <a href="/fireworks"><i>Fireworks</i></a>
@@ -119,15 +113,12 @@ a:hover {
 </div>
 <br><br><br>
 <div class="row">
-    <div id="contact" class="col-sm-6 col-sm-offset-1 text-justify">
+    <div id="contact" class="col-sm-7 col-sm-offset-1 text-justify">
         <h1 class="title text-left">4. Contact</h1>
         <h1>Please
-            <a href="mailto:ari.karchmer.s@gmail.com">email</a>
-            ,
-            <a href="https://twitter.com/intent/tweet?screen_name=f_times_d">tweet</a>
-            , and
-            <a href="https://github.com/arikarchmer">contribute</a>
-            .
+            <a href="mailto:ari.karchmer.s@gmail.com">email</a>,
+            <a href="https://twitter.com/intent/tweet?screen_name=f_times_d">tweet</a>, and
+            <a href="https://github.com/arikarchmer">view the code</a>.
         </h1>
     </div>
 </div>
@@ -138,12 +129,13 @@ a:hover {
 
     function title() {
         var title = document.getElementById("title");
-        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
             title.style.opacity = 0;
             title.style.transform = 'translate(0px, -100px)';
 
-        } else if (document.body.scrollTop <= 50 || document.documentElement.scrollTop <= 50) {
+        } else if (document.body.scrollTop <= 150 || document.documentElement.scrollTop <= 150) {
             title.style.opacity = 1;
+            title.style.transform = 'translate(0px, 100px)';
             title.style.transform = 'rotate(-15deg)';
         }
     }
