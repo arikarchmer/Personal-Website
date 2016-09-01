@@ -17,6 +17,15 @@ body {
     background-color: white;
     color: black;
 }
+h3 {
+    font: 18px "Cabin";
+    color: black;
+    letter-spacing: 2px;
+    transition: opacity 3s, transform 1500ms;
+}
+h3:hover {
+    transform: translate(10px, 0);
+}
 h1 {
     font: 36px "Cabin";
     color: lightgray;
@@ -47,6 +56,9 @@ a:hover {
 </style>
 <body>
 <canvas id="canvas"></canvas>
+<div class="col-sm-2 text-left">
+    <h1><a href="/"><span class="glyphicon glyphicon-arrow-left"></span></a></h1>
+</div>
 <br><br><br>
 <div class="row">
     <div id="about" class="col-sm-7 col-sm-offset-1 text-left">
@@ -62,13 +74,14 @@ a:hover {
     <div id="contact" class="col-sm-5 col-sm-offset-1 text-left">
         <h1>Please <br>
             <a href="mailto:ari.karchmer.s@gmail.com">email</a>,
-            <a href="https://twitter.com/intent/tweet?screen_name=f_times_d">tweet</a>, and <br>
-            <a href="https://github.com/arikarchmer">view some of Ari's code</a>.
+            <a href="https://twitter.com/intent/tweet?screen_name=f_times_d">tweet</a>, and <br> view some of <b>Ari's</b>
+            <a href="https://github.com/arikarchmer">code</a>.
         </h1>
     </div>
 </div>
 </body>
 <script>
+
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
 
@@ -77,10 +90,14 @@ a:hover {
 
     var drops = [];
 
+    var collided = function(x, y, size) {
+        return Math.abs(x.x - y.x) < (size / 2) && Math.abs(x.y - y.y) < (size / 2)
+    };
+
     function animateDrop(drop) {
 
-//        drop.vy = drop.vy * 1.005;
-//        drop.vx = drop.vx * 1.005;
+//        drop.vy = drop.vy * 1.001;
+//        drop.vx = drop.vx * 1.001;
         drop.y = drop.y + drop.vy;
         drop.x = drop.x + drop.vx;
         drop.iters = drop.iters + 1;
@@ -99,6 +116,15 @@ a:hover {
         }
         if (drop.y < 0) {
             drop.vy = -drop.vy;
+        }
+
+        for (var i = 0; i < drops.length; i++) {
+            var d2 = drops[i];
+            ctx.strokeStyle = 'darkgray';
+            ctx.beginPath();
+            ctx.moveTo(drop.x, drop.y);
+            ctx.lineTo(d2.x, d2.y);
+            ctx.stroke();
         }
 
 //        if (drop.x > canvas.width || drop.x < 0 || drop.y > canvas.height || drop.y < 0) {
@@ -152,24 +178,20 @@ a:hover {
 
     function start(e) {
         if (e) {
-            var drop = {x: e.offsetX, y: e.offsetY, vy: 0.5 * Math.random() - 0.25, vx: 0.5 * Math.random() - 0.25, r: 1, c: 'black', iters: 0, del: false};
+            var drop = {x: e.offsetX, y: e.offsetY, vy: 0.5 * Math.random() - 0.25, vx: 0.5 * Math.random() - 0.25, r: 3, c: 'black', iters: 0, del: false};
         } else {
-            var drop = {x: canvas.width * Math.random(), y: canvas.height * Math.random(), vy: 0.5 * Math.random() - 0.25, vx: 0.5 * Math.random() - 0.25, r: 0.01, c: 'black', iters: 0, del: false};
+            var drop = {x: canvas.width / 2, y: canvas.height / 2, vy: 0.5 * Math.random() - 0.25, vx: 0.5 * Math.random() - 0.25, r: 3, c: 'black', iters: 0, del: false};
         }
         drops.push(drop);
         beginAnimation();
     }
 
-//    setInterval(start, 100);
-
-    for (var j = 0; j < 100; j++) {
+    for (var j = 0; j < 5; j++) {
         start();
     }
 
     canvas.addEventListener('click', function(e) {
-        for (var j = 0; j < 10; j++) {
-            start(e);
-        }
+        start(e);
     });
 </script>
 </html>
