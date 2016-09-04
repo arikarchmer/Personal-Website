@@ -87,68 +87,42 @@ a:hover {
 
     var drops = [];
 
-    var collided = function(x, y, size) {
-        return Math.abs(x.x - y.x) < (size / 2) && Math.abs(x.y - y.y) < (size / 2)
+    var distance = function(x, y) {
+        return Math.sqrt((x.x - y.x) * (x.x - y.x) + (y.y - x.y) * (y.y - y.x));
     };
 
     function animateDrop(drop) {
 
-//        drop.vy = drop.vy * 1.001;
-//        drop.vx = drop.vx * 1.001;
         drop.y = drop.y + drop.vy;
         drop.x = drop.x + drop.vx;
-        drop.iters = drop.iters + 1;
-        if (drop.r < 1) {
-            drop.r = drop.r + 0.001;
-        }
 
-        if (drop.x > canvas.width) {
+        if (drop.x > canvas.width * (15/16)) {
             drop.vx = -drop.vx;
         }
-        if (drop.x < 0) {
+        if (drop.x < canvas.width * (6/8)) {
             drop.vx = -drop.vx;
         }
-        if (drop.y > canvas.height) {
+        if (drop.y > canvas.height * (2/3)) {
             drop.vy = -drop.vy;
         }
-        if (drop.y < 0) {
+        if (drop.y < canvas.height * (1/3)) {
             drop.vy = -drop.vy;
         }
 
-        for (var i = 0; i < drops.length; i++) {
-            var d2 = drops[i];
-            ctx.strokeStyle = 'darkgray';
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        for (var k = 0; k < drops.length; k++) {
+            var d2 = drops[k];
             ctx.beginPath();
             ctx.moveTo(drop.x, drop.y);
             ctx.lineTo(d2.x, d2.y);
             ctx.stroke();
+            ctx.closePath();
         }
-
-//        if (drop.x > canvas.width || drop.x < 0 || drop.y > canvas.height || drop.y < 0) {
-//            drop.del = true;
-//        }
-//
-//        if (drop.r < 0.01) {
-//            drop.del = true;
-//        }
-
     }
 
     function draw() {
         canvas.width = canvas.width;  // clear
-
-        var new_drops = [];
-
-        /* create new array for drops that are still on screen */
-        for (var i = 0; i < drops.length; i++) {
-            var d = drops[i];
-            if (!d.del) {
-                new_drops.push(d);
-            }
-        }
-
-        /* replace array */
-        drops = new_drops;
 
         for (var j = 0; j < drops.length; j++) {
             var drop = drops[j];
@@ -173,22 +147,14 @@ a:hover {
         }
     }
 
-    function start(e) {
-        if (e) {
-            var drop = {x: e.offsetX, y: e.offsetY, vy: 0.5 * Math.random() - 0.25, vx: 0.5 * Math.random() - 0.25, r: 3, c: 'black', iters: 0, del: false};
-        } else {
-            var drop = {x: canvas.width / 2, y: canvas.height / 2, vy: 0.5 * Math.random() - 0.25, vx: 0.5 * Math.random() - 0.25, r: 3, c: 'black', iters: 0, del: false};
-        }
+    function start() {
+        var drop = {x: canvas.width * 13.5/16, y: canvas.height / 2, vy: Math.random() - 0.5, vx: Math.random() - 0.5, r: 0, c: 'black'};
         drops.push(drop);
         beginAnimation();
     }
 
-    for (var j = 0; j < 5; j++) {
+    for (var j = 0; j < 7; j++) {
         start();
     }
-
-    canvas.addEventListener('click', function(e) {
-        start(e);
-    });
 </script>
 </html>

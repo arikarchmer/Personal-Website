@@ -45,10 +45,12 @@ a:hover {
 </style>
 <body>
 <canvas id="canvas"></canvas>
-<div class="col-sm-2 text-left">
-    <h1><a href="/"><span class="glyphicon glyphicon-arrow-left"></span></a></h1>
+<div class="row">
+    <div class="col-sm-2 col-sm-offset-1 text-left">
+        <h1><a href="/"><span class="glyphicon glyphicon-arrow-left"></span></a></h1>
+    </div>
 </div>
-<br><br><br>
+<br>
 <div class="row">
     <div id="big" class="col-sm-7 col-sm-offset-1 text-left">
         <h3>1. Projects</h3>
@@ -56,12 +58,12 @@ a:hover {
             <a href="/stars"><i>July, 2016: "STARSPACE"</i></a>
             an entertaining web game that features you, the daring spaceship pilot, and your quest to collect massive stars
             before your alien counterparts do the same. Realized with Python, Javascript, HTML, CSS, Bootstrap, Ajax,
-            Google App Engine, and a little D3.
+            Google App Engine, D3.js.
         </h1>
         <h1>
             <a href="/twitterdata"><i>June, 2016: "TwitterData"</i></a>
             a minimalist web tool for discovering twitter trends by location. TwitterData is useful for searching keywords in specific cities,
-            or for making broad searches on a location by drawing a circle on the world map. Realized with Python, a little Javascript,
+            or for making broad searches on a location by drawing a circle on the world map. Realized with Python, Leaflet.js, Javascript,
             HTML, CSS, Bootstrap, Jinja Templates, Google App Engine, and the Tweepy api for Twitter.
         </h1>
     </div>
@@ -70,6 +72,12 @@ a:hover {
 <div class="row">
     <div id="small" class="col-sm-3 col-sm-offset-1 text-left">
         <h3>2. Hacks</h3>
+        <h1>
+            <a href="/repellantOrb"><i>Repellant Orb</i></a>
+        </h1>
+        <h1>
+            <a href="/connectingparticles"><i>Connecting Particles</i></a>
+        </h1>
         <h1>
             <a href="/fireworks"><i>Fireworks</i></a>
         </h1>
@@ -84,10 +92,9 @@ a:hover {
         </h1>
     </div>
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br>
 </body>
 <script>
-
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
 
@@ -97,64 +104,59 @@ a:hover {
     var drops = [];
 
     var collided = function(x, y, size) {
-        return Math.abs(x.x - y.x) < (size / 2) && Math.abs(x.y - y.y) < (size / 2)
+        return Math.abs(x.x - y.x) < (size) && Math.abs(x.y - y.y) < (size);
+    };
+
+    var distance = function(x, y) {
+        return Math.sqrt((x.x - y.x) * (x.x - y.x) + (x.y - y.y) * (x.y - y.y));
     };
 
     function animateDrop(drop) {
 
         drop.y = drop.y + drop.vy;
         drop.x = drop.x + drop.vx;
-        drop.iters = drop.iters + 1;
 
         if (drop.x > canvas.width) {
-            drop.vx = -drop.vx;
+            drop.x = 0;
         }
         if (drop.x < 0) {
-            drop.vx = -drop.vx;
+            drop.x = canvas.width;
         }
         if (drop.y > canvas.height) {
-            drop.vy = -drop.vy;
+            drop.y = 0;
         }
         if (drop.y < 0) {
-            drop.vy = -drop.vy;
-        }
-
-        // create links
-        for (var i = 0; i < drops.length; i++) {
-            var d2 = drops[i];
-            if (collided(drop, d2, 250)) {
-                ctx.strokeStyle = 'lightgray';
-                ctx.beginPath();
-                ctx.moveTo(drop.x, drop.y);
-                ctx.lineTo(d2.x, d2.y);
-                ctx.stroke();
-            }
+            drop.y = canvas.height;
         }
     }
 
     function draw() {
         canvas.width = canvas.width;  // clear
 
-        var new_drops = [];
-
-        /* create new array for drops that are still on screen */
-        for (var i = 0; i < drops.length; i++) {
-            var d = drops[i];
-            if (!d.del) {
-                new_drops.push(d);
-            }
-        }
-
-        /* replace array */
-        drops = new_drops;
-
         for (var j = 0; j < drops.length; j++) {
             var drop = drops[j];
             animateDrop(drop);
-            ctx.fillStyle = drop.c;
+            ctx.lineWidth = 0.1;
+            ctx.strokeStyle = drop.c;
             ctx.beginPath();
             ctx.arc(drop.x, drop.y, drop.r, 0, 2 * Math.PI, false);
-            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+
+             // create links
+            ctx.lineWidth = 0.1;
+            ctx.strokeStyle = 'lightgray';
+            for (var k = 0; k < drops.length; k++) {
+                var d2 = drops[k];
+                if (collided(drop, d2, 50)) {
+                    ctx.beginPath();
+                    ctx.moveTo(drop.x, drop.y);
+                    ctx.lineTo(d2.x, d2.y);
+                    ctx.stroke();
+                    ctx.closePath();
+                }
+            }
+
         }
     }
 
@@ -173,15 +175,15 @@ a:hover {
 
     function start(e) {
         if (e) {
-            var drop = {x: e.offsetX, y: e.offsetY, vy: 0.5 * Math.random() - 0.25, vx: 0.5 * Math.random() - 0.25, r: 2, c: 'gray', iters: 0, del: false};
+            var drop = {x: e.offsetX, y: e.offsetY, vy: Math.random() - 0.5, vx: Math.random() - 0.5, r: .1, c: 'lightgray'};
         } else {
-            var drop = {x: canvas.width * Math.random(), y: canvas.height * Math.random(), vy: 0.5 * Math.random() - 0.25, vx: 0.5 * Math.random() - 0.25, r: 2, c: 'gray', iters: 0, del: false};
+            var drop = {x: canvas.width * Math.random(), y: canvas.height * Math.random(), vy: Math.random() - 0.5, vx: Math.random() - 0.5, r: .1, c: 'lightgray'};
         }
         drops.push(drop);
         beginAnimation();
     }
 
-    for (var j = 0; j < 100; j++) {
+    for (var j = 0; j < 1000; j++) {
         start();
     }
 

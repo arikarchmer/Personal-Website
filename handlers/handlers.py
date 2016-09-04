@@ -44,6 +44,19 @@ class ParticleHandler(webapp2.RequestHandler):
         page = JINJA_ENVIRONMENT.get_template('particles.html')
         self.response.write(page.render())
 
+class RepellantOrbHandler(webapp2.RequestHandler):
+
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('repellantOrb.html')
+        self.response.write(page.render())
+
+
+class ConnectingPartsHandler(webapp2.RequestHandler):
+
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('ConnectingParts.html')
+        self.response.write(page.render())
+
 
 class DrawHandler(webapp2.RequestHandler):
 

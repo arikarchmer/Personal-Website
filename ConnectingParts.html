@@ -1,0 +1,133 @@
+<html>
+<head>
+  <title>F x d</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Lobster|Cabin|Source+Code+Pro" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<style>
+    #canvas {
+        position: absolute;
+        background-color: black;
+    }
+</style>
+<body>
+<canvas id="canvas"></canvas>
+</body>
+<script>
+
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    canvas.height = $(window).height();
+    canvas.width = $(window).width();
+
+    var drops = [];
+
+    var distance = function(x, y) {
+        return Math.sqrt((x.x - y.x) * (x.x - y.x) + (x.y - y.y) * (x.y - y.y));
+    };
+
+    function animateDrop(drop) {
+
+        drop.y = drop.y + drop.vy;
+        drop.x = drop.x + drop.vx;
+
+        if (drop.x > canvas.width) {
+            drop.vx = -drop.vx;
+        }
+        if (drop.x < 0) {
+            drop.vx = -drop.vx;
+        }
+        if (drop.y > canvas.height) {
+            drop.vy = -drop.vy;
+        }
+        if (drop.y < 0) {
+            drop.vy = -drop.vy;
+        }
+    }
+
+    function draw() {
+        canvas.width = canvas.width;  // clear
+
+        for (var j = 0; j < drops.length; j++) {
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 0.1;
+
+            var drop = drops[j];
+            animateDrop(drop);
+            ctx.fillStyle = drop.c;
+            ctx.beginPath();
+            ctx.arc(drop.x, drop.y, drop.r, 0, 2 * Math.PI, false);
+            ctx.fill();
+
+            for (var k = 0; k < drops.length; k++) {
+                var d2 = drops[k];
+                if (distance(drop, d2) < 100) {
+                    ctx.beginPath();
+                    ctx.moveTo(drop.x, drop.y);
+                    ctx.lineTo(d2.x, d2.y);
+                    ctx.stroke();
+                    ctx.closePath();
+                }
+            }
+            if (distance(drop, center) < 100) {
+//                drop.x = drop.x + (center.x - drop.x) / 10;
+//                drop.y = drop.y + (center.y - drop.y) / 10;
+
+
+                ctx.strokeStyle = 'red';
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.moveTo(center.x, center.y);
+                ctx.lineTo(drop.x, drop.y);
+                ctx.stroke();
+                ctx.closePath();
+            }
+        }
+
+        ctx.fillStyle = center.c;
+        ctx.beginPath();
+        ctx.arc(center.x, center.y, center.r, 0, 2 * Math.PI, false);
+        ctx.fill();
+    }
+
+    function animation() {
+        draw();
+        requestAnimationFrame(animation);
+    }
+
+
+    function start() {
+        for (var j = 0; j < 100; j++) {
+            var drop = {
+                x: canvas.width * Math.random(),
+                y: canvas.height * Math.random(),
+                vy: Math.random() - 0.5,
+                vx: Math.random() - 0.5,
+                r: 1,
+                c: 'white'
+            };
+            drops.push(drop);
+        }
+        requestAnimationFrame(animation);
+    }
+
+    var center = {x: canvas.width / 2, y: canvas.height / 2, r: 1, c: 'red'};
+
+    function updateUser(e) {
+        center.x = e.offsetX;
+        center.y = e.offsetY;
+    }
+
+    canvas.addEventListener('mousemove', function(e) {
+        updateUser(e);
+    });
+
+    start();
+
+</script>
+</html>
