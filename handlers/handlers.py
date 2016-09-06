@@ -58,6 +58,13 @@ class ConnectingPartsHandler(webapp2.RequestHandler):
         self.response.write(page.render())
 
 
+class MonteCarloPiHandler(webapp2.RequestHandler):
+
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('MonteCarloApproxPi.html')
+        self.response.write(page.render())
+
+
 class DrawHandler(webapp2.RequestHandler):
 
     def get(self):

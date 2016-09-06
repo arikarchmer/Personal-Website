@@ -33,6 +33,7 @@ app = webapp2.WSGIApplication([
     ('/spacetravel', hh.SpaceTravelHandler),
     ('/fireworks', hh.FireworksHandler),
     ('/connectingparticles', hh.ConnectingPartsHandler),
-    ('/repellantOrb', hh.RepellantOrbHandler)
+    ('/repellantOrb', hh.RepellantOrbHandler),
+    ('/montecarlopi', hh.MonteCarloPiHandler)
 
 ], debug=True)
