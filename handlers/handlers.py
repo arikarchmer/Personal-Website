@@ -1,9 +1,10 @@
-import webapp2
-import jinja2
 import json
-from searcher import Searcher
 
+import jinja2
+import webapp2
 from google.appengine.ext import db
+
+from TwitterData.searcher import Searcher
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader('./'),
@@ -75,7 +76,7 @@ class DrawHandler(webapp2.RequestHandler):
 class TestHandler(webapp2.RequestHandler):
 
     def get(self):
-        page = JINJA_ENVIRONMENT.get_template('new_about.html')
+        page = JINJA_ENVIRONMENT.get_template('WebsiteFiles/new_about.html')
         self.response.write(page.render())
 
 
@@ -91,25 +92,6 @@ class AboutMeHandler(webapp2.RequestHandler):
     def get(self):
         page = JINJA_ENVIRONMENT.get_template('about_me.html')
         self.response.write(page.render())
-
-
-class PlayersHandler(webapp2.RequestHandler):
-
-    def get(self):
-        self.response.headers['Content-Type'] = 'application/json'
-
-        new_player = {'name': self.request.get('name'), 'score': self.request.get('score')}
-        if new_player['score'] != '':
-            score = Score(name=new_player['name'], score=int(new_player['score']))
-            score.put()
-
-        query = db.Query(Score)
-        query.order('-score')
-
-        s = [{'name': x.name, 'score': x.score} for x in query.run(limit=100)]
-        obj = {'leaderboard': s, 'latest': new_player}
-
-        self.response.write(json.dumps(obj))
 
 
 class StarsHandler(webapp2.RequestHandler):
@@ -135,6 +117,25 @@ class SearchHandler(webapp2.RequestHandler):
     def get(self):
         search_page = JINJA_ENVIRONMENT.get_template('search_page.html')
         self.response.write(search_page.render())
+
+
+class PlayersHandler(webapp2.RequestHandler):
+
+    def get(self):
+        self.response.headers['Content-Type'] = 'application/json'
+
+        new_player = {'name': self.request.get('name'), 'score': self.request.get('score')}
+        if new_player['score'] != '':
+            score = Score(name=new_player['name'], score=int(new_player['score']))
+            score.put()
+
+        query = db.Query(Score)
+        query.order('-score')
+
+        s = [{'name': x.name, 'score': x.score} for x in query.run(limit=100)]
+        obj = {'leaderboard': s, 'latest': new_player}
+
+        self.response.write(json.dumps(obj))
 
 
 class ResultsHandler(webapp2.RequestHandler):
