@@ -4,7 +4,7 @@ import jinja2
 import webapp2
 from google.appengine.ext import db
 
-from TwitterData.searcher import Searcher
+from searcher import Searcher
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader('./'),

@@ -1,6 +1,6 @@
 import tweepy
 
-from TwitterData.geocoder import Geocoder
+from geocoder import Geocoder
 from keys import Keys
 
 
