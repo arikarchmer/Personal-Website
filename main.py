@@ -21,7 +21,6 @@ app = webapp2.WSGIApplication([
 
     ('/', hh.TestHandler),
     ('/projects', hh.ProjectPageHandler),
-    ('/about', hh.AboutMeHandler),
     ('/stars', hh.StarsHandler),
     ('/players', hh.PlayersHandler),
     ('/twitterdata', hh.TwitterHomeHandler),

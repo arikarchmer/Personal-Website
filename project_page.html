@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>F x d</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+    #canvas {
+        position: absolute;
+        background-color: white;
+    }
+    body {
+        background-color: white;
+        color: black;
+    }
+    p {
+        font: 14px "Cabin";
+        color: lightgray;
+        letter-spacing: 2px;
+        transition: color 500ms;
+    }
+    p:hover {
+        color: black;
+    }
+    a {
+        font-size: 24px;
+        color: midnightblue;
+    }
+    .text-justify {
+        text-align: justify;
+    }
+    .project {
+        font: 30px "Cabin";
+        transition: background-color 500ms;
+    }
+    .project:hover {
+        text-decoration: none;
+        background-color: aliceblue;
+    }
+    .hack {
+        font: 16px "Cabin";
+        transition: background-color 500ms;
+    }
+    .hack:hover {
+        text-decoration: none;
+        background-color: aliceblue;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<br>
+<div class="row">
+    <div class="col-sm-2 col-sm-offset-1 text-left">
+        <a href="/static"><span class="glyphicon glyphicon-arrow-left"></span></a>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-2 col-sm-offset-1 text-left">
+        <h1>Projects && hacks</h1>
+    </div>
+</div>
+<br><br>
+<div class="row">
+    <div id="big" class="col-sm-4 col-sm-offset-1 text-left">
+        <p>
+            <a href="/stars" class="project">'StarSpace'</a><br>
+            My second project completed in July, 2016. An entertaining web game
+            that features you, the daring spaceship pilot, and your quest to collect massive stars
+            before your alien counterparts do the same. Realized with
+            Python, Javascript, HTML, CSS, Bootstrap, Ajax,
+            Google App Engine, D3.js.
+        </p>
+        <br>
+        <p>
+            <a href="/twitterdata" class="project">'TwitterData'</a><br>
+            My first project completed in June, 2016. A minimalist web tool for discovering twitter trends by location. TwitterData is useful for searching keywords in specific cities,
+            or for making broad searches on a location by drawing a circle on the world map. Realized with
+            Python, Leaflet.js, Javascript,
+            HTML, CSS, Bootstrap, Jinja Templates, Google App Engine, and the Tweepy api for Twitter.
+        </p>
+    </div>
+</div>
+<br><br>
+<div class="row">
+    <div id="small" class="col-sm-3 col-sm-offset-1 text-left">
+        <p>
+            <a href="/montecarlopi" class="hack">Monte Carlo Approximation of Pi</a>
+        </p>
+        <p>
+            <a href="/repellantOrb" class="hack">Repellant Orb</a>
+        </p>
+        <p>
+            <a href="/connectingparticles" class="hack">Connecting Particles</a>
+        </p>
+        <p>
+            <a href="/fireworks" class="hack">Fireworks</a>
+        </p>
+        <p>
+            <a href="/bouncingballs" class="hack">Bouncing Balls</a>
+        </p>
+        <p>
+            <a href="/particles" class="hack">Splitting Particles</a>
+        </p>
+        <p>
+            <a href="/spacetravel" class="hack">Space Travel</a>
+        </p>
+        <br>
+    </div>
+</div>
+<script>
+
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    var drops = [];
+
+    var collided = function(x, y, size) {
+        return Math.abs(x.x - y.x) < (size) && Math.abs(x.y - y.y) < (size);
+    };
+
+    var distance = function(x, y) {
+        return Math.sqrt((x.x - y.x) * (x.x - y.x) + (x.y - y.y) * (x.y - y.y));
+    };
+
+    function draw_square(s1) {
+        var s = s1.s;
+
+        ctx.fillStyle = s1.c;
+        ctx.fillRect(s1.x, s1.y, s, s);
+
+        ctx.strokeStyle = "white";
+        ctx.rect(s1.x, s1.y, s, s);
+        ctx.stroke();
+    }
+
+    function draw() {
+        canvas.width = canvas.width;  // clear, resize
+
+        for (var j = 0; j < drops.length; j++) {
+            var drop = drops[j];
+            draw_square(drop);
+        }
+    }
+
+    function animation() {
+        if ($(window).width() > 768) {
+            draw();
+        }
+        requestAnimationFrame(animation);
+    }
+
+    exec = false;
+    function beginAnimation() {
+        if (!exec) {
+            exec = true;
+            requestAnimationFrame(animation);
+        }
+    }
+
+    function start() {
+        var drop = {x: canvas.width * Math.random() / 2.5 + canvas.width * 2.5/5, y: canvas.height * Math.random(), s: 80, c: 'white'};
+        drops.push(drop);
+        beginAnimation();
+    }
+
+    var mouse = {x: canvas.width / 2, y: canvas.height / 2};
+
+    function updateUser(e) {
+        mouse.x = e.offsetX;
+        mouse.y = e.offsetY;
+    }
+
+    canvas.addEventListener('mousemove', function(e) {
+        updateUser(e);
+        for (var i = 0; i < drops.length; i++) {
+            var drop = drops[i];
+            if (collided(mouse, drop, 100)) {
+                drop.c = 'black';
+            } else {
+                drop.c = 'white';
+            }
+        }
+    });
+
+    function regenerate_squares(wait_time) {
+        drops = [];
+        regen_squares = true;
+
+        setTimeout(function() {
+            if (regen_squares) {
+                for (var j = 0; j < 100; j++) {
+                    start();
+                }
+            }
+            regen_squares = false;
+        }, wait_time);
+    }
+
+    var regen_squares = false;
+
+    $(window).resize(function () {
+        regen_squares = false;
+        canvas.height = $('body')[0].scrollHeight;
+        canvas.width = $(window).width();
+        regenerate_squares(500);
+    });
+
+    $(window).scroll(function () {
+        regen_squares = false;
+        canvas.height = $(window).height() + document.body.scrollTop;
+        canvas.width = $(window).width();
+        regenerate_squares(500);
+    });
+
+    for (var j = 0; j < 100; j++) {
+        start();
+    }
+</script>
+</body>
+</html>
