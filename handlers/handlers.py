@@ -76,7 +76,7 @@ class DrawHandler(webapp2.RequestHandler):
 class TestHandler(webapp2.RequestHandler):
 
     def get(self):
-        page = JINJA_ENVIRONMENT.get_template('WebsiteFiles/new_about.html')
+        page = JINJA_ENVIRONMENT.get_template('new_about.html')
         self.response.write(page.render())
 
 
