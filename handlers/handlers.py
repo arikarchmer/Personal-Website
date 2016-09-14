@@ -66,38 +66,24 @@ class MonteCarloPiHandler(webapp2.RequestHandler):
         self.response.write(page.render())
 
 
-class DrawHandler(webapp2.RequestHandler):
+class HomeHandler(webapp2.RequestHandler):
 
     def get(self):
-        draw_page = JINJA_ENVIRONMENT.get_template('draw_page.html')
-        self.response.write(draw_page.render())
-
-
-class TestHandler(webapp2.RequestHandler):
-
-    def get(self):
-        page = JINJA_ENVIRONMENT.get_template('new_about.html')
+        page = JINJA_ENVIRONMENT.get_template('ftimesd_home.html')
         self.response.write(page.render())
 
 
 class ProjectPageHandler(webapp2.RequestHandler):
 
     def get(self):
-        page = JINJA_ENVIRONMENT.get_template('project_page.html')
-        self.response.write(page.render())
-
-
-class AboutMeHandler(webapp2.RequestHandler):
-
-    def get(self):
-        page = JINJA_ENVIRONMENT.get_template('about_me.html')
+        page = JINJA_ENVIRONMENT.get_template('ftimesd_project_page.html')
         self.response.write(page.render())
 
 
 class StarsHandler(webapp2.RequestHandler):
 
     def get(self):
-        stars_page = JINJA_ENVIRONMENT.get_template('stars_page.html')
+        stars_page = JINJA_ENVIRONMENT.get_template('Starspace.html')
         self.response.write(stars_page.render())
 
 
@@ -115,7 +101,7 @@ class TwitterHomeHandler(webapp2.RequestHandler):
 class SearchHandler(webapp2.RequestHandler):
 
     def get(self):
-        search_page = JINJA_ENVIRONMENT.get_template('search_page.html')
+        search_page = JINJA_ENVIRONMENT.get_template('TD_search_page.html')
         self.response.write(search_page.render())
 
 
@@ -152,7 +138,7 @@ class ResultsHandler(webapp2.RequestHandler):
                 items = searcher.search(keyword=k, city=c, state=s)
                 info = [k, c, s]
             else:
-                page = JINJA_ENVIRONMENT.get_template('search_page.html')
+                page = JINJA_ENVIRONMENT.get_template('TD_search_page.html')
                 parameters = {'invalid': True}
                 print 'bad search'
                 flag = False
@@ -163,7 +149,7 @@ class ResultsHandler(webapp2.RequestHandler):
             coor= {'lat': lat, 'lng': lng}
             r = self.request.get('radius')
             if lat is None or lng is None or r is None:
-                page = JINJA_ENVIRONMENT.get_template('map_page.html')
+                page = JINJA_ENVIRONMENT.get_template('TD_map_page.html')
                 parameters = {'fail': True}
             else:
                 items = searcher.search(coordinates=coor)
@@ -172,14 +158,14 @@ class ResultsHandler(webapp2.RequestHandler):
         if flag:
             if len(items) == 0:
                 if mode == 'city_state':
-                    page = JINJA_ENVIRONMENT.get_template('search_page.html')
+                    page = JINJA_ENVIRONMENT.get_template('TD_search_page.html')
                     parameters = {'invalid': True}
                 elif mode == 'coordinates':
-                    page = JINJA_ENVIRONMENT.get_template('map_page.html')
+                    page = JINJA_ENVIRONMENT.get_template('TD_map_page.html')
                     parameters = {'len': len(items)}
             else:
                 parameters = {'items': items, 'info': info}
-                page = JINJA_ENVIRONMENT.get_template('results_page.html')
+                page = JINJA_ENVIRONMENT.get_template('TD_results_page.html')
 
         self.response.write(page.render(parameters))
 
@@ -187,5 +173,5 @@ class ResultsHandler(webapp2.RequestHandler):
 class MapHandler(webapp2.RequestHandler):
 
     def get(self):
-        map_page = JINJA_ENVIRONMENT.get_template('map_page.html')
+        map_page = JINJA_ENVIRONMENT.get_template('TD_map_page.html')
         self.response.write(map_page.render())
