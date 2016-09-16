@@ -18,6 +18,13 @@ class Score(db.Model):
     score = db.IntegerProperty()
 
 
+class ScramblerHandler(webapp2.RequestHandler):
+
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('sentence_scrambler.html')
+        self.response.write(page.render())
+
+
 class FireworksHandler(webapp2.RequestHandler):
 
     def get(self):

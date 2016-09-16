@@ -20,7 +20,7 @@
     p {
         font: 14px "Cabin";
         color: lightgray;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
         transition: color 500ms;
     }
     p:hover {
@@ -35,7 +35,7 @@
     }
     .project {
         font: 30px "Cabin";
-        transition: background-color 500ms;
+        transition: background-color 500ms, color 500ms;
     }
     .project:hover {
         text-decoration: none;
@@ -43,7 +43,7 @@
     }
     .hack {
         font: 16px "Cabin";
-        transition: background-color 500ms;
+        transition: background-color 500ms, color 500ms;
     }
     .hack:hover {
         text-decoration: none;
@@ -89,6 +89,9 @@
 <br><br>
 <div class="row">
     <div id="small" class="col-sm-3 col-sm-offset-1 text-left">
+        <p>
+            <a href="/sentencescrambler" class="hack">Sentence Scrambler</a>
+        </p>
         <p>
             <a href="/montecarlopi" class="hack">Monte Carlo Approximation of Pi</a>
         </p>
@@ -191,16 +194,18 @@
         }
     });
 
+    var regen_count = 0;
     function regenerate_squares(wait_time) {
         drops = [];
         regen_squares = true;
-
         setTimeout(function() {
             if (regen_squares) {
                 for (var j = 0; j < 100; j++) {
                     start();
                 }
             }
+            regen_count = regen_count + 1;
+            console.log(regen_count);
             regen_squares = false;
         }, wait_time);
     }
