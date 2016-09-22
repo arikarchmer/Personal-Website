@@ -5,4 +5,4 @@
     - Various Hacks
     - Fantasy Football (unfinished)
 
-# This project was created as a beginning showcase for my ability to apply class knowledge to my code.
+# This website was created as a beginning showcase for my ability to apply class knowledge to my code.
