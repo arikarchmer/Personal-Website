@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,13 +24,14 @@
         color: lightgray;
         letter-spacing: 1px;
         transition: color 500ms;
+        background-color: transparent;
     }
     p:hover {
         color: black;
     }
     a {
         font-size: 24px;
-        color: midnightblue;
+        color: darkblue;
     }
     .text-justify {
         text-align: justify;
@@ -40,19 +43,21 @@
     .project:hover {
         text-decoration: none;
         background-color: aliceblue;
+        color: black;
     }
     .hack {
-        font: 16px "Cabin";
+        font: 18px "Cabin";
         transition: background-color 500ms, color 500ms;
     }
     .hack:hover {
         text-decoration: none;
         background-color: aliceblue;
+        color: black;
     }
   </style>
 </head>
 <body>
-<canvas id="canvas"></canvas>
+<!--<canvas id="canvas"></canvas>-->
 <br>
 <div class="row">
     <div class="col-sm-2 col-sm-offset-1 text-left">
@@ -88,7 +93,7 @@
 </div>
 <br><br>
 <div class="row">
-    <div id="small" class="col-sm-3 col-sm-offset-1 text-left">
+    <div id="small" class="col-sm-4 col-sm-offset-1 text-justify">
         <p>
             <a href="/sentencescrambler" class="hack">Sentence Scrambler</a>
         </p>
@@ -126,6 +131,8 @@
 
     var drops = [];
 
+    var pad = 50;
+
     var collided = function(x, y, size) {
         return Math.abs(x.x - y.x) < (size) && Math.abs(x.y - y.y) < (size);
     };
@@ -135,14 +142,29 @@
     };
 
     function draw_square(s1) {
+
+//        s1.x = s1.x + s1.vx;
+//        s1.y = s1.y + s1.vy;
+
         var s = s1.s;
 
-        ctx.fillStyle = s1.c;
-        ctx.fillRect(s1.x, s1.y, s, s);
-
-        ctx.strokeStyle = "white";
-        ctx.rect(s1.x, s1.y, s, s);
+        ctx.strokeStyle = s1.o;
+        ctx.lineWidth = 10;
+        ctx.beginPath();
+        ctx.arc(s1.x, s1.y, s1.s, 0, 2 * Math.PI, false);
         ctx.stroke();
+
+        ctx.fillStyle = s1.c;
+        ctx.beginPath();
+        ctx.arc(s1.x, s1.y, s1.s, 0, 2 * Math.PI, false);
+        ctx.fill();
+
+//        ctx.fillStyle = s1.c;
+//        ctx.fillRect(s1.x, s1.y, s, s);
+//
+//        ctx.strokeStyle = "white";
+//        ctx.rect(s1.x, s1.y, s, s);
+//        ctx.stroke();
     }
 
     function draw() {
@@ -155,6 +177,7 @@
     }
 
     function animation() {
+
         if ($(window).width() > 768) {
             draw();
         }
@@ -170,7 +193,7 @@
     }
 
     function start() {
-        var drop = {x: canvas.width * Math.random() / 2.5 + canvas.width * 2.5/5, y: canvas.height * Math.random(), s: 80, c: 'white'};
+        var drop = {x: canvas.width / 2 * Math.random() + canvas.width / 2 - 100, y: canvas.height * Math.random(), vx: 2 * Math.random() - 1, vy: 2 * Math.random() - 1, s: 40 + Math.random() * 40, c: 'aliceblue', o: 'white'};
         drops.push(drop);
         beginAnimation();
     }
@@ -182,14 +205,25 @@
         mouse.y = e.offsetY;
     }
 
+    canvas.addEventListener('click', function(e) {
+        for (var i = 0; i < drops.length; i++) {
+            var drop = drops[i];
+            if (collided(mouse, drop, drop.s)) {
+                if (drop.s < 101) {
+                    drop.s = 0.9 * drop.s;
+                }
+            }
+        }
+    });
+
     canvas.addEventListener('mousemove', function(e) {
         updateUser(e);
         for (var i = 0; i < drops.length; i++) {
             var drop = drops[i];
-            if (collided(mouse, drop, 100)) {
-                drop.c = 'black';
+            if (collided(mouse, drop, drop.s)) {
+                drop.o = 'midnightblue';
             } else {
-                drop.c = 'white';
+                drop.o = 'white';
             }
         }
     });
@@ -200,7 +234,7 @@
         regen_squares = true;
         setTimeout(function() {
             if (regen_squares) {
-                for (var j = 0; j < 100; j++) {
+                for (var j = 0; j < 25; j++) {
                     start();
                 }
             }
@@ -221,12 +255,12 @@
 
     $(window).scroll(function () {
         regen_squares = false;
-        canvas.height = $(window).height() + document.body.scrollTop;
+        canvas.height = $('body')[0].scrollHeight;
         canvas.width = $(window).width();
         regenerate_squares(500);
     });
 
-    for (var j = 0; j < 100; j++) {
+    for (var j = 0; j < 25; j++) {
         start();
     }
 </script>

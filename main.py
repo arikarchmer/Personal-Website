@@ -20,6 +20,10 @@ import handlers.handlers as hh
 app = webapp2.WSGIApplication([
 
     ('/', hh.HomeHandler),
+    ('/boards', hh.BoardHandler),
+    ('/boards_accounts', hh.BoardsAccountsHandler),
+    ('/boards/home', hh.BoardSignHandler),
+    ('/colorpuzzle', hh.ColorPuzzleHandler),
     ('/sentencescrambler', hh.ScramblerHandler),
     ('/projects', hh.ProjectPageHandler),
     ('/stars', hh.StarsHandler),

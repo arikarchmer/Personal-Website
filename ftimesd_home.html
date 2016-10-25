@@ -24,7 +24,7 @@
         transition: opacity 3s, transform 1500ms;
     }
     p {
-        font: 20px "Cabin";
+        font: 18px "Cabin";
         color: lightgray;
         letter-spacing: 2px;
         transition: color 500ms;
@@ -33,16 +33,17 @@
         color: black;
     }
     b {
-        font: 20px "Cabin";
+        font: 18px "Cabin";
         color: black;
         letter-spacing: 2px;
     }
     a {
-        color: midnightblue;
+        color: darkblue;
         transition: color 500ms, background-color 500ms;
     }
     a:hover {
         background-color: aliceblue;
+        color:black;
         text-decoration: none;
     }
     .text-justify {
@@ -130,6 +131,11 @@
                 }
             }
             if (distance(drop, center) < 100 && in_box()) {
+
+                if (drop.r < 4) {
+                    drop.r = drop.r * 1.1;
+                }
+
                 ctx.strokeStyle = center.c;
                 ctx.lineWidth = 1;
                 ctx.beginPath();
@@ -137,6 +143,10 @@
                 ctx.lineTo(drop.x, drop.y);
                 ctx.stroke();
                 ctx.closePath();
+            } else {
+                if (drop.r > 2) {
+                    drop.r = drop.r / 1.1;
+                }
             }
         }
 

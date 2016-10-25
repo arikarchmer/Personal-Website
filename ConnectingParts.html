@@ -79,6 +79,9 @@
 //                drop.x = drop.x + (center.x - drop.x) / 10;
 //                drop.y = drop.y + (center.y - drop.y) / 10;
 
+                if (drop.r < 3) {
+                    drop.r = drop.r * 1.1;
+                }
 
                 ctx.strokeStyle = 'red';
                 ctx.lineWidth = 0.5;
@@ -87,6 +90,10 @@
                 ctx.lineTo(drop.x, drop.y);
                 ctx.stroke();
                 ctx.closePath();
+            } else {
+                if (drop.r > 1) {
+                    drop.r = drop.r / 1.1;
+                }
             }
         }
 
