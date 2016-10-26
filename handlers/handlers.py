@@ -195,55 +195,48 @@ class MapHandler(webapp2.RequestHandler):
 
 #########################################BOARDS################################################
 
-class User(db.Model):
-    """Sub model for representing a score."""
-    username = db.StringProperty()
-    password = db.StringProperty()
-
-
-# class BoardHandler(webapp2.RequestHandler):
+# class User(db.Model):
+#     email = db.EmailProperty()
+#     slates = db.ListProperty(db.StringProperty())
+#
+#
+# class BoardsAccountsHandler(webapp2.RequestHandler):
 #
 #     def get(self):
-#         # user = users.get_current_user()
-#         # if user:
-#         #     nickname = user.nickname()
-#         #     logout_url = users.create_logout_url('/')
-#         #     greeting = 'Welcome, {}! (<a href="{}">sign out</a>)'.format(
-#         #         nickname, logout_url)
-#         # else:
-#         #     login_url = users.create_login_url('/')
-#         #     greeting = '<a href="{}">Sign in</a>'.format(login_url)
+#         self.response.headers['Content-Type'] = 'application/json'
 #
-#         self.response.write(JINJA_ENVIRONMENT.get_template('Boards.html').render())
+#         flag = True
+#         new_slate = {'email': users.get_current_user().email(), 'slate': self.request.get('slate')}
+#
+#         email_query = User.all()
+#         email_query.filter("email =", new_slate['email'])
+#         if email_query.get() is not None:
+#             slate = new_slate['slate']
+#             slate_list = users.get_current_user().slates
+#             slate_list.append(slate)
+#             user = User(email=new_slate['email'], slates=slate_list)
+#             user.put()
 
+        # if new_account['password'] != '':
+        #     username_query = User.all()
+        #     username_query.filter("username =", new_account['username'])
+        #     if username_query.get() is None:
+        #         user = User(username=new_account['username'], password=new_account['password'])
+        #         user.put()
+        #     else:
+        #         page = JINJA_ENVIRONMENT.get_template('Boards.html')
+        #         parameters = {'user_taken': 'true'}
+        #         flag = False
 
-class BoardsAccountsHandler(webapp2.RequestHandler):
-
-    def get(self):
-        self.response.headers['Content-Type'] = 'application/json'
-
-        flag = True
-        new_account = {'username': self.request.get('username'), 'password': self.request.get('password')}
-        if new_account['password'] != '':
-            username_query = User.all()
-            username_query.filter("username =", new_account['username'])
-            if username_query.get() is None:
-                user = User(username=new_account['username'], password=new_account['password'])
-                user.put()
-            else:
-                page = JINJA_ENVIRONMENT.get_template('Boards.html')
-                parameters = {'user_taken': 'true'}
-                flag = False
-
-        if flag:
-            query = db.Query(User)
-
-            s = [{'username': x.username, 'password': x.password} for x in query.run(limit=100)]
-            obj = {'accounts': s, 'latest': new_account}
-
-            self.response.write(json.dumps(obj))
-        else:
-            self.response.write(page.render(parameters))
+        # if flag:
+        #     query = db.Query(User)
+        #
+        #     s = [{'username': x.username, 'password': x.password} for x in query.run(limit=100)]
+        #     obj = {'accounts': s, 'latest': new_account}
+        #
+        #     self.response.write(json.dumps(obj))
+        # else:
+        #     self.response.write(page.render(parameters))
 
 
 class BoardHandler(webapp2.RequestHandler):
@@ -272,9 +265,3 @@ class BoardHandler(webapp2.RequestHandler):
 
         template = JINJA_ENVIRONMENT.get_template('Boards.html')
         self.response.write(template.render(parameters))
-
-
-class BoardSignHandler(webapp2.RequestHandler):
-    def get(self):
-        Boards_page = JINJA_ENVIRONMENT.get_template('BoardsHome.html')
-        self.response.write(Boards_page.render())

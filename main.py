@@ -21,8 +21,7 @@ app = webapp2.WSGIApplication([
 
     ('/', hh.HomeHandler),
     ('/boards', hh.BoardHandler),
-    ('/boards_accounts', hh.BoardsAccountsHandler),
-    ('/boards/home', hh.BoardSignHandler),
+    # ('/boards_accounts', hh.BoardsAccountsHandler),
     ('/colorpuzzle', hh.ColorPuzzleHandler),
     ('/sentencescrambler', hh.ScramblerHandler),
     ('/projects', hh.ProjectPageHandler),

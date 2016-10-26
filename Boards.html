@@ -64,9 +64,9 @@
     <div class="modal-dialog text-left" style="padding: 200px 50px 100px 50px">
         <!--<div class="modal-body text-left" style="color: black;background-color: white;padding: 50px 50px 50px 25px;border-top: none">-->
             <!--<ul>-->
-                <h4 style="color: white">1. Hit the + button to create a text note. Type, then hit enter.</h4>
+                <h4 style="color: white">1. Hit the + button to create a text note. Hit enter when you're done.</h4>
                 <h4 style="color: white">2. Double click on a note to edit it, then hit enter to freeze it. </h4>
-                <h4 style="color: white">3. Hold the shift key and click a note to delete it.</h4>
+                <h4 style="color: white">3. To delete a note, hold shift and click on it.</h4>
                 <h4 style="color: white">4. Drag a note to move it.</h4>
             <!--</ul>-->
         <!--</div>-->
@@ -78,8 +78,8 @@
 <div class="modal fade text-center" id="signup" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
     <div class="modal-dialog text-center">
         <br><br><br><br><br>
-        <h1 style="color: white; font: 64px 'Cabin'">Welcome to Boards</h1>
-        <br>
+        <h1 style="color: white; font: 64px 'Cabin'">SlateUniverse v1.0</h1>
+
         <div style="color: lightgray">
             <!--<span class="glyphicon glyphicon-user" id="guy" style="color: white; transition: color 1s"></span>-->
             <!--<input id="username" type="text" placeholder="username" autofocus="autofocus">-->
@@ -96,7 +96,7 @@
             {% if user_status %}
                 <button type="submit" onclick="signIn()" class="btn btn-transparent btn-sm">Sign in</button>
             {% else %}
-                <h3 style="font: 24px Cabin; color: white">Hi, {{name}}</h3>
+                <h3 style="font: 24px 'Cabin'; color: white">Hello, {{name}}</h3>
             <br>
                 <button type="submit" onclick="load()" class="btn btn-transparent btn-sm">Enter</button>
             {% endif %}
@@ -121,6 +121,12 @@
         'http://fjordtravel.no/wp-content/uploads/2013/09/001115_Gaute-Bruvik_www.nordnorge.com_Karlsoey.jpg'
     ];
 
+    var starterMessages = ["Hello darkness, my old friend...",
+        "It's a long way to the top, if you wanna rock n roll...",
+        "I never sleep, cause sleep is the cousin of death...",
+        "No, woman, no cry..."
+    ];
+
     document.body.style.backgroundImage = "url('" + backgrounds[Math.floor(Math.random() * backgrounds.length)] + "')";
 
     function load() {
@@ -141,39 +147,39 @@
         window.location = '{{ url }}';
     }
 
-    function signUp() {
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
-        $.getJSON('/boards_accounts', {username: username, password: password}, function (data) {
-
-        });
-        if (username == '') {
-            document.getElementById('guy').style.color = 'red';
-        } else {
-            document.getElementById('guy').style.color = 'white';
-        }
-        if (password == '') {
-            document.getElementById('lock').style.color = 'red';
-        } else {
-            document.getElementById('lock').style.color = 'white';
-        }
-        var userTaken = '{{ user_taken }}';
-        console.log(userTaken);
-        if (username != '' && password != '') {
-            if (userTaken == 'true') {
-                alert('Sorry, that username is already taken!');
-            } else {
-                $("#signup").modal("toggle");
-                setTimeout(function() {
-                    controls_go();
-                }, 500);
-            }
-        }
-    }
+//    function signUp() {
+//        var username = document.getElementById('username').value;
+//        var password = document.getElementById('password').value;
+//        $.getJSON('/boards_accounts', {username: username, password: password}, function (data) {
+//
+//        });
+//        if (username == '') {
+//            document.getElementById('guy').style.color = 'red';
+//        } else {
+//            document.getElementById('guy').style.color = 'white';
+//        }
+//        if (password == '') {
+//            document.getElementById('lock').style.color = 'red';
+//        } else {
+//            document.getElementById('lock').style.color = 'white';
+//        }
+//        var userTaken = '{{ user_taken }}';
+//        console.log(userTaken);
+//        if (username != '' && password != '') {
+//            if (userTaken == 'true') {
+//                alert('Sorry, that username is already taken!');
+//            } else {
+//                $("#signup").modal("toggle");
+//                setTimeout(function() {
+//                    controls_go();
+//                }, 500);
+//            }
+//        }
+//    }
 
     var newNoteButton = function() {
         var node = document.createElement("p");
-        var textnode = document.createTextNode('+');
+        var textnode = document.createTextNode('+ new Slate');
         node.appendChild(textnode);
         node.addEventListener('mouseenter', function() {
             node.style.opacity = 0.8;
@@ -191,13 +197,13 @@
         });
         document.body.appendChild(node);
 
-        move(node, window.innerWidth - 140, 10);
+        move(node, window.innerWidth - 240, 10);
         node.style.fontSize = 24 +'px';
     };
 
     var logOutButton = function() {
         var node = document.createElement("p");
-        var textnode = document.createTextNode('Log out');
+        var textnode = document.createTextNode('log out');
         node.appendChild(textnode);
         node.addEventListener('mouseenter', function() {
             node.style.opacity = 0.8;
@@ -216,6 +222,40 @@
         document.body.appendChild(node);
 
         move(node, 10, 10);
+        node.style.fontSize = 24 +'px';
+    };
+
+    var backgroundOffButton = function() {
+        var node = document.createElement("p");
+        node.textvalue = 'background off';
+        var textnode = document.createTextNode('background off');
+        node.appendChild(textnode);
+        node.addEventListener('mouseenter', function() {
+            node.style.opacity = 0.8;
+            node.style.color = 'black';
+            var textnode = document.createTextNode('');
+            textnode.innerHTML = 'type, then hit enter to create a next text node.';
+            textnode.appendChild(textnode);
+        });
+        node.addEventListener('mouseleave', function() {
+            node.style.opacity = 0.6;
+            node.style.color = 'black';
+        });
+        node.addEventListener('click', function() {
+            console.log(node.childNodes[0].textvalue);
+            if (document.getElementById('background_button').getElementsByTagName('p')[0] == 'background off') {
+                document.body.style.backgroundImage = "url('')";
+                document.body.style.background = 'white';
+                node.style.border = '1px solid black';
+                node.innerHTML = "background on";
+            } else {
+                document.body.style.backgroundImage = "url('" + backgrounds[Math.floor(Math.random() * backgrounds.length)] + "')";
+                node.innerHTML = "background off";
+            }
+        });
+        document.body.appendChild(node);
+
+        move(node, window.innerWidth - 172, window.innerHeight - 50);
         node.style.fontSize = 24 +'px';
     };
 
@@ -246,6 +286,7 @@
     logOutButton();
     newNoteButton();
     controls();
+//    backgroundOffButton();
     log_in();
     var textarea = document.getElementById('textarea');
     var id = 0;
@@ -268,7 +309,7 @@
     function newNote() {
         var node = document.createElement("textarea");
         node.autofocus = 'autofocus';
-        node.placeholder = "Type something...";
+        node.placeholder = starterMessages[Math.floor(Math.random() * starterMessages.length)];
         id = id + 1;
         node.id = id;
         node.cols = 30;
