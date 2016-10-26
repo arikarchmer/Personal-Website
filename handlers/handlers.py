@@ -4,6 +4,7 @@ import jinja2
 import webapp2
 from google.appengine.ext import db
 from google.appengine.api import users
+from flask import Markup
 
 from searcher import Searcher
 
@@ -249,19 +250,31 @@ class BoardHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user:
+            # url = users.create_logout_url(self.request.uri)
             nickname = user.nickname()
-            logout_url = users.create_logout_url('/boards')
-            greeting = 'Welcome, {}! (<a href="{}">sign out</a>)'.format(
-                nickname, logout_url)
+            url_linktext = 'Logout'
+            user_status = False
+            login_url = Markup(users.create_logout_url('/boards'))
         else:
-            login_url = users.create_login_url('/boards/home')
-            greeting = '<a href="{}">Sign in</a>'.format(login_url)
+            # url = users.create_login_url(self.request.uri)
+            nickname = ''
+            url_linktext = 'Login'
+            user_status = True
+            login_url = Markup(users.create_login_url('/boards'))
 
-        self.response.write(
-            '<html><body>{}</body></html>'.format(greeting))
+        parameters = {
+            'user': user,
+            'name': nickname,
+            'url': login_url,
+            'url_linktext': url_linktext,
+            'user_status': user_status
+        }
+
+        template = JINJA_ENVIRONMENT.get_template('Boards.html')
+        self.response.write(template.render(parameters))
 
 
 class BoardSignHandler(webapp2.RequestHandler):
     def get(self):
-        map_page = JINJA_ENVIRONMENT.get_template('BoardsHome.html')
-        self.response.write(map_page.render())
+        Boards_page = JINJA_ENVIRONMENT.get_template('BoardsHome.html')
+        self.response.write(Boards_page.render())

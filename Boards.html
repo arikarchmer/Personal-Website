@@ -52,6 +52,7 @@
         background-color: transparent;
         color: lightgray;
         border: 1px solid lightgray;
+        font: 24px "Cabin";
     }
     .btn-transparent:hover {
         color: white;
@@ -77,39 +78,33 @@
 <div class="modal fade text-center" id="signup" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
     <div class="modal-dialog text-center">
         <br><br><br><br><br>
-        <h1 style="color: white">Welcome to Boards</h1>
+        <h1 style="color: white; font: 64px 'Cabin'">Welcome to Boards</h1>
         <br>
         <div style="color: lightgray">
-            <span class="glyphicon glyphicon-user" id="guy" style="color: white; transition: color 1s"></span>
-            <input id="username" type="text" placeholder="username" autofocus="autofocus">
+            <!--<span class="glyphicon glyphicon-user" id="guy" style="color: white; transition: color 1s"></span>-->
+            <!--<input id="username" type="text" placeholder="username" autofocus="autofocus">-->
+            <!--<br>-->
+            <!--&lt;!&ndash;{% if user_taken %}&ndash;&gt;-->
+                <!--&lt;!&ndash;<h5 style="color:red">That username is already taken!</h5>&ndash;&gt;-->
+            <!--&lt;!&ndash;{% endif %}&ndash;&gt;-->
+            <!--<br>-->
+            <!--<span class="glyphicon glyphicon-lock" id="lock" style="color: white; transition: color 1s"></span>-->
+            <!--<input id="password" type="password" placeholder=password autofocus="autofocus">-->
+            <!--<br><br>-->
+
+
+            {% if user_status %}
+                <button type="submit" onclick="signIn()" class="btn btn-transparent btn-sm">Sign in</button>
+            {% else %}
+                <h3 style="font: 24px Cabin; color: white">Hi, {{name}}</h3>
             <br>
-            <!--{% if user_taken %}-->
-                <!--<h5 style="color:red">That username is already taken!</h5>-->
-            <!--{% endif %}-->
-            <br>
-            <span class="glyphicon glyphicon-lock" id="lock" style="color: white; transition: color 1s"></span>
-            <input id="password" type="password" placeholder=password autofocus="autofocus">
-            <br><br>
-            <button type="submit" onclick="signUp()" class="btn btn-transparent btn-sm">Sign up</button>
+                <button type="submit" onclick="load()" class="btn btn-transparent btn-sm">Enter</button>
+            {% endif %}
+
+
             <!--or <button type="submit" onclick="logIn()" class="btn btn-transparent btn-sm">Log in</button>-->
-            <br>
-            <h5 style="color: white">Already have an account? <br><br> <button type="submit" onclick="logIn()" class="btn btn-transparent btn-sm">Log in</button></h5>
-        </div>
-    </div>
-</div>
-<div class="modal fade text-center" id="login" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
-    <div class="modal-dialog text-center">
-        <br><br><br><br><br>
-        <h1 style="color: white">Welcome back!</h1>
-        <br>
-        <div style="color: lightgray">
-            <span class="glyphicon glyphicon-user" id="guy2" style="color: white; transition: color 1s"></span>
-            <input id="username2" type="text" placeholder="username" autofocus="autofocus">
-            <br><br>
-            <span class="glyphicon glyphicon-lock" id="lock2" style="color: white; transition: color 1s"></span>
-            <input id="password2" type="password" placeholder=password autofocus="autofocus">
-            <br><br>
-            <button type="submit" onclick="load()" class="btn btn-transparent btn-sm">Log in</button>
+            <!--<br>-->
+            <!--<h5 style="color: white">Already have an account? <br><br> <button type="submit" onclick="logIn()" class="btn btn-transparent btn-sm">Log in</button></h5>-->
         </div>
     </div>
 </div>
@@ -129,13 +124,21 @@
     document.body.style.backgroundImage = "url('" + backgrounds[Math.floor(Math.random() * backgrounds.length)] + "')";
 
     function load() {
-        $("#login").modal("toggle");
+        $("#signup").modal("toggle");
+    }
 
+    function logOut() {
+        window.location = '{{ url }}';
     }
 
     function logIn() {
         $("#signup").modal("toggle");
         $("#login").modal("toggle");
+    }
+
+    function signIn() {
+        $("#signup").modal("toggle");
+        window.location = '{{ url }}';
     }
 
     function signUp() {
@@ -192,6 +195,30 @@
         node.style.fontSize = 24 +'px';
     };
 
+    var logOutButton = function() {
+        var node = document.createElement("p");
+        var textnode = document.createTextNode('Log out');
+        node.appendChild(textnode);
+        node.addEventListener('mouseenter', function() {
+            node.style.opacity = 0.8;
+            node.style.color = 'black';
+            var textnode = document.createTextNode('');
+            textnode.innerHTML = 'type, then hit enter to create a next text node.';
+            textnode.appendChild(textnode);
+        });
+        node.addEventListener('mouseleave', function() {
+            node.style.opacity = 0.6;
+            node.style.color = 'black';
+        });
+        node.addEventListener('click', function() {
+            logOut();
+        });
+        document.body.appendChild(node);
+
+        move(node, 10, 10);
+        node.style.fontSize = 24 +'px';
+    };
+
     var controls = function() {
         var node = document.createElement("p");
         var textnode = document.createTextNode('controls');
@@ -216,7 +243,7 @@
         node.style.fontSize = 24 +'px';
     };
 
-
+    logOutButton();
     newNoteButton();
     controls();
     log_in();
