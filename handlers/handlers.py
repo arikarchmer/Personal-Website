@@ -3,6 +3,7 @@ import json
 import jinja2
 import webapp2
 from google.appengine.ext import db
+from google.appengine.ext import ndb
 from google.appengine.api import users
 from flask import Markup
 
@@ -195,27 +196,51 @@ class MapHandler(webapp2.RequestHandler):
 
 #########################################BOARDS################################################
 
-# class User(db.Model):
-#     email = db.EmailProperty()
-#     slates = db.ListProperty(db.StringProperty())
-#
-#
-# class BoardsAccountsHandler(webapp2.RequestHandler):
-#
-#     def get(self):
-#         self.response.headers['Content-Type'] = 'application/json'
-#
-#         flag = True
-#         new_slate = {'email': users.get_current_user().email(), 'slate': self.request.get('slate')}
-#
-#         email_query = User.all()
-#         email_query.filter("email =", new_slate['email'])
-#         if email_query.get() is not None:
-#             slate = new_slate['slate']
-#             slate_list = users.get_current_user().slates
-#             slate_list.append(slate)
-#             user = User(email=new_slate['email'], slates=slate_list)
-#             user.put()
+class MyUser(ndb.Model):
+    email = ndb.StringProperty()
+    slates = ndb.StringProperty(repeated=True)
+
+
+class BoardsAccountsHandler(webapp2.RequestHandler):
+
+    def get(self):
+        self.response.headers['Content-Type'] = 'application/json'
+
+        flag = True
+        new_slate = {'email': users.get_current_user().email(), 'slate': self.request.get('slate')}
+        # print '====================' + self.request.get('slate') + '==================='
+
+        #parse slate, 0 is text, 1 is x-coor, 2 is y-coor
+        # slate_info = new_slate['slate'].split(" ")
+
+        # key = None
+        email_query = MyUser.query()
+        email_query = email_query.filter(MyUser.email == new_slate['email'])
+        # email_query.filter("email =", new_slate['email'])
+        if email_query.get() is not None:
+            key = email_query.get().key
+            slate = new_slate['slate']
+            # print '====================' + slate + '==================='
+            slate_list = email_query.get().slates
+
+            if key is not None:
+                u = key.get()
+                slate_list.append(slate)
+                u.slates = slate_list
+                u.put()
+            else:
+                slate_list.append(slate)
+                user = MyUser(email=new_slate['email'], slates=slate_list)
+                user.put()
+
+        else:
+            user = MyUser(email=users.get_current_user().email(), slates=[])
+            user.put()
+
+        query = MyUser.query()
+
+        s = [{'name': x.email, 'slates': x.slates} for x in query.fetch(100)]
+        self.response.write(json.dumps(s))
 
         # if new_account['password'] != '':
         #     username_query = User.all()
@@ -227,7 +252,7 @@ class MapHandler(webapp2.RequestHandler):
         #         page = JINJA_ENVIRONMENT.get_template('Boards.html')
         #         parameters = {'user_taken': 'true'}
         #         flag = False
-
+        #
         # if flag:
         #     query = db.Query(User)
         #

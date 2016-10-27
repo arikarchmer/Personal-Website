@@ -39,13 +39,7 @@
         color: black;
         background-color: white;
         opacity: 0.6;
-        border-radius: 4px;
-        padding: 5px 5px 5px 5px;
-    }
-    li {
-        font: 18px "Cabin";
-        color: black;
-        background-color: white;
+        border-radius: 14px;
         padding: 5px 5px 5px 5px;
     }
     .btn-transparent {
@@ -118,7 +112,8 @@
     var backgrounds = ['http://static.businessinsider.com/image/51c33f37eab8ea675e000007/image.jpg',
         'https://static.pexels.com/photos/792/wood-landscape-mountains-nature.jpg',
         'https://seefcbplayers.files.wordpress.com/2013/09/fc-barcelona-camp-nou.jpg',
-        'http://fjordtravel.no/wp-content/uploads/2013/09/001115_Gaute-Bruvik_www.nordnorge.com_Karlsoey.jpg'
+        'http://fjordtravel.no/wp-content/uploads/2013/09/001115_Gaute-Bruvik_www.nordnorge.com_Karlsoey.jpg',
+        'https://s-media-cache-ak0.pinimg.com/originals/cd/0b/00/cd0b00a78edd426a3a389771dacdc911.jpg'
     ];
 
     var starterMessages = ["Hello darkness, my old friend...",
@@ -184,9 +179,6 @@
         node.addEventListener('mouseenter', function() {
             node.style.opacity = 0.8;
             node.style.color = 'black';
-            var textnode = document.createTextNode('');
-            textnode.innerHTML = 'type, then hit enter to create a next text node.';
-            textnode.appendChild(textnode);
         });
         node.addEventListener('mouseleave', function() {
             node.style.opacity = 0.6;
@@ -197,8 +189,8 @@
         });
         document.body.appendChild(node);
 
-        move(node, window.innerWidth - 240, 10);
-        node.style.fontSize = 24 +'px';
+        move(node, window.innerWidth - 190, 10);
+        node.style.fontSize = 18 +'px';
     };
 
     var logOutButton = function() {
@@ -208,9 +200,6 @@
         node.addEventListener('mouseenter', function() {
             node.style.opacity = 0.8;
             node.style.color = 'black';
-            var textnode = document.createTextNode('');
-            textnode.innerHTML = 'type, then hit enter to create a next text node.';
-            textnode.appendChild(textnode);
         });
         node.addEventListener('mouseleave', function() {
             node.style.opacity = 0.6;
@@ -222,41 +211,41 @@
         document.body.appendChild(node);
 
         move(node, 10, 10);
-        node.style.fontSize = 24 +'px';
+        node.style.fontSize = 18 +'px';
     };
+
+    var c = 0;
+    function backgroundCounter() {
+        c = c + 1;
+        return c;
+    }
 
     var backgroundOffButton = function() {
         var node = document.createElement("p");
-        node.textvalue = 'background off';
         var textnode = document.createTextNode('background off');
         node.appendChild(textnode);
         node.addEventListener('mouseenter', function() {
             node.style.opacity = 0.8;
             node.style.color = 'black';
-            var textnode = document.createTextNode('');
-            textnode.innerHTML = 'type, then hit enter to create a next text node.';
-            textnode.appendChild(textnode);
         });
         node.addEventListener('mouseleave', function() {
             node.style.opacity = 0.6;
             node.style.color = 'black';
         });
         node.addEventListener('click', function() {
-            console.log(node.childNodes[0].textvalue);
-            if (document.getElementById('background_button').getElementsByTagName('p')[0] == 'background off') {
-                document.body.style.backgroundImage = "url('')";
-                document.body.style.background = 'white';
-                node.style.border = '1px solid black';
+            if (backgroundCounter() % 2 == 1) {
+                document.body.style.background = 'whitesmoke';
                 node.innerHTML = "background on";
             } else {
                 document.body.style.backgroundImage = "url('" + backgrounds[Math.floor(Math.random() * backgrounds.length)] + "')";
+                document.body.style.backgroundSize = '100%';
                 node.innerHTML = "background off";
             }
         });
         document.body.appendChild(node);
 
-        move(node, window.innerWidth - 172, window.innerHeight - 50);
-        node.style.fontSize = 24 +'px';
+        move(node, window.innerWidth - 135, window.innerHeight - 40);
+        node.style.fontSize = 18 +'px';
     };
 
     var controls = function() {
@@ -266,9 +255,6 @@
         node.addEventListener('mouseenter', function() {
             node.style.opacity = 0.8;
             node.style.color = 'black';
-            var textnode = document.createTextNode('');
-            textnode.innerHTML = 'type, then hit enter to create a next text node.';
-            textnode.appendChild(textnode);
         });
         node.addEventListener('mouseleave', function() {
             node.style.opacity = 0.6;
@@ -279,14 +265,14 @@
         });
         document.body.appendChild(node);
 
-        move(node, window.innerWidth - 100, 10);
-        node.style.fontSize = 24 +'px';
+        move(node, window.innerWidth - 80, 10);
+        node.style.fontSize = 18 +'px';
     };
 
     logOutButton();
     newNoteButton();
     controls();
-//    backgroundOffButton();
+    backgroundOffButton();
     log_in();
     var textarea = document.getElementById('textarea');
     var id = 0;
@@ -314,7 +300,11 @@
         node.id = id;
         node.cols = 30;
         node.rows = 3;
+//        node.style.border = '1px solid black';
         node.style.opacity = 0;
+
+        var node_location = {x: window.innerWidth * 0.3 * Math.random() + window.innerWidth * 0.1,
+            y: window.innerHeight * 0.3 * Math.random() + window.innerHeight * 0.1};
 
         node.setAttribute('draggable', 'true');
         node.addEventListener('click', function(e) {
@@ -332,28 +322,29 @@
                 node.rows = 3;
                 node.readOnly = true;
 
+                $.getJSON('/boards_accounts', {slate: node.value + " " + node_location.x + " " + node_location.y}, function (data) {
+                    console.log(data.slates);
+                });
             }
         });
         node.addEventListener('mouseenter', function() {
             node.style.opacity = 0.8;
             node.style.color = 'black';
-            var textnode = document.createTextNode('');
-            textnode.innerHTML = 'type, then hit enter to create a next text node.';
-            textnode.appendChild(textnode);
         });
         node.addEventListener('mouseleave', function() {
             node.style.opacity = 0.6;
             node.style.color = 'black';
         });
         node.addEventListener('dragend', function(e) {
-            move(node, e.clientX, e.clientY - $('#' + node.id).height());
+            node_location.x = e.clientX;
+            node_location.y = e.clientY - $('#' + node.id).height();
+            move(node, node_location.x, node_location.y);
         });
         document.body.appendChild(node);
         fade_in(node);
-        move(node, window.innerWidth * 0.3 * Math.random() + window.innerWidth * 0.1,
-                window.innerHeight * 0.3 * Math.random() + window.innerHeight * 0.1);
+        move(node, node_location.x, node_location.y);
         node.style.fontSize = 36 +'px';
-        textarea.value = '';
+
     }
 
     function fade_in(element) {
