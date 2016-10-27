@@ -219,15 +219,6 @@ class BoardsAccountsHandler(webapp2.RequestHandler):
             # print '====================' + slate + '==================='
             slate_list = email_query.get().slates
 
-            # # need to make all current slates 'OLD'
-            # for s in slate_list:
-            #     if s != '':
-            #         s = s[:-3]
-            #         print '=====================' + s + '====================='
-            #         s += 'OLD'
-            #         print '=====================' + s + '====================='
-
-
             if key is not None:
                 u = key.get()
 
@@ -269,18 +260,8 @@ class BoardsAccountsHandler(webapp2.RequestHandler):
                     slate_list.append(slate)
                 u.slates = slate_list
                 u.put()
+
             else:
-
-                # # Go through slates to see if there is a duplicate so we can remove and update
-                # for s in slate_list:
-                #     if s != '':
-                #         s_list = s.split(':::::')
-                #         print '=====================' + str(len(s_list)) + '====================='
-                #         if s_list[3] == slate.split(':::::')[3]:
-                #             status = s_list[4]
-                #             if status == 'OLD':
-                #                 slate_list.remove(status)
-
                 slate_list.append(slate)
                 user = MyUser(email=new_slate['email'], slates=slate_list)
                 user.put()

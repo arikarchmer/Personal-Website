@@ -21,7 +21,7 @@
         opacity: 0.6;
         overflow: hidden;
         border-radius: 4px;
-        padding: 5px 5px 5px 5px
+        padding: 5px 5px 5px 5px;
     }
     input {
         font: 18px "Cabin";
@@ -332,6 +332,8 @@
                 node_location.y + ":::::" + node.id + ":::::NEW"}, function (data) {
 //                    console.log(data.slates);
                 });
+
+                $('#' + node.id).autoResize();
             }
         });
         node.addEventListener('mouseenter', function() {
@@ -369,6 +371,7 @@
         node.rows = 3;
 //        node.style.border = '1px solid black';
         node.style.opacity = 0;
+        node.readOnly = true;
 
         node.value = info[0];
         var node_location = {x: info[1], y: info[2]};
@@ -423,7 +426,7 @@
         document.body.appendChild(node);
         fade_in(node);
         move(node, node_location.x, node_location.y);
-        node.style.fontSize = 36 +'px';
+        $('textarea').autoResize();
     }
 
     function generatePastNotes() {
