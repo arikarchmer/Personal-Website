@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Art</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Lobster|Cabin|Source+Code+Pro" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+        p {
+            font: 12px "Menlo";
+        }
+        #poem {
+            opacity: 1;
+            transition: opacity 200ms;
+            padding-left: 50px;
+            padding-top: 50px;
+        }
+        #astro {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-sm-5" id="poem">
+        <p>surfing the atmosphere i turn towards the moon</p>
+        <p>she speaks to me dreaming of a dreamy star.</p>
+        <p>puzzle pieces piece together reality plus realism</p>
+        <p>as my soul saunters to sleep.</p>
+        <br>
+        <img id="astro" src="static/astro.jpg" style="height: 288px; width: 512px;">
+    </div>
+<script>
+
+    var blinks = 0;
+    var touch_flag = false;
+    var poem = document.getElementById('poem');
+    var astro = document.getElementById('astro');
+
+    var blink = function() {
+        blinks++;
+        if (blinks % 2 == 0) {
+            return 0.85;
+        } else {
+            return 0.15;
+        }
+    };
+
+    var opacity = function(time) {
+
+        time = time * 0.95;
+
+        if (time > 1) {
+            poem.style.opacity = blink();
+            setTimeout(opacity.bind(null, time), time);
+        } else {
+            poem.style.opacity = 1;
+            setTimeout(function() {
+                poem.style.opacity = 0.15;
+                touch_flag = true;
+            }, 100);
+        }
+    };
+
+    poem.addEventListener('mouseenter', function() {
+         if (touch_flag) {
+             poem.style.opacity = 1;
+             astro.style.opacity = 1;
+         }
+    });
+    poem.addEventListener('mouseleave', function() {
+         if (touch_flag) {
+             poem.style.opacity = 0.15;
+             astro.style.opacity = 0;
+        }
+    });
+
+    opacity(500);
+
+</script>
+</body>
+</html>

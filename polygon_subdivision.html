@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>F x d</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Lobster|Cabin|Source+Code+Pro" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+        #canvas {
+            position: absolute;
+            background-color: white;
+        }
+        .title {
+            color: white;
+            font: 64px "Menlo";
+            letter-spacing: 4px;
+            transition: letter-spacing 1s;
+        }
+        .title:hover {
+            letter-spacing: 12px;
+        }
+        p {
+            color: white;
+            font: 18px "Menlo";
+            letter-spacing: 2px;
+            transition: font 1s, letter-spacing 3s;
+        }
+</style>
+</head>
+
+<body>
+
+<canvas id="canvas"></canvas>
+
+<script>
+
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    canvas.height = $(window).height();
+    canvas.width = $(window).width();
+
+    var getLine = function(bounds) {
+        return {x1: Math.random()*bounds.one, x2: Math.random()*bounds.two};
+    };
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#0';
+        for (var i = 0; i < 5; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    var drawBorder = function() {
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(canvas.width, 0);
+        ctx.lineTo(canvas.width, canvas.height);
+        ctx.lineTo(0, canvas.height);
+        ctx.lineTo(0, 0);
+        ctx.stroke();
+    };
+
+    var drawDiv = function(polygon) {
+
+        var points = [];
+
+        for (var i = 0; i < polygon.length; i++) {
+            points.push(polygon[i]);
+        }
+
+        var i1 = Math.floor(points.length * Math.random());
+        var p1 = points[i1];
+        points.splice(i1, 1);
+
+        var i2 = Math.floor(points.length * Math.random());
+        var p2 = points[i2];
+        points.splice(i2, 1);
+
+        var i3 = Math.floor(points.length * Math.random());
+        var p3 = points[i3];
+        points.splice(i3, 1);
+
+        var i4 = Math.floor(points.length * Math.random());
+        var p4 = points[i4];
+        points.splice(i4, 1);
+
+        var b = {x: (p1.x + p2.x) / 2, y: (p1.y + p2.y) / 2};
+        var e = {x: (p3.x + p4.x) / 2, y: (p3.y + p4.y) / 2};
+
+        ctx.moveTo(b.x, b.y);
+        ctx.lineTo(e.x, e.y);
+        ctx.lineTo()
+
+
+    };
+
+    var draw = function(line, oldLine) {
+        ctx.lineWidth = 5;
+        if (line.x1 < 10) {
+            ctx.beginPath();
+            ctx.moveTo(line.x1, 0);
+            ctx.lineTo(line.x2, canvas.height);
+            ctx.lineTo(oldLine.x2, canvas.height);
+            ctx.lineTo(oldLine.x1, 0);
+            ctx.lineTo(line.x1, 0);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+//            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(line.x1, 0);
+            ctx.lineTo(line.x2, canvas.height);
+            ctx.lineTo(0, canvas.height);
+            ctx.lineTo(0, 0);
+            ctx.lineTo(line.x1, 0);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+//            ctx.stroke();
+
+//            setTimeout(function() {
+//                canvas.width = canvas.width;
+////                drawBorder();
+//                draw(getLine({one: canvas.width, two: canvas.width}), {x1: canvas.width, x2: canvas.width});
+//            }, 500);
+        } else {
+            ctx.beginPath();
+            ctx.moveTo(line.x1, 0);
+            ctx.lineTo(line.x2, canvas.height);
+            ctx.lineTo(oldLine.x2, canvas.height);
+            ctx.lineTo(oldLine.x1, 0);
+            ctx.lineTo(line.x1, 0);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+//            ctx.stroke();
+
+            setTimeout(function() {
+                draw(getLine({one: line.x1, two: line.x2}), {x1: line.x1, x2: line.x2});
+            }, 100);
+
+        }
+    };
+
+    drawBorder();
+//    draw(getLine({one: canvas.width, two: canvas.width}), {x1: canvas.width, x2: canvas.width});
+
+</script>
+
+</body>
+</html>

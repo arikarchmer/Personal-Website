@@ -210,25 +210,77 @@ class BoardsAccountsHandler(webapp2.RequestHandler):
         new_slate = {'email': users.get_current_user().email(), 'slate': self.request.get('slate')}
         # print '====================' + self.request.get('slate') + '==================='
 
-        #parse slate, 0 is text, 1 is x-coor, 2 is y-coor
-        # slate_info = new_slate['slate'].split(" ")
-
-        # key = None
         email_query = MyUser.query()
         email_query = email_query.filter(MyUser.email == new_slate['email'])
-        # email_query.filter("email =", new_slate['email'])
+
         if email_query.get() is not None:
             key = email_query.get().key
             slate = new_slate['slate']
             # print '====================' + slate + '==================='
             slate_list = email_query.get().slates
 
+            # # need to make all current slates 'OLD'
+            # for s in slate_list:
+            #     if s != '':
+            #         s = s[:-3]
+            #         print '=====================' + s + '====================='
+            #         s += 'OLD'
+            #         print '=====================' + s + '====================='
+
+
             if key is not None:
                 u = key.get()
-                slate_list.append(slate)
+
+                # Go through slates to see if there is a duplicate so we can remove and update
+                count = -1
+                del_list = []
+                for s in slate_list:
+                    count += 1
+                    if s != '' and slate != '':
+
+                        if s[-3:] != 'DEL':
+                            # need to make all current slates 'OLD'
+                            s = s[:-3]
+                            # print '=====================' + s + '====================='
+                            s += 'OLD'
+                            # print '=====================' + s + '====================='
+
+                        s_list = s.split(':::::')
+                        n_s_list = slate.split(':::::')
+                        # print '=====================' + s_list[4] + '====================='
+                        # print '=====================' + str(len(n_s_list)) + '====================='
+                        # print '=====================' + slate + '====================='
+                        if s_list[3] == n_s_list[3]:
+                            status = s_list[4]
+                            if status == 'OLD':
+                                # print '=====================' + str(len(slate_list)) + '==================='
+                                # print '=====================WOULD DELETE OLD ONE==================='
+                                del_list.append(count)
+                                # slate_list[:] = [x for x in slate_list if x != s]
+                                # print '=====================' + str(len(slate_list)) + '==================='
+                            if status == 'DEL':
+                                del_list.append(count)
+
+                    # delete
+                    for i in del_list:
+                        del slate_list[i]
+
+                if slate[-3:] != 'DEL':
+                    slate_list.append(slate)
                 u.slates = slate_list
                 u.put()
             else:
+
+                # # Go through slates to see if there is a duplicate so we can remove and update
+                # for s in slate_list:
+                #     if s != '':
+                #         s_list = s.split(':::::')
+                #         print '=====================' + str(len(s_list)) + '====================='
+                #         if s_list[3] == slate.split(':::::')[3]:
+                #             status = s_list[4]
+                #             if status == 'OLD':
+                #                 slate_list.remove(status)
+
                 slate_list.append(slate)
                 user = MyUser(email=new_slate['email'], slates=slate_list)
                 user.put()
@@ -242,39 +294,16 @@ class BoardsAccountsHandler(webapp2.RequestHandler):
         s = [{'name': x.email, 'slates': x.slates} for x in query.fetch(100)]
         self.response.write(json.dumps(s))
 
-        # if new_account['password'] != '':
-        #     username_query = User.all()
-        #     username_query.filter("username =", new_account['username'])
-        #     if username_query.get() is None:
-        #         user = User(username=new_account['username'], password=new_account['password'])
-        #         user.put()
-        #     else:
-        #         page = JINJA_ENVIRONMENT.get_template('Boards.html')
-        #         parameters = {'user_taken': 'true'}
-        #         flag = False
-        #
-        # if flag:
-        #     query = db.Query(User)
-        #
-        #     s = [{'username': x.username, 'password': x.password} for x in query.run(limit=100)]
-        #     obj = {'accounts': s, 'latest': new_account}
-        #
-        #     self.response.write(json.dumps(obj))
-        # else:
-        #     self.response.write(page.render(parameters))
-
 
 class BoardHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user:
-            # url = users.create_logout_url(self.request.uri)
             nickname = user.nickname()
             url_linktext = 'Logout'
             user_status = False
             login_url = Markup(users.create_logout_url('/boards'))
         else:
-            # url = users.create_login_url(self.request.uri)
             nickname = ''
             url_linktext = 'Login'
             user_status = True

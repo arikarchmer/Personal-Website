@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Alan</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Lobster|Cabin|Source+Code+Pro" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+        #canvas {
+            position: absolute;
+            background-color: black;
+        }
+        h1 {
+            font: 64px "Menlo";
+            color: white;
+            letter-spacing: 2px;
+        }
+</style>
+</head>
+
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="row">
+    <br><br><br><br><br><br><br><br>
+    <div class="col-sm-4 col-sm-offset-1 text-left">
+        <h1>alankarchmer.com</h1>
+    </div>
+</div>
+
+<script>
+
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    canvas.height = $(window).height();
+    canvas.width = $(window).width();
+
+    var getLine = function(bounds) {
+        return {x1: Math.random() * bounds.one, x2: Math.random() * bounds.two};
+    };
+
+    function getRandomColor() {
+
+
+
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#0';
+        for (var i = 0; i < 5; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    var drawBorder = function() {
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(canvas.width, 0);
+        ctx.lineTo(canvas.width, canvas.height);
+        ctx.lineTo(0, canvas.height);
+        ctx.lineTo(0, 0);
+        ctx.stroke();
+    };
+
+    var color = function() {
+
+    };
+
+    var draw = function(line, oldLine) {
+        ctx.lineWidth = 7;
+        if (line.x1 < 100) {
+            ctx.beginPath();
+            ctx.moveTo(line.x1, 0);
+            ctx.lineTo(line.x2, canvas.height);
+            ctx.lineTo(oldLine.x2, canvas.height);
+            ctx.lineTo(oldLine.x1, 0);
+            ctx.lineTo(line.x1, 0);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(line.x1, 0);
+            ctx.lineTo(line.x2, canvas.height);
+            ctx.lineTo(0, canvas.height);
+            ctx.lineTo(0, 0);
+            ctx.lineTo(line.x1, 0);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+            ctx.stroke();
+
+            setTimeout(function () {
+                canvas.width = canvas.width;
+                //                drawBorder();
+                draw(getLine({one: canvas.width, two: canvas.width}), {x1: canvas.width, x2: canvas.width});
+            }, 500);
+
+        } else {
+            ctx.beginPath();
+            ctx.moveTo(line.x1, 0);
+            ctx.lineTo(line.x2, canvas.height);
+            ctx.lineTo(oldLine.x2, canvas.height);
+            ctx.lineTo(oldLine.x1, 0);
+            ctx.lineTo(line.x1, 0);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+            ctx.stroke();
+
+            setTimeout(function() {
+                draw(getLine({one: line.x1, two: line.x2}), {x1: line.x1, x2: line.x2});
+            }, 100);
+
+        }
+    };
+
+//    drawBorder();
+    draw(getLine({one: canvas.width, two: canvas.width}), {x1: canvas.width, x2: canvas.width});
+
+</script>
+
+</body>
+</html>
