@@ -241,16 +241,16 @@ class BoardsAccountsHandler(webapp2.RequestHandler):
                         # print '=====================' + s_list[4] + '====================='
                         # print '=====================' + str(len(n_s_list)) + '====================='
                         # print '=====================' + slate + '====================='
-                        if s_list[3] == n_s_list[3]:
-                            status = s_list[4]
+                        status = s_list[6]
+                        if s_list[5] == n_s_list[5]:
                             if status == 'OLD':
                                 # print '=====================' + str(len(slate_list)) + '==================='
                                 # print '=====================WOULD DELETE OLD ONE==================='
                                 del_list.append(count)
                                 # slate_list[:] = [x for x in slate_list if x != s]
                                 # print '=====================' + str(len(slate_list)) + '==================='
-                            if status == 'DEL':
-                                del_list.append(count)
+                        if status == 'DEL':
+                            del_list.append(count)
 
                     # delete
                     for i in del_list:

@@ -39,6 +39,7 @@
         color: black;
         background-color: white;
         opacity: 0.6;
+        border: 1px solid black;
         border-radius: 14px;
         padding: 5px 5px 5px 5px;
     }
@@ -49,6 +50,7 @@
         font: 24px "Cabin";
     }
     .btn-transparent:hover {
+        background-color: transparent;
         color: white;
         border: 1px solid white;
     }
@@ -72,8 +74,8 @@
 <div class="modal fade text-center" id="signup" data-backdrop="static" data-keyboard="false" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
     <div class="modal-dialog text-center">
         <br><br><br><br><br>
-        <h1 style="color: white; font: 64px 'Cabin'">SlateUniverse v1.0</h1>
-
+        <h1 style="color: white; font: 72px 'Cabin'">SlateUniverse v1.0</h1>
+        <!--<h6 class="text-right" style="color: white; font: 10px 'Menlo'">productive note-taking and planning</h6>-->
         <div style="color: lightgray">
             <!--<span class="glyphicon glyphicon-user" id="guy" style="color: white; transition: color 1s"></span>-->
             <!--<input id="username" type="text" placeholder="username" autofocus="autofocus">-->
@@ -86,13 +88,13 @@
             <!--<input id="password" type="password" placeholder=password autofocus="autofocus">-->
             <!--<br><br>-->
 
-
             {% if user_status %}
+            <br>
                 <button type="submit" onclick="signIn()" class="btn btn-transparent btn-sm">Sign in</button>
             {% else %}
                 <h3 style="font: 24px 'Cabin'; color: white">Hello, {{name}}</h3>
             <br>
-                <button type="submit" onclick="load()" class="btn btn-transparent btn-sm">Enter</button>
+                <button type="submit" onclick="load()" class="btn btn-transparent btn-sm">Start</button>
             {% endif %}
 
 
@@ -109,11 +111,14 @@
 
 <script>
 
+
+
     var backgrounds = ['http://static.businessinsider.com/image/51c33f37eab8ea675e000007/image.jpg',
         'https://static.pexels.com/photos/792/wood-landscape-mountains-nature.jpg',
         'https://seefcbplayers.files.wordpress.com/2013/09/fc-barcelona-camp-nou.jpg',
         'http://fjordtravel.no/wp-content/uploads/2013/09/001115_Gaute-Bruvik_www.nordnorge.com_Karlsoey.jpg',
-        'https://s-media-cache-ak0.pinimg.com/originals/cd/0b/00/cd0b00a78edd426a3a389771dacdc911.jpg'
+        'https://s-media-cache-ak0.pinimg.com/originals/cd/0b/00/cd0b00a78edd426a3a389771dacdc911.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/3/35/Stonehenge_on_27.01.08.jpg'
     ];
 
     var starterMessages = ["Hello darkness, my old friend...",
@@ -141,36 +146,6 @@
         $("#signup").modal("toggle");
         window.location = '{{ url }}';
     }
-
-//    function signUp() {
-//        var username = document.getElementById('username').value;
-//        var password = document.getElementById('password').value;
-//        $.getJSON('/boards_accounts', {username: username, password: password}, function (data) {
-//
-//        });
-//        if (username == '') {
-//            document.getElementById('guy').style.color = 'red';
-//        } else {
-//            document.getElementById('guy').style.color = 'white';
-//        }
-//        if (password == '') {
-//            document.getElementById('lock').style.color = 'red';
-//        } else {
-//            document.getElementById('lock').style.color = 'white';
-//        }
-//        var userTaken = '{{ user_taken }}';
-//        console.log(userTaken);
-//        if (username != '' && password != '') {
-//            if (userTaken == 'true') {
-//                alert('Sorry, that username is already taken!');
-//            } else {
-//                $("#signup").modal("toggle");
-//                setTimeout(function() {
-//                    controls_go();
-//                }, 500);
-//            }
-//        }
-//    }
 
     var newNoteButton = function() {
         var node = document.createElement("p");
@@ -275,7 +250,6 @@
     controls();
     backgroundOffButton();
     log_in();
-    var textarea = document.getElementById('textarea');
     var id = 0;
 
     function move(ele, x, y) {
@@ -299,9 +273,11 @@
         node.placeholder = starterMessages[Math.floor(Math.random() * starterMessages.length)];
         id = id + 1;
         node.id = id;
-        node.cols = 30;
-        node.rows = 3;
-//        node.style.border = '1px solid black';
+        node.setAttribute('width', 300 + 'px');
+        node.setAttribute('height', 100  + 'px');
+        node.style.width = 300 + 'px';
+        node.style.height = 100 + 'px';
+        node.style.border = '1px solid black';
         node.style.opacity = 0;
 
         var node_location = {x: window.innerWidth * 0.3 * Math.random() + window.innerWidth * 0.1,
@@ -312,44 +288,59 @@
             if (e.shiftKey) {
                 document.body.removeChild(node);
                 $.getJSON('/boards_accounts', {slate: node.value + ":::::" + node_location.x + ":::::" +
-                node_location.y + ":::::" + node.id + ":::::DEL"}, function (data) {
+                node_location.y + ":::::" + node.offsetWidth + ":::::" + node.offsetHeight + ":::::" + node.id + ":::::DEL"}, function (data) {
 //                    console.log(data.slates);
             });
             }
         });
         node.addEventListener('dblclick', function()  {
             node.readOnly = false;
+            $.getJSON('/boards_accounts', {slate: node.value + ":::::" + node_location.x + ":::::" +
+                node_location.y + ":::::" + node.offsetWidth + ":::::" + node.offsetHeight + ":::::" + node.id + ":::::NEW"}, function (data) {
+//                    console.log(data.slates);
+            });
 
         });
         node.addEventListener('keypress', function(e) {
             if (e.keyCode == 13) {
                 node.style.fontSize = 18 +'px';
-                node.cols = 15;
-                node.rows = 3;
+                node.setAttribute('width', 150 + 'px');
+                node.setAttribute('height', 50  + 'px');
+                node.style.width = 150 + 'px';
+                node.style.height = 50 + 'px';
                 node.readOnly = true;
 
                 $.getJSON('/boards_accounts', {slate: node.value + ":::::" + node_location.x + ":::::" +
-                node_location.y + ":::::" + node.id + ":::::NEW"}, function (data) {
+                node_location.y + ":::::" + node.offsetWidth + ":::::" + node.offsetHeight + ":::::" + node.id + ":::::NEW"}, function (data) {
 //                    console.log(data.slates);
                 });
-
-                $('#' + node.id).autoResize();
             }
         });
         node.addEventListener('mouseenter', function() {
             node.style.opacity = 0.8;
-            node.style.color = 'black';
         });
         node.addEventListener('mouseleave', function() {
             node.style.opacity = 0.6;
-            node.style.color = 'black';
         });
         node.addEventListener('dragend', function(e) {
             node_location.x = e.clientX;
             node_location.y = e.clientY - $('#' + node.id).height();
             move(node, node_location.x, node_location.y);
             $.getJSON('/boards_accounts', {slate: node.value + ":::::" + node_location.x + ":::::" +
-                node_location.y + ":::::" + node.id + ":::::NEW"}, function (data) {
+                node_location.y + ":::::" + node.offsetWidth + ":::::" + node.offsetHeight + ":::::" + node.id + ":::::NEW"}, function (data) {
+                    console.log(data[0].slates);
+            });
+        });
+        node.addEventListener('mouseup', function(e) {
+            var node_width = node.offsetWidth;
+            var node_height = node.offsetHeight;
+            node.setAttribute('width', node.offsetWidth + 'px');
+            node.setAttribute('height', node.offsetHeight  + 'px');
+            node.style.width = node_width + 'px';
+            node.style.height = node_height + 'px';
+
+            $.getJSON('/boards_accounts', {slate: node.value + ":::::" + node_location.x + ":::::" +
+                node_location.y + ":::::" + node_width + ":::::" + node_height + ":::::" + node.id + ":::::NEW"}, function (data) {
                     console.log(data[0].slates);
             });
         });
@@ -357,7 +348,6 @@
         fade_in(node);
         move(node, node_location.x, node_location.y);
         node.style.fontSize = 36 +'px';
-
     }
 
     function createPastNote(info) {
@@ -367,9 +357,12 @@
         id = id + 1;
         node.id = id;
         node.style.fontSize = 18 +'px';
-        node.cols = 15;
-        node.rows = 3;
-//        node.style.border = '1px solid black';
+        node.setAttribute('width', info[3] + 'px');
+        node.setAttribute('height', info[4] + 'px');
+        node.style.width = info[3] + 'px';
+        node.style.height = info[4] + 'px';
+        console.log(node.style.width + ', ' + node.style.height);
+        node.style.border = '1px solid black';
         node.style.opacity = 0;
         node.readOnly = true;
 
@@ -381,7 +374,7 @@
             if (e.shiftKey) {
                 document.body.removeChild(node);
                 $.getJSON('/boards_accounts', {slate: node.value + ":::::" + node_location.x + ":::::" +
-                node_location.y + ":::::" + node.id + ":::::DEL"}, function (data) {
+                node_location.y + ":::::" + node.offsetWidth + ":::::" + node.offsetHeight + ":::::" + node.id + ":::::DEL"}, function (data) {
 //                    console.log(data.slates);
             });
             }
@@ -389,49 +382,62 @@
         node.addEventListener('dblclick', function()  {
             node.readOnly = false;
             $.getJSON('/boards_accounts', {slate: node.value + ":::::" + node_location.x + ":::::" +
-                node_location.y + ":::::" + node.id + ":::::NEW"}, function (data) {
+                node_location.y + ":::::" + node.offsetWidth + ":::::" + node.offsetHeight + ":::::" + node.id + ":::::NEW"}, function (data) {
 //                    console.log(data.slates);
             });
         });
         node.addEventListener('keypress', function(e) {
             if (e.keyCode == 13) {
                 node.style.fontSize = 18 +'px';
-                node.cols = 15;
-                node.rows = 3;
+                node.setAttribute('width', 150 + 'px');
+                node.setAttribute('height', 50 + 'px');
+                node.style.width = 150 + 'px';
+                node.style.height = 50 + 'px';
                 node.readOnly = true;
 
                 $.getJSON('/boards_accounts', {slate: node.value + ":::::" + node_location.x + ":::::" +
-                node_location.y + ":::::" + node.id + ":::::NEW"}, function (data) {
-//                    console.log(data.slates);
-                });
+                node_location.y + ":::::" + node.offsetWidth + ":::::" + node.offsetHeight + ":::::" + node.id + ":::::NEW"}, function (data) {
+                    console.log(data[0].slates);
+            });
             }
         });
         node.addEventListener('mouseenter', function() {
             node.style.opacity = 0.8;
-            node.style.color = 'black';
         });
         node.addEventListener('mouseleave', function() {
             node.style.opacity = 0.6;
-            node.style.color = 'black';
         });
         node.addEventListener('dragend', function(e) {
             node_location.x = e.clientX;
             node_location.y = e.clientY - $('#' + node.id).height();
             move(node, node_location.x, node_location.y);
             $.getJSON('/boards_accounts', {slate: node.value + ":::::" + node_location.x + ":::::" +
-                node_location.y + ":::::" + node.id + ":::::NEW"}, function (data) {
+                node_location.y + ":::::" + node.offsetWidth + ":::::" + node.offsetHeight + ":::::" + node.id + ":::::NEW"}, function (data) {
                     console.log(data[0].slates);
             });
         });
+        node.addEventListener('mouseup', function(e) {
+            var node_width = node.offsetWidth;
+            var node_height = node.offsetHeight;
+            node.setAttribute('width', node_width + 'px');
+            node.setAttribute('height', node_height + 'px');
+            node.style.width = node_width + 'px';
+            node.style.height = node_height + 'px';
+
+            $.getJSON('/boards_accounts', {slate: node.value + ":::::" + node_location.x + ":::::" +
+                node_location.y + ":::::" + node_width + ":::::" + node_height + ":::::" + node.id + ":::::NEW"}, function (data) {
+                    console.log(data[0].slates);
+            });
+        });
+
         document.body.appendChild(node);
         fade_in(node);
         move(node, node_location.x, node_location.y);
-        $('textarea').autoResize();
     }
 
     function generatePastNotes() {
         $.getJSON('/boards_accounts', function(data) {
-            console.log(data[0].slates);
+//            console.log(data[0].slates);
 //            $.each(data, function(key, val) {
 //
 ////                if (key == 'slates') {
@@ -448,17 +454,17 @@
 //            });
 
             var slates = data[0].slates;
+            console.log(slates.length);
             for (var i = 0; i < slates.length; i++) {
                 var slate = slates[i];
                 if (slate != '') {
-                    var info = slate.split(':::::'); // 0 is text, 1 is x-coor, 2 is y-coor
-
+                    // 0 is text, 1 is x-coor, 2 is y-coor, 3 is cols, 4 is rows, 5 is id, 6 is status
+                    var info = slate.split(':::::');
                     createPastNote(info);
                 }
             }
         });
     }
-
 
     function fade_in(element) {
         var op = 0.1;
@@ -472,6 +478,7 @@
             op += op * 0.1;
         }, 10);
     }
+
 </script>
 </body>
 </html>
