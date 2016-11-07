@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Source+Code+Pro" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
@@ -17,108 +17,113 @@
     }
     body {
         background-color: white;
+    }
+    .title {
+        background-color: transparent;
         color: black;
+        /*letter-spacing: 1px;*/
+        transition: color 250ms;
+        font: 42px "Source Code Pro";
+        padding: 10px 10px 10px 10px;
+        border: dashed 1px black;
+    }
+    .title:hover {
+        text-decoration: none;
+        border: dashed 1px black;
     }
     p {
-        font: 14px "Cabin";
-        color: lightgray;
-        letter-spacing: 1px;
-        transition: color 500ms;
-        background-color: transparent;
-    }
-    p:hover {
+        font: 14px "Source Code Pro";
         color: black;
+        /*letter-spacing: 1px;*/
+        background-color: transparent;
+        border: dashed 1px black;
+        padding: 10px 10px 10px 10px;
     }
     a {
         font-size: 24px;
-        color: darkblue;
+        color: black;
     }
     .text-justify {
         text-align: justify;
     }
     .project {
-        font: 30px "Cabin";
-        transition: background-color 500ms, color 500ms;
+        font: 30px "Source Code Pro";
+        /*letter-spacing: 1px;*/
     }
     .project:hover {
         text-decoration: none;
-        background-color: aliceblue;
-        color: black;
+        background-color: darkslategray;
+        color: white;
     }
     .hack {
-        font: 18px "Cabin";
-        transition: background-color 500ms, color 500ms;
+        font: 18px "Source Code Pro";
     }
     .hack:hover {
         text-decoration: none;
-        background-color: aliceblue;
-        color: black;
+        background-color: darkslategray;
+        color: white;
     }
   </style>
 </head>
 <body>
-<!--<canvas id="canvas"></canvas>-->
+<canvas id="canvas"></canvas>
 <br>
 <div class="row">
-    <div class="col-sm-2 col-sm-offset-1 text-left">
+    <div class="col-sm-6 col-sm-offset-3 text-left">
         <a href="/"><span class="glyphicon glyphicon-arrow-left"></span></a>
     </div>
 </div>
-<br>
 <div class="row">
-    <div class="col-sm-2 col-sm-offset-1 text-left">
-        <h1>Projects && hacks</h1>
+    <div class="col-sm-6 col-sm-offset-3 text-center">
+        <h1 class="title">Projects && hacks</h1>
     </div>
 </div>
-<br><br>
+<br>
 <div class="row">
-    <div id="big" class="col-sm-4 col-sm-offset-1 text-left">
+    <div id="big" class="col-sm-6 col-sm-offset-3 text-justify">
+        <!--<p>-->
+            <!--<a href="http://slateuniverse-147719.appspot.com" class="project">"SlateUniverse"</a><br>-->
+            <!--My third project completed over the course of a week during the first semester of my junior year.-->
+            <!--SlateUniverse is a productivity app that allows a user to create "slates" that they can fill with-->
+            <!--reminders, to-dos, or any other message. Using a google account, a user can come back to their saved-->
+            <!--slates another time. SlateUniverse was realized with Google App Engine for Python and the cloud datastore,-->
+            <!--Javascript, HTML, CSS, Jinja Templates, and Ajax.-->
+        <!--</p>-->
         <p>
-            <a href="/stars" class="project">'StarSpace'</a><br>
-            My second project completed in July, 2016. An entertaining web game
+            <a href="/stars" class="project">"StarSpace"</a><br>
+            My second project completed in July, '16. An entertaining web game
             that features you, the daring spaceship pilot, and your quest to collect massive stars
             before your alien counterparts do the same. Realized with
             Python, Javascript, HTML, CSS, Bootstrap, Ajax,
             Google App Engine, D3.js.
         </p>
-        <br>
         <p>
-            <a href="/twitterdata" class="project">'TwitterData'</a><br>
-            My first project completed in June, 2016. A minimalist web tool for discovering twitter trends by location. TwitterData is useful for searching keywords in specific cities,
+            <a href="/twitterdata" class="project">"TwitterData"</a><br>
+            My first project completed in June, '16. A minimalist web tool for discovering twitter trends by location. TwitterData is useful for searching keywords in specific cities,
             or for making broad searches on a location by drawing a circle on the world map. Realized with
-            Python, Leaflet.js, Javascript,
-            HTML, CSS, Bootstrap, Jinja Templates, Google App Engine, and the Tweepy api for Twitter.
+            Python, Leaflet.js, Javascript, HTML, CSS, Bootstrap, Jinja Templates, Google App Engine, and the Tweepy api for Twitter.
         </p>
     </div>
 </div>
-<br><br>
 <div class="row">
-    <div id="small" class="col-sm-4 col-sm-offset-1 text-justify">
+    <div id="small" class="col-sm-6 col-sm-offset-3 text-justify">
         <p>
-            <a href="/sentencescrambler" class="hack">Sentence Scrambler</a>
-        </p>
-        <p>
-            <a href="/montecarlopi" class="hack">Monte Carlo Approximation of Pi</a>
-        </p>
-        <p>
-            <a href="/repellantOrb" class="hack">Repellant Orb</a>
-        </p>
-        <p>
-            <a href="/connectingparticles" class="hack">Connecting Particles</a>
-        </p>
-        <p>
-            <a href="/fireworks" class="hack">Fireworks</a>
-        </p>
-        <p>
-            <a href="/bouncingballs" class="hack">Bouncing Balls</a>
-        </p>
-        <p>
-            <a href="/particles" class="hack">Splitting Particles</a>
-        </p>
-        <p>
+            <a href="/sentencescrambler" class="hack">Sentence Scrambler,</a>
+
+            <a href="/montecarlopi" class="hack">Monte Carlo Approximation of Pi,</a>
+
+            <a href="/repellantOrb" class="hack">Repellant Orb,</a>
+
+            <a href="/connectingparticles" class="hack">Connecting Particles,</a>
+
+            <a href="/fireworks" class="hack">Fireworks,</a>
+
+            <a href="/bouncingballs" class="hack">Bouncing Balls,</a>
+
+            <a href="/particles" class="hack">Splitting Particles,</a>
+
             <a href="/spacetravel" class="hack">Space Travel</a>
         </p>
-        <br>
     </div>
 </div>
 <script>
@@ -126,143 +131,262 @@
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
 
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
+    canvas.height = $(window).height();
+    canvas.width = $(window).width();
 
     var drops = [];
-
-    var pad = 50;
-
-    var collided = function(x, y, size) {
-        return Math.abs(x.x - y.x) < (size) && Math.abs(x.y - y.y) < (size);
-    };
 
     var distance = function(x, y) {
         return Math.sqrt((x.x - y.x) * (x.x - y.x) + (x.y - y.y) * (x.y - y.y));
     };
 
-    function draw_square(s1) {
+    function animateDrop(drop) {
 
-//        s1.x = s1.x + s1.vx;
-//        s1.y = s1.y + s1.vy;
+        drop.y = drop.y + drop.vy;
+        drop.x = drop.x + drop.vx;
 
-        var s = s1.s;
-
-        ctx.strokeStyle = s1.o;
-        ctx.lineWidth = 10;
-        ctx.beginPath();
-        ctx.arc(s1.x, s1.y, s1.s, 0, 2 * Math.PI, false);
-        ctx.stroke();
-
-        ctx.fillStyle = s1.c;
-        ctx.beginPath();
-        ctx.arc(s1.x, s1.y, s1.s, 0, 2 * Math.PI, false);
-        ctx.fill();
-
-//        ctx.fillStyle = s1.c;
-//        ctx.fillRect(s1.x, s1.y, s, s);
-//
-//        ctx.strokeStyle = "white";
-//        ctx.rect(s1.x, s1.y, s, s);
-//        ctx.stroke();
-    }
-
-    function draw() {
-        canvas.width = canvas.width;  // clear, resize
-
-        for (var j = 0; j < drops.length; j++) {
-            var drop = drops[j];
-            draw_square(drop);
+        if (drop.x > canvas.width) {
+            drop.vx = -drop.vx;
+        }
+        if (drop.x < 0) {
+            drop.vx = -drop.vx;
+        }
+        if (drop.y > canvas.height) {
+            drop.vy = -drop.vy;
+        }
+        if (drop.y < 0) {
+            drop.vy = -drop.vy;
         }
     }
 
-    function animation() {
+    function draw() {
+        canvas.width = canvas.width;  // clear
 
-        if ($(window).width() > 768) {
-            draw();
+        for (var j = 0; j < drops.length; j++) {
+            ctx.strokeStyle = 'lightgray';
+            ctx.lineWidth = 0.2;
+
+            var drop = drops[j];
+            animateDrop(drop);
+            ctx.fillStyle = drop.c;
+            ctx.beginPath();
+            ctx.arc(drop.x, drop.y, drop.r, 0, 2 * Math.PI, false);
+            ctx.fill();
+
+            for (var k = 0; k < drops.length; k++) {
+                var d2 = drops[k];
+                if (distance(drop, d2) < 100) {
+                    ctx.beginPath();
+                    ctx.moveTo(drop.x, drop.y);
+                    ctx.lineTo(d2.x, d2.y);
+                    ctx.stroke();
+                    ctx.closePath();
+                }
+            }
+            if (distance(drop, center) < 100) {
+//                drop.x = drop.x + (center.x - drop.x) / 10;
+//                drop.y = drop.y + (center.y - drop.y) / 10;
+
+//                if (drop.r < 3) {
+//                    drop.r = drop.r * 1.1;
+//                }
+//
+//                ctx.strokeStyle = 'black';
+//                ctx.lineWidth = 0.5;
+//                ctx.beginPath();
+//                ctx.moveTo(center.x, center.y);
+//                ctx.lineTo(drop.x, drop.y);
+//                ctx.stroke();
+//                ctx.closePath();
+            }
+//            else {
+//                if (drop.r > 1) {
+//                    drop.r = drop.r / 1.1;
+//                }
+//            }
+        }
+
+//        ctx.fillStyle = center.c;
+//        ctx.beginPath();
+//        ctx.arc(center.x, center.y, center.r, 0, 2 * Math.PI, false);
+//        ctx.fill();
+    }
+
+    function animation() {
+        draw();
+        requestAnimationFrame(animation);
+    }
+
+
+    function start() {
+        for (var j = 0; j < 200; j++) {
+            var drop = {
+                x: canvas.width * Math.random(),
+                y: canvas.height * Math.random(),
+                vy: Math.random() - 0.5,
+                vx: Math.random() - 0.5,
+                r: 0,
+                c: 'lightgray'
+            };
+            drops.push(drop);
         }
         requestAnimationFrame(animation);
     }
 
-    exec = false;
-    function beginAnimation() {
-        if (!exec) {
-            exec = true;
-            requestAnimationFrame(animation);
-        }
-    }
-
-    function start() {
-        var drop = {x: canvas.width / 2 * Math.random() + canvas.width / 2 - 100, y: canvas.height * Math.random(), vx: 2 * Math.random() - 1, vy: 2 * Math.random() - 1, s: 40 + Math.random() * 40, c: 'aliceblue', o: 'white'};
-        drops.push(drop);
-        beginAnimation();
-    }
-
-    var mouse = {x: canvas.width / 2, y: canvas.height / 2};
+    var center = {x: canvas.width / 2, y: canvas.height / 2, r: 1, c: 'red'};
 
     function updateUser(e) {
-        mouse.x = e.offsetX;
-        mouse.y = e.offsetY;
+        center.x = e.offsetX;
+        center.y = e.offsetY;
     }
-
-    canvas.addEventListener('click', function(e) {
-        for (var i = 0; i < drops.length; i++) {
-            var drop = drops[i];
-            if (collided(mouse, drop, drop.s)) {
-                if (drop.s < 101) {
-                    drop.s = 0.9 * drop.s;
-                }
-            }
-        }
-    });
 
     canvas.addEventListener('mousemove', function(e) {
         updateUser(e);
-        for (var i = 0; i < drops.length; i++) {
-            var drop = drops[i];
-            if (collided(mouse, drop, drop.s)) {
-                drop.o = 'midnightblue';
-            } else {
-                drop.o = 'white';
-            }
-        }
     });
 
-    var regen_count = 0;
-    function regenerate_squares(wait_time) {
-        drops = [];
-        regen_squares = true;
-        setTimeout(function() {
-            if (regen_squares) {
-                for (var j = 0; j < 25; j++) {
-                    start();
-                }
-            }
-            regen_count = regen_count + 1;
-            console.log(regen_count);
-            regen_squares = false;
-        }, wait_time);
-    }
+    start();
 
-    var regen_squares = false;
 
-    $(window).resize(function () {
-        regen_squares = false;
-        canvas.height = $('body')[0].scrollHeight;
-        canvas.width = $(window).width();
-        regenerate_squares(500);
-    });
-
-    $(window).scroll(function () {
-        regen_squares = false;
-        canvas.height = $('body')[0].scrollHeight;
-        canvas.width = $(window).width();
-        regenerate_squares(500);
-    });
-
-    for (var j = 0; j < 25; j++) {
-        start();
-    }
+//    var canvas = document.getElementById("canvas");
+//    var ctx = canvas.getContext("2d");
+//
+//    canvas.height = window.innerHeight;
+//    canvas.width = window.innerWidth;
+//
+//    var drops = [];
+//
+//    var pad = 50;
+//
+//    var collided = function(x, y, size) {
+//        return Math.abs(x.x - y.x) < (size) && Math.abs(x.y - y.y) < (size);
+//    };
+//
+//    var distance = function(x, y) {
+//        return Math.sqrt((x.x - y.x) * (x.x - y.x) + (x.y - y.y) * (x.y - y.y));
+//    };
+//
+//    function draw_square(s1) {
+//
+////        s1.x = s1.x + s1.vx;
+////        s1.y = s1.y + s1.vy;
+//
+//        var s = s1.s;
+//
+//        ctx.strokeStyle = s1.o;
+//        ctx.lineWidth = 10;
+//        ctx.beginPath();
+//        ctx.arc(s1.x, s1.y, s1.s, 0, 2 * Math.PI, false);
+//        ctx.stroke();
+//
+//        ctx.fillStyle = s1.c;
+//        ctx.beginPath();
+//        ctx.arc(s1.x, s1.y, s1.s, 0, 2 * Math.PI, false);
+//        ctx.fill();
+//
+////        ctx.fillStyle = s1.c;
+////        ctx.fillRect(s1.x, s1.y, s, s);
+////
+////        ctx.strokeStyle = "white";
+////        ctx.rect(s1.x, s1.y, s, s);
+////        ctx.stroke();
+//    }
+//
+//    function draw() {
+//        canvas.width = canvas.width;  // clear, resize
+//
+//        for (var j = 0; j < drops.length; j++) {
+//            var drop = drops[j];
+//            draw_square(drop);
+//        }
+//    }
+//
+//    function animation() {
+//
+//        if ($(window).width() > 768) {
+//            draw();
+//        }
+//        requestAnimationFrame(animation);
+//    }
+//
+//    exec = false;
+//    function beginAnimation() {
+//        if (!exec) {
+//            exec = true;
+//            requestAnimationFrame(animation);
+//        }
+//    }
+//
+//    function start() {
+//        var drop = {x: canvas.width / 2 * Math.random() + canvas.width / 2 - 100, y: canvas.height * Math.random(), vx: 2 * Math.random() - 1, vy: 2 * Math.random() - 1, s: 40 + Math.random() * 40, c: 'aliceblue', o: 'white'};
+//        drops.push(drop);
+//        beginAnimation();
+//    }
+//
+//    var mouse = {x: canvas.width / 2, y: canvas.height / 2};
+//
+//    function updateUser(e) {
+//        mouse.x = e.offsetX;
+//        mouse.y = e.offsetY;
+//    }
+//
+//    canvas.addEventListener('click', function(e) {
+//        for (var i = 0; i < drops.length; i++) {
+//            var drop = drops[i];
+//            if (collided(mouse, drop, drop.s)) {
+//                if (drop.s < 101) {
+//                    drop.s = 0.9 * drop.s;
+//                }
+//            }
+//        }
+//    });
+//
+//    canvas.addEventListener('mousemove', function(e) {
+//        updateUser(e);
+//        for (var i = 0; i < drops.length; i++) {
+//            var drop = drops[i];
+//            if (collided(mouse, drop, drop.s)) {
+//                drop.o = 'midnightblue';
+//            } else {
+//                drop.o = 'white';
+//            }
+//        }
+//    });
+//
+//    var regen_count = 0;
+//    function regenerate_squares(wait_time) {
+//        drops = [];
+//        regen_squares = true;
+//        setTimeout(function() {
+//            if (regen_squares) {
+//                for (var j = 0; j < 25; j++) {
+//                    start();
+//                }
+//            }
+//            regen_count = regen_count + 1;
+//            console.log(regen_count);
+//            regen_squares = false;
+//        }, wait_time);
+//    }
+//
+//    var regen_squares = false;
+//
+//    $(window).resize(function () {
+//        regen_squares = false;
+//        canvas.height = $('body')[0].scrollHeight;
+//        canvas.width = $(window).width();
+//        regenerate_squares(500);
+//    });
+//
+//    $(window).scroll(function () {
+//        regen_squares = false;
+//        canvas.height = $('body')[0].scrollHeight;
+//        canvas.width = $(window).width();
+//        regenerate_squares(500);
+//    });
+//
+//    for (var j = 0; j < 25; j++) {
+//        start();
+//    }
 </script>
 </body>
 </html>

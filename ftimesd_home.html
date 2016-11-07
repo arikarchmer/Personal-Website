@@ -18,32 +18,33 @@
         color: black;
     }
     h3 {
-        font: 18px "Cabin";
+        font: 16px "Source Code Pro";
         color: black;
-        letter-spacing: 2px;
+        /*letter-spacing: 2px;*/
         transition: opacity 3s, transform 1500ms;
     }
     p {
-        font: 18px "Cabin";
+        font: 16px "Source Code Pro";
         color: lightgray;
-        letter-spacing: 2px;
+        /*letter-spacing: 2px;*/
         transition: color 500ms;
     }
     p:hover {
         color: black;
     }
     b {
-        font: 18px "Cabin";
+        font: 16px "Source Code Pro";
         color: black;
-        letter-spacing: 2px;
+        /*letter-spacing: 2px;*/
     }
     a {
-        color: darkblue;
-        transition: color 500ms, background-color 500ms;
+        color: black;
+        border-bottom: dashed 1px black;
     }
     a:hover {
-        background-color: aliceblue;
-        color:black;
+        background-color: darkslategray;
+        color:white;
+        border-bottom: none;
         text-decoration: none;
     }
     .text-justify {
@@ -56,7 +57,7 @@
 <canvas id="canvas"></canvas>
 <br><br><br>
 <div class="row">
-    <div id="about" class="col-sm-4 col-sm-offset-1 text-left">
+    <div id="about" class="col-sm-4 col-sm-offset-1 text-justify">
         <p>
             <b>Ari Karchmer</b> <br> is a student at <b>Brandeis University</b>; a member of the class of 2018.
             He is a <b>Computer Science</b> and <b>Math</b> double major. <b>Java</b>, <b>Python</b>, and <b>Javascript</b> are his tools.
@@ -83,9 +84,11 @@
     canvas.width = $(window).width();
     var drops = [];
     var pad = 50;
+
     var distance = function(x, y) {
         return Math.sqrt((x.x - y.x) * (x.x - y.x) + (x.y - y.y) * (x.y - y.y));
     };
+
     function animateDrop(drop) {
         drop.y = drop.y + drop.vy;
         drop.x = drop.x + drop.vx;
@@ -102,10 +105,11 @@
             drop.vy = -drop.vy;
         }
     }
+
     function draw() {
         canvas.width = canvas.width;  // clear
 
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 2;
         ctx.rect(canvas.width / 2 - pad, canvas.height / 2 - pad, canvas.width / 2, canvas.height / 2);
         ctx.stroke();
 
@@ -169,8 +173,13 @@
         requestAnimationFrame(animation);
     }
 
-
     function start() {
+
+        createParticles();
+        requestAnimationFrame(animation);
+    }
+
+    function createParticles() {
         for (var j = 0; j < 40; j++) {
             var drop = {
                 x: canvas.width / 2 * Math.random() + canvas.width / 2 - pad,
@@ -182,7 +191,11 @@
             };
             drops.push(drop);
         }
-        requestAnimationFrame(animation);
+    }
+
+    function regenParticles() {
+        drops = [];
+        createParticles();
     }
 
     var center = {x: canvas.width / 2, y: canvas.height / 2, r: 2, c: 'red'};
@@ -197,6 +210,23 @@
     });
 
     start();
+
+    $(window).resize(function () {
+
+        var height = $(window).height();
+        var width = $(window).width();
+
+        if (width > 768) {
+            document.getElementById('canvas').style.visibility = 'visible';
+            canvas.height = height;
+            canvas.width = width;
+            regenParticles();
+        } else {
+            // kill canvas
+            document.getElementById('canvas').style.visibility = 'hidden';
+        }
+
+    });
 
 </script>
 </body>
