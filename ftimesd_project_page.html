@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,36 +19,44 @@
     body {
         background-color: white;
     }
-    .title {
-        background-color: transparent;
-        color: black;
-        /*letter-spacing: 1px;*/
-        transition: color 250ms;
-        font: 42px "Source Code Pro";
-        padding: 10px 10px 10px 10px;
-        border: dashed 1px black;
-    }
-    .title:hover {
-        text-decoration: none;
-        border: dashed 1px black;
+    iframe {
+        border: solid 1px black;
+        height: 240px;
+        width: 100%
     }
     p {
+        font: 14px "Source Code Pro";
+    }
+    .header {
+        background-color: transparent;
+        color: black;
+        font: 24px "Source Code Pro";
+        padding: 20px 120px 20px 120px;
+        /*border: dashed 1px black;*/
+    }
+    .post {
         font: 14px "Source Code Pro";
         color: black;
         /*letter-spacing: 1px;*/
         background-color: transparent;
-        border: dashed 1px black;
-        padding: 10px 10px 10px 10px;
+        border-top: dashed 1px black;
+        padding: 20px 60px 20px 60px;
     }
     a {
-        font-size: 24px;
-        color: black;
+        font-size: 14px;
+        color: darkslategray;
+    }
+    a:hover {
+        text-decoration: none;
+        background-color: darkslategray;
+        color: white;
     }
     .text-justify {
         text-align: justify;
     }
     .project {
-        font: 30px "Source Code Pro";
+        font: 24px "Source Code Pro";
+        color: darkslategray;
         /*letter-spacing: 1px;*/
     }
     .project:hover {
@@ -66,22 +75,32 @@
   </style>
 </head>
 <body>
-<canvas id="canvas"></canvas>
+<!--<canvas id="canvas"></canvas>-->
 <br>
-<div class="row">
-    <div class="col-sm-6 col-sm-offset-3 text-left">
-        <a href="/"><span class="glyphicon glyphicon-arrow-left"></span></a>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-6 col-sm-offset-3 text-center">
-        <h1 class="title">Projects && hacks</h1>
-    </div>
-</div>
+<!--<div class="row">-->
+    <!--<div class="col-sm-6 col-sm-offset-3 text-left">-->
+        <!--<a href="/"><span class="glyphicon glyphicon-arrow-left"></span></a>-->
+    <!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+    <!--<div class="col-sm-8 col-sm-offset-2 text-justify header">-->
+        <!--<p>-->
+            <!--<b style="font-size: 48px">Ari Karchmer</b><br>-->
+            <!--<br>- Student at Brandeis University, class of '18-->
+            <!--<br>- Computer Science and Math double major-->
+            <!--<br>- Java, Python, Javascript-->
+
+            <!--<br>- <a href="mailto:ari.karchmer.s@gmail.com">email</a>,-->
+                <!--<a href="https://twitter.com/intent/tweet?screen_name=f_times_d">tweet</a>,-->
+                <!--<a href="https://github.com/arikarchmer">code</a>-->
+        <!--</p>-->
+    <!--</div>-->
+<!--</div>-->
 <br>
 <div class="row">
     <div id="big" class="col-sm-6 col-sm-offset-3 text-justify">
-        <!--<p>-->
+        <!--<p class="post">-->
+            <!--October, '16<br><br>-->
             <!--<a href="http://slateuniverse-147719.appspot.com" class="project">"SlateUniverse"</a><br>-->
             <!--My third project completed over the course of a week during the first semester of my junior year.-->
             <!--SlateUniverse is a productivity app that allows a user to create "slates" that they can fill with-->
@@ -89,304 +108,78 @@
             <!--slates another time. SlateUniverse was realized with Google App Engine for Python and the cloud datastore,-->
             <!--Javascript, HTML, CSS, Jinja Templates, and Ajax.-->
         <!--</p>-->
-        <p>
+        <!--<br>-->
+        <p class="post">
+            11/8/16 |
+            <a href="/recursivetree">More recursive art: tree</a><br><br>
+            <iframe src="/recursivetree"></iframe>
+        </p>
+        <br>
+        <p class="post">
+            9/27/16 |
+            <a href="/colorpuzzle">Art with recursion</a><br><br>
+            <iframe src="/colorpuzzle"></iframe>
+        </p>
+        <br>
+        <p class="post">
+            8/7/16 |
+            <a href="/repellantOrb">Repellant Orb</a><br><br>
+            <iframe src="/repellantOrb"></iframe>
+        </p>
+        <br>
+        <p class="post">
+            8/4/16 |
+            <a href="/connectingparticles">Particles</a><br><br>
+            <iframe src="/connectingparticles"></iframe>
+        </p>
+        <br>
+        <p class="post">
+            8/2/16 |
+            <a href="/bouncingballs">Bouncing Balls</a><br><br>
+            <iframe src="/bouncingballs"></iframe>
+        </p>
+        <br>
+        <p class="post">
+            8/1/16 |
+            <a href="/spacetravel">Space Travel</a><br><br>
+            <iframe src="/spacetravel"></iframe>
+        </p>
+        <br>
+        <p class="post">
+            July, '16<br><br>
             <a href="/stars" class="project">"StarSpace"</a><br>
-            My second project completed in July, '16. An entertaining web game
+            My second project, completed during July of 2016. An entertaining web game
             that features you, the daring spaceship pilot, and your quest to collect massive stars
             before your alien counterparts do the same. Realized with
             Python, Javascript, HTML, CSS, Bootstrap, Ajax,
             Google App Engine, D3.js.
         </p>
-        <p>
+        <br>
+        <p class="post">
+            June, '16<br><br>
             <a href="/twitterdata" class="project">"TwitterData"</a><br>
-            My first project completed in June, '16. A minimalist web tool for discovering twitter trends by location. TwitterData is useful for searching keywords in specific cities,
+            My first project, completed during June of 2016. A minimalist web tool for discovering twitter trends by location. TwitterData is useful for searching keywords in specific cities,
             or for making broad searches on a location by drawing a circle on the world map. Realized with
             Python, Leaflet.js, Javascript, HTML, CSS, Bootstrap, Jinja Templates, Google App Engine, and the Tweepy api for Twitter.
         </p>
+        <br>
     </div>
 </div>
 <div class="row">
     <div id="small" class="col-sm-6 col-sm-offset-3 text-justify">
-        <p>
-            <a href="/sentencescrambler" class="hack">Sentence Scrambler,</a>
-
-            <a href="/montecarlopi" class="hack">Monte Carlo Approximation of Pi,</a>
-
-            <a href="/repellantOrb" class="hack">Repellant Orb,</a>
-
-            <a href="/connectingparticles" class="hack">Connecting Particles,</a>
-
-            <a href="/fireworks" class="hack">Fireworks,</a>
-
-            <a href="/bouncingballs" class="hack">Bouncing Balls,</a>
-
-            <a href="/particles" class="hack">Splitting Particles,</a>
-
-            <a href="/spacetravel" class="hack">Space Travel</a>
+        <p class="post">
+            <a href="/sentencescrambler" class="hack">- Sentence Scrambler</a>
+            <br>
+            <a href="/montecarlopi" class="hack">- Monte Carlo Approximation of Pi</a>
+            <br>
+            <a href="/fireworks" class="hack">- Fireworks</a>
+            <br>
+            <a href="/particles" class="hack">- Splitting Particles</a>
         </p>
     </div>
 </div>
 <script>
 
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
-
-    canvas.height = $(window).height();
-    canvas.width = $(window).width();
-
-    var drops = [];
-
-    var distance = function(x, y) {
-        return Math.sqrt((x.x - y.x) * (x.x - y.x) + (x.y - y.y) * (x.y - y.y));
-    };
-
-    function animateDrop(drop) {
-
-        drop.y = drop.y + drop.vy;
-        drop.x = drop.x + drop.vx;
-
-        if (drop.x > canvas.width) {
-            drop.vx = -drop.vx;
-        }
-        if (drop.x < 0) {
-            drop.vx = -drop.vx;
-        }
-        if (drop.y > canvas.height) {
-            drop.vy = -drop.vy;
-        }
-        if (drop.y < 0) {
-            drop.vy = -drop.vy;
-        }
-    }
-
-    function draw() {
-        canvas.width = canvas.width;  // clear
-
-        for (var j = 0; j < drops.length; j++) {
-            ctx.strokeStyle = 'lightgray';
-            ctx.lineWidth = 0.2;
-
-            var drop = drops[j];
-            animateDrop(drop);
-            ctx.fillStyle = drop.c;
-            ctx.beginPath();
-            ctx.arc(drop.x, drop.y, drop.r, 0, 2 * Math.PI, false);
-            ctx.fill();
-
-            for (var k = 0; k < drops.length; k++) {
-                var d2 = drops[k];
-                if (distance(drop, d2) < 100) {
-                    ctx.beginPath();
-                    ctx.moveTo(drop.x, drop.y);
-                    ctx.lineTo(d2.x, d2.y);
-                    ctx.stroke();
-                    ctx.closePath();
-                }
-            }
-            if (distance(drop, center) < 100) {
-//                drop.x = drop.x + (center.x - drop.x) / 10;
-//                drop.y = drop.y + (center.y - drop.y) / 10;
-
-//                if (drop.r < 3) {
-//                    drop.r = drop.r * 1.1;
-//                }
-//
-//                ctx.strokeStyle = 'black';
-//                ctx.lineWidth = 0.5;
-//                ctx.beginPath();
-//                ctx.moveTo(center.x, center.y);
-//                ctx.lineTo(drop.x, drop.y);
-//                ctx.stroke();
-//                ctx.closePath();
-            }
-//            else {
-//                if (drop.r > 1) {
-//                    drop.r = drop.r / 1.1;
-//                }
-//            }
-        }
-
-//        ctx.fillStyle = center.c;
-//        ctx.beginPath();
-//        ctx.arc(center.x, center.y, center.r, 0, 2 * Math.PI, false);
-//        ctx.fill();
-    }
-
-    function animation() {
-        draw();
-        requestAnimationFrame(animation);
-    }
-
-
-    function start() {
-        for (var j = 0; j < 200; j++) {
-            var drop = {
-                x: canvas.width * Math.random(),
-                y: canvas.height * Math.random(),
-                vy: Math.random() - 0.5,
-                vx: Math.random() - 0.5,
-                r: 0,
-                c: 'lightgray'
-            };
-            drops.push(drop);
-        }
-        requestAnimationFrame(animation);
-    }
-
-    var center = {x: canvas.width / 2, y: canvas.height / 2, r: 1, c: 'red'};
-
-    function updateUser(e) {
-        center.x = e.offsetX;
-        center.y = e.offsetY;
-    }
-
-    canvas.addEventListener('mousemove', function(e) {
-        updateUser(e);
-    });
-
-    start();
-
-
-//    var canvas = document.getElementById("canvas");
-//    var ctx = canvas.getContext("2d");
-//
-//    canvas.height = window.innerHeight;
-//    canvas.width = window.innerWidth;
-//
-//    var drops = [];
-//
-//    var pad = 50;
-//
-//    var collided = function(x, y, size) {
-//        return Math.abs(x.x - y.x) < (size) && Math.abs(x.y - y.y) < (size);
-//    };
-//
-//    var distance = function(x, y) {
-//        return Math.sqrt((x.x - y.x) * (x.x - y.x) + (x.y - y.y) * (x.y - y.y));
-//    };
-//
-//    function draw_square(s1) {
-//
-////        s1.x = s1.x + s1.vx;
-////        s1.y = s1.y + s1.vy;
-//
-//        var s = s1.s;
-//
-//        ctx.strokeStyle = s1.o;
-//        ctx.lineWidth = 10;
-//        ctx.beginPath();
-//        ctx.arc(s1.x, s1.y, s1.s, 0, 2 * Math.PI, false);
-//        ctx.stroke();
-//
-//        ctx.fillStyle = s1.c;
-//        ctx.beginPath();
-//        ctx.arc(s1.x, s1.y, s1.s, 0, 2 * Math.PI, false);
-//        ctx.fill();
-//
-////        ctx.fillStyle = s1.c;
-////        ctx.fillRect(s1.x, s1.y, s, s);
-////
-////        ctx.strokeStyle = "white";
-////        ctx.rect(s1.x, s1.y, s, s);
-////        ctx.stroke();
-//    }
-//
-//    function draw() {
-//        canvas.width = canvas.width;  // clear, resize
-//
-//        for (var j = 0; j < drops.length; j++) {
-//            var drop = drops[j];
-//            draw_square(drop);
-//        }
-//    }
-//
-//    function animation() {
-//
-//        if ($(window).width() > 768) {
-//            draw();
-//        }
-//        requestAnimationFrame(animation);
-//    }
-//
-//    exec = false;
-//    function beginAnimation() {
-//        if (!exec) {
-//            exec = true;
-//            requestAnimationFrame(animation);
-//        }
-//    }
-//
-//    function start() {
-//        var drop = {x: canvas.width / 2 * Math.random() + canvas.width / 2 - 100, y: canvas.height * Math.random(), vx: 2 * Math.random() - 1, vy: 2 * Math.random() - 1, s: 40 + Math.random() * 40, c: 'aliceblue', o: 'white'};
-//        drops.push(drop);
-//        beginAnimation();
-//    }
-//
-//    var mouse = {x: canvas.width / 2, y: canvas.height / 2};
-//
-//    function updateUser(e) {
-//        mouse.x = e.offsetX;
-//        mouse.y = e.offsetY;
-//    }
-//
-//    canvas.addEventListener('click', function(e) {
-//        for (var i = 0; i < drops.length; i++) {
-//            var drop = drops[i];
-//            if (collided(mouse, drop, drop.s)) {
-//                if (drop.s < 101) {
-//                    drop.s = 0.9 * drop.s;
-//                }
-//            }
-//        }
-//    });
-//
-//    canvas.addEventListener('mousemove', function(e) {
-//        updateUser(e);
-//        for (var i = 0; i < drops.length; i++) {
-//            var drop = drops[i];
-//            if (collided(mouse, drop, drop.s)) {
-//                drop.o = 'midnightblue';
-//            } else {
-//                drop.o = 'white';
-//            }
-//        }
-//    });
-//
-//    var regen_count = 0;
-//    function regenerate_squares(wait_time) {
-//        drops = [];
-//        regen_squares = true;
-//        setTimeout(function() {
-//            if (regen_squares) {
-//                for (var j = 0; j < 25; j++) {
-//                    start();
-//                }
-//            }
-//            regen_count = regen_count + 1;
-//            console.log(regen_count);
-//            regen_squares = false;
-//        }, wait_time);
-//    }
-//
-//    var regen_squares = false;
-//
-//    $(window).resize(function () {
-//        regen_squares = false;
-//        canvas.height = $('body')[0].scrollHeight;
-//        canvas.width = $(window).width();
-//        regenerate_squares(500);
-//    });
-//
-//    $(window).scroll(function () {
-//        regen_squares = false;
-//        canvas.height = $('body')[0].scrollHeight;
-//        canvas.width = $(window).width();
-//        regenerate_squares(500);
-//    });
-//
-//    for (var j = 0; j < 25; j++) {
-//        start();
-//    }
 </script>
 </body>
 </html>

@@ -65,7 +65,7 @@
             ctx.arc(drop.x, drop.y, drop.r, 0, 2 * Math.PI, false);
             ctx.fill();
 
-            if (distance(drop, center) < 100) {
+            if (distance(drop, center) < canvas.width / 10) {
 
                 drop.x = drop.x - (center.x - drop.x) / 10;
                 drop.y = drop.y - (center.y - drop.y) / 10;
@@ -93,8 +93,8 @@
                 var drop = {
                     x: j * spacing + 5,
                     y: k * spacing + 5,
-                    vy: 3 * Math.random() - 1.5,
-                    vx: 3 * Math.random() - 1.5,
+                    vy: 2 * Math.random() - 1,
+                    vx: 2 * Math.random() - 1,
                     r: 0.5,
                     c: 'black'
                 };

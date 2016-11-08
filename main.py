@@ -23,6 +23,7 @@ app = webapp2.WSGIApplication([
     ('/boards', hh.BoardHandler),
     ('/boards_accounts', hh.BoardsAccountsHandler),
     ('/colorpuzzle', hh.ColorPuzzleHandler),
+    ('/recursivetree', hh.RecursiveTreeHandler),
     ('/sentencescrambler', hh.ScramblerHandler),
     ('/projects', hh.ProjectPageHandler),
     ('/stars', hh.StarsHandler),

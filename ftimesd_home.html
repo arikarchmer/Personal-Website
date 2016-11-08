@@ -92,16 +92,16 @@
     function animateDrop(drop) {
         drop.y = drop.y + drop.vy;
         drop.x = drop.x + drop.vx;
-        if (drop.x > canvas.width - pad) {
+        if (drop.x > canvas.width - pad - drop.r) {
             drop.vx = -drop.vx;
         }
-        if (drop.x < canvas.width / 2 - pad) {
+        if (drop.x < canvas.width / 2 - pad + drop.r) {
             drop.vx = -drop.vx;
         }
-        if (drop.y > canvas.height - pad) {
+        if (drop.y > canvas.height - pad - drop.r) {
             drop.vy = -drop.vy;
         }
-        if (drop.y < canvas.height / 2 - pad) {
+        if (drop.y < canvas.height / 2 - pad + drop.r) {
             drop.vy = -drop.vy;
         }
     }
@@ -109,7 +109,7 @@
     function draw() {
         canvas.width = canvas.width;  // clear
 
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 1;
         ctx.rect(canvas.width / 2 - pad, canvas.height / 2 - pad, canvas.width / 2, canvas.height / 2);
         ctx.stroke();
 

@@ -78,7 +78,7 @@ body {
 
     function animation() {
         draw();
-        setTimeout(animation, 1);
+        setTimeout(animation, 1000/60);
     }
 
     exec = false;
@@ -90,7 +90,7 @@ body {
     }
 
     function start() {
-        var drop = {x: canvas.width / 2, y: canvas.height / 2, vy: 0.5 * Math.random() - 0.25, vx: 0.5 * Math.random() - 0.25, r: Math.random(), c: 'white', iters: 0, del: false};
+        var drop = {x: canvas.width / 2, y: canvas.height / 2, vy: 2 * Math.random() - 1, vx: 2 * Math.random() - 1, r: Math.random(), c: 'white', iters: 0, del: false};
         drops.push(drop);
         beginAnimation();
     }

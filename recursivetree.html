@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Lobster|Cabin|Source+Code+Pro" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+        #canvas {
+            position: absolute;
+            background-color: white;
+        }
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+
+    canvas.height = $(window).height();
+    canvas.width = $(window).width();
+
+    var getLine = function(one, two) {
+        return {x1: one.x, x2: two.x, y1: one.y, y2: two.y};
+    };
+
+    function getBaseLog(x, y) {
+        return Math.log(y) / Math.log(x);
+    }
+
+    function draw(line) {
+        ctx.beginPath();
+        ctx.moveTo(line.x1, line.y1);
+        ctx.lineTo(line.x2, line.y2);
+        ctx.stroke();
+    }
+
+    var size = canvas.height / 5;
+    var iters = canvas.width * 8;
+    var log = (getBaseLog(2, iters));
+    var count = 0;
+    function start(point, old) {
+        count++;
+        if (count < iters) {
+            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = 'black';
+            draw(getLine(point, old));
+            setTimeout(function () {
+                start({
+                    x: ((log - getBaseLog(2, count)) / log) * size * Math.random() + point.x,
+                    y: ((log - getBaseLog(2, count)) / log) * (0.8*size) * -Math.random() + point.y
+                }, point);
+            }, 1000 / 30);
+            setTimeout(function () {
+                start({
+                    x: ((log - getBaseLog(2, count)) / log) * -size * Math.random() + point.x,
+                    y: ((log - getBaseLog(2, count)) / log) * (0.8*size) * -Math.random() + point.y
+                }, point);
+            }, 1000 / 30);
+        }
+    }
+
+    start({x: canvas.width / 2, y: canvas.height - (0.8*size)},
+            {x: canvas.width / 2, y: canvas.height});
+
+    canvas.addEventListener('click', function() {
+        canvas.width = canvas.width;
+        count = 0;
+        start({x: canvas.width / 2, y: canvas.height - (0.8*size)},
+            {x: canvas.width / 2, y: canvas.height});
+    });
+
+</script>
+
+</body>
+</html>

@@ -4,25 +4,33 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Cabin|Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Source+Code+Pro|Lobster" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <style>
         textarea {
-            font: 24px "Cabin";
+            font: 14px "Source Code Pro";
             color: black;
             outline: none;
             border: none;
             resize: none;
             overflow: hidden;
+            height: 300px;
+            width: 100%;
+        }
+        p {
+            padding-left: 50px;
+            font: 48px "Lobster";
         }
     </style>
 </head>
 <body>
-    <h1 style="font: 48px Lobster; padding-left: 25px">Sentence Scrambler</h1>
-    <br><br><br>
+    <br>
+    <p>Sentence Scrambler</p>
     <div class="col-sm-10 col-sm-offset-1">
-        <textarea id="textarea" autofocus="autofocus" placeholder="start typing..." cols="40" rows="10"></textarea>
+
+        <br><br>
+        <textarea id="textarea" autofocus="autofocus" placeholder="start typing..."></textarea>
     </div>
 <script>
 

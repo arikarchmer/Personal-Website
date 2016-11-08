@@ -5,29 +5,30 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200|Bad+Script|Loved+by+the+King' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200' rel='stylesheet' type='text/css'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <style>
 body {
-    background-color: black;
-    color: white;
-    font: 24px "Source Code Pro";
+    background-color: white;
+    color: black;
+}
+p {
+    font: 14px "Source Code Pro";
 }
 #canvas {
     position: absolute;
-    background-color: black;
+    background-color: white;
 }
 </style>
 <body>
 <canvas id="canvas"></canvas>
-<div class="row">
-    <div class="col-sm-1">
-        <h1>click</h1>
-    </div>
-    </div>
-</div>
+<!--<div class="row">-->
+    <!--<div class="col-sm-3 text-right">-->
+        <!--<p>click</p>-->
+    <!--</div>-->
+<!--</div>-->
 </body>
 <script>
 
@@ -52,9 +53,9 @@ body {
             if (drop.x < 0) {
                 drop.vx = -drop.vx;
             }
-            if (drop.y + 2 * drop.r >= canvas.height) {
+            if (drop.y + 3 * drop.r >= canvas.height) {
                 drop.vy = -drop.vy;
-                drop.a = drop.a + 0.5;
+                drop.a = drop.a * 1.1;
             }
         }
     }
@@ -85,22 +86,22 @@ body {
 
     var exec = false;
     var colors = ['hotpink', 'aquamarine', 'red'];
-    canvas.addEventListener('click', function(e) {
-        for (var i = 0; i < 10; i++) {
-            var drop = {
-                id: 1,
-                x: e.offsetX,
-                y: e.offsetY,
-                vy: Math.random() - 10,
-                vx: 6 * Math.random() - 3,
-                a: 1,
-                r: 10,
-                c: colors[Math.floor(Math.random() * 3)],
-                static: false,
-                iters: 0
-            };
-            drops.push(drop);
-        }
+    canvas.addEventListener('mousemove', function(e) {
+        var drop = {
+            id: 1,
+            x: e.offsetX,
+            y: e.offsetY,
+            vy: 10 * Math.random() - 20,
+            vx: 10 * Math.random() - 5,
+            a: 1,
+            r: 3,
+            c: 'black',
+//                c: colors[Math.floor(Math.random() * 3)],
+            static: false,
+            iters: 0
+        };
+        drops.push(drop);
+
         beginAnimation();
     });
 

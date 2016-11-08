@@ -56,7 +56,7 @@
 
         for (var j = 0; j < drops.length; j++) {
             ctx.strokeStyle = 'white';
-            ctx.lineWidth = 0.2;
+            ctx.lineWidth = 0.1;
 
             var drop = drops[j];
             animateDrop(drop);
@@ -67,7 +67,7 @@
 
             for (var k = 0; k < drops.length; k++) {
                 var d2 = drops[k];
-                if (distance(drop, d2) < 100) {
+                if (distance(drop, d2) < 75) {
                     ctx.beginPath();
                     ctx.moveTo(drop.x, drop.y);
                     ctx.lineTo(d2.x, d2.y);
@@ -75,11 +75,11 @@
                     ctx.closePath();
                 }
             }
-            if (distance(drop, center) < 100) {
+            if (distance(drop, center) < 75) {
 //                drop.x = drop.x + (center.x - drop.x) / 10;
 //                drop.y = drop.y + (center.y - drop.y) / 10;
 
-                if (drop.r < 5) {
+                if (drop.r < 3) {
                     drop.r = drop.r * 1.1;
                 }
 
@@ -91,7 +91,7 @@
                 ctx.stroke();
                 ctx.closePath();
             } else {
-                if (drop.r > 2) {
+                if (drop.r > 1) {
                     drop.r = drop.r / 1.1;
                 }
             }
@@ -110,13 +110,13 @@
 
 
     function start() {
-        for (var j = 0; j < 100; j++) {
+        for (var j = 0; j < canvas.width / 6; j++) {
             var drop = {
                 x: canvas.width * Math.random(),
                 y: canvas.height * Math.random(),
-                vy: 2 * Math.random() - 1,
-                vx: 2 * Math.random() - 1,
-                r: 2,
+                vy: Math.random() - 0.5,
+                vx: Math.random() - 0.5,
+                r: 1,
                 c: 'white'
             };
             drops.push(drop);

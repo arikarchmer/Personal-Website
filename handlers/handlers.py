@@ -28,6 +28,13 @@ class ColorPuzzleHandler(webapp2.RequestHandler):
         self.response.write(page.render())
 
 
+class RecursiveTreeHandler(webapp2.RequestHandler):
+
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('recursivetree.html')
+        self.response.write(page.render())
+
+
 class ScramblerHandler(webapp2.RequestHandler):
 
     def get(self):

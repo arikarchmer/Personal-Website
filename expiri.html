@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Alan</title>
+  <title></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -13,25 +13,10 @@
             position: absolute;
             background-color: black;
         }
-        h1 {
-            font: 64px "Menlo";
-            color: white;
-            letter-spacing: 2px;
-        }
 </style>
 </head>
-
 <body>
-
 <canvas id="canvas"></canvas>
-
-<div class="row">
-    <br><br><br><br><br><br><br><br>
-    <div class="col-sm-4 col-sm-offset-1 text-left">
-        <h1>alankarchmer.com</h1>
-    </div>
-</div>
-
 <script>
 
     var canvas = document.getElementById("canvas");
@@ -41,12 +26,10 @@
     canvas.width = $(window).width();
 
     var getLine = function(bounds) {
-        return {x1: Math.random() * bounds.one, x2: Math.random() * bounds.two};
+        return {x1: Math.random() * bounds.two, x2: Math.random() * bounds.one};
     };
 
     function getRandomColor() {
-
-
 
         var letters = '0123456789ABCDEF'.split('');
         var color = '#0';
@@ -57,7 +40,7 @@
     }
 
     var drawBorder = function() {
-        ctx.lineWidth = 5;
+        ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(0, 0);
         ctx.lineTo(canvas.width, 0);
@@ -67,12 +50,8 @@
         ctx.stroke();
     };
 
-    var color = function() {
-
-    };
-
     var draw = function(line, oldLine) {
-        ctx.lineWidth = 7;
+        ctx.lineWidth = 0;
         if (line.x1 < 100) {
             ctx.beginPath();
             ctx.moveTo(line.x1, 0);
@@ -115,13 +94,12 @@
             ctx.stroke();
 
             setTimeout(function() {
-                draw(getLine({one: line.x1, two: line.x2}), {x1: line.x1, x2: line.x2});
+                draw(getLine({one: line.x2, two: line.x1}), {x1: line.x2, x2: line.x1});
             }, 100);
 
         }
     };
 
-//    drawBorder();
     draw(getLine({one: canvas.width, two: canvas.width}), {x1: canvas.width, x2: canvas.width});
 
 </script>
