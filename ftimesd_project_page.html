@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,54 +5,71 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Cabin|Source+Code+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Lato|Baskerville" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
-    #canvas {
-        position: absolute;
-        background-color: white;
-    }
     body {
-        background-color: white;
+        position: relative;
+        opacity: 0;
+        background-color: whitesmoke;
+        transition: opacity 3s;
+        letter-spacing: 1px;
+    }
+    .icon {
+        height: 20px;
+        width: 40px;
+        padding-right: 20px;
+        transition: 250ms;
+    }
+    .icon:hover {
+        transform: rotate(15deg);
+    }
+    .me {
+        opacity: 0.9;
+        height: 128px;
+        width: 128px;
+        transition: opacity 500ms, transform 500ms;
+    }
+    .me:hover {
+        opacity: 1;
+        transform: rotate(15deg);
     }
     iframe {
-        border: solid 1px black;
-        height: 240px;
-        width: 100%
+        border: 1px solid darkslategray;
+        width: 100%;
+        height: 200px;
     }
     p {
-        font: 14px "Source Code Pro";
+        font: 18px "Baskerville";
+    }
+    b {
+        font: 18px "Baskerville"
     }
     .header {
-        background-color: transparent;
         color: black;
-        font: 24px "Source Code Pro";
-        padding: 20px 120px 20px 120px;
-        /*border: dashed 1px black;*/
+        /*height: 70vh;*/
+        padding-left: 20px;
+        padding-right: 70px;
     }
     .post {
-        font: 14px "Source Code Pro";
+        font: 14px "Baskerville";
         color: black;
-        /*letter-spacing: 1px;*/
+
         background-color: transparent;
-        border-top: dashed 1px black;
-        padding: 20px 60px 20px 60px;
+        border-top: dashed 1px lightslategray;
+        padding: 20px 100px 20px 100px;
     }
     a {
-        font-size: 14px;
+        font: 18px "Baskerville";
         color: darkslategray;
-    }
-    a:hover {
         text-decoration: none;
-        background-color: darkslategray;
-        color: white;
     }
     .text-justify {
         text-align: justify;
     }
     .project {
-        font: 24px "Source Code Pro";
+        font: 36px "Baskerville";
         color: darkslategray;
         /*letter-spacing: 1px;*/
     }
@@ -64,122 +78,186 @@
         background-color: darkslategray;
         color: white;
     }
+    .demo {
+        font: 30px "Baskerville";
+    }
+    .demo:hover {
+        text-decoration: none;
+        background-color: darkslategray;
+        color: white;
+    }
     .hack {
-        font: 18px "Source Code Pro";
+        font: 24px "Baskerville";
     }
     .hack:hover {
         text-decoration: none;
         background-color: darkslategray;
         color: white;
     }
+    /*#quote {*/
+        /*opacity: 0;*/
+        /*transition: opacity 3s;*/
+    /*}*/
+    .modal {
+       position: fixed;
+
+
+    }
+    .affix {
+      top: 0;
+  }
+      /*#sidebar {*/
+          /*position: -webkit-sticky;  // required for Safari*/
+            /*position: sticky;*/
+            /*top: 10px; // required as well.*/
+      /*}*/
   </style>
 </head>
-<body>
-<!--<canvas id="canvas"></canvas>-->
-<br>
-<!--<div class="row">-->
-    <!--<div class="col-sm-6 col-sm-offset-3 text-left">-->
-        <!--<a href="/"><span class="glyphicon glyphicon-arrow-left"></span></a>-->
-    <!--</div>-->
-<!--</div>-->
-<!--<div class="row">-->
-    <!--<div class="col-sm-8 col-sm-offset-2 text-justify header">-->
-        <!--<p>-->
-            <!--<b style="font-size: 48px">Ari Karchmer</b><br>-->
-            <!--<br>- Student at Brandeis University, class of '18-->
-            <!--<br>- Computer Science and Math double major-->
-            <!--<br>- Java, Python, Javascript-->
-
-            <!--<br>- <a href="mailto:ari.karchmer.s@gmail.com">email</a>,-->
-                <!--<a href="https://twitter.com/intent/tweet?screen_name=f_times_d">tweet</a>,-->
-                <!--<a href="https://github.com/arikarchmer">code</a>-->
-        <!--</p>-->
-    <!--</div>-->
-<!--</div>-->
-<br>
-<div class="row">
-    <div id="big" class="col-sm-6 col-sm-offset-3 text-justify">
-        <!--<p class="post">-->
-            <!--October, '16<br><br>-->
-            <!--<a href="http://slateuniverse-147719.appspot.com" class="project">"SlateUniverse"</a><br>-->
-            <!--My third project completed over the course of a week during the first semester of my junior year.-->
-            <!--SlateUniverse is a productivity app that allows a user to create "slates" that they can fill with-->
-            <!--reminders, to-dos, or any other message. Using a google account, a user can come back to their saved-->
-            <!--slates another time. SlateUniverse was realized with Google App Engine for Python and the cloud datastore,-->
-            <!--Javascript, HTML, CSS, Jinja Templates, and Ajax.-->
-        <!--</p>-->
-        <!--<br>-->
-        <p class="post">
-            11/8/16 |
-            <a href="/recursivetree">More recursive art: tree</a><br><br>
-            <iframe src="/recursivetree"></iframe>
-        </p>
-        <br>
-        <p class="post">
-            9/27/16 |
-            <a href="/colorpuzzle">Art with recursion</a><br><br>
-            <iframe src="/colorpuzzle"></iframe>
-        </p>
-        <br>
-        <p class="post">
-            8/7/16 |
-            <a href="/repellantOrb">Repellant Orb</a><br><br>
-            <iframe src="/repellantOrb"></iframe>
-        </p>
-        <br>
-        <p class="post">
-            8/4/16 |
-            <a href="/connectingparticles">Particles</a><br><br>
-            <iframe src="/connectingparticles"></iframe>
-        </p>
-        <br>
-        <p class="post">
-            8/2/16 |
-            <a href="/bouncingballs">Bouncing Balls</a><br><br>
-            <iframe src="/bouncingballs"></iframe>
-        </p>
-        <br>
-        <p class="post">
-            8/1/16 |
-            <a href="/spacetravel">Space Travel</a><br><br>
-            <iframe src="/spacetravel"></iframe>
-        </p>
-        <br>
-        <p class="post">
-            July, '16<br><br>
-            <a href="/stars" class="project">"StarSpace"</a><br>
-            My second project, completed during July of 2016. An entertaining web game
-            that features you, the daring spaceship pilot, and your quest to collect massive stars
-            before your alien counterparts do the same. Realized with
-            Python, Javascript, HTML, CSS, Bootstrap, Ajax,
-            Google App Engine, D3.js.
-        </p>
-        <br>
-        <p class="post">
-            June, '16<br><br>
-            <a href="/twitterdata" class="project">"TwitterData"</a><br>
-            My first project, completed during June of 2016. A minimalist web tool for discovering twitter trends by location. TwitterData is useful for searching keywords in specific cities,
-            or for making broad searches on a location by drawing a circle on the world map. Realized with
-            Python, Leaflet.js, Javascript, HTML, CSS, Bootstrap, Jinja Templates, Google App Engine, and the Tweepy api for Twitter.
-        </p>
-        <br>
+<body id="body" data-spy="scroll" data-target="#sidebar" data-offset="15">
+<div class="modal fade text-center" id="about" data-backdrop="false" role="dialog" style="background: transparent;">
+    <div class="modal-body text-justify" style="color: white;background-color: transparent; padding-left: 100px; padding-right: 100px">
+        <br><br>
+        <p style="font-size: 46px; color: white; background-color: rgba(47, 79, 79, 0.9); padding: 5px 25px 5px 25px">
+            Ari Karchmer is a student at Brandeis University; a member of the class of 2018.
+            He is a Computer Science and Math double major, and a lover of all things soccer.
+            Java, Python, and Javascript are his tools.
+            He started this blog in the summer of 2016 after his sophomore year of college,
+            and has been pursuing the experiments seen here ever since. Enjoy!</p>
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 72px">&times;</button>
     </div>
 </div>
-<div class="row">
-    <div id="small" class="col-sm-6 col-sm-offset-3 text-justify">
-        <p class="post">
-            <a href="/sentencescrambler" class="hack">- Sentence Scrambler</a>
-            <br>
-            <a href="/montecarlopi" class="hack">- Monte Carlo Approximation of Pi</a>
-            <br>
-            <a href="/fireworks" class="hack">- Fireworks</a>
-            <br>
-            <a href="/particles" class="hack">- Splitting Particles</a>
-        </p>
+<div class="text-justify header">
+    <br>
+    <!--<div class="col-sm-2" id="sidebar" data-spy="affix">-->
+        <!--<br>-->
+        <!--<img class="me img-circle" src="/static/me.jpg" onclick="about()">-->
+        <!--<div class="text-left">-->
+            <!--<br>-->
+            <!--<p id="quote"><i>-->
+            <!--"It is not enough to be busy; so are the ants. The question is: what are we busy about?"-->
+                <!--<br>- Henry David Thoreau</i></p><br>-->
+            <!--<a href="https://www.youtube.com/watch?v=C7mXGMcpA0g"><i>Futbol</i></a><br>-->
+            <!--<a href="https://www.youtube.com/watch?v=8nYB4nszMCA"><i>Conversation piece</i></a><br>-->
+            <!--<a href="http://www.newyorker.com/cartoons/cartoons-90th-anniversary-1995-2005-20"><i>Funny</i></a><br><br>-->
+            <!--<p><i><u>some animations</u></i></p>-->
+            <!--<a href="/bouncingballs"><i>Bouncing balls</i></a>-->
+            <!--<br>-->
+            <!--<a href="/fireworks"><i>Fireworks</i></a>-->
+            <!--<br>-->
+            <!--<a href="/spacetravel"><i>Space travel</i></a>-->
+
+        <!--</div>-->
+    <!--</div>-->
+    <div class="col-sm-6 col-sm-offset-3 text-center">
+        <img class="me img-circle" src="/static/me.jpg" onclick="about()"><br><br>
+        <!--<h1 id="name" onclick="about()">Bienvenidos...</h1>-->
+        <a class="icon" href="http://www.github.com/arikarchmer" style="padding-left: 50px"><img class="icon" src="/static/github.svg"></a>
+        <a class="icon" href="https://www.instagram.com/notarikarchmer"><img class="icon" src="/static/insta.png"></a>
+        <a class="icon" href="https://play.spotify.com/user/1235283146"><img class="icon" src="/static/Spotify_Logo_CMYK_Black.png"></a>
+        <a class="icon" href="mailto:ari.karchmer.s@gmail.com"><img class="icon" src="/static/email.svg"></a>
+        <br><br>
+
     </div>
+</div>
+
+<div id="big" class="col-sm-6 col-sm-offset-3 text-justify">
+    <p class="post">
+        December 11, 2016<br><br>
+        <a href="https://twitter.com/highwaltwhitman" class="hack">A twitter bot that talks like Walt Whitman (Markov chains)</a>
+    </p>
+    <!--<p class="post">-->
+        <!--12/8/16 <br><br>-->
+        <!--<articletitle>Intro to Pandas, part 1: Exoplanets</articletitle>-->
+        <!--<br><br><br>-->
+        <!--Scientists find new planets every day. No, not in our solar system. We have nine (or eight, no one even-->
+        <!--knows whats up with pluto anymore). Scientists are constantly finding <i>exoplanets</i>. That is,-->
+        <!--planets that orbit stars outside our solar system. Have you ever wondered really just how far away they are?-->
+        <!--Kaggle has a <a href="https://www.kaggle.com/mrisdal/open-exoplanet-catalogue" class="demo">dataset</a> of 3416 exoplanets and-->
+        <!--almost everything you might want to know about each of them, including distance from the sun, radius, eccentricity,-->
+        <!--and year of discovery. For today we will be focusing on discovery year and distance from the sun.<br><br><br>-->
+        <!--This was my first time with pandas and matplotlib so please, bear with me. Here's what I did:<br><br><br>-->
+        <!--<img src="/static/LearningPandas1.png" style="height:67px;width: 100% "><br><br><br>-->
+        <!--This right here is just standard. We import pandas, matplotlib, and numpy, and we say that we want plots-->
+        <!--to be rendered inline for our own convenience. Now, we're ready to get started:<br><br><br>-->
+        <!--<img src="/static/LearningPandas2.png" style="height:80px;width: 100% "><br><br><br>-->
+        <!--Pandas.read_csv() is a handy method that takes a csv file and inputs it into a Pandas.Dataframe-->
+        <!--automatically. The dataframe allows to easily view, modify, and sort our data, and it also comes-->
+        <!--with some tools like Dataframe.describe(), which outputs a bunch of stats for each data column, like-->
+        <!--count, mean, median, and more. We'll see a describe() later. Pandas gives us a very easy way to plot data-->
+        <!--if we have a dataframe. We simply use the dataframe.plot(), specifying the kind (this case scatterplot), the x-axis-->
+        <!--(year of discovery), y-axis (distance from sun in parsecs), and optionally things like alpha (transparency of points),-->
+        <!--log scaling, and data point color. Next, using matplotlib, we are able to take care of labels and titles by accesing the chart's attributes. So,-->
+        <!--here is the rendered plot:<br><br><br>-->
+        <!--<img src="/static/output_1_1.png" style="padding-left: 55px"><br><br><br>-->
+        <!--What do we see here? It seems that each successive year,-->
+        <!--the range in distance grows. The minimum sticks around 10 parsecs, but the max is growing about tenfold every seven years.-->
+        <!--But, this is a bit hard to see with our current chart. Let's see if we can find a better way to visualize the data.<br><br><br>-->
+        <!--<img src="/static/LearningPandas3.png" style="height: 20px; width: 100%"><br><br><br>-->
+        <!--We take the distance column, planets['DistFromSunParsec'] and use the groupby function to ask pandas to organize-->
+        <!--the distance column by the year of discovery. Now, this allows us to grab the median distances, by year.-->
+        <!--Additionally, we grab only the data from 1995 to 2014, which is wear the bulk of our data comes from, in order-->
+        <!--to clean up the chart a bit.<br><br><br>-->
+        <!--<img src="/static/output2.png" style="padding-left: 55px"><br><br><br>-->
+        <!--This is a much cleaner version of the information we had already extracted from the first chart.-->
+        <!--The median distance of exoplanets being discovered is indisputably growing since the 1990's.-->
+        <!--There could be a variety of reasons for this, but a few are fairly obvious;-->
+        <!--the technology at the disposal of the world's top scientists continues to improve exponentially,-->
+        <!--and interest in outer space is heightening as well.<br><br><br>-->
+        <!--This concludes part one of my adventure into the world of data analysis with pandas. Part two arrives soon,-->
+        <!--but not before I find a new dataset to dive into. Cheers!-->
+    <!--</p>-->
+    <p class="post">
+        December 7, 2016 <br><br>
+        <a href="/capitalism" class="demo">Particles v2</a><br><br>
+        <iframe src="/capitalism"></iframe>
+    </p>
+    <p class="post">
+        November 8, 2016 <br><br>
+        <a href="/recursivetree" class="demo">Recursive art: tree</a><br><br>
+        <iframe src="/recursivetree"></iframe>
+    </p>
+    <p class="post">
+        September 14, 2016 <br><br>
+        <a href="/montecarlopi" class="hack">Monte Carlo approximation of pi</a>
+    </p>
+    <p class="post">
+        August 8, 2016 <br><br>
+        <a href="/connectingparticles" class="demo">Particles</a><br><br>
+        <iframe src="/connectingparticles"></iframe>
+
+    </p>
+    <p class="post">
+        July, '16<br><br>
+        <a href="/stars" class="project">StarSpace</a><br>
+        (this is the game you play when there are no more games to play)
+        <br><br>
+        Python, javascript, html, css, bootstrap, ajax,
+        google app engine, d3.js
+    </p>
+    <!--<br>-->
+    <p class="post">
+        June, '16<br><br>
+        <a href="/twitterdata/map" class="project">TwitterData</a><br>
+        Now you can search twitter using a map <br><br>
+        Python, leaflet.js, javascript, html, css, bootstrap, jinja templates, google app engine, tweepy
+    </p>
+    <!--<br>-->
+</div>
+
+<div id="small" class="col-sm-6 col-sm-offset-3 text-center">
+    <br>
+    <a class="icon" href="http://www.github.com/arikarchmer" style="padding-left: 50px"><img class="icon" src="/static/github.svg"></a>
+    <a class="icon" href="https://www.instagram.com/notarikarchmer"><img class="icon" src="/static/insta.png"></a>
+    <a class="icon" href="https://play.spotify.com/user/1235283146"><img class="icon" src="/static/Spotify_Logo_CMYK_Black.png"></a>
+    <a class="icon" href="mailto:ari.karchmer.s@gmail.com"><img class="icon" src="/static/email.svg"></a>
+    <br><br>
 </div>
 <script>
+    document.getElementById('body').style.opacity = 1;
 
+    function about() {
+        $("#about").modal();
+    }
 </script>
 </body>
 </html>

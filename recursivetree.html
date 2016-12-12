@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css?family=Inconsolata|Lobster|Cabin|Source+Code+Pro" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
     <style>
         #canvas {
             position: absolute;
@@ -22,9 +24,18 @@
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
 
-
     canvas.height = $(window).height();
     canvas.width = $(window).width();
+
+    function getRandomGreen() {
+
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#00';
+        for (var i = 0; i < 4; i++) {
+            color += letters[Math.floor(Math.random() * 20) - 4];
+        }
+        return color;
+    }
 
     var getLine = function(one, two) {
         return {x1: one.x, x2: two.x, y1: one.y, y2: two.y};
@@ -35,46 +46,95 @@
     }
 
     function draw(line) {
+//        if (count / iters > 0.1) {
+//            ctx.strokeStyle = 'forestgreen';
+//        } else {
+//            ctx.strokeStyle = 'saddlebrown';
+//        }
         ctx.beginPath();
         ctx.moveTo(line.x1, line.y1);
         ctx.lineTo(line.x2, line.y2);
         ctx.stroke();
     }
 
-    var size = canvas.height / 5;
-    var iters = canvas.width * 8;
-    var log = (getBaseLog(2, iters));
+    function getIters() {
+
+    }
+
+    var constant = 0.66;
+    var size = canvas.height / 3;
+    var iters = canvas.height * 6;
     var count = 0;
-    function start(point, old) {
+    function start(point, old, l) {
         count++;
         if (count < iters) {
-            ctx.lineWidth = 0.5;
-            ctx.strokeStyle = 'black';
+            ctx.lineWidth = l * 8;
             draw(getLine(point, old));
+
             setTimeout(function () {
                 start({
-                    x: ((log - getBaseLog(2, count)) / log) * size * Math.random() + point.x,
-                    y: ((log - getBaseLog(2, count)) / log) * (0.8*size) * -Math.random() + point.y
-                }, point);
-            }, 1000 / 30);
+                    x: size * l * Math.random() + point.x,
+                    y: (0.8 * size) * -l * Math.random() + point.y
+                }, point, l * constant);
+            }, 1000 / 60);
             setTimeout(function () {
                 start({
-                    x: ((log - getBaseLog(2, count)) / log) * -size * Math.random() + point.x,
-                    y: ((log - getBaseLog(2, count)) / log) * (0.8*size) * -Math.random() + point.y
-                }, point);
-            }, 1000 / 30);
+                    x: -size * l * Math.random() + point.x,
+                    y: (0.8 * size) * -l * Math.random() + point.y
+                }, point, l * constant);
+            }, 1000 / 60);
         }
     }
 
-    start({x: canvas.width / 2, y: canvas.height - (0.8*size)},
-            {x: canvas.width / 2, y: canvas.height});
+    function go() {
+        start(
+            {x: canvas.width / 2, y: canvas.height - size},
+            {x: canvas.width / 2, y: canvas.height}, 1
+        );
+    }
 
-    canvas.addEventListener('click', function() {
-        canvas.width = canvas.width;
-        count = 0;
-        start({x: canvas.width / 2, y: canvas.height - (0.8*size)},
-            {x: canvas.width / 2, y: canvas.height});
-    });
+    var intervalID;
+    function loop() {
+        intervalID = setInterval(function() {
+            canvas.width = canvas.width;
+            count = 0;
+            go();
+        }, 4000);
+    }
+
+    go();
+    loop();
+
+//    var timeoutID;
+//    $(window).resize(function () {
+//
+//        clearInterval(intervalID);
+//
+//        var height = $(window).height();
+//        var width = $(window).width();
+//
+//        if (width > 400) {
+//            document.getElementById('canvas').style.visibility = 'visible';
+//            canvas.height = height;
+//            canvas.width = width;
+//        } else {
+//            // kill canvas
+//            document.getElementById('canvas').style.visibility = 'hidden';
+//        }
+//
+//        canvas.width = canvas.width;
+//        go();
+//        loop();
+//
+//        clearTimeout(timeoutID);
+//        timeoutID = setTimeout(function() {
+//            canvas.width = canvas.width;
+//            go();
+//            loop();
+//        }, 250);
+//
+//
+//    });
 
 </script>
 

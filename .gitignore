@@ -2,5 +2,6 @@ lib/*
 *.pyc
 .idea/*
 static/td/keys.js
+botkeys/keys.py
 keys.py
 

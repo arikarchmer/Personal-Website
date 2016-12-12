@@ -12,7 +12,7 @@
 <style>
     #canvas {
         position: absolute;
-        background-color: black;
+        background-color: white;
     }
 </style>
 <body>
@@ -55,7 +55,7 @@
         canvas.width = canvas.width;  // clear
 
         for (var j = 0; j < drops.length; j++) {
-            ctx.strokeStyle = 'white';
+            ctx.strokeStyle = 'black';
             ctx.lineWidth = 0.1;
 
             var drop = drops[j];
@@ -67,7 +67,7 @@
 
             for (var k = 0; k < drops.length; k++) {
                 var d2 = drops[k];
-                if (distance(drop, d2) < 75) {
+                if (distance(drop, d2) < canvas.height / 5) {
                     ctx.beginPath();
                     ctx.moveTo(drop.x, drop.y);
                     ctx.lineTo(d2.x, d2.y);
@@ -75,11 +75,12 @@
                     ctx.closePath();
                 }
             }
-            if (distance(drop, center) < 75) {
-//                drop.x = drop.x + (center.x - drop.x) / 10;
-//                drop.y = drop.y + (center.y - drop.y) / 10;
+            if (distance(drop, center) < canvas.height / 5) {
+//                drop.x = drop.x + (center.x - drop.x) / 30;
+//                drop.y = drop.y + (center.y - drop.y) / 30;
 
-                if (drop.r < 3) {
+
+                if (drop.r < 5) {
                     drop.r = drop.r * 1.1;
                 }
 
@@ -91,7 +92,7 @@
                 ctx.stroke();
                 ctx.closePath();
             } else {
-                if (drop.r > 1) {
+                if (drop.r > 2) {
                     drop.r = drop.r / 1.1;
                 }
             }
@@ -110,21 +111,21 @@
 
 
     function start() {
-        for (var j = 0; j < canvas.width / 6; j++) {
+        for (var j = 0; j < canvas.height / 5; j++) {
             var drop = {
                 x: canvas.width * Math.random(),
                 y: canvas.height * Math.random(),
                 vy: Math.random() - 0.5,
                 vx: Math.random() - 0.5,
-                r: 1,
-                c: 'white'
+                r: 3,
+                c: 'black'
             };
             drops.push(drop);
         }
         requestAnimationFrame(animation);
     }
 
-    var center = {x: canvas.width / 2, y: canvas.height / 2, r: 3, c: 'red'};
+    var center = {x: canvas.width / 2, y: canvas.height / 2, r: 5, c: 'red'};
 
     function updateUser(e) {
         center.x = e.offsetX;

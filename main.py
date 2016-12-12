@@ -19,13 +19,14 @@ import handlers.handlers as hh
 
 app = webapp2.WSGIApplication([
 
-    ('/', hh.HomeHandler),
+    # ('/', hh.HomeHandler),
     ('/boards', hh.BoardHandler),
     ('/boards_accounts', hh.BoardsAccountsHandler),
+    ('/capitalism', hh.CapitalismHandler),
     ('/colorpuzzle', hh.ColorPuzzleHandler),
     ('/recursivetree', hh.RecursiveTreeHandler),
     ('/sentencescrambler', hh.ScramblerHandler),
-    ('/projects', hh.ProjectPageHandler),
+    ('/', hh.ProjectPageHandler),
     ('/stars', hh.StarsHandler),
     ('/players', hh.PlayersHandler),
     ('/twitterdata', hh.TwitterHomeHandler),
@@ -38,6 +39,7 @@ app = webapp2.WSGIApplication([
     ('/fireworks', hh.FireworksHandler),
     ('/connectingparticles', hh.ConnectingPartsHandler),
     ('/repellantOrb', hh.RepellantOrbHandler),
-    ('/montecarlopi', hh.MonteCarloPiHandler)
+    ('/montecarlopi', hh.MonteCarloPiHandler),
+    ('/highwaltwhitman', hh.HighWaltWhitman)
 
 ], debug=True)

@@ -32,8 +32,8 @@
     function getRandomColor() {
 
         var letters = '0123456789ABCDEF'.split('');
-        var color = '#0';
-        for (var i = 0; i < 5; i++ ) {
+        var color = '#00';
+        for (var i = 0; i < 4; i++ ) {
             color += letters[Math.floor(Math.random() * 16)];
         }
         return color;
@@ -77,9 +77,8 @@
 
             setTimeout(function () {
                 canvas.width = canvas.width;
-                //                drawBorder();
                 draw(getLine({one: canvas.width, two: canvas.width}), {x1: canvas.width, x2: canvas.width});
-            }, 500);
+            }, 2000);
 
         } else {
             ctx.beginPath();

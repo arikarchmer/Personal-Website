@@ -11,16 +11,16 @@
 </head>
 <style>
     body {
-        background-color: whitesmoke;
+        background-color: white;
     }
     #canvas {
         position: absolute;
-        background-color: whitesmoke;
-        border: solid black;
+        background-color: white;
+        border: none;
     }
     p {
         color: black;
-        font: 36px 'Cabin';
+        font: 36px 'Baskerville';
     }
 </style>
 <body>
@@ -34,7 +34,7 @@
         <p id="count"></p>
         <p id="percent"></p>
         <br>
-        <button id="pause" type="button" onclick="pause()" class="btn btn-lg">pause</button>
+        <button id="pause" style="font-family: Baskerville; border-radius: 0px; outline: none" type="button" onclick="pause()" class="btn btn-lg">pause</button>
     </div>
 </div>
 </div>
@@ -64,13 +64,13 @@
         document.getElementById('count').innerHTML = 'data points: ' + count;
         document.getElementById('percent').innerHTML = 'percent error: ' + Math.abs((Math.PI - pi) / Math.PI * 100) + '%';
         if (!stop) {
-            for (var i = 0; i < 1001; i++) {
+            for (var i = 0; i < 99; i++) {
                 count = count + 1;
                 if (count < limit) {
                     var x = Math.random() * 500;
                     var y = Math.random() * 500;
                     if (distance({x: 0, y: 0}, {x: x, y: y}) < 500) {
-                        ctx.fillStyle = 'green';
+                        ctx.fillStyle = 'black';
                         green = green + 1;
                     } else {
                         ctx.fillStyle = 'gray';

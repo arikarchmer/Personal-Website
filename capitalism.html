@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>F x d</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Lobster|Cabin|Source+Code+Pro" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<style>
+    #canvas {
+        position: absolute;
+        background-color: white;
+    }
+    .mycontainer {
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    input {
+        border: none;
+        border-bottom: 1px solid black;
+    }
+    input:focus {
+        outline: none;
+    }
+</style>
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+<script>
+
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    canvas.height = $(window).height();
+    canvas.width = $(window).width();
+
+    var drops = [];
+
+    var distance = function(x, y) {
+        return Math.sqrt((x.x - y.x) * (x.x - y.x) + (x.y - y.y) * (x.y - y.y));
+    };
+
+    function animateDrop(drop) {
+
+        drop.y = drop.y + drop.vy;
+        drop.x = drop.x + drop.vx;
+
+        if (drop.x + drop.r*4 > canvas.width) {
+            drop.vx = -drop.vx;
+        }
+        if (drop.x - drop.r*4  < 0) {
+            drop.vx = -drop.vx;
+        }
+        if (drop.y + drop.r*4 > canvas.height) {
+            drop.vy = -drop.vy;
+        }
+        if (drop.y - drop.r*4 < 0) {
+            drop.vy = -drop.vy;
+        }
+    }
+
+    function draw() {
+        canvas.width = canvas.width;  // clear
+        ctx.globalAlpha = 0.5;
+
+        for (var j = 0; j < drops.length; j++) {
+            ctx.lineWidth = 0.25;
+
+            var drop = drops[j];
+            animateDrop(drop);
+//            ctx.strokeStyle = 'black';
+//            ctx.fillStyle = 'black';
+
+            var cluster = 0;
+            for (var k = 0; k < drops.length; k++) {
+                var d2 = drops[k];
+                var larger;
+                var smaller;
+                if (drop.r > d2.r) {
+                    larger = drop;
+                    smaller = d2;
+                } else {
+                    larger = d2;
+                    smaller = drop;
+                }
+
+                var dist = distance(larger, smaller);
+                var connection = larger.r*15;
+                if (dist < connection) {
+                    cluster += 1;
+
+                    if (cluster < 5) {
+
+                        smaller.x = smaller.x + (larger.x - smaller.x) / (350 - larger.r * 50);
+                        smaller.y = smaller.y + (larger.y - smaller.y) / (350 - larger.r * 50);
+
+                        ctx.lineWidth = 1.1-(dist/connection);
+                        ctx.beginPath();
+                        ctx.moveTo(larger.x, larger.y);
+                        ctx.lineTo(smaller.x, smaller.y);
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+
+            }
+
+            ctx.beginPath();
+            ctx.arc(drop.x, drop.y, drop.r * 4, 0, 2 * Math.PI, false);
+            ctx.lineWidth = drop.r / 8;
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.arc(drop.x, drop.y, drop.r, 0, 2 * Math.PI, false);
+            ctx.fill();
+            ctx.closePath();
+
+        }
+
+    }
+
+    function animation() {
+        draw();
+        requestAnimationFrame(animation);
+    }
+
+
+    function start() {
+        for (var j = 0; j < canvas.height / 5; j++) {
+            var drop = {
+                x: (canvas.width - 48) * Math.random() + 24,
+                y: (canvas.height - 48) * Math.random() + 24,
+                vy: 0,
+                vx: 0,
+                r: (4 * Math.random() + 1),
+                c: 'black',
+                id: j
+            };
+            drop.vy = (5 - drop.r) * Math.random() - (5 - drop.r) / 2;
+            drop.vx = (5 - drop.r) * Math.random() - (5 - drop.r) / 2;
+            drops.push(drop);
+        }
+        animation();
+    }
+
+    canvas.addEventListener('click', function(e) {
+        for (var j = 0; j < 3; j++) {
+            var drop = {
+                x: e.offsetX,
+                y: e.offsetY,
+                vy: 0,
+                vx: 0,
+                r: (4 * Math.random() + 1),
+                id: j
+            };
+            drop.vy = (5 - drop.r) * Math.random() - (5 - drop.r) / 2;
+            drop.vx = (5 - drop.r) * Math.random() - (5 - drop.r) / 2;
+            drops.push(drop);
+        }
+    });
+
+    start();
+
+</script>
+</html>

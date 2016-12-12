@@ -21,6 +21,20 @@ class Score(db.Model):
     score = db.IntegerProperty()
 
 
+class CapitalismHandler(webapp2.RequestHandler):
+
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('capitalism.html')
+        self.response.write(page.render())
+
+
+class HighWaltWhitman(webapp2.RequestHandler):
+
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('highWaltWhitman.html')
+        self.response.write(page.render())
+
+
 class ColorPuzzleHandler(webapp2.RequestHandler):
 
     def get(self):
