@@ -59,9 +59,11 @@ class Waltbot:
     def genPoem(self, lines, wpl, dict):
         s=[]
         str=''
+
+        index = random.randint(0, len(dict.keys()) - 1)
+        s = dict.keys()[index].split(' ')
+
         for i in range(lines):
-            index = random.randint(0, len(dict.keys()) - 1)
-            s = dict.keys()[index].split(' ')
 
             str += self.generateSentence(s[0], s[1], dict, wpl) + '\n'
 
