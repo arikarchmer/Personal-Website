@@ -8,6 +8,7 @@ from google.appengine.api import users
 from flask import Markup
 
 from searcher import Searcher
+from waltbot import Waltbot
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader('./'),
@@ -123,6 +124,12 @@ class StarsHandler(webapp2.RequestHandler):
     def get(self):
         stars_page = JINJA_ENVIRONMENT.get_template('Starspace.html')
         self.response.write(stars_page.render())
+
+
+class WaltbotHandler(webapp2.RequestHandler):
+
+    def get(self):
+        Waltbot().run()
 
 
 #################################################################################################

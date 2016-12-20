@@ -16,6 +16,7 @@
 #
 import webapp2
 import handlers.handlers as hh
+import waltbot
 
 app = webapp2.WSGIApplication([
 
@@ -40,6 +41,6 @@ app = webapp2.WSGIApplication([
     ('/connectingparticles', hh.ConnectingPartsHandler),
     ('/repellantOrb', hh.RepellantOrbHandler),
     ('/montecarlopi', hh.MonteCarloPiHandler),
-    ('/highwaltwhitman', hh.HighWaltWhitman)
+    ('/waltbot', hh.WaltbotHandler)
 
 ], debug=True)
