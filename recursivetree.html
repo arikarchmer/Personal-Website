@@ -18,7 +18,15 @@
 </style>
 </head>
 <body>
-<canvas id="canvas"></canvas>
+
+<canvas id="canvas" ng-mousemove="adjust()"></canvas>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.count = 0;
+});
+</script>
 <script>
 
     var canvas = document.getElementById("canvas");
@@ -63,7 +71,7 @@
 
     var constant = 0.66;
     var size = canvas.height / 3;
-    var iters = canvas.height * 6;
+    var iters = canvas.height * 4;
     var count = 0;
     function start(point, old, l) {
         count++;
