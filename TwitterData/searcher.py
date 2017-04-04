@@ -1,7 +1,7 @@
 import tweepy
 
-from geocoder import Geocoder
-from TDkeys import TDkeys
+from TwitterData.TDkeys import TDkeys
+from TwitterData.geocoder import Geocoder
 
 
 class Searcher():

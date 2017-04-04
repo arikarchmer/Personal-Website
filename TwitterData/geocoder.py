@@ -2,7 +2,7 @@ import urllib
 import json
 import logging
 import urllib2
-from keys import Keys
+from geo_keys import Keys
 
 class Geocoder():
 

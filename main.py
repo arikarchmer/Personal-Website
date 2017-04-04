@@ -15,29 +15,20 @@
 # limitations under the License.
 #
 import webapp2
+
 import handlers.handlers as hh
-import waltbot
 
 app = webapp2.WSGIApplication([
 
-    # ('/', hh.HomeHandler),
     ('/particle', hh.CapitalismHandler),
     ('/colorpuzzle', hh.ColorPuzzleHandler),
     ('/recursivetree', hh.RecursiveTreeHandler),
-    ('/sentencescrambler', hh.ScramblerHandler),
     ('/', hh.ProjectPageHandler),
     ('/starsakjsdha', hh.StarsHandler),
     ('/players', hh.PlayersHandler),
     ('/twitterdata', hh.MapHandler),
-    ('/twitterdata/search', hh.SearchHandler),
     ('/twitterdata/results/(.*)', hh.ResultsHandler),
     ('/twitterdata/map', hh.MapHandler),
-    ('/particles', hh.ParticleHandler),
-    ('/bouncingballs', hh.BouncingHandler),
-    ('/spacetravel', hh.SpaceTravelHandler),
-    ('/fireworks', hh.FireworksHandler),
-    ('/connectingparticles', hh.ConnectingPartsHandler),
-    ('/repellantOrb', hh.RepellantOrbHandler),
     ('/montecarlopi', hh.MonteCarloPiHandler),
     ('/march', hh.MarchHandler)
 
