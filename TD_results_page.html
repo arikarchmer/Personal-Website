@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200|Cabin' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200|Baskerville' rel='stylesheet' type='text/css'>
   <script src="/static/star/js/core.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -24,45 +24,49 @@ tr {
     table-layout: auto;
 }
 table {
-    height:400px;
+    height: 80vh;
     display: -moz-groupbox;
 }
 tbody {
     overflow-y: scroll;
-    height: 400px;
+    height: 80vh;
     width: 100%;
     position: absolute;
-    font: 48px "Cabin";
+    font: 24px "Baskerville";
 }
 a {
-    font: 48px "Cabin";
+    font: 18px "Baskerville";
     color: blue;
 }
 a:hover {
-    text-decoration: none;
-    color: green;
-    transition: color 500ms;
+    color: blueviolet;
+    text-decoration: dotted;
 }
 h1 {
-    font: 96px "Cabin";
+    font: 64px "Baskerville";
 }
 #text {
-    font: 24px "Cabin";
+    font: 18px "Baskerville";
 }
 </style>
 <body>
 <div class="row">
-    <div class="col-sm-4 col-sm-offset-1 text-justify">
-        <h1>Results</h1>
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <a href="/twitterdata/search">1. Search</a>
-        <br>
-        <a href="/twitterdata/map">2. Map</a>
-        <br>
-        <a href="/twitterdata">3. Home</a>
+    <div class="col-sm-4 col-sm-offset-4 text-center">
+        <h1 style="border-bottom: 1px solid black;">Results</h1>
     </div>
-    <br><br><br><br><br><br>
-    <div class="col-sm-6">
+</div>
+<div class="row">
+    <div class="col-sm-2 col-sm-offset-4 text-center">
+        <a href="/twitterdata/map">Map</a>
+    </div>
+    <div class="col-sm-2 text-center">
+        <a href="/">Home</a>
+    </div>
+</div>
+</div>
+<br><br><br>
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
       <table class="table text-center">
         <tbody>
         {% for i in items %}

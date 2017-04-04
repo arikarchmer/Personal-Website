@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>F x d</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Lobster|Cabin|Source+Code+Pro" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<style>
+    #canvas {
+        border: none;
+        position: fixed;
+    }
+    p {
+        font: 36px "Baskerville";
+    }
+
+</style>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="text-center">
+        <p>DRAW</p>
+    </div>
+
+</body>
+<script>
+
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext("2d");
+
+
+    canvas.height = $(window).height();
+    canvas.width = $(window).width();
+
+    var prev = {};
+    var draw = true;
+
+    var current = [];
+
+    var object = function(points) {
+        var obj = points;
+
+        var getObj = function() {
+            return obj;
+        };
+        return {
+            getObj: getObj
+        }
+    };
+
+    var objects = [];
+    var count = 0;
+    var d = 1;
+
+    canvas.addEventListener('mousemove', function(e) {
+        if (draw) {
+            count = count + 1;
+            if (count % 10 == 0) {
+                if (count % 50 == 0) {
+                    d = -1;
+                }
+                if (count % 100 == 0) {
+                    d = 1;
+                }
+                ctx.lineWidth = ctx.lineWidth + d
+            }
+
+            var x = e.offsetX;
+            var y = e.offsetY;
+
+//            ctx.beginPath();
+//            ctx.arc(x, y, 2, 0, 2 * Math.PI, false);
+//            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(prev.x, prev.y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+
+            prev.x = x;
+            prev.y = y;
+            current.push(prev);
+        }
+    });
+
+    canvas.addEventListener('click', function() {
+        if (draw) {
+            draw = false;
+            objects.push(object(current));
+        } else {
+            draw = true;
+            prev = {}
+        }
+    });
+
+</script>
+</html>

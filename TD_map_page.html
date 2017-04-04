@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
 <head>
   <title>Search</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Baskerville' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
   <script src="/static/td/core.js"></script>
@@ -17,13 +17,15 @@
 #map {
     height: 100%;
     width: 100%;
-    font: 8px "Cabin";
+    font: 8px "Baskerville";
     position: absolute;
 }
 #explain {
     opacity: 0;
+    background-color: white;
+    color: black;
     transition: opacity 1000ms;
-    font: 48px "Cabin";
+    font: 36px "Baskerville";
 }
 #text1 {
     pointer-events: none;
@@ -31,16 +33,18 @@
 .option {
     background-color: white;
     color: black;
-    font: 36px "Cabin";
+    font: 24px "Baskerville";
 }
 h1 {
-    font: 96px "Cabin";
+    background-color: transparent;
+    color: black;
+    font: 64px "Baskerville";
 }
 body {
     background-color: whitesmoke;
 }
 a {
-    font: 48px "Cabin";
+    font: 48px "Baskerville";
     color: blue;
 }
 a:hover {
@@ -51,12 +55,11 @@ a:hover {
 </style>
 <body>
 <div id="map"></div>
-<div id="text1" class="col-sm-4 col-sm-offset-1 text-left">
-    <h1>Map</h1>
+<div id="text1" class="col-sm-4 col-sm-offset-1 text-justify">
     <br>
     <p id="explain">Click once to mark a center; click again to create a radius.</p>
 </div>
-<div class="col-sm-4 col-sm-offset-2 text-right">
+<div class="col-sm-2 col-sm-offset-4 text-right">
     <br><br><br>
     <form role="form" action="javascript: find()">
         <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>

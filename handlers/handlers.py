@@ -50,6 +50,14 @@ class RecursiveTreeHandler(webapp2.RequestHandler):
         self.response.write(page.render())
 
 
+class MarchHandler(webapp2.RequestHandler):
+
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('MarchMad.html')
+        self.response.write(page.render())
+
+
+
 class ScramblerHandler(webapp2.RequestHandler):
 
     def get(self):
@@ -81,7 +89,7 @@ class BouncingHandler(webapp2.RequestHandler):
 class ParticleHandler(webapp2.RequestHandler):
 
     def get(self):
-        page = JINJA_ENVIRONMENT.get_template('particles.html')
+        page = JINJA_ENVIRONMENT.get_template('newhomepage.html')
         self.response.write(page.render())
 
 class RepellantOrbHandler(webapp2.RequestHandler):
@@ -130,6 +138,24 @@ class WaltbotHandler(webapp2.RequestHandler):
 
     def get(self):
         Waltbot().run()
+
+
+class GenPTHandler(webapp2.RequestHandler):
+
+    def get(self):
+        self.response.headers['Content-Type'] = 'application/json'
+        d = Waltbot().createMap()
+        print d
+        self.response.write(json.dumps(d))
+
+
+class PoemTreeHandler(webapp2.RequestHandler):
+
+    def get(self):
+        # dict = Waltbot().createMap()
+        PoemTree_page = JINJA_ENVIRONMENT.get_template('PoemTree.html')
+        self.response.write(PoemTree_page.render())
+
 
 
 #################################################################################################

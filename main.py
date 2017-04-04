@@ -21,16 +21,14 @@ import waltbot
 app = webapp2.WSGIApplication([
 
     # ('/', hh.HomeHandler),
-    ('/boards', hh.BoardHandler),
-    ('/boards_accounts', hh.BoardsAccountsHandler),
-    ('/capitalism', hh.CapitalismHandler),
+    ('/particle', hh.CapitalismHandler),
     ('/colorpuzzle', hh.ColorPuzzleHandler),
     ('/recursivetree', hh.RecursiveTreeHandler),
     ('/sentencescrambler', hh.ScramblerHandler),
     ('/', hh.ProjectPageHandler),
-    ('/stars', hh.StarsHandler),
+    ('/starsakjsdha', hh.StarsHandler),
     ('/players', hh.PlayersHandler),
-    ('/twitterdata', hh.TwitterHomeHandler),
+    ('/twitterdata', hh.MapHandler),
     ('/twitterdata/search', hh.SearchHandler),
     ('/twitterdata/results/(.*)', hh.ResultsHandler),
     ('/twitterdata/map', hh.MapHandler),
@@ -41,6 +39,6 @@ app = webapp2.WSGIApplication([
     ('/connectingparticles', hh.ConnectingPartsHandler),
     ('/repellantOrb', hh.RepellantOrbHandler),
     ('/montecarlopi', hh.MonteCarloPiHandler),
-    ('/waltbot', hh.WaltbotHandler)
+    ('/march', hh.MarchHandler)
 
 ], debug=True)

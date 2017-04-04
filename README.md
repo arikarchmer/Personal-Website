@@ -1,8 +1,6 @@
-# A collection of work from Summer 2016, encapsulated in one webpage.
-#Projects:
-    - TwitterData
-    - STARSPACE
-    - Various Hacks
-    - Fantasy Football (unfinished)
+# My personal website, showcasing some of my work.
+# Including:
+    - TwitterData: An app for searching twitter regionally using a map.
+    - STARSPACE: An original single player game with a competitive leaderboard.
+    - Various Hacks and Demos: animations, twitter bots, etc
 
-# This website was created as a beginning showcase for my ability to apply class knowledge to my code.

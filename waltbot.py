@@ -1,7 +1,7 @@
 import tweepy
 import re
 import random
-import time
+
 import botkeys.botkeys as k
 
 
@@ -9,7 +9,7 @@ class Waltbot:
 
     def createMap(self):
         dict = {}
-        with open('waltwhitman.txt', 'r') as f:
+        with open('/static/waltwhitman.txt', 'r') as f:
             for line in f:
                 line = re.sub("[^a-zA-Z']", " ", line)
                 tokenized_line = line.split(' ')
@@ -79,26 +79,10 @@ class Waltbot:
 
         wordmap = self.createMap()
 
-        while True:
-
-            api.update_status(status=self.genPoem(2, random.randint(10, 15), wordmap))
-            print 'tweeted'
-            time.sleep(5)
+        api.update_status(status=self.genPoem(2, random.randint(10, 15), wordmap))
+        print 'tweeted'
 
 
 if __name__ == '__main__':
 
     Waltbot().run()
-
-    # # This handles Twitter authetification and the connection to Twitter Streaming API
-    # auth = tweepy.OAuthHandler(k.Keys.consumer_key, k.Keys.consumer_secret)
-    # auth.set_access_token(k.Keys.access_token, k.Keys.access_token_secret)
-    #
-    # api = tweepy.API(auth)
-    #
-    # wordmap = createMap()
-    #
-    # while True:
-    #     api.update_status(status=genPoem(2, random.randint(10,15), wordmap))
-    #     print 'tweeted'
-    #     time.sleep(3600)

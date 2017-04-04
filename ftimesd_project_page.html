@@ -12,7 +12,7 @@
     body {
         position: relative;
         opacity: 0;
-        background-color: whitesmoke;
+        background-color: white;
         transition: opacity 3s;
         letter-spacing: 1px;
     }
@@ -36,12 +36,13 @@
         transform: rotate(15deg);
     }
     iframe {
-        border: 1px solid darkslategray;
+        border: 1px solid black;
         width: 100%;
-        height: 200px;
+        height: 33vh;
     }
     p {
-        font: 18px "Baskerville";
+        font: 24px "Baskerville";
+        color: black;
     }
     b {
         font: 18px "Baskerville"
@@ -53,46 +54,48 @@
         padding-right: 70px;
     }
     .post {
-        font: 14px "Baskerville";
+        font: 18px "Baskerville";
         color: black;
 
         background-color: transparent;
-        border-top: dashed 1px lightslategray;
-        padding: 20px 100px 20px 100px;
+        border-top: dashed 1px black;
+        padding: 50px 120px 50px 120px;
     }
     a {
-        font: 14px "Baskerville";
-        color: darkslategray;
+        font: 18px "Baskerville";
+        color: darkslategrey;
         text-decoration: none;
     }
     .text-justify {
         text-align: justify;
     }
     .project {
-        font: 36px "Baskerville";
-        color: darkslategray;
+        font: 30px "Baskerville";
+        color: black;
         /*letter-spacing: 1px;*/
     }
     .project:hover {
         text-decoration: none;
-        background-color: darkslategray;
-        color: white;
+        background-color: aliceblue;
+        color: black;
     }
     .demo {
         font: 30px "Baskerville";
+        color: black;
     }
     .demo:hover {
         text-decoration: none;
-        background-color: darkslategray;
-        color: white;
+        background-color: aliceblue;
+        color: black;
     }
     .hack {
-        font: 24px "Baskerville";
+        font: 30px "Baskerville";
+        color: black;
     }
     .hack:hover {
         text-decoration: none;
-        background-color: darkslategray;
-        color: white;
+        background-color: aliceblue;
+        color: black;
     }
     /*#quote {*/
         /*opacity: 0;*/
@@ -149,69 +152,40 @@
         <!--</div>-->
     <!--</div>-->
     <div class="col-sm-6 col-sm-offset-3 text-center">
-        <img class="me img-circle" src="/static/me.jpg" onclick="about()"><br><br>
+        <br>
+        <!--<p class="left">Ari Karchmer is a junior at Brandeis University. He is a computer science and mathematics major. He's a lover of all things soccer and calls Brookline, MA home. This is his website.</p>-->
+        <img class="me img-circle" src="/static/me.jpg" onclick="about()" style="height: 200px; width: 200px;"><br><br>
         <!--<h1 id="name" onclick="about()">Bienvenidos...</h1>-->
+
         <a class="icon" href="http://www.github.com/arikarchmer" style="padding-left: 50px"><img class="icon" src="/static/github.svg"></a>
-        <a class="icon" href="https://www.instagram.com/notarikarchmer"><img class="icon" src="/static/insta.png"></a>
-        <a class="icon" href="https://play.spotify.com/user/1235283146"><img class="icon" src="/static/Spotify_Logo_CMYK_Black.png"></a>
+        <!--<a class="icon" href="https://www.instagram.com/notarikarchmer"><img class="icon" src="/static/insta.png"></a>-->
+        <!--<a class="icon" href="https://play.spotify.com/user/1235283146"><img class="icon" src="/static/Spotify_Logo_CMYK_Black.png"></a>-->
         <a class="icon" href="mailto:ari.karchmer.s@gmail.com"><img class="icon" src="/static/email.svg"></a>
         <br><br>
 
     </div>
 </div>
-
 <div id="big" class="col-sm-6 col-sm-offset-3 text-justify">
+    <p class="post">
+        April 2, 2017<br><br>
+        <a class="hack">Daily Collage: Image Scraping</a>
+    </p>
+    <!--<p class="post">-->
+        <!--March 20, 2017<br><br>-->
+        <!--<a href="/march" class="hack">How to pick 29/32 first round NCAA tournament games</a>-->
+        <!--<br><br>-->
+        <!--<a href="https://tournament.fantasysports.yahoo.com/t1/368975">full bracket</a>-->
+    <!--</p>-->
     <p class="post">
         December 12, 2016<br><br>
         <a href="https://twitter.com/_waltbot" class="hack">A twitter bot that talks in poetry (Markov chains)</a>
         <br><br>
         find code <a href="https://github.com/arikarchmer/summer2016/blob/master/waltbot.py">here</a>
     </p>
-    <!--<p class="post">-->
-        <!--12/8/16 <br><br>-->
-        <!--<articletitle>Intro to Pandas, part 1: Exoplanets</articletitle>-->
-        <!--<br><br><br>-->
-        <!--Scientists find new planets every day. No, not in our solar system. We have nine (or eight, no one even-->
-        <!--knows whats up with pluto anymore). Scientists are constantly finding <i>exoplanets</i>. That is,-->
-        <!--planets that orbit stars outside our solar system. Have you ever wondered really just how far away they are?-->
-        <!--Kaggle has a <a href="https://www.kaggle.com/mrisdal/open-exoplanet-catalogue" class="demo">dataset</a> of 3416 exoplanets and-->
-        <!--almost everything you might want to know about each of them, including distance from the sun, radius, eccentricity,-->
-        <!--and year of discovery. For today we will be focusing on discovery year and distance from the sun.<br><br><br>-->
-        <!--This was my first time with pandas and matplotlib so please, bear with me. Here's what I did:<br><br><br>-->
-        <!--<img src="/static/LearningPandas1.png" style="height:67px;width: 100% "><br><br><br>-->
-        <!--This right here is just standard. We import pandas, matplotlib, and numpy, and we say that we want plots-->
-        <!--to be rendered inline for our own convenience. Now, we're ready to get started:<br><br><br>-->
-        <!--<img src="/static/LearningPandas2.png" style="height:80px;width: 100% "><br><br><br>-->
-        <!--Pandas.read_csv() is a handy method that takes a csv file and inputs it into a Pandas.Dataframe-->
-        <!--automatically. The dataframe allows to easily view, modify, and sort our data, and it also comes-->
-        <!--with some tools like Dataframe.describe(), which outputs a bunch of stats for each data column, like-->
-        <!--count, mean, median, and more. We'll see a describe() later. Pandas gives us a very easy way to plot data-->
-        <!--if we have a dataframe. We simply use the dataframe.plot(), specifying the kind (this case scatterplot), the x-axis-->
-        <!--(year of discovery), y-axis (distance from sun in parsecs), and optionally things like alpha (transparency of points),-->
-        <!--log scaling, and data point color. Next, using matplotlib, we are able to take care of labels and titles by accesing the chart's attributes. So,-->
-        <!--here is the rendered plot:<br><br><br>-->
-        <!--<img src="/static/output_1_1.png" style="padding-left: 55px"><br><br><br>-->
-        <!--What do we see here? It seems that each successive year,-->
-        <!--the range in distance grows. The minimum sticks around 10 parsecs, but the max is growing about tenfold every seven years.-->
-        <!--But, this is a bit hard to see with our current chart. Let's see if we can find a better way to visualize the data.<br><br><br>-->
-        <!--<img src="/static/LearningPandas3.png" style="height: 20px; width: 100%"><br><br><br>-->
-        <!--We take the distance column, planets['DistFromSunParsec'] and use the groupby function to ask pandas to organize-->
-        <!--the distance column by the year of discovery. Now, this allows us to grab the median distances, by year.-->
-        <!--Additionally, we grab only the data from 1995 to 2014, which is wear the bulk of our data comes from, in order-->
-        <!--to clean up the chart a bit.<br><br><br>-->
-        <!--<img src="/static/output2.png" style="padding-left: 55px"><br><br><br>-->
-        <!--This is a much cleaner version of the information we had already extracted from the first chart.-->
-        <!--The median distance of exoplanets being discovered is indisputably growing since the 1990's.-->
-        <!--There could be a variety of reasons for this, but a few are fairly obvious;-->
-        <!--the technology at the disposal of the world's top scientists continues to improve exponentially,-->
-        <!--and interest in outer space is heightening as well.<br><br><br>-->
-        <!--This concludes part one of my adventure into the world of data analysis with pandas. Part two arrives soon,-->
-        <!--but not before I find a new dataset to dive into. Cheers!-->
-    <!--</p>-->
     <p class="post">
         December 7, 2016 <br><br>
-        <a href="/capitalism" class="demo">Particles v2</a><br><br>
-        <iframe src="/capitalism"></iframe>
+        <a href="/particle" class="demo">Particles</a><br><br>
+        <iframe src="/particle"></iframe>
     </p>
     <p class="post">
         November 8, 2016 <br><br>
@@ -219,18 +193,8 @@
         <iframe src="/recursivetree"></iframe>
     </p>
     <p class="post">
-        September 14, 2016 <br><br>
-        <a href="/montecarlopi" class="hack">Monte Carlo approximation of pi</a>
-    </p>
-    <p class="post">
-        August 8, 2016 <br><br>
-        <a href="/connectingparticles" class="demo">Particles</a><br><br>
-        <iframe src="/connectingparticles"></iframe>
-
-    </p>
-    <p class="post">
         July, '16<br><br>
-        <a href="/stars" class="project">StarSpace</a><br>
+        <a href="/starsakjsdha" class="project">StarSpace</a><br>
         (this is the game you play when there are no more games to play)
         <br><br>
         Python, javascript, html, css, bootstrap, ajax,
@@ -249,17 +213,17 @@
 <div id="small" class="col-sm-6 col-sm-offset-3 text-center">
     <br>
     <a class="icon" href="http://www.github.com/arikarchmer" style="padding-left: 50px"><img class="icon" src="/static/github.svg"></a>
-    <a class="icon" href="https://www.instagram.com/notarikarchmer"><img class="icon" src="/static/insta.png"></a>
-    <a class="icon" href="https://play.spotify.com/user/1235283146"><img class="icon" src="/static/Spotify_Logo_CMYK_Black.png"></a>
+    <!--<a class="icon" href="https://www.instagram.com/notarikarchmer"><img class="icon" src="/static/insta.png"></a>-->
+    <!--<a class="icon" href="https://play.spotify.com/user/1235283146"><img class="icon" src="/static/Spotify_Logo_CMYK_Black.png"></a>-->
     <a class="icon" href="mailto:ari.karchmer.s@gmail.com"><img class="icon" src="/static/email.svg"></a>
     <br><br>
 </div>
 <script>
     document.getElementById('body').style.opacity = 1;
 
-    function about() {
-        $("#about").modal();
-    }
+//    function about() {
+//        $("#about").modal();
+//    }
 </script>
 </body>
 </html>
