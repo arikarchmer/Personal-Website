@@ -21,7 +21,6 @@ import handlers.handlers as hh
 app = webapp2.WSGIApplication([
 
     ('/particle', hh.CapitalismHandler),
-    ('/colorpuzzle', hh.ColorPuzzleHandler),
     ('/recursivetree', hh.RecursiveTreeHandler),
     ('/', hh.ProjectPageHandler),
     ('/starsakjsdha', hh.StarsHandler),
@@ -29,7 +28,6 @@ app = webapp2.WSGIApplication([
     ('/twitterdata', hh.MapHandler),
     ('/twitterdata/results/(.*)', hh.ResultsHandler),
     ('/twitterdata/map', hh.MapHandler),
-    ('/montecarlopi', hh.MonteCarloPiHandler),
     ('/march', hh.MarchHandler)
 
 ], debug=True)
