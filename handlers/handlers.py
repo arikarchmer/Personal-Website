@@ -3,6 +3,8 @@ import jinja2
 import webapp2
 from google.appengine.ext import db
 from TwitterData.searcher import Searcher
+from tweepy import TweepError
+# from Sumo.sumo import Sumo
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader('./'),
@@ -65,6 +67,24 @@ class ProjectPageHandler(webapp2.RequestHandler):
         self.response.write(page.render())
 
 
+# class SumoHandler(webapp2.RequestHandler):
+#
+#     def get(self):
+#         page = JINJA_ENVIRONMENT.get_template('Sumo/sumo.html')
+#         self.response.write(page.render())
+#
+#
+# class SumoResultsHandler(webapp2.RequestHandler):
+#
+#     def post(self):
+#         page = JINJA_ENVIRONMENT.get_template('Sumo/sumo_results.html')
+#         data = self.request.POST['data']
+#         sumo = Sumo()
+#         items = sumo.run(data)
+#         parameters = {'items': items}
+#         self.response.write(page.render(parameters))
+
+
 class StarsHandler(webapp2.RequestHandler):
 
     def get(self):
@@ -72,19 +92,7 @@ class StarsHandler(webapp2.RequestHandler):
         self.response.write(stars_page.render())
 
 
-#################################################################################################
-################ Twitter Data ###################################################################
-#################################################################################################
-
-class TwitterHomeHandler(webapp2.RequestHandler):
-
-    def get(self):
-        home_page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_home_page.html')
-        self.response.write(home_page.render())
-
-
 class PlayersHandler(webapp2.RequestHandler):
-
     def get(self):
         self.response.headers['Content-Type'] = 'application/json'
 
@@ -100,6 +108,17 @@ class PlayersHandler(webapp2.RequestHandler):
         obj = {'leaderboard': s, 'latest': new_player}
 
         self.response.write(json.dumps(obj))
+
+
+#################################################################################################
+################ Twitter Data ###################################################################
+#################################################################################################
+
+class TwitterHomeHandler(webapp2.RequestHandler):
+
+    def get(self):
+        home_page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_home_page.html')
+        self.response.write(home_page.render())
 
 
 class ResultsHandler(webapp2.RequestHandler):
@@ -122,15 +141,20 @@ class ResultsHandler(webapp2.RequestHandler):
                 flag = False
 
         elif mode == 'coordinates':
-            lat = self.request.get('lat')
-            lng = self.request.get('lng')
+            lat = float(self.request.get('lat'))
+            lng = float(self.request.get('lng'))
             coor= {'lat': lat, 'lng': lng}
             r = self.request.get('radius')
             if lat is None or lng is None or r is None:
                 page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_map_page.html')
                 parameters = {'fail': True}
             else:
-                items = searcher.search(coordinates=coor)
+                try:
+                    items = searcher.search(coordinates=coor)
+                except TweepError, e:
+                    items = [('','Sorry, Twitter is unavailable to be searched at this time. Try again later.','','','','','')]
+                    # print 'error'
+
                 info = [lat, lng, r]
 
         if flag:

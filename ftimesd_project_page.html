@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Lato|Baskerville" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
@@ -13,167 +13,167 @@
         position: relative;
         opacity: 0;
         background-color: white;
-        transition: opacity 3s;
+        transition: opacity 1s;
         letter-spacing: 1px;
     }
-    .icon {
-        height: 20px;
-        width: 40px;
-        padding-right: 20px;
-        transition: 250ms;
+    table {
+        height: 85vh;
+        display: -moz-groupbox;
     }
-    .icon:hover {
-        transform: rotate(15deg);
+    tbody {
+        overflow-y: scroll;
+        height: 85vh;
+        width: 100%;
+        position: absolute;
+        padding-left: 30px;
     }
-    .me {
-        opacity: 0.9;
-        height: 128px;
-        width: 128px;
-        transition: opacity 500ms, transform 500ms;
-    }
-    .me:hover {
-        opacity: 1;
-        transform: rotate(15deg);
+    tr {
+        width: 100%;
+        /*display: inline-table;*/
     }
     iframe {
-        border: 1px solid black;
-        width: 100%;
-        height: 33vh;
+        border: 1px solid #333333;
+        /*border: none;*/
+        width: 40%;
+        /*height: 15vh;*/
     }
     p {
-        font: 24px "Baskerville";
-        color: black;
+        color: #333333;
     }
     b {
-        font: 18px "Baskerville"
+        font: 14px "PT Sans"
     }
     .header {
-        color: black;
-        /*height: 70vh;*/
-        padding-left: 20px;
-        padding-right: 70px;
+        color: #333333;
     }
     .post {
-        font: 18px "Baskerville";
-        color: black;
+        font: 12px "PT Sans";
+        color: #333333;
 
         background-color: transparent;
-        border-top: dashed 1px black;
-        padding: 50px 120px 50px 120px;
+        /*border: dashed 1px black;*/
     }
     a {
-        font: 18px "Baskerville";
-        color: darkslategrey;
+        font: 12px "PT Sans";
+        color: purple;
         text-decoration: none;
+    }
+    a:hover {
+        text-decoration: none;
+        color: purple;
     }
     .text-justify {
         text-align: justify;
     }
     .project {
-        font: 30px "Baskerville";
-        color: black;
+        font: 24px "PT Sans";
+        color: #333333;
         /*letter-spacing: 1px;*/
     }
     .project:hover {
         text-decoration: none;
         background-color: aliceblue;
-        color: black;
+        color: #333333;
     }
     .demo {
-        font: 30px "Baskerville";
-        color: black;
+        font: 24px "PT Sans";
+        color: #333333;
     }
     .demo:hover {
         text-decoration: none;
         background-color: aliceblue;
-        color: black;
+        color: #333333;
     }
     .hack {
-        font: 30px "Baskerville";
-        color: black;
+        font: 24px "PT Sans";
+        color: #333333;
     }
     .hack:hover {
         text-decoration: none;
         background-color: aliceblue;
-        color: black;
+        color: #333333;
     }
-    .modal {
-       position: fixed;
-    }
+     textarea {
+         border: 1px solid #333333;
+         resize: none;
+         outline: none;
+         height: 20vh;
+         width: 55%;
+
+     }
   </style>
 </head>
-<body id="body" data-spy="scroll" data-target="#sidebar" data-offset="15">
-<div class="modal fade text-center" id="about" data-backdrop="false" role="dialog" style="background: transparent;">
-    <div class="modal-body text-justify" style="color: white;background-color: transparent; padding-left: 100px; padding-right: 100px">
-        <br><br>
-        <p style="font-size: 46px; color: white; background-color: rgba(47, 79, 79, 0.9); padding: 5px 25px 5px 25px">
-            Ari Karchmer is a student at Brandeis University; a member of the class of 2018.
-            He is a Computer Science and Math double major, and a lover of all things soccer.
-            Java, Python, and Javascript are his tools.
-            He started this blog in the summer of 2016 after his sophomore year of college,
-            and has been pursuing the experiments seen here ever since. Enjoy!</p>
-        <button type="button" class="close" data-dismiss="modal" style="font-size: 72px">&times;</button>
-    </div>
-</div>
+<body id="body">
+
 <div class="text-justify header">
-    <br>
-    <div class="col-sm-6 col-sm-offset-3 text-center">
+<br><br><br>
+
+    <div class="col-sm-2 col-sm-offset-2 text-right">
         <br>
-        <img class="me img-circle" src="/static/me.jpg" onclick="about()" style="height: 150px; width: 150px;"><br><br>
-        <a class="icon" href="http://www.github.com/arikarchmer" style="padding-left: 50px"><img class="icon" src="/static/github.svg"></a>
-        <a class="icon" href="mailto:ari.karchmer.s@gmail.com"><img class="icon" src="/static/email.svg"></a>
-        <br><br>
+        <p style="font: 24px 'PT Sans'">Ari Karchmer </p>
+        <button class="btn-xs" type="button"><a href="http://www.github.com/arikarchmer" style="font-size: 14px; color: #333333">Github</a></button>
+        <button class="btn-xs" type="button"><a href="mailto:ari.karchmer.s@gmail.com" style="font-size: 14px;  color: #333333">Email</a></button>
+        <br>
     </div>
-</div>
-<div id="big" class="col-sm-6 col-sm-offset-3 text-justify">
-    <!--<p class="post">-->
-        <!--April 2, 2017<br><br>-->
-        <!--<a class="hack">Daily Collage: Image Scraping</a>-->
-    <!--</p>-->
-    <!--<p class="post">-->
-        <!--March 20, 2017<br><br>-->
-        <!--<a href="/march" class="hack">How to pick 29/32 first round NCAA tournament games</a>-->
-        <!--<br><br>-->
-        <!--<a href="https://tournament.fantasysports.yahoo.com/t1/368975">full bracket</a>-->
-    <!--</p>-->
-    <p class="post">
-        December 12, 2016<br><br>
-        <a href="https://twitter.com/_waltbot" class="hack">A twitter bot that talks in poetry (Markov chains)</a>
-        <br><br>
-        find code <a href="https://github.com/arikarchmer/summer2016/blob/master/waltbot.py">here</a>
-    </p>
-    <p class="post">
-        December 7, 2016 <br><br>
-        <a href="/particle" class="demo">Particles</a><br><br>
-        <iframe src="/particle"></iframe>
-    </p>
-    <p class="post">
-        November 8, 2016 <br><br>
-        <a href="/recursivetree" class="demo">Recursive art: tree</a><br><br>
-        <iframe src="/recursivetree"></iframe>
-    </p>
-    <p class="post">
-        July, '16<br><br>
-        <a href="/starsakjsdha" class="project">StarSpace</a><br>
-        (this is the game you play when there are no more games to play)
-        <br><br>
-        Python, javascript, html, css, bootstrap, ajax,
-        google app engine, d3.js
-    </p>
-    <p class="post">
-        June, '16<br><br>
-        <a href="/twitterdata/map" class="project">TwitterData</a><br>
-        Now you can search twitter using a map <br><br>
-        Python, leaflet.js, javascript, html, css, bootstrap, jinja templates, google app engine, tweepy
-    </p>
+    <div class="col-sm-6 text-left">
+        <div id="big">
+            <table class="table text-left" style="border-left: 2px dotted #333333">
+                <tbody>
+                    <!--<p class="post">-->
+                        <!--April 2, 2017<br>-->
+                        <!--<a class="hack">Daily Collage: Image Scraping</a>-->
+                    <!--</p>-->
+
+                    <tr class="post">
+                        <td>
+                            March 20, 2017<br>
+                            <a href="/march" class="hack">How to pick 29/32 first round NCAA tournament games</a>
+                            <br>
+                            <a href="https://tournament.fantasysports.yahoo.com/t1/368975">full bracket</a>
+                        </td>
+                    </tr>
+                    <tr class="post">
+                        <td>
+                            December 12, 2016<br>
+                            <a href="https://twitter.com/_waltbot" class="hack">A twitter bot that talks in poetry (Markov chains)</a>
+                            <br>
+                            <a href="https://github.com/arikarchmer/Personal-Website/blob/master/MarkovPoetry/waltbot.py">code</a>
+                        </td>
+                    </tr>
+                    <tr class="post">
+                        <td>
+                            December 7, 2016 <br>
+                            <a href="/particle" class="demo">Particles</a><br><br>
+                            <iframe src="/particle"></iframe>
+                        </td>
+                    </tr>
+                    <tr class="post">
+                        <td>
+                            November 8, 2016 <br>
+                            <a href="/recursivetree" class="demo">Recursive art: tree</a><br><br>
+                            <iframe src="/recursivetree"></iframe>
+                        </td>
+                    </tr>
+                    <tr class="post">
+                        <td>
+                            July, '16<br>
+                            <a href="/starsakjsdha" class="project">StarSpace</a><br>
+                            Made with Python, ajax, d3.js
+                        </td>
+                    </tr>
+                    <tr class="post">
+                        <td>
+                            June, '16<br>
+                            <a href="/twitterdata/map" class="project">TwitterData</a><br>
+                           Made with Python, leaflet.js, jinja templates, tweepy
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
-<div id="small" class="col-sm-6 col-sm-offset-3 text-center">
-    <br>
-    <a class="icon" href="http://www.github.com/arikarchmer" style="padding-left: 50px"><img class="icon" src="/static/github.svg"></a>
-    <a class="icon" href="mailto:ari.karchmer.s@gmail.com"><img class="icon" src="/static/email.svg"></a>
-    <br><br>
-</div>
 <script>
     document.getElementById('body').style.opacity = 1;
 

@@ -1,8 +1,6 @@
 import tweepy
-
 from TwitterData.TDkeys import TDkeys
 from TwitterData.geocoder import Geocoder
-
 
 class Searcher():
 
@@ -25,7 +23,7 @@ class Searcher():
 
 if __name__ == '__main__':
     s = Searcher()
-    #l = s.search('warriors', city='Boston', state='MA')
+    #l = s.search('celtics', city='Boston', state='MA')
     l = s.search(coordinates={'lat': 42, 'lng': -71.89888888})
     for x in l:
         print x
