@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Euphemia UCAS+Sans" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
@@ -19,16 +19,20 @@
     table {
         height: 85vh;
         display: -moz-groupbox;
+        width: 100%;
     }
     tbody {
         overflow-y: scroll;
-        height: 85vh;
+        height: 100%;
         width: 100%;
         position: absolute;
-        padding-left: 30px;
+        /*border: 1px dotted black;*/
     }
     tr {
-        width: 100%;
+        /*width: 75%;*/
+        /*padding-left: 20px;*/
+        /*padding-right: 20px;*/
+        border: 30px solid white;
         /*display: inline-table;*/
     }
     iframe {
@@ -39,22 +43,23 @@
     }
     p {
         color: #333333;
+        font: 12px "Euphemia UCAS"
     }
     b {
-        font: 14px "PT Sans"
+        font: 12px "Euphemia UCAS"
     }
     .header {
         color: #333333;
     }
     .post {
-        font: 12px "PT Sans";
+        font: 12px "Euphemia UCAS";
         color: #333333;
 
         background-color: transparent;
         /*border: dashed 1px black;*/
     }
     a {
-        font: 12px "PT Sans";
+        font: 12px "Euphemia UCAS";
         color: purple;
         text-decoration: none;
     }
@@ -66,7 +71,7 @@
         text-align: justify;
     }
     .project {
-        font: 24px "PT Sans";
+        font: 24px "Euphemia UCAS";
         color: #333333;
         /*letter-spacing: 1px;*/
     }
@@ -76,7 +81,7 @@
         color: #333333;
     }
     .demo {
-        font: 24px "PT Sans";
+        font: 24px "Euphemia UCAS";
         color: #333333;
     }
     .demo:hover {
@@ -85,7 +90,7 @@
         color: #333333;
     }
     .hack {
-        font: 24px "PT Sans";
+        font: 24px "Euphemia UCAS";
         color: #333333;
     }
     .hack:hover {
@@ -104,32 +109,31 @@
   </style>
 </head>
 <body id="body">
-
-<div class="text-justify header">
-<br><br><br>
-
-    <div class="col-sm-2 col-sm-offset-2 text-right">
-        <br>
-        <p style="font: 24px 'PT Sans'">Ari Karchmer </p>
-        <button class="btn-xs" type="button"><a href="http://www.github.com/arikarchmer" style="font-size: 14px; color: #333333">Github</a></button>
-        <button class="btn-xs" type="button"><a href="mailto:ari.karchmer.s@gmail.com" style="font-size: 14px;  color: #333333">Email</a></button>
-        <br>
-    </div>
-    <div class="col-sm-6 text-left">
+<canvas id="canvas" style="position: absolute; background-color: #e1f2de"></canvas>
+<div class="text-justify row" >
+<br><br>
+    <div class="col-sm-5 col-sm-offset-1 text-left" style="background-color: white;">
         <div id="big">
-            <table class="table text-left" style="border-left: 2px dotted #333333">
+            <table class="table text-left">
                 <tbody>
                     <!--<p class="post">-->
                         <!--April 2, 2017<br>-->
                         <!--<a class="hack">Daily Collage: Image Scraping</a>-->
                     <!--</p>-->
-
+                    <tr class="post">
+                        <td>
+                            June 10, 2017<br>
+                            <a href="/castle" class="hack">A computational approach to FiveThirtyEight's 02-03-17 riddle (genetic algorithm)</a>
+                            <br>
+                            <a href="https://fivethirtyeight.com/features/can-you-rule-riddler-nation/"><u>the riddle</u></a>
+                        </td>
+                    </tr>
                     <tr class="post">
                         <td>
                             March 20, 2017<br>
                             <a href="/march" class="hack">How to pick 29/32 first round NCAA tournament games</a>
                             <br>
-                            <a href="https://tournament.fantasysports.yahoo.com/t1/368975">full bracket</a>
+                            <a href="https://tournament.fantasysports.yahoo.com/t1/368975"><u>full bracket</u></a>
                         </td>
                     </tr>
                     <tr class="post">
@@ -137,7 +141,7 @@
                             December 12, 2016<br>
                             <a href="https://twitter.com/_waltbot" class="hack">A twitter bot that talks in poetry (Markov chains)</a>
                             <br>
-                            <a href="https://github.com/arikarchmer/Personal-Website/blob/master/MarkovPoetry/waltbot.py">code</a>
+                            <a href="https://github.com/arikarchmer/Personal-Website/blob/master/MarkovPoetry/waltbot.py"><u>code</u></a>
                         </td>
                     </tr>
                     <tr class="post">
@@ -158,28 +162,119 @@
                         <td>
                             July, '16<br>
                             <a href="/starsakjsdha" class="project">StarSpace</a><br>
-                            Made with Python, ajax, d3.js
+                            python, ajax, d3.js
                         </td>
                     </tr>
                     <tr class="post">
                         <td>
                             June, '16<br>
                             <a href="/twitterdata/map" class="project">TwitterData</a><br>
-                           Made with Python, leaflet.js, jinja templates, tweepy
+                            python, leaflet.js, jinja templates, tweepy
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <!--<div class="col-sm-2 col-sm-offset-3 text-right" style="background-color: transparent">-->
+        <!--<p style="font: 24px 'Euphemia UCAS'">Ari Karchmer </p>-->
+        <!--<button class="btn-xs" type="button"><a href="http://www.github.com/arikarchmer" style="font-size: 14px; color: #333333">Github</a></button>-->
+        <!--<button class="btn-xs" type="button"><a href="mailto:ari.karchmer.s@gmail.com" style="font-size: 14px;  color: #333333">Email</a></button>-->
+        <!--<br>-->
+    <!--</div>-->
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-5 col-sm-offset-1">
+        <p>Ari Karchmer |
+        <a href="http://www.github.com/arikarchmer"><u>Github</u></a> |
+        <a href="mailto:ari.karchmer.s@gmail.com"><u>Email</u></a> |
+        <a href="https://www.linkedin.com/in/ari-karchmer-a12a7b10b/"><u>Linked In</u></a>
+        <!--<a onclick="getImg()"><u>Download your drawing</u></a></p>-->
+
+        <!--<button class="btn-xs" type="button"><a href="http://www.github.com/arikarchmer" style="font-size: 14px; color: #333333">Github</a></button>-->
+        <!--<button class="btn-xs" type="button"><a href="mailto:ari.karchmer.s@gmail.com" style="font-size: 14px;  color: #333333">Email</a></button>-->
+    </div>
 </div>
 
 <script>
-    document.getElementById('body').style.opacity = 1;
+   document.getElementById('body').style.opacity = 1;
 
-//    function about() {
-//        $("#about").modal();
-//    }
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext("2d");
+
+    canvas.height = $(window).height();
+    canvas.width = $(window).width();
+
+    var prev = {};
+    var draw = true;
+
+    var current = [];
+
+    var object = function(points) {
+        var obj = points;
+
+        var getObj = function() {
+            return obj;
+        };
+        return {
+            getObj: getObj
+        }
+    };
+
+    var objects = [];
+    var count = 0;
+    var d = 1;
+    ctx.lineWidth = 0.5;
+
+    canvas.addEventListener('mousemove', function(e) {
+        if (draw) {
+//            count = count + 1;
+//            if (count % 10 == 0) {
+//                if (count % 50 == 0) {
+//                    ctx.lineWidth = ctx.lineWidth * 0.66
+//                }
+//                if (count % 100 == 0) {
+////                    d = 1;
+//                }
+////                ctx.lineWidth = ctx.lineWidth - d
+//            }
+
+            var x = e.offsetX;
+            var y = e.offsetY;
+
+            ctx.beginPath();
+            ctx.arc(x, y, 1, 0, 2 * Math.PI, false);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(prev.x, prev.y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+
+            prev.x = x;
+            prev.y = y;
+            current.push(prev);
+        }
+    });
+
+    canvas.addEventListener('click', function() {
+        if (draw) {
+            draw = false;
+            objects.push(object(current));
+        } else {
+            draw = true;
+            prev = {}
+        }
+    });
+
+    function getImg() {
+        var img = canvas.toDataURL("image/png");
+        var decoded_img = window.atob(img);
+//        return img;
+        document.write('<a download="drawing.png" href=' + window.location.href + '>text</a><br><img src="'+decoded_img+'"/>');
+    }
+
 </script>
 </body>
 </html>

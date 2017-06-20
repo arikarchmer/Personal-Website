@@ -9,13 +9,16 @@ class Searcher():
         auth.set_access_token(TDkeys.access_token, TDkeys.access_token_secret)
         api = tweepy.API(auth)
 
+        # api.update_status(status="hello, world")
+
         if coordinates is None:
             geo = Geocoder()
             coordinates = geo.getCoordinates(city, state)
 
         coordinate_str = '{lat},{lng},'.format(**coordinates) + radius
 
-        tweets = api.search(keyword, count=100, geocode=coordinate_str)
+        tweets = api.search(geocode=coordinate_str)
+        # print tweets
 
         tweets.sort(reverse=True, key=lambda x: x.author.followers_count)
 

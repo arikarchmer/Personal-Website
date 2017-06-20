@@ -67,6 +67,12 @@ class ProjectPageHandler(webapp2.RequestHandler):
         self.response.write(page.render())
 
 
+class CastleHandler(webapp2.RequestHandler):
+    def get(self):
+        page = JINJA_ENVIRONMENT.get_template('castle-defense-ai.html')
+        self.response.write(page.render())
+
+
 # class SumoHandler(webapp2.RequestHandler):
 #
 #     def get(self):
@@ -88,7 +94,7 @@ class ProjectPageHandler(webapp2.RequestHandler):
 class StarsHandler(webapp2.RequestHandler):
 
     def get(self):
-        stars_page = JINJA_ENVIRONMENT.get_template('Starspace.html')
+        stars_page = JINJA_ENVIRONMENT.get_template('Starspace/Starspace.html')
         self.response.write(stars_page.render())
 
 
@@ -152,7 +158,9 @@ class ResultsHandler(webapp2.RequestHandler):
                 try:
                     items = searcher.search(coordinates=coor)
                 except TweepError, e:
-                    items = [('','Sorry, Twitter is unavailable to be searched at this time. Try again later.','','','','','')]
+
+                    items = searcher.search(coordinates=coor)
+                    #items = [('','Sorry, Twitter is unavailable to be searched at this time. Try again later. ' + str(e),'','','','','')]
                     # print 'error'
 
                 info = [lat, lng, r]
@@ -177,3 +185,5 @@ class MapHandler(webapp2.RequestHandler):
     def get(self):
         map_page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_map_page.html')
         self.response.write(map_page.render())
+
+

@@ -95,7 +95,8 @@
                 if (dist < connection) {
                     cluster += 1;
 
-                    if (cluster < 5) {
+                    //control clustering
+                    if (cluster < 4) {
 
                         smaller.x = smaller.x + (larger.x - smaller.x) / (350 - larger.r * 50);
                         smaller.y = smaller.y + (larger.y - smaller.y) / (350 - larger.r * 50);
@@ -111,11 +112,11 @@
 
             }
 
-            ctx.beginPath();
-            ctx.arc(drop.x, drop.y, drop.r * 4, 0, 2 * Math.PI, false);
-            ctx.lineWidth = drop.r / 8;
-            ctx.stroke();
-            ctx.closePath();
+//            ctx.beginPath();
+//            ctx.arc(drop.x, drop.y, drop.r * canvas.width / 400, 0, 2 * Math.PI, false);
+//            ctx.lineWidth = drop.r / 8;
+//            ctx.stroke();
+//            ctx.closePath();
 
             ctx.beginPath();
             ctx.arc(drop.x, drop.y, drop.r, 0, 2 * Math.PI, false);
@@ -133,7 +134,7 @@
 
 
     function start() {
-        for (var j = 0; j < canvas.height / 5; j++) {
+        for (var j = 0; j < Math.pow(canvas.width, 1.5) / 200; j++) {
             var drop = {
                 x: (canvas.width - 48) * Math.random() + 24,
                 y: (canvas.height - 48) * Math.random() + 24,
@@ -164,6 +165,8 @@
             drop.vx = (5 - drop.r) * Math.random() - (5 - drop.r) / 2;
             drops.push(drop);
         }
+
+
     });
 
     start();
