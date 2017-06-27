@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Euphemia UCAS+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Avenir" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
@@ -26,7 +27,10 @@
         height: 100%;
         width: 100%;
         position: absolute;
-        /*border: 1px dotted black;*/
+        background-color: white;
+        box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.5);
+        -webkit-box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.5);
+        -moz-box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.5);
     }
     tr {
         /*width: 75%;*/
@@ -36,70 +40,66 @@
         /*display: inline-table;*/
     }
     iframe {
-        border: 1px solid #333333;
+        border: 1px solid #030303;
         /*border: none;*/
         width: 40%;
         /*height: 15vh;*/
     }
     p {
-        color: #333333;
-        font: 12px "Euphemia UCAS"
+        color: #030303;
+        font: 12px "Avenir Next"
     }
     b {
-        font: 12px "Euphemia UCAS"
+        font: 12px "Avenir Next"
     }
     .header {
-        color: #333333;
+        color: #030303;
     }
     .post {
-        font: 12px "Euphemia UCAS";
-        color: #333333;
+        font: 12px "Avenir Next";
+        color: #030303;
 
         background-color: transparent;
         /*border: dashed 1px black;*/
     }
     a {
-        font: 12px "Euphemia UCAS";
+        font: 12px "Avenir Next";
         color: purple;
         text-decoration: none;
-    }
-    a:hover {
-        text-decoration: none;
-        color: purple;
     }
     .text-justify {
         text-align: justify;
     }
     .project {
-        font: 24px "Euphemia UCAS";
-        color: #333333;
+        font: 24px "Avenir Next";
+        color: #030303;
         /*letter-spacing: 1px;*/
     }
     .project:hover {
         text-decoration: none;
         background-color: aliceblue;
-        color: #333333;
+        color: #030303;
     }
     .demo {
-        font: 24px "Euphemia UCAS";
-        color: #333333;
+        font: 24px "Avenir Next";
+        color: #030303;
     }
     .demo:hover {
         text-decoration: none;
         background-color: aliceblue;
-        color: #333333;
+        color: #030303;
     }
     .hack {
-        font: 24px "Euphemia UCAS";
-        color: #333333;
+        font: 24px "Avenir Next";
+        color: #030303;
     }
     .hack:hover {
         text-decoration: none;
         background-color: aliceblue;
-        color: #333333;
+        color: #030303;
     }
      textarea {
-         border: 1px solid #333333;
+         border: 1px solid #030303;
          resize: none;
          outline: none;
          height: 20vh;
@@ -108,10 +108,23 @@
      }
   </style>
 </head>
+<!--#e1f2de-->
 <body id="body">
-<canvas id="canvas" style="position: absolute; background-color: #e1f2de"></canvas>
-<div class="text-justify row" >
+<canvas id="canvas" style="position: absolute; background-color: white"></canvas>
 <br><br>
+<div class="row">
+    <div class="col-sm-5 col-sm-offset-1">
+        <p>Ari Karchmer |
+        <a href="http://www.github.com/arikarchmer"><u>Github</u></a> |
+        <a href="mailto:ari.karchmer.s@gmail.com"><u>Email</u></a> |
+        <a href="https://www.linkedin.com/in/ari-karchmer-a12a7b10b/"><u>Linked In</u></a>
+        <!--<a onclick="getImg()"><u>Download your drawing</u></a></p>-->
+
+        <!--<button class="btn-xs" type="button"><a href="http://www.github.com/arikarchmer" style="font-size: 14px; color: #030303">Github</a></button>-->
+        <!--<button class="btn-xs" type="button"><a href="mailto:ari.karchmer.s@gmail.com" style="font-size: 14px;  color: #030303">Email</a></button>-->
+    </div>
+</div>
+<div class="text-justify row">
     <div class="col-sm-5 col-sm-offset-1 text-left" style="background-color: white;">
         <div id="big">
             <table class="table text-left">
@@ -177,25 +190,14 @@
         </div>
     </div>
     <!--<div class="col-sm-2 col-sm-offset-3 text-right" style="background-color: transparent">-->
-        <!--<p style="font: 24px 'Euphemia UCAS'">Ari Karchmer </p>-->
-        <!--<button class="btn-xs" type="button"><a href="http://www.github.com/arikarchmer" style="font-size: 14px; color: #333333">Github</a></button>-->
-        <!--<button class="btn-xs" type="button"><a href="mailto:ari.karchmer.s@gmail.com" style="font-size: 14px;  color: #333333">Email</a></button>-->
+        <!--<p style="font: 24px 'Avenir Next'">Ari Karchmer </p>-->
+        <!--<button class="btn-xs" type="button"><a href="http://www.github.com/arikarchmer" style="font-size: 14px; color: #030303">Github</a></button>-->
+        <!--<button class="btn-xs" type="button"><a href="mailto:ari.karchmer.s@gmail.com" style="font-size: 14px;  color: #030303">Email</a></button>-->
         <!--<br>-->
     <!--</div>-->
 </div>
 <br>
-<div class="row">
-    <div class="col-sm-5 col-sm-offset-1">
-        <p>Ari Karchmer |
-        <a href="http://www.github.com/arikarchmer"><u>Github</u></a> |
-        <a href="mailto:ari.karchmer.s@gmail.com"><u>Email</u></a> |
-        <a href="https://www.linkedin.com/in/ari-karchmer-a12a7b10b/"><u>Linked In</u></a>
-        <!--<a onclick="getImg()"><u>Download your drawing</u></a></p>-->
 
-        <!--<button class="btn-xs" type="button"><a href="http://www.github.com/arikarchmer" style="font-size: 14px; color: #333333">Github</a></button>-->
-        <!--<button class="btn-xs" type="button"><a href="mailto:ari.karchmer.s@gmail.com" style="font-size: 14px;  color: #333333">Email</a></button>-->
-    </div>
-</div>
 
 <script>
    document.getElementById('body').style.opacity = 1;
@@ -229,23 +231,23 @@
 
     canvas.addEventListener('mousemove', function(e) {
         if (draw) {
-//            count = count + 1;
-//            if (count % 10 == 0) {
-//                if (count % 50 == 0) {
-//                    ctx.lineWidth = ctx.lineWidth * 0.66
-//                }
-//                if (count % 100 == 0) {
-////                    d = 1;
-//                }
-////                ctx.lineWidth = ctx.lineWidth - d
-//            }
+            count = count + 1;
+            if (count % 10 == 0) {
+                if (count % 50 == 0) {
+                    d = -1;
+                }
+                if (count % 100 == 0) {
+                    d = 1;
+                }
+                ctx.lineWidth = ctx.lineWidth + d
+            }
 
             var x = e.offsetX;
             var y = e.offsetY;
 
-            ctx.beginPath();
-            ctx.arc(x, y, 1, 0, 2 * Math.PI, false);
-            ctx.fill();
+//            ctx.beginPath();
+//            ctx.arc(x, y, 2, 0, 2 * Math.PI, false);
+//            ctx.fill();
 
             ctx.beginPath();
             ctx.moveTo(prev.x, prev.y);
@@ -268,12 +270,6 @@
         }
     });
 
-    function getImg() {
-        var img = canvas.toDataURL("image/png");
-        var decoded_img = window.atob(img);
-//        return img;
-        document.write('<a download="drawing.png" href=' + window.location.href + '>text</a><br><img src="'+decoded_img+'"/>');
-    }
 
 </script>
 </body>

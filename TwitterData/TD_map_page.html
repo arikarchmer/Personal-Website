@@ -17,7 +17,7 @@
 #map {
     height: 100%;
     width: 100%;
-    font: 8px "PT Sans";
+    font: 8px "Avenir Next";
     position: absolute;
 }
 #explain {
@@ -25,7 +25,7 @@
     background-color: white;
     color: black;
     transition: opacity 1000ms;
-    font: 36px "PT Sans";
+    font: 36px "Avenir Next";
 }
 #text1 {
     pointer-events: none;
@@ -33,18 +33,18 @@
 .option {
     background-color: white;
     color: black;
-    font: 24px "PT Sans";
+    font: 24px "Avenir Next";
 }
 h1 {
     background-color: transparent;
     color: black;
-    font: 64px "PT Sans";
+    font: 64px "Avenir Next";
 }
 body {
     background-color: whitesmoke;
 }
 a {
-    font: 48px "PT Sans";
+    font: 48px "Avenir Next";
     color: blue;
 }
 a:hover {
@@ -83,10 +83,6 @@ a:hover {
     var radius;
     map.on('click', function(e) {
 
-        var exp = document.getElementById('explain');
-        exp.style.opacity = 0;
-        map.removeEventListener('mousemove', explain);
-
         if (!center) {
             center = e.latlng;
             L.marker(center).addTo(map);
@@ -98,13 +94,6 @@ a:hover {
             circle.addTo(map);
         }
     });
-
-    function explain() {
-        var exp = document.getElementById('explain');
-        exp.style.opacity = 1;
-    }
-
-    map.addEventListener('mousemove', explain);
 
     function find() {
         window.location = '/twitterdata/results/coordinates?lat=' + center.lat + '&lng=' + center.lng + '&radius=' + radius;

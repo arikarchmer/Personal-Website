@@ -4,39 +4,58 @@
   <title>Results</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200|PT+Sans' rel='stylesheet' type='text/css'>
-  <script src="/static/star/js/core.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+  <script src="/static/td/core.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script src="/static/td/keys.js"></script>
 </head>
 <style>
 body {
     background-color: white;
     color: black;
+    font: 14px "Avenir Next";
 }
 td {
     border-top: none !important;
 }
 tr {
-    width: 100%;
-    display: inline-table;
-    height: 100px;
+    /*width: 100%;*/
+    /*display: inline-table;*/
+    /*height: 18vh;*/
     table-layout: auto;
+    border-bottom: 1px solid gray;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    transition: border 350ms;
+}
+tr:hover{
+    border-left: 15px solid darkgray;
+    /*border-left: 15px solid darkgray;*/
 }
 table {
-    height: 80vh;
+    /*width: 100%;*/
+    height: 65vh;
     display: -moz-groupbox;
 }
 tbody {
     overflow-y: scroll;
-    height: 80vh;
-    width: 100%;
+    height: 65vh;
+    width: 97.5%;
     position: absolute;
-    font: 24px "PT Sans";
+    font: 18px "Avenir Next";
+    /*border: 2px solid black;*/
+    box-shadow: 0 7px 14px 0 rgba(50, 50, 50, 0.5);
+    -webkit-box-shadow: 0 7px 14px 0 rgba(50, 50, 50, 0.5);
+    -moz-box-shadow: 0 7px 14px 0 rgba(50, 50, 50, 0.5);
 }
+
 a {
-    font: 18px "PT Sans";
+    font: 18px "Avenir Next";
     color: blue;
 }
 a:hover {
@@ -44,39 +63,197 @@ a:hover {
     text-decoration: dotted;
 }
 h1 {
-    font: 64px "PT Sans";
+    font: 48px "Avenir Next";
+}
+h2 {
+    font: 32px "Avenir Next";
+}
+
+h3 {
+    font: 32px "Avenir Next";
+    display: none;
 }
 #text {
-    font: 18px "PT Sans";
+    font: 16px "Avenir Next";
 }
+#map {
+    height: 65vh;
+    /*width: 100%;*/
+    font: 8px "Avenir Next";
+    position: relative;
+    box-shadow: 0 7px 14px 0 rgba(50, 50, 50, 0.5);
+    -webkit-box-shadow: 0 7px 14px 0 rgba(50, 50, 50, 0.5);
+    -moz-box-shadow: 0 7px 14px 0 rgba(50, 50, 50, 0.5);
+}
+.b {
+        background-color: white;
+    border: none;
+        padding-top: 10px;
+        box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
+    -webkit-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
+    -moz-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
+}
+.b:hover {
+    background-color: whitesmoke;
+}
+.dropdown-toggle {
+    background-color: white;
+    border: none;
+}
+.dropdown-menu {
+    width: 100%;
+}
+#sent {
+        font: 8px "Avenir Next";
+        display: none;
+    }
+    .stats {
+
+        box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
+    -webkit-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
+    -moz-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
+        font: 24px "Avenir Next";
+      }
+    .info {
+        box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
+    -webkit-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
+    -moz-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
+        font: 16px "Avenir Next";
+    }
+input {
+    padding-left: 10px;
+    border: none;
+         resize: none;
+         outline: none;
+         height: 6vh;
+         width: 103.5%;
+box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
+    -webkit-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
+    -moz-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
+        font: 24px "Avenir Next";
+     }
 </style>
-<body>
+<body id="body">
+<h3 id="which_widget">{{which_widget}}</h3>
+<div class="modal fade text-left" id="how" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="color: black;background-color: white; font: 24px 'Avenir Next'; padding: 20px 20px;width: 700px">
+            <p>1. Place a center marker on the map by clicking.</p>
+            <p>2. Click in another location to define a radius.</p>
+            <p>3. If you are satisfied with this region, click the 'Analyze this location' button below the map.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="modal fade text-left" id="about" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="color: black;background-color: white; font: 24px 'Avenir Next'; padding: 20px 20px;width: 700px">
+            <p>The goal of this app is to provide insight on a certain location's overall mood.
+            The app allows a user to define a specific region and then browse tweets and view sentiment analysis provided by text-processing.com. </p>
+            <p>The tweets are color coded by sentiment score, and below is a key to help you decode.</p>
+            <p>Enjoy the app!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div class="row">
-    <div class="col-sm-4 col-sm-offset-4 text-center">
-        <h1 style="border-bottom: 1px solid black;">Results</h1>
+    <div class="col-sm-6 col-sm-offset-3 text-center">
+        <h2><i>Sentiment analysis for Twitter</i></h2>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-2">
+        <form>
+        <input placeholder="#" autofocus="autofocus" id="searchbox" onsubmit="search()">
+        </form>
+    </div>
+    <div class="col-sm-2">
+        <button style="height: 6vh; width: 100%; font-size: 24px" class="b" type="button" onclick="search()">Search</button>
+        <!--<div class="dropdown">-->
+                <!--<button style="height: 8vh; width: 100%; font-size: 24px" class="b dropdown-toggle" type="button" data-toggle="dropdown">Event-->
+                <!--<span class="caret"></span></button>-->
+                <!--<ul class="dropdown-menu">-->
+                    <!--<li><a onclick="" href="#">Event</a></li>-->
+                    <!--<li><a href="#">User</a></li>-->
+                    <!--<li><a href="#">Broad Search</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2 text-center">
+        {% if search_items is not defined %}
+            <p style="position: absolute; font: 24px 'Avenir Next'; padding-top: 50px; padding-left: 50px">There's nothing here yet...search a topic!</p>
+        {% endif %}
+        <table id="myTable2" class="table text-left">
+            <tbody>
+            {% for i in search_items %}
+              <tr onclick="goToTweet2(this)">
+                  <td>
+                    <img src="{{i[5]}}" alt="Searching" class="img-circle" style="width:36px;height:36px;border: 1px solid gray;"> {{i[0]}}
+                        <span class="badge" style="color:black; background-color: transparent; font-size: small; border: 1px solid gray">{{i[4]}}</span>
+                      <br>
+                      <p id="text2">{{i[1]}}</p>
+                      <h3 id="sent2">{{i[7]}}</h3>
+                      <h4 id="tweetid2" style="display: none">{{i[6]}}</h4>
+                      <h4 id="screen_name2" style="display: none">{{i[2]}}</h4>
+                  </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+</div>
+<div class="row">
+    <div id="stat2" class="col-sm-8 col-sm-offset-2 text-center stats" style="padding-top: 10px;">
+        <p id="overall_sent2"></p>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-2 col-sm-offset-5 text-center">
+        <button style="border: none; background-color: transparent; outline: none; font-size: 32px" onclick="scroll('down')"><span class="glyphicon glyphicon-chevron-down"></span></button>
+    </div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="row">
+    <div class="col-sm-2 col-sm-offset-5 text-center">
+        <button style="border: none; background-color: transparent; outline: none; font-size: 32px" onclick="scroll('up')"><span class="glyphicon glyphicon-chevron-up"></span></button>
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-2 col-sm-offset-4 text-center">
-        <a href="/twitterdata/map">Map</a>
-    </div>
-    <div class="col-sm-2 text-center">
-        <a href="/">Home</a>
+    <div class="col-sm-6 col-sm-offset-3 text-center">
+        <h2><i>Location based sentiment analysis for Twitter</i></h2>
     </div>
 </div>
-</div>
-<br><br><br>
+<br>
 <div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
-      <table class="table text-center">
+    <div id="map-wrapper" style="position: relative">
+        <div id="map" class="col-sm-5 col-sm-offset-1">
+        </div>
+    </div>
+    <div class="col-sm-5 text-center">
+        {% if map_items is not defined %}
+            <p style="position: absolute; font: 24px 'Avenir Next'; padding-top: 50px; padding-left: 50px">There's nothing here yet...search a location!</p>
+        {% endif %}
+      <table id="myTable" class="table text-left">
         <tbody>
-        {% for i in items %}
-          <tr>
+        {% for i in map_items %}
+          <tr onclick="goToTweet(this)">
               <td>
-                <img src="{{i[5]}}" alt="Searching" class="img-circle" style="width:48px;height:48px;"> {{i[0]}}
-                    <span class="badge" style="color:white; font-size: medium">{{i[4]}}</span>
+                <img src="{{i[5]}}" alt="Searching" class="img-circle" style="width:36px;height:36px;border: 1px solid gray;"> {{i[0]}}
+                    <span class="badge" style="color:black; background-color: transparent; font-size: small; border: 1px solid gray">{{i[4]}}</span>
                   <br>
                   <p id="text">{{i[1]}}</p>
+                  <h3 id="sent">{{i[7]}}</h3>
+                  <h4 id="tweetid" style="display: none">{{i[6]}}</h4>
+                  <h4 id="screen_name" style="display: none">{{i[2]}}</h4>
               </td>
           </tr>
         {% endfor %}
@@ -84,5 +261,242 @@ h1 {
       </table>
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-3 col-sm-offset-1 text-center stats b" onclick="find()">
+        <p>Analyze this location <span class="glyphicon glyphicon-stats"></span></p>
+    </div>
+    <div id="stat1" class=" col-sm-4 text-center stats" style="padding-top: 43px;">
+        <p id="overall_sent"></p>
+    </div>
+
+    <div class="col-sm-3 text-center stats b" onclick="howTo()">
+        <p>Download this data <span class="glyphicon glyphicon-cloud-download"></span></p>
+    </div>
+</div>
+<br><br><br><br><br>
+<!--<div class="row">-->
+    <!--<div class="col-sm-1 col-sm-offset-1 text-center info b" onclick="about()">-->
+        <!--<p>About</p>-->
+    <!--</div>-->
+    <!--<div class="col-sm-1 text-center info b" onclick="howTo()">-->
+        <!--<p>How to</p>-->
+    <!--</div>-->
+
+<!--</div>-->
+<script>
+
+
+        // create map
+    var map = L.map('map').setView([42.3610, -71.0587], 12);
+    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: false,
+    maxZoom: 18,
+    id: mapbox_keys.id,
+    accessToken: mapbox_keys.accessToken
+    }).addTo(map);
+
+    map.locate({setView : true});
+
+    // click listener
+    var circle;
+    var center;
+    var radius;
+    map.on('click', function(e) {
+
+        if (!center) {
+            center = e.latlng;
+            console.log(center);
+            L.marker(center).addTo(map);
+            return;
+        }
+        else {
+            if (!radius) {
+                radius = center.distanceTo(e.latlng);
+                circle = L.circle(center, radius);
+                circle.addTo(map);
+            }
+        }
+    });
+
+//    function getCookie() {
+//        var cookie_split = document.cookie.split(';');
+//        var center_str = cookie_split[0].split('=')[1].split(',');
+//        var radius_str = cookie_split[1].split('=')[1];
+//        var center = {'lat': center_str[0], 'lng': center_str[1]};
+//        L.marker(center).addTo(map);
+////        L.circle(center, radius_str).addTo(map);
+//    }
+//
+//    window.onload = getCookie();
+
+    function search() {
+        var k = document.getElementById('searchbox').value;
+        window.location = '/twitterdata/results/keyword?keyword=' + k
+    }
+
+
+    function find() {
+        var oldcenter = {lat: center.lat, lng: center.lng};
+        var oldr = radius;
+
+//        document.cookie = "center=" + oldcenter['lat'] + "," + oldcenter['lng'] + ";radius=" + oldr;
+        window.location = '/twitterdata/results/coordinates?lat=' + center.lat + '&lng=' + center.lng + '&radius=' + radius;
+
+    }
+
+    function changeBackgroundColors() {
+
+        $('#myTable tr h3').each(function() {
+            var text = this.innerHTML;
+            console.log(text);
+
+            var c = getColor(text);
+            $(this).parent().css( "background-color", c );
+        });
+
+    }
+
+    function changeBackgroundColors2() {
+
+        $('#myTable2 tr h3').each(function() {
+            var text = this.innerHTML;
+            console.log(text);
+
+            var c = getColor(text);
+            $(this).parent().css( "background-color", c );
+        });
+
+    }
+
+    overall_sentiment = [];
+
+    function getColor(d) {
+
+        var data = d.split(',');
+        var negativity = data[0];
+        console.log(negativity);
+        overall_sentiment.push(negativity);
+        if (data[1] > 0.65) {
+            return 'white'
+        } else {
+            return getColorFromNum(negativity);
+        }
+    }
+
+    function getColorFromNum(n) {
+
+//        if (n < 0.5) {
+//            return 'rgb(0,255,127,' + 1-n*2 + ')';
+//        }
+//        if (n > 0.5) {
+//            return 'rgb(220,20,60,' + (n - 0.5) * 2 + ')';
+//        }
+
+        if (n < 0.05) {
+            return '#00E568'
+        }
+        if (n < 0.15) {
+            return '#33ea86'
+        }
+        if (n < 0.25) {
+            return '#66efa4'
+        }
+        if (n < 0.35) {
+            return '#99f4c2'
+        }
+        if (n < 0.45) {
+            return '#ccf9e0'
+        }
+        if (n < 0.5) {
+            return '#e9ffe8'
+        }
+        if (n < 0.55) {
+            return '#ffd3d3'
+        }
+        if (n < 0.65) {
+            return '#ef6684'
+        }
+        if (n < 0.75) {
+            return '#ea335b'
+        }
+        if (n < 0.85) {
+            return '#e71946'
+        }
+        if (n < 0.95) {
+            return '#e50032'
+        }
+
+    }
+
+    function stats() {
+
+        var widget = document.getElementById('which_widget').innerHTML;
+        console.log(widget);
+
+        var sum = 0;
+            for (var n = 0; n < overall_sentiment.length; n++) {
+                console.log(overall_sentiment[n]);
+                sum = sum + parseFloat(overall_sentiment[n]);
+            }
+        if (widget == 'map') {
+
+            window.scrollBy(0,2000);
+
+            var avg = sum / overall_sentiment.length * 100;
+            document.getElementById('overall_sent').innerHTML = 'Overall sentiment: ' +(100 - avg.toPrecision(4)) + '% positive';
+            $('#stat1').css( "background-color", getColorFromNum(avg.toPrecision(4) / 100.0) );
+            $('#stat1').css( "padding-top", '10px');
+
+            $("html, body").animate({ scrollTop: "1800px" }, 1);
+
+        } else if (widget == 'search') {
+
+            var avg = sum / overall_sentiment.length * 100;
+            document.getElementById('overall_sent2').innerHTML = 'Overall sentiment: ' +(100 - avg.toPrecision(4)) + '% positive';
+            $('#stat2').css( "background-color", getColorFromNum(avg.toPrecision(4) / 100.0) );
+
+        }
+
+
+    }
+
+     function howTo() {
+         $("#how").modal("toggle");
+     }
+     function about() {
+         $("#about").modal("toggle");
+     }
+
+     function goToTweet(ele) {
+//         window.location = "http://www.twitter.com/" + $(ele, '#screename').innerHTML + "/status/" + $(ele, '#tweetid').innerHTML;
+//         window.location = "http://www.twitter.com/" + ele.getElementById('screen_name').innerHTML + "/status/" + ele.getElementById('tweetid').innerHTML
+     }
+
+     function goToTweet2(ele) {
+//         window.location = "http://www.twitter.com/" + $(ele, '#screename2').innerHTML + "/status/" + $(ele, '#tweetid2').innerHTML;
+//         window.location = "http://www.twitter.com/" + ele.getElementById('screen_name2').innerHTML + "/status/" + ele.getElementById('tweetid2').innerHTML
+     }
+
+     function trMouseOver(ele) {
+//         ele.style.opacity = ele.style.opacity * 2;
+//         ele.style.paddingTop = '50px';
+     }
+
+     function scroll(direction) {
+         if (direction == 'down') {
+             $("html, body").animate({ scrollTop: "1800px" }, 1500);
+         } else if (direction == 'up') {
+             $("html, body").animate({ scrollTop: "-1800px" }, 1500);
+         }
+
+    }
+
+
+    changeBackgroundColors();
+    changeBackgroundColors2();
+    stats();
+
+
+</script>
 </body>
 </html>

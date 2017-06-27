@@ -69,7 +69,7 @@ class ProjectPageHandler(webapp2.RequestHandler):
 
 class CastleHandler(webapp2.RequestHandler):
     def get(self):
-        page = JINJA_ENVIRONMENT.get_template('castle-defense-ai.html')
+        page = JINJA_ENVIRONMENT.get_template('castle+defense+ai.html')
         self.response.write(page.render())
 
 
@@ -133,13 +133,13 @@ class ResultsHandler(webapp2.RequestHandler):
 
         searcher = Searcher()
         flag = True
-        if mode == 'city_state':
+        if mode == 'keyword':
             k = self.request.get('keyword')
-            c = self.request.get('city')
-            s = self.request.get('state')
-            if k and c and s:
-                items = searcher.search(keyword=k, city=c, state=s)
-                info = [k, c, s]
+            if k:
+                search_items = searcher.search(keyword=k)
+                info = [k]
+                parameters = {'search_items': search_items, 'info': info, 'which_widget': 'search'}
+                page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_results_page.html')
             else:
                 page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_search_page.html')
                 parameters = {'invalid': True}
@@ -156,26 +156,27 @@ class ResultsHandler(webapp2.RequestHandler):
                 parameters = {'fail': True}
             else:
                 try:
-                    items = searcher.search(coordinates=coor)
+                    map_items = searcher.search(coordinates=coor)
+                    parameters = {'map_items': map_items, 'which_widget': 'map'}
+                    page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_results_page.html')
                 except TweepError, e:
 
                     items = searcher.search(coordinates=coor)
-                    #items = [('','Sorry, Twitter is unavailable to be searched at this time. Try again later. ' + str(e),'','','','','')]
+                    # items = [('','Sorry, Twitter is unavailable to be searched at this time. Try again later. ' + str(e),'','','','','')]
                     # print 'error'
 
                 info = [lat, lng, r]
 
-        if flag:
-            if len(items) == 0:
-                if mode == 'city_state':
-                    page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_search_page.html')
-                    parameters = {'invalid': True}
-                elif mode == 'coordinates':
-                    page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_map_page.html')
-                    parameters = {'len': len(items)}
-            else:
-                parameters = {'items': items, 'info': info}
-                page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_results_page.html')
+        # if flag:
+            # if len(items) == 0:
+            #     if mode == 'keyword':
+            #         page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_results_page.html')
+            #         parameters = {'invalid': True}
+            #     elif mode == 'coordinates':
+            #         page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_map_page.html')
+            #         parameters = {'len': len(items)}
+            # else:
+
 
         self.response.write(page.render(parameters))
 
@@ -183,7 +184,7 @@ class ResultsHandler(webapp2.RequestHandler):
 class MapHandler(webapp2.RequestHandler):
 
     def get(self):
-        map_page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_map_page.html')
+        map_page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_results_page.html')
         self.response.write(map_page.render())
 
 
