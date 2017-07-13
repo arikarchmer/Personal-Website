@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Avenir" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cutive+Mono|PT+Sans" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
@@ -15,10 +16,11 @@
         opacity: 0;
         background-color: white;
         transition: opacity 1s;
-        letter-spacing: 1px;
+        letter-spacing: 0px;
+        font-weight: 800;
     }
     table {
-        height: 85vh;
+        /*height: 50vh;*/
         display: -moz-groupbox;
         width: 100%;
     }
@@ -26,18 +28,20 @@
         overflow-y: scroll;
         height: 100%;
         width: 100%;
-        position: absolute;
-        background-color: white;
-        box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.5);
-        -webkit-box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.5);
-        -moz-box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.5);
+        position: relative;
+        background-color: transparent;
+        border: none;
+        /*box-shadow: 0 1px 2px 0 rgba(50, 50, 50, 0.5);*/
+        /*-webkit-box-shadow: 0 1px 2px 0 rgba(50, 50, 50, 0.5);*/
+        /*-moz-box-shadow: 0 1px 2px 0 rgba(50, 50, 50, 0.5);*/
     }
     tr {
         /*width: 75%;*/
         /*padding-left: 20px;*/
         /*padding-right: 20px;*/
-        border: 30px solid white;
-        /*display: inline-table;*/
+        border: 1px dotted white;
+        display: table;
+
     }
     iframe {
         border: 1px solid #030303;
@@ -45,61 +49,66 @@
         width: 40%;
         /*height: 15vh;*/
     }
-    p {
-        color: #030303;
-        font: 12px "Avenir Next"
-    }
+    /*p {*/
+        /*color: #030303;*/
+        /*font: 12px "Cutive Mono"*/
+    /*}*/
     b {
-        font: 12px "Avenir Next"
+        font: 12px "Cutive Mono"
     }
     .header {
         color: #030303;
+        font: 36px "Cutive Mono";
     }
     .post {
-        font: 12px "Avenir Next";
+        font: 12px "Cutive Mono";
         color: #030303;
 
         background-color: transparent;
         /*border: dashed 1px black;*/
     }
     a {
-        font: 12px "Avenir Next";
-        color: purple;
-        text-decoration: none;
+        font: 12px "Cutive Mono";
+        color: blue;
+
+    }
+    a:hover {
+        color: blue;
+
     }
     .text-justify {
         text-align: justify;
     }
     .project {
-        font: 24px "Avenir Next";
-        color: #030303;
+        font: 18px "Cutive Mono";
+        color: black;
         /*letter-spacing: 1px;*/
     }
     .project:hover {
         text-decoration: none;
         background-color: aliceblue;
-        color: #030303;
+        color: black;
     }
     .demo {
-        font: 24px "Avenir Next";
-        color: #030303;
+        font: 18px "Cutive Mono";
+        color: black;
     }
     .demo:hover {
         text-decoration: none;
         background-color: aliceblue;
-        color: #030303;
+        color: black;
     }
     .hack {
-        font: 24px "Avenir Next";
-        color: #030303;
+        font: 18px "Cutive Mono";
+        color: black;
     }
     .hack:hover {
         text-decoration: none;
         background-color: aliceblue;
-        color: #030303;
+        color: black;
     }
      textarea {
-         border: 1px solid #030303;
+         border: 1px solid purple;
          resize: none;
          outline: none;
          height: 20vh;
@@ -109,36 +118,39 @@
   </style>
 </head>
 <!--#e1f2de-->
-<body id="body">
-<canvas id="canvas" style="position: absolute; background-color: white"></canvas>
-<br><br>
+<body id="body" style="padding: 5vw 5vw 5vw 5vw">
 <div class="row">
-    <div class="col-sm-5 col-sm-offset-1">
-        <p>Ari Karchmer |
-        <a href="http://www.github.com/arikarchmer"><u>Github</u></a> |
-        <a href="mailto:ari.karchmer.s@gmail.com"><u>Email</u></a> |
-        <a href="https://www.linkedin.com/in/ari-karchmer-a12a7b10b/"><u>Linked In</u></a>
+    <div class="col-sm-6 col-sm-offset-0 header text-justify">
+        <p>Ari Karchmer<br>.
+        <a href="http://www.github.com/arikarchmer">Github</a> .
+        <a href="mailto:ari.karchmer.s@gmail.com">Email</a> .
+        <a href="https://www.linkedin.com/in/ari-karchmer-a12a7b10b/">Linked In</a> .</p>
         <!--<a onclick="getImg()"><u>Download your drawing</u></a></p>-->
 
         <!--<button class="btn-xs" type="button"><a href="http://www.github.com/arikarchmer" style="font-size: 14px; color: #030303">Github</a></button>-->
         <!--<button class="btn-xs" type="button"><a href="mailto:ari.karchmer.s@gmail.com" style="font-size: 14px;  color: #030303">Email</a></button>-->
     </div>
 </div>
+
 <div class="text-justify row">
-    <div class="col-sm-5 col-sm-offset-1 text-left" style="background-color: white;">
+    <div class="col-sm-6 text-left" style="background-color: white;">
         <div id="big">
             <table class="table text-left">
                 <tbody>
-                    <!--<p class="post">-->
-                        <!--April 2, 2017<br>-->
-                        <!--<a class="hack">Daily Collage: Image Scraping</a>-->
-                    <!--</p>-->
+                    <tr class="post">
+                        <td>
+                            July 13, 2017<br>
+                            <a class="hack" href="https://github.com/arikarchmer/tppy">Tppy: a command line tool for location based sentiment analysis on Twitter</a>
+                            <br>
+                            python, tweepy, text-processing api
+                        </td>
+                    </tr>
                     <tr class="post">
                         <td>
                             June 10, 2017<br>
-                            <a href="/castle" class="hack">A computational approach to FiveThirtyEight's 02-03-17 riddle (genetic algorithm)</a>
+                            <a href="/castle" class="hack">A computational approach to FiveThirtyEight's 02-03-17 riddle [genetic algorithm]</a>
                             <br>
-                            <a href="https://fivethirtyeight.com/features/can-you-rule-riddler-nation/"><u>the riddle</u></a>
+                            <a href="https://fivethirtyeight.com/features/can-you-rule-riddler-nation/">the riddle</a>
                         </td>
                     </tr>
                     <tr class="post">
@@ -146,130 +158,62 @@
                             March 20, 2017<br>
                             <a href="/march" class="hack">How to pick 29/32 first round NCAA tournament games</a>
                             <br>
-                            <a href="https://tournament.fantasysports.yahoo.com/t1/368975"><u>full bracket</u></a>
+                            <a href="https://tournament.fantasysports.yahoo.com/t1/368975">full bracket</a>
                         </td>
                     </tr>
                     <tr class="post">
                         <td>
                             December 12, 2016<br>
-                            <a href="https://twitter.com/_waltbot" class="hack">A twitter bot that talks in poetry (Markov chains)</a>
+                            <a href="https://twitter.com/_waltbot" class="hack">A twitter bot that talks in poetry [Markov chains]</a>
                             <br>
-                            <a href="https://github.com/arikarchmer/Personal-Website/blob/master/MarkovPoetry/waltbot.py"><u>code</u></a>
+                            <a href="https://github.com/arikarchmer/Personal-Website/blob/master/MarkovPoetry/waltbot.py">code</a>
                         </td>
                     </tr>
                     <tr class="post">
                         <td>
                             December 7, 2016 <br>
-                            <a href="/particle" class="demo">Particles</a><br><br>
-                            <iframe src="/particle"></iframe>
+                            <a href="/particle" class="demo">Particles</a><br>
+                            <!--<iframe src="/particle"></iframe>-->
                         </td>
                     </tr>
                     <tr class="post">
                         <td>
                             November 8, 2016 <br>
-                            <a href="/recursivetree" class="demo">Recursive art: tree</a><br><br>
-                            <iframe src="/recursivetree"></iframe>
+                            <a href="/recursivetree" class="demo">Recursive art: tree</a><br>
+                            <!--<iframe src="/recursivetree"></iframe>-->
                         </td>
                     </tr>
                     <tr class="post">
                         <td>
                             July, '16<br>
                             <a href="/starsakjsdha" class="project">StarSpace</a><br>
-                            python, ajax, d3.js
+                            python, javascript, d3.js, ajax
                         </td>
                     </tr>
                     <tr class="post">
                         <td>
                             June, '16<br>
                             <a href="/twitterdata/map" class="project">TwitterData</a><br>
-                            python, leaflet.js, jinja templates, tweepy
+                            python, javascript, leaflet.js, jinja templates, tweepy
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <div class="col-sm-6">
+        <canvas id="canvas" style="position: absolute; background-color: white;"></canvas>
+    </div>
     <!--<div class="col-sm-2 col-sm-offset-3 text-right" style="background-color: transparent">-->
-        <!--<p style="font: 24px 'Avenir Next'">Ari Karchmer </p>-->
+        <!--<p style="font: 24px 'Cutive Mono'">Ari Karchmer </p>-->
         <!--<button class="btn-xs" type="button"><a href="http://www.github.com/arikarchmer" style="font-size: 14px; color: #030303">Github</a></button>-->
         <!--<button class="btn-xs" type="button"><a href="mailto:ari.karchmer.s@gmail.com" style="font-size: 14px;  color: #030303">Email</a></button>-->
         <!--<br>-->
     <!--</div>-->
 </div>
-<br>
-
-
 <script>
+
    document.getElementById('body').style.opacity = 1;
-
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext("2d");
-
-    canvas.height = $(window).height();
-    canvas.width = $(window).width();
-
-    var prev = {};
-    var draw = true;
-
-    var current = [];
-
-    var object = function(points) {
-        var obj = points;
-
-        var getObj = function() {
-            return obj;
-        };
-        return {
-            getObj: getObj
-        }
-    };
-
-    var objects = [];
-    var count = 0;
-    var d = 1;
-    ctx.lineWidth = 0.5;
-
-    canvas.addEventListener('mousemove', function(e) {
-        if (draw) {
-            count = count + 1;
-            if (count % 10 == 0) {
-                if (count % 50 == 0) {
-                    d = -1;
-                }
-                if (count % 100 == 0) {
-                    d = 1;
-                }
-                ctx.lineWidth = ctx.lineWidth + d
-            }
-
-            var x = e.offsetX;
-            var y = e.offsetY;
-
-//            ctx.beginPath();
-//            ctx.arc(x, y, 2, 0, 2 * Math.PI, false);
-//            ctx.fill();
-
-            ctx.beginPath();
-            ctx.moveTo(prev.x, prev.y);
-            ctx.lineTo(x, y);
-            ctx.stroke();
-
-            prev.x = x;
-            prev.y = y;
-            current.push(prev);
-        }
-    });
-
-    canvas.addEventListener('click', function() {
-        if (draw) {
-            draw = false;
-            objects.push(object(current));
-        } else {
-            draw = true;
-            prev = {}
-        }
-    });
-
 
 </script>
 </body>

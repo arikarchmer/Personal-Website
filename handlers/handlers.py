@@ -149,7 +149,7 @@ class ResultsHandler(webapp2.RequestHandler):
         elif mode == 'coordinates':
             lat = float(self.request.get('lat'))
             lng = float(self.request.get('lng'))
-            coor= {'lat': lat, 'lng': lng}
+            coor = {'lat': lat, 'lng': lng}
             r = self.request.get('radius')
             if lat is None or lng is None or r is None:
                 page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_map_page.html')
@@ -167,16 +167,15 @@ class ResultsHandler(webapp2.RequestHandler):
 
                 info = [lat, lng, r]
 
-        # if flag:
-            # if len(items) == 0:
-            #     if mode == 'keyword':
-            #         page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_results_page.html')
-            #         parameters = {'invalid': True}
-            #     elif mode == 'coordinates':
-            #         page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_map_page.html')
-            #         parameters = {'len': len(items)}
-            # else:
-
+                # if flag:
+                # if len(items) == 0:
+                #     if mode == 'keyword':
+                #         page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_results_page.html')
+                #         parameters = {'invalid': True}
+                #     elif mode == 'coordinates':
+                #         page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_map_page.html')
+                #         parameters = {'len': len(items)}
+                # else:
 
         self.response.write(page.render(parameters))
 
