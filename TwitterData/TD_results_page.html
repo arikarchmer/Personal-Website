@@ -18,7 +18,7 @@
 body {
     background-color: white;
     color: black;
-    font: 14px "Avenir Next";
+    font: 14px "Times New Roman";
 }
 td {
     border-top: none !important;
@@ -39,23 +39,19 @@ tr:hover{
 }
 table {
     /*width: 100%;*/
-    height: 65vh;
+    height: 40vh;
     display: -moz-groupbox;
 }
 tbody {
     overflow-y: scroll;
-    height: 65vh;
-    width: 97.5%;
+    height: 40vh;
+    width: 100%;
     position: absolute;
-    font: 18px "Avenir Next";
-    /*border: 2px solid black;*/
-    box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    -webkit-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    -moz-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    border-radius: 4px;
+    font: 18px "Times New Roman";
+    border: 1px solid gray;
 }
 a {
-    font: 18px "Avenir Next";
+    font: 18px "Times New Roman";
     color: blue;
 }
 a:hover {
@@ -63,218 +59,121 @@ a:hover {
     text-decoration: dotted;
 }
 h1 {
-    font: 48px "Avenir Next";
+    font: 48px "Times New Roman";
 }
 h2 {
-    font: 32px "Avenir Next";
+    font: 24px "Times New Roman";
 }
 h3 {
-    font: 32px "Avenir Next";
+    font: 32px "Times New Roman";
     display: none;
 }
 #text {
-    font: 16px "Avenir Next";
+    font: 16px "Times New Roman";
 }
 #map {
-    height: 65vh;
-    /*width: 100%;*/
-    font: 8px "Avenir Next";
+    height: 60vh;
     position: relative;
-    box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    -webkit-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    -moz-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    border-radius: 4px;
+    border: 1px solid gray;
 }
 .b {
         background-color: white;
-    border: none;
+    border: 1px solid gray;
         padding-top: 10px;
-        box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    -webkit-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    -moz-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    border-radius: 4px;
+    height: 4vh;
 }
 .b:hover {
     background-color: whitesmoke;
 }
-.dropdown-toggle {
-    background-color: white;
-    border: none;
-}
-.dropdown-menu {
-    width: 100%;
-}
-#sent {
-        font: 8px "Avenir Next";
-        display: none;
-    border-radius: 4px;
-    }
-    .stats {
-        box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    -webkit-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    -moz-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-        font: 24px "Avenir Next";
-        border-radius: 4px;
-      }
-    .info {
-        box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    -webkit-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    -moz-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-        font: 16px "Avenir Next";
-        border-radius: 4px;
-    }
-input {
-    padding-left: 10px;
-    border: none;
-         resize: none;
-         outline: none;
-         height: 6vh;
-         width: 103.5%;
-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    -webkit-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-    -moz-box-shadow: 0 2px 4px 0 rgba(50, 50, 50, 0.5);
-        font: 18px "Avenir Next";
-    border-radius: 4px;
-     }
-</style>
-<body id="body">
-<h3 id="which_widget">{{which_widget}}</h3>
-<div class="modal fade text-left" id="how" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body" style="color: black;background-color: white; font: 24px 'Avenir Next'; padding: 20px 20px;width: 700px">
-            <p>1. Place a center marker on the map by clicking.</p>
-            <p>2. Click in another location to define a radius.</p>
-            <p>3. If you are satisfied with this region, click the 'Analyze this location' button below the map.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-<div class="modal fade text-left" id="about" role="dialog" style="background: rgba(204, 204, 204, 0.2);">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body" style="color: black;background-color: white; font: 24px 'Avenir Next'; padding: 20px 20px;width: 700px">
-            <p>The goal of this app is to provide insight on a certain location's overall mood.
-            The app allows a user to define a specific region and then browse tweets and view sentiment analysis provided by text-processing.com. </p>
-            <p>The tweets are color coded by sentiment score, and below is a key to help you decode.</p>
-            <p>Enjoy the app!</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
+    .stats {
+
+        font: 14px "Times New Roman";
+
+      }
+textarea {
+    padding-left: 10px;
+    padding-top: 10px;
+    border: 1px dotted gray;
+        resize: vertical;
+         outline: none;
+         height: 4vh;
+         width: 100%;
+
+        font: 14px "Times New Roman";
+     }
+    .control-container {
+        border: 0px solid gray;
+        height: 20vh;
+    }
+</style>
+<body id="body" style="padding-left: 2vw; padding-right: 2vw">
+<h2><i>location based sentiment analysis for twitter</i></h2>
 <div class="row">
-    <div class="col-sm-6 col-sm-offset-3 text-center">
-        <h2><i>Sentiment analysis for Twitter</i></h2>
+
+    <div class="col-sm-6" style="padding-right: 2vw;">
+
+        <div class="row">
+            <div id="map" class="col-sm-12"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="control-container col-sm-12">
+
+                <div class="row" style="padding: 6px 0px 3px 0px">
+                    <textarea placeholder="search"></textarea>
+                </div>
+                <div class="row" style="padding: 3px 0px 3px 0px">
+                    <div class="col-sm-2 text-center stats b" onclick="find()" style="border-right: none">
+                        <p>search</p>
+                    </div>
+                    <div class="col-sm-2 text-center stats b" onclick="find()">
+                        <p>stream</p>
+                    </div>
+                </div>
+                <div class="row" style="padding: 3px 0px 6px 0px">
+                    <div class="col-sm-2 text-center stats b" onclick="howTo()">
+                        <p>download</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<br>
-<div class="row">
-    <div class="col-sm-6 col-sm-offset-2">
-        <form>
-        <input placeholder="#" autofocus="autofocus" id="searchbox" onsubmit="search()">
-        </form>
-    </div>
-    <div class="col-sm-2">
-        <button style="height: 6vh; width: 100%; font-size: 24px" class="b" type="button" onclick="search()">Search</button>
-        <!--<div class="dropdown">-->
-                <!--<button style="height: 8vh; width: 100%; font-size: 24px" class="b dropdown-toggle" type="button" data-toggle="dropdown">Event-->
-                <!--<span class="caret"></span></button>-->
-                <!--<ul class="dropdown-menu">-->
-                    <!--<li><a onclick="" href="#">Event</a></li>-->
-                    <!--<li><a href="#">User</a></li>-->
-                    <!--<li><a href="#">Broad Search</a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
-    </div>
-</div>
-<br>
-<div class="row">
-    <div class="col-sm-8 col-sm-offset-2 text-center">
-        {% if search_items is not defined %}
-            <p style="position: absolute; font: 24px 'Avenir Next'; padding-top: 50px; padding-left: 50px">There's nothing here yet...search a topic!</p>
-        {% endif %}
-        <table id="myTable2" class="table text-left">
+    <div class="col-sm-6">
+
+        <div class="row">
+            {% if map_items is not defined %}
+                <p style="position: absolute; font: 24px 'Times New Roman'; padding-top: 50px; padding-left: 50px">there's nothing here yet...search a location!</p>
+            {% endif %}
+          <table id="myTable" class="table text-left">
             <tbody>
-            {% for i in search_items %}
-              <tr onclick="goToTweet2(this)">
+            {% for i in map_items %}
+              <tr onclick="goToTweet(this)">
                   <td>
                     <img src="{{i[5]}}" alt="Searching" class="img-circle" style="width:36px;height:36px;border: 1px solid gray;"> {{i[0]}}
                         <span class="badge" style="color:black; background-color: transparent; font-size: small; border: 1px solid gray">{{i[4]}}</span>
                       <br>
-                      <p id="text2">{{i[1]}}</p>
-                      <h3 id="sent2">{{i[7]}}</h3>
-                      <h4 id="tweetid2" style="display: none">{{i[6]}}</h4>
-                      <h4 id="screen_name2" style="display: none">{{i[2]}}</h4>
+                      <p id="text">{{i[1]}}</p>
+                      <h3 id="sent">{{i[7]}}</h3>
+                      <h4 id="tweetid" style="display: none">{{i[6]}}</h4>
+                      <h4 id="screen_name" style="display: none">{{i[2]}}</h4>
                   </td>
               </tr>
             {% endfor %}
             </tbody>
           </table>
         </div>
-</div>
-<div id="stat2" class="col-sm-8 col-sm-offset-2 text-center stats" style="padding-top: 10px;">
-    <p id="overall_sent2"></p>
-</div>
-<br><br><br>
-<div class="row">
-    <div class="col-sm-2 col-sm-offset-5 text-center">
-        <button style="border: none; background-color: transparent; outline: none; font-size: 32px" onclick="scroll('down')"><span class="glyphicon glyphicon-chevron-down"></span></button>
-    </div>
-</div>
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<div class="row">
-    <div class="col-sm-2 col-sm-offset-5 text-center">
-        <button style="border: none; background-color: transparent; outline: none; font-size: 32px" onclick="scroll('up')"><span class="glyphicon glyphicon-chevron-up"></span></button>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-6 col-sm-offset-3 text-center">
-        <h2><i>Location based sentiment analysis for Twitter</i></h2>
-    </div>
-</div>
-<br>
-<div class="row">
-    <div id="map-wrapper" style="position: relative">
-        <div id="map" class="col-sm-5 col-sm-offset-1">
+        <div class="row">
+            <div style="height: 40vh; border: 1px solid gray">
+                <!--placeholder-->
+            </div>
         </div>
-    </div>
-    <div class="col-sm-5 text-center">
-        {% if map_items is not defined %}
-            <p style="position: absolute; font: 24px 'Avenir Next'; padding-top: 50px; padding-left: 50px">There's nothing here yet...search a location!</p>
-        {% endif %}
-      <table id="myTable" class="table text-left">
-        <tbody>
-        {% for i in map_items %}
-          <tr onclick="goToTweet(this)">
-              <td>
-                <img src="{{i[5]}}" alt="Searching" class="img-circle" style="width:36px;height:36px;border: 1px solid gray;"> {{i[0]}}
-                    <span class="badge" style="color:black; background-color: transparent; font-size: small; border: 1px solid gray">{{i[4]}}</span>
-                  <br>
-                  <p id="text">{{i[1]}}</p>
-                  <h3 id="sent">{{i[7]}}</h3>
-                  <h4 id="tweetid" style="display: none">{{i[6]}}</h4>
-                  <h4 id="screen_name" style="display: none">{{i[2]}}</h4>
-              </td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-3 col-sm-offset-1 text-center stats b" onclick="find()">
-        <p>Analyze this location <span class="glyphicon glyphicon-stats"></span></p>
-    </div>
-    <div id="stat1" class=" col-sm-4 text-center stats" style="padding-top: 43px;">
-        <p id="overall_sent"></p>
+
     </div>
 
-    <div class="col-sm-3 text-center stats b" onclick="howTo()">
-        <p>Download this data <span class="glyphicon glyphicon-cloud-download"></span></p>
-    </div>
 </div>
+
+
 <br><br><br><br><br>
 <!--<div class="row">-->
     <!--<div class="col-sm-1 col-sm-offset-1 text-center info b" onclick="about()">-->

@@ -25,7 +25,7 @@ class Searcher():
         tweets.sort(reverse=True, key=lambda x: x.author.followers_count)
 
         a = Analyzer()
-        # return [t.entities for t in tweets]
+
         return [(t.author.name, t.text, t.user.screen_name, t.entities, t.author.followers_count, t.author.profile_image_url, t.id, a.analyze(t.text)) for t in tweets]
 
 

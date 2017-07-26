@@ -17,7 +17,7 @@
         background-color: white;
         transition: opacity 1s;
         letter-spacing: 0px;
-        font-weight: 800;
+        font-weight: 200;
     }
     table {
         /*height: 50vh;*/
@@ -51,24 +51,24 @@
     }
     /*p {*/
         /*color: #030303;*/
-        /*font: 12px "Cutive Mono"*/
+        /*font: 12px "Menlo"*/
     /*}*/
     b {
-        font: 12px "Cutive Mono"
+        font: 10px "Menlo"
     }
     .header {
         color: #030303;
-        font: 36px "Cutive Mono";
+        font: 36px "Menlo";
     }
     .post {
-        font: 12px "Cutive Mono";
+        font: 10px "Menlo";
         color: #030303;
 
         background-color: transparent;
         /*border: dashed 1px black;*/
     }
     a {
-        font: 12px "Cutive Mono";
+        font: 10px "Menlo";
         color: blue;
 
     }
@@ -80,31 +80,31 @@
         text-align: justify;
     }
     .project {
-        font: 18px "Cutive Mono";
+        font: 14px "Menlo";
         color: black;
         /*letter-spacing: 1px;*/
     }
     .project:hover {
         text-decoration: none;
-        background-color: aliceblue;
+        background-color: #ffdce9;
         color: black;
     }
     .demo {
-        font: 18px "Cutive Mono";
+        font: 14px "Menlo";
         color: black;
     }
     .demo:hover {
         text-decoration: none;
-        background-color: aliceblue;
+        background-color: #ffdce9;
         color: black;
     }
     .hack {
-        font: 18px "Cutive Mono";
+        font: 14px "Menlo";
         color: black;
     }
     .hack:hover {
         text-decoration: none;
-        background-color: aliceblue;
+        background-color: #ffdce9;
         color: black;
     }
      textarea {
@@ -113,27 +113,23 @@
          outline: none;
          height: 20vh;
          width: 55%;
-
      }
   </style>
 </head>
 <!--#e1f2de-->
 <body id="body" style="padding: 5vw 5vw 5vw 5vw">
 <div class="row">
-    <div class="col-sm-6 col-sm-offset-0 header text-justify">
+    <div class="col-sm-12 col-sm-offset-0 header text-justify">
+        <img src="static/painting.png" style="width: 260px; height: 80px"><br><br>
         <p>Ari Karchmer<br>.
         <a href="http://www.github.com/arikarchmer">Github</a> .
         <a href="mailto:ari.karchmer.s@gmail.com">Email</a> .
         <a href="https://www.linkedin.com/in/ari-karchmer-a12a7b10b/">Linked In</a> .</p>
-        <!--<a onclick="getImg()"><u>Download your drawing</u></a></p>-->
-
-        <!--<button class="btn-xs" type="button"><a href="http://www.github.com/arikarchmer" style="font-size: 14px; color: #030303">Github</a></button>-->
-        <!--<button class="btn-xs" type="button"><a href="mailto:ari.karchmer.s@gmail.com" style="font-size: 14px;  color: #030303">Email</a></button>-->
     </div>
 </div>
 
 <div class="text-justify row">
-    <div class="col-sm-6 text-left" style="background-color: white;">
+    <div class="col-sm-12 text-left" style="background-color: white;">
         <div id="big">
             <table class="table text-left">
                 <tbody>
@@ -148,9 +144,9 @@
                     <tr class="post">
                         <td>
                             June 10, 2017<br>
-                            <a href="/castle" class="hack">A computational approach to FiveThirtyEight's 02-03-17 riddle [genetic algorithm]</a>
+                            <a href="/castle" class="hack">A computational approach to FiveThirtyEight's 02-03-17 riddle</a>
                             <br>
-                            <a href="https://fivethirtyeight.com/features/can-you-rule-riddler-nation/">the riddle</a>
+                            python, pandas, genetic algorithms <br><a href="https://fivethirtyeight.com/features/can-you-rule-riddler-nation/">the riddle</a>
                         </td>
                     </tr>
                     <tr class="post">
@@ -158,21 +154,22 @@
                             March 20, 2017<br>
                             <a href="/march" class="hack">How to pick 29/32 first round NCAA tournament games</a>
                             <br>
-                            <a href="https://tournament.fantasysports.yahoo.com/t1/368975">full bracket</a>
+                            python, pandas, linear regression
                         </td>
                     </tr>
                     <tr class="post">
                         <td>
                             December 12, 2016<br>
-                            <a href="https://twitter.com/_waltbot" class="hack">A twitter bot that talks in poetry [Markov chains]</a>
+                            <a href="https://twitter.com/_waltbot" class="hack">A twitter bot that talks in poetry</a>
                             <br>
-                            <a href="https://github.com/arikarchmer/Personal-Website/blob/master/MarkovPoetry/waltbot.py">code</a>
+                            python, Markov chains <br><a href="https://github.com/arikarchmer/Personal-Website/blob/master/MarkovPoetry/waltbot.py">code</a>
                         </td>
                     </tr>
                     <tr class="post">
                         <td>
                             December 7, 2016 <br>
                             <a href="/particle" class="demo">Particles</a><br>
+                            javascript
                             <!--<iframe src="/particle"></iframe>-->
                         </td>
                     </tr>
@@ -180,6 +177,7 @@
                         <td>
                             November 8, 2016 <br>
                             <a href="/recursivetree" class="demo">Recursive art: tree</a><br>
+                            javascript
                             <!--<iframe src="/recursivetree"></iframe>-->
                         </td>
                     </tr>
@@ -205,7 +203,7 @@
         <canvas id="canvas" style="position: absolute; background-color: white;"></canvas>
     </div>
     <!--<div class="col-sm-2 col-sm-offset-3 text-right" style="background-color: transparent">-->
-        <!--<p style="font: 24px 'Cutive Mono'">Ari Karchmer </p>-->
+        <!--<p style="font: 24px 'Menlo'">Ari Karchmer </p>-->
         <!--<button class="btn-xs" type="button"><a href="http://www.github.com/arikarchmer" style="font-size: 14px; color: #030303">Github</a></button>-->
         <!--<button class="btn-xs" type="button"><a href="mailto:ari.karchmer.s@gmail.com" style="font-size: 14px;  color: #030303">Email</a></button>-->
         <!--<br>-->
