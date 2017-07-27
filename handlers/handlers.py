@@ -132,50 +132,23 @@ class ResultsHandler(webapp2.RequestHandler):
     def get(self, mode):
 
         searcher = Searcher()
-        flag = True
-        if mode == 'keyword':
-            k = self.request.get('keyword')
-            if k:
-                search_items = searcher.search(keyword=k)
-                info = [k]
-                parameters = {'search_items': search_items, 'info': info, 'which_widget': 'search'}
+
+        k = self.request.get('keyword')
+        lat = float(self.request.get('lat'))
+        lng = float(self.request.get('lng'))
+        coor = {'lat': lat, 'lng': lng}
+        r = self.request.get('radius')
+        if lat is None or lng is None or r is None:
+            page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_map_page.html')
+            parameters = {'fail': True}
+        else:
+            try:
+                map_items = searcher.search(keyword=k, coordinates=coor, radius=r)
+                parameters = {'map_items': map_items}
                 page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_results_page.html')
-            else:
-                page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_search_page.html')
-                parameters = {'invalid': True}
-                print 'bad search'
-                flag = False
+            except TweepError, e:
 
-        elif mode == 'coordinates':
-            lat = float(self.request.get('lat'))
-            lng = float(self.request.get('lng'))
-            coor = {'lat': lat, 'lng': lng}
-            r = self.request.get('radius')
-            if lat is None or lng is None or r is None:
-                page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_map_page.html')
-                parameters = {'fail': True}
-            else:
-                try:
-                    map_items = searcher.search(coordinates=coor)
-                    parameters = {'map_items': map_items, 'which_widget': 'map'}
-                    page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_results_page.html')
-                except TweepError, e:
-
-                    items = searcher.search(coordinates=coor)
-                    # items = [('','Sorry, Twitter is unavailable to be searched at this time. Try again later. ' + str(e),'','','','','')]
-                    # print 'error'
-
-                info = [lat, lng, r]
-
-                # if flag:
-                # if len(items) == 0:
-                #     if mode == 'keyword':
-                #         page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_results_page.html')
-                #         parameters = {'invalid': True}
-                #     elif mode == 'coordinates':
-                #         page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_map_page.html')
-                #         parameters = {'len': len(items)}
-                # else:
+                print 'error'
 
         self.response.write(page.render(parameters))
 

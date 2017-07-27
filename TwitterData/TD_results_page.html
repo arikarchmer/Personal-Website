@@ -13,6 +13,7 @@
   <script src="/static/td/core.js"></script>
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="/static/td/keys.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <style>
 body {
@@ -27,11 +28,7 @@ tr {
     /*width: 100%;*/
     /*display: inline-table;*/
     /*height: 18vh;*/
-    table-layout: auto;
-    border-bottom: 1px solid gray;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    transition: border 350ms;
+    /*border-bottom: 1px solid gray;*/
 }
 tr:hover{
     /*border-left: 15px solid darkgray;*/
@@ -48,7 +45,7 @@ tbody {
     width: 100%;
     position: absolute;
     font: 18px "Times New Roman";
-    border: 1px solid gray;
+    /*border: 1px solid gray;*/
 }
 a {
     font: 18px "Times New Roman";
@@ -69,12 +66,12 @@ h3 {
     display: none;
 }
 #text {
-    font: 16px "Times New Roman";
+    font: 14px "Times New Roman";
 }
 #map {
     height: 60vh;
     position: relative;
-    border: 1px solid gray;
+    /*border: 1px solid gray;*/
 }
 .b {
         background-color: white;
@@ -104,14 +101,35 @@ textarea {
      }
     .control-container {
         border: 0px solid gray;
-        height: 20vh;
+        /*height: 10vh;*/
     }
+
+
+    /*d3 chart stuff*/
+
+    .axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #000;
+}
+
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 28px;
+  pointer-events: none;
+}
 </style>
-<body id="body" style="padding-left: 2vw; padding-right: 2vw">
+<body id="body" style="padding-left: 6vw; padding-right: 6vw">
 <h2><i>location based sentiment analysis for twitter</i></h2>
 <div class="row">
 
-    <div class="col-sm-6" style="padding-right: 2vw;">
+    <div class="col-sm-6" style="padding-right: 3vw;">
 
         <div class="row">
             <div id="map" class="col-sm-12"></div>
@@ -121,22 +139,20 @@ textarea {
             <div class="control-container col-sm-12">
 
                 <div class="row" style="padding: 6px 0px 3px 0px">
-                    <textarea placeholder="search"></textarea>
+                    <textarea id="searchbar" placeholder="search"></textarea>
                 </div>
                 <div class="row" style="padding: 3px 0px 3px 0px">
-                    <div class="col-sm-2 text-center stats b" onclick="find()" style="border-right: none">
+                    <div class="col-sm-2 text-center stats b" onclick="find()" style="">
                         <p>search</p>
                     </div>
-                    <div class="col-sm-2 text-center stats b" onclick="find()">
-                        <p>stream</p>
-                    </div>
                 </div>
-                <div class="row" style="padding: 3px 0px 6px 0px">
-                    <div class="col-sm-2 text-center stats b" onclick="howTo()">
-                        <p>download</p>
-                    </div>
-                </div>
+                <!--<div class="row" style="padding: 3px 0px 6px 0px">-->
+                    <!--<div class="col-sm-2 text-center stats b" onclick="howTo()">-->
+                        <!--<p>download</p>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
+            <i>*searching may take a few seconds; thank you for your patience</i>
         </div>
     </div>
     <div class="col-sm-6">
@@ -155,6 +171,7 @@ textarea {
                       <br>
                       <p id="text">{{i[1]}}</p>
                       <h3 id="sent">{{i[7]}}</h3>
+                      <h6 id="rele" style="display: none">{{i[8]}}</h6>
                       <h4 id="tweetid" style="display: none">{{i[6]}}</h4>
                       <h4 id="screen_name" style="display: none">{{i[2]}}</h4>
                   </td>
@@ -164,8 +181,9 @@ textarea {
           </table>
         </div>
         <div class="row">
-            <div style="height: 40vh; border: 1px solid gray">
+            <div id="chart" style="height: 40vh; border: none;">
                 <!--placeholder-->
+
             </div>
         </div>
 
@@ -184,6 +202,7 @@ textarea {
     <!--</div>-->
 
 <!--</div>-->
+
 <script>
         // create map
     var map = L.map('map').setView([42.3610, -71.0587], 12);
@@ -213,25 +232,14 @@ textarea {
             }
         }
     });
-//    function getCookie() {
-//        var cookie_split = document.cookie.split(';');
-//        var center_str = cookie_split[0].split('=')[1].split(',');
-//        var radius_str = cookie_split[1].split('=')[1];
-//        var center = {'lat': center_str[0], 'lng': center_str[1]};
-//        L.marker(center).addTo(map);
-////        L.circle(center, radius_str).addTo(map);
-//    }
-//
-//    window.onload = getCookie();
-    function search() {
-        var k = document.getElementById('searchbox').value;
-        window.location = '/twitterdata/results/keyword?keyword=' + k
-    }
+
+
     function find() {
+        var k = document.getElementById('searchbar').value;
         var oldcenter = {lat: center.lat, lng: center.lng};
         var oldr = radius;
 //        document.cookie = "center=" + oldcenter['lat'] + "," + oldcenter['lng'] + ";radius=" + oldr;
-        window.location = '/twitterdata/results/coordinates?lat=' + center.lat + '&lng=' + center.lng + '&radius=' + radius;
+        window.location = '/twitterdata/results/?lat=' + center.lat + '&lng=' + center.lng + '&radius=' + radius + 'mi&keyword=' + k;
     }
     function changeBackgroundColors() {
         $('#myTable tr h3').each(function() {
@@ -241,33 +249,26 @@ textarea {
             $(this).parent().css( "background-color", c );
         });
     }
-    function changeBackgroundColors2() {
-        $('#myTable2 tr h3').each(function() {
+    var relevance = []
+    function getRelevance() {
+        $('#myTable tr h6').each(function() {
             var text = this.innerHTML;
             console.log(text);
-            var c = getColor(text);
-            $(this).parent().css( "background-color", c );
+            relevance.push(parseFloat(text))
         });
     }
+
     overall_sentiment = [];
     function getColor(d) {
-        var data = d.split(',');
-        var negativity = data[0];
+        var data = d;
+        var negativity = 1 - parseFloat(data);
         console.log(negativity);
-        overall_sentiment.push(negativity);
-        if (data[1] > 0.6) {
-            return 'white'
-        } else {
-            return getColorFromNum(negativity);
-        }
+        overall_sentiment.push(1 - negativity);
+
+        return getColorFromNum(negativity);
     }
     function getColorFromNum(n) {
-//        if (n < 0.5) {
-//            return 'rgb(0,255,127,' + 1-n*2 + ')';
-//        }
-//        if (n > 0.5) {
-//            return 'rgb(220,20,60,' + (n - 0.5) * 2 + ')';
-//        }
+
         if (n < 0.05) {
             return '#00E568'
         }
@@ -303,54 +304,44 @@ textarea {
         }
     }
     function stats() {
-        var widget = document.getElementById('which_widget').innerHTML;
-        console.log(widget);
+
         var sum = 0;
-            for (var n = 0; n < overall_sentiment.length; n++) {
-                console.log(overall_sentiment[n]);
-                sum = sum + parseFloat(overall_sentiment[n]);
-            }
-        if (widget == 'map') {
-            window.scrollBy(0,2000);
-            var avg = sum / overall_sentiment.length * 100;
-            document.getElementById('overall_sent').innerHTML = 'Overall sentiment: ' +(100 - avg.toPrecision(4)) + '% positive';
-            $('#stat1').css( "background-color", getColorFromNum(avg.toPrecision(4) / 100.0) );
-            $('#stat1').css( "padding-top", '10px');
-            $("html, body").animate({ scrollTop: "1800px" }, 1);
-        } else if (widget == 'search') {
-            var avg = sum / overall_sentiment.length * 100;
-            document.getElementById('overall_sent2').innerHTML = 'Overall sentiment: ' +(100 - avg.toPrecision(4)) + '% positive';
-            $('#stat2').css( "background-color", getColorFromNum(avg.toPrecision(4) / 100.0) );
+        for (var n = 0; n < overall_sentiment.length; n++) {
+            console.log(overall_sentiment[n]);
+            sum = sum + parseFloat(overall_sentiment[n]);
         }
+        var avg = sum / overall_sentiment.length * 100;
+//        document.getElementById('overall_sent').innerHTML = 'Overall sentiment: ' +(100 - avg.toPrecision(4)) + '% positive';
+        $('#stat1').css( "background-color", getColorFromNum(avg.toPrecision(4) / 100.0) );
+        $('#stat1').css( "padding-top", '10px');
+        $("html, body").animate({ scrollTop: "1800px" }, 1);
     }
-     function howTo() {
-         $("#how").modal("toggle");
-     }
-     function about() {
-         $("#about").modal("toggle");
-     }
-     function goToTweet(ele) {
-//         window.location = "http://www.twitter.com/" + $(ele, '#screename').innerHTML + "/status/" + $(ele, '#tweetid').innerHTML;
-//         window.location = "http://www.twitter.com/" + ele.getElementById('screen_name').innerHTML + "/status/" + ele.getElementById('tweetid').innerHTML
-     }
-     function goToTweet2(ele) {
-//         window.location = "http://www.twitter.com/" + $(ele, '#screename2').innerHTML + "/status/" + $(ele, '#tweetid2').innerHTML;
-//         window.location = "http://www.twitter.com/" + ele.getElementById('screen_name2').innerHTML + "/status/" + ele.getElementById('tweetid2').innerHTML
-     }
-     function trMouseOver(ele) {
-//         ele.style.opacity = ele.style.opacity * 2;
-//         ele.style.paddingTop = '50px';
-     }
-     function scroll(direction) {
-         if (direction == 'down') {
-             $("html, body").animate({ scrollTop: "1800px" }, 1500);
-         } else if (direction == 'up') {
-             $("html, body").animate({ scrollTop: "-1800px" }, 1500);
-         }
-    }
+
     changeBackgroundColors();
-    changeBackgroundColors2();
+    getRelevance();
     stats();
+
+
+//    chart stuff
+
+    var trace1 = {
+  x: relevance,
+  y: overall_sentiment,
+  mode: 'markers'
+};
+
+var data = [trace1];
+
+var layout = {
+  title:'sentiment against relevance',
+    titlefont: {family: 'Times', size: '24px'},
+    xaxis: {title: 'relevance', titlefont: {family: 'Times', size: '14px'}},
+    yaxis: {title: 'sentiment', titlefont: {family: 'Times', size: '14px'}},
+    paper_bgcolor: 'whitesmoke'
+};
+
+Plotly.newPlot('chart', data, layout);
+
 </script>
 </body>
 </html>
