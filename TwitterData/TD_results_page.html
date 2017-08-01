@@ -19,7 +19,7 @@
 body {
     background-color: white;
     color: black;
-    font: 14px "Times New Roman";
+    font: 14px "PT Sans";
 }
 td {
     border-top: none !important;
@@ -29,10 +29,11 @@ tr {
     /*display: inline-table;*/
     /*height: 18vh;*/
     /*border-bottom: 1px solid gray;*/
+    opacity: 0.85;
+    transition: opacity 0.15s;
 }
 tr:hover{
-    /*border-left: 15px solid darkgray;*/
-    /*border-left: 15px solid darkgray;*/
+    opacity: 1;
 }
 table {
     /*width: 100%;*/
@@ -44,29 +45,29 @@ tbody {
     height: 40vh;
     width: 100%;
     position: absolute;
-    font: 18px "Times New Roman";
+    font: 18px "PT Sans";
     /*border: 1px solid gray;*/
 }
 a {
-    font: 18px "Times New Roman";
-    color: blue;
+    font: 18px "PT Sans";
+    color: black;
 }
 a:hover {
-    color: blueviolet;
-    text-decoration: dotted;
+    color: black;
+    text-decoration: none;
 }
 h1 {
-    font: 48px "Times New Roman";
+    font: 48px "PT Sans";
 }
 h2 {
-    font: 24px "Times New Roman";
+    font: 24px "PT Sans";
 }
 h3 {
-    font: 32px "Times New Roman";
+    font: 32px "PT Sans";
     display: none;
 }
 #text {
-    font: 14px "Times New Roman";
+    font: 14px "PT Sans";
 }
 #map {
     height: 60vh;
@@ -74,9 +75,9 @@ h3 {
     /*border: 1px solid gray;*/
 }
 .b {
-        background-color: white;
+    background-color: white;
     border: 1px solid gray;
-        padding-top: 10px;
+    padding-top: 1vh;
     height: 4vh;
 }
 .b:hover {
@@ -85,24 +86,20 @@ h3 {
 
     .stats {
 
-        font: 14px "Times New Roman";
+        font: 14px "PT Sans";
 
       }
 textarea {
     padding-left: 10px;
-    padding-top: 10px;
+    padding-top: 1vh;
     border: 1px dotted gray;
         resize: vertical;
          outline: none;
          height: 4vh;
          width: 100%;
 
-        font: 14px "Times New Roman";
+        font: 14px "PT Sans";
      }
-    .control-container {
-        border: 0px solid gray;
-        /*height: 10vh;*/
-    }
 
 
     /*d3 chart stuff*/
@@ -114,14 +111,11 @@ textarea {
   shape-rendering: crispEdges;
 }
 
-.dot {
-  stroke: #000;
-}
-
 .tooltip {
-  position: absolute;
-  width: 200px;
-  height: 28px;
+    display: inline-flex;
+  position: relative;
+  /*width: 200px;*/
+  /*height: 28px;*/
   pointer-events: none;
 }
 </style>
@@ -159,7 +153,7 @@ textarea {
 
         <div class="row">
             {% if map_items is not defined %}
-                <p style="position: absolute; font: 24px 'Times New Roman'; padding-top: 50px; padding-left: 50px">there's nothing here yet...search a location!</p>
+                <p style="position: absolute; font: 24px 'PT Sans'; padding-top: 50px; padding-left: 50px">there's nothing here yet...search a location!</p>
             {% endif %}
           <table id="myTable" class="table text-left">
             <tbody>
@@ -172,7 +166,7 @@ textarea {
                       <p id="text">{{i[1]}}</p>
                       <h3 id="sent">{{i[7]}}</h3>
                       <h6 id="rele" style="display: none">{{i[8]}}</h6>
-                      <h4 id="tweetid" style="display: none">{{i[6]}}</h4>
+                      <h4 id="tweetlink" style="display: none">{{i[3]}}</h4>
                       <h4 id="screen_name" style="display: none">{{i[2]}}</h4>
                   </td>
               </tr>
@@ -181,27 +175,13 @@ textarea {
           </table>
         </div>
         <div class="row">
-            <div id="chart" style="height: 40vh; border: none;">
-                <!--placeholder-->
+            <div id="sentchart" style="height: 40vh; border: none;"></div>
 
-            </div>
         </div>
 
     </div>
 
 </div>
-
-
-<br><br><br><br><br>
-<!--<div class="row">-->
-    <!--<div class="col-sm-1 col-sm-offset-1 text-center info b" onclick="about()">-->
-        <!--<p>About</p>-->
-    <!--</div>-->
-    <!--<div class="col-sm-1 text-center info b" onclick="howTo()">-->
-        <!--<p>How to</p>-->
-    <!--</div>-->
-
-<!--</div>-->
 
 <script>
         // create map
@@ -239,7 +219,7 @@ textarea {
         var oldcenter = {lat: center.lat, lng: center.lng};
         var oldr = radius;
 //        document.cookie = "center=" + oldcenter['lat'] + "," + oldcenter['lng'] + ";radius=" + oldr;
-        window.location = '/twitterdata/results/?lat=' + center.lat + '&lng=' + center.lng + '&radius=' + radius + 'mi&keyword=' + k;
+        window.location = '/twitterdata/results/?lat=' + center.lat + '&lng=' + center.lng + '&radius=' + radius + '&keyword=' + k;
     }
     function changeBackgroundColors() {
         $('#myTable tr h3').each(function() {
@@ -249,12 +229,26 @@ textarea {
             $(this).parent().css( "background-color", c );
         });
     }
-    var relevance = []
+    var relevance = [];
     function getRelevance() {
         $('#myTable tr h6').each(function() {
             var text = this.innerHTML;
             console.log(text);
-            relevance.push(parseFloat(text))
+            relevance.push(parseFloat(text));
+        });
+    }
+
+    var tweets = [];
+    function getTweets() {
+        $('#myTable tr p').each(function() {
+            var text = this.innerHTML;
+            console.log(text);
+            var text_list = text.split('. ');
+            text = '';
+            for (var i = 0; i < text_list.length; i++) {
+                text += text_list[i] + '<br>';
+            }
+            tweets.push(text);
         });
     }
 
@@ -314,33 +308,82 @@ textarea {
 //        document.getElementById('overall_sent').innerHTML = 'Overall sentiment: ' +(100 - avg.toPrecision(4)) + '% positive';
         $('#stat1').css( "background-color", getColorFromNum(avg.toPrecision(4) / 100.0) );
         $('#stat1').css( "padding-top", '10px');
-        $("html, body").animate({ scrollTop: "1800px" }, 1);
+
     }
+
+        function goToTweet()
+        {
+//            var url = document.getElementById('tweetlink').innerHTML;
+//            console.log(url);
+//            window.location = url;
+        }
 
     changeBackgroundColors();
     getRelevance();
+    getTweets();
     stats();
 
 
 //    chart stuff
 
     var trace1 = {
-  x: relevance,
-  y: overall_sentiment,
-  mode: 'markers'
-};
+        x: relevance,
+        y: overall_sentiment,
+        customdata: tweets,
+        mode: 'markers',
+        type: 'scatter',
+        marker:{symbol: "triangle-up", size:10, color: 'black', opacity:0.33},
+        hoverlabel: {
+            bgcolor: 'white',
+            bordercolor: 'black',
+            font: {
+                size: 10
+            }
+        },
+        hovertext: tweets,
+        hoverinfo: 'text'
+    };
 
-var data = [trace1];
+    var myPlot = document.getElementById('sentchart'),
+        hoverInfo = document.getElementById('hoverinfo'),
+        d3 = Plotly.d3,
+        data = [trace1];
+        layout = {
+            title:'sentiment against relevance',
+            xaxis: {
+                title: 'relevance',
+                titlefont: {
+                    family: 'PT Sans',
+                    size: 12
+                },
+                tickfont: {
+                    size: 10
+                }
+            },
+            yaxis: {
+                title: 'sentiment',
+                titlefont: {
+                    family: 'PT Sans',
+                    size: 12
+                },
+                tickfont: {
+                    size: 10
+                }
+            },
+            paper_bgcolor: 'whitesmoke',
 
-var layout = {
-  title:'sentiment against relevance',
-    titlefont: {family: 'Times', size: '24px'},
-    xaxis: {title: 'relevance', titlefont: {family: 'Times', size: '14px'}},
-    yaxis: {title: 'sentiment', titlefont: {family: 'Times', size: '14px'}},
-    paper_bgcolor: 'whitesmoke'
-};
+            font: {
+                family: 'PT Sans',
+                size: 16,
+                color: 'black'
+            },
+            hovermode: 'closest',
+            margin: {
+                l: 100
+            }
+        };
 
-Plotly.newPlot('chart', data, layout);
+    Plotly.newPlot('sentchart', data, layout);
 
 </script>
 </body>
