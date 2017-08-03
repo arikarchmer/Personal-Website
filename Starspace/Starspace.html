@@ -15,7 +15,7 @@
 body {
     background-color: black;
     color: white;
-    font: 12px "Space Mono";
+    font: 12px "Times New Roman";
 }
 input[type=text] {
     border: 0;
@@ -24,7 +24,7 @@ input[type=text] {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: white;
-    font: 12px 'Space Mono';
+    font: 12px 'Times New Roman';
     padding: 5px 5px;
 }
 td {
@@ -45,14 +45,16 @@ tbody {
     height: 200px;
     width: 100%;
     position: absolute;
-    font: 14px 'Space Mono';
+    font: 14px 'Times New Roman';
 }
 .tooltip {
-    font: 10px 'Space Mono';
+    font: 10px 'Times New Roman';
 }
 .btn {
     margin: 5px;
-    border-radius: 12px;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
 }
 #name {
     transition: border-bottom-color 1s;
@@ -73,7 +75,7 @@ tbody {
             <div class="form-group">
                 <label for="name"><span class="glyphicon glyphicon-user" id="guy"></span></label>
                 <input id="name" type="text" class="from-control text-left" autofocus="autofocus" placeholder="Player 1" style="color:white">
-                <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-off"></span></button>
+                <button type="submit" class="btn btn-sm"><span class="glyphicon glyphicon-off"></span></button>
             </div>
           </form>
         </div>
@@ -100,7 +102,7 @@ tbody {
                 <p>This is a power up star (a very special star):</p>
                 <img src="/static/star/images/stars/green.png" class="img-circle">
                 <br><br>
-                <button type="button" onclick="demo()" class="btn btn-success btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span></button>
+                <button type="button" onclick="demo()" class="btn btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span></button>
             </div>
           </form>
         </div>
@@ -115,7 +117,7 @@ tbody {
             <br><br><br>
             <canvas id="myCanvas3" width="150" height="100" style="background-color:black"></canvas>
             <br><br><br>
-            <button type="button" onclick="clickStart()" class="btn btn-success btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span></button>
+            <button type="button" onclick="clickStart()" class="btn btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span></button>
         </div>
       </div>
     </div>
@@ -139,7 +141,7 @@ tbody {
             <br>
             <h4>Are you ready to move on?</h4>
             <br>
-            <button type="button" onclick="levelUp()" class="btn btn-success btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+            <button type="button" onclick="levelUp()" class="btn btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-thumbs-up"></span></button>
         </div>
       </div>
     </div>
@@ -152,9 +154,9 @@ tbody {
             <br>
             <h5 id="score"></h5>
             <br><br>
-            <button type="button" onclick="restart()" class="btn btn-success btn-sm" data-toggle="tooltip" title="Play again" data-animation="true" data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-repeat"></span></button>
-            <button type="button" onclick="submitScore()" class="btn btn-info btn-sm" data-toggle="tooltip" title="Leaderboard" data-animation="true" data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-globe"></span></button>
-            <button type="button" onclick="play()" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Home" data-animation="true"  data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-home"></span></button>
+            <button type="button" onclick="restart()" class="btn btn-sm" data-toggle="tooltip" title="Play again" data-animation="true" data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-repeat"></span></button>
+            <button type="button" onclick="submitScore()" class="btn btn-sm" data-toggle="tooltip" title="Leaderboard" data-animation="true" data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-globe"></span></button>
+            <button type="button" onclick="play()" class="btn btn-sm" data-toggle="tooltip" title="Home" data-animation="true"  data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-home"></span></button>
             <br><br>
         </div>
       </div>
@@ -170,8 +172,8 @@ tbody {
                 <h3 id="your_score" style="color: springgreen"></h3>
             </table>
             <br>
-            <button type="button" onclick="restart()" class="btn btn-success btn-sm" data-toggle="tooltip" title="Play again" data-animation="true" data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-repeat"></span></button>
-            <button type="button" onclick="play()" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Home" data-animation="true" data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-home"></span></button>
+            <button type="button" onclick="restart()" class="btn btn-sm" data-toggle="tooltip" title="Play again" data-animation="true" data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-repeat"></span></button>
+            <button type="button" onclick="play()" class="btn btn-sm" data-toggle="tooltip" title="Home" data-animation="true" data-placement="bottom" data-dismiss="modal"><span class="glyphicon glyphicon-home"></span></button>
             <br><br>
         </div>
       </div>
