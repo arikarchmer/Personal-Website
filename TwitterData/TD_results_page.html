@@ -83,11 +83,8 @@ h3 {
 .b:hover {
     background-color: whitesmoke;
 }
-
     .stats {
-
         font: 14px "Times New Roman";
-
       }
 textarea {
     padding-left: 10px;
@@ -97,20 +94,15 @@ textarea {
          outline: none;
          height: 4vh;
          width: 100%;
-
         font: 14px "Times New Roman";
      }
-
-
     /*d3 chart stuff*/
-
     .axis path,
 .axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
 }
-
 .tooltip {
     display: inline-flex;
   position: relative;
@@ -152,9 +144,7 @@ textarea {
     <div class="col-sm-6">
 
         <div class="row">
-            {% if map_items is not defined %}
-                <p style="position: absolute; font: 24px 'Times New Roman'; padding-top: 50px; padding-left: 50px">there's nothing here yet...search a location!</p>
-            {% endif %}
+            {% if map_items is defined %}
           <table id="myTable" class="table text-left">
             <tbody>
             {% for i in map_items %}
@@ -172,13 +162,15 @@ textarea {
               </tr>
             {% endfor %}
             </tbody>
+              {% endif %}
           </table>
         </div>
+        {% if map_items is defined %}
         <div class="row">
             <div id="sentchart" style="height: 40vh; border: none;"></div>
 
         </div>
-
+        {% endif %}
     </div>
 
 </div>
@@ -212,8 +204,6 @@ textarea {
             }
         }
     });
-
-
     function find() {
         var k = document.getElementById('searchbar').value;
         var oldcenter = {lat: center.lat, lng: center.lng};
@@ -237,7 +227,6 @@ textarea {
             relevance.push(parseFloat(text));
         });
     }
-
     var tweets = [];
     function getTweets() {
         $('#myTable tr p').each(function() {
@@ -251,18 +240,15 @@ textarea {
             tweets.push(text);
         });
     }
-
     overall_sentiment = [];
     function getColor(d) {
         var data = d;
         var negativity = 1 - parseFloat(data);
         console.log(negativity);
         overall_sentiment.push(1 - negativity);
-
         return getColorFromNum(negativity);
     }
     function getColorFromNum(n) {
-
         if (n < 0.05) {
             return '#00E568'
         }
@@ -298,7 +284,6 @@ textarea {
         }
     }
     function stats() {
-
         var sum = 0;
         for (var n = 0; n < overall_sentiment.length; n++) {
             console.log(overall_sentiment[n]);
@@ -308,24 +293,18 @@ textarea {
 //        document.getElementById('overall_sent').innerHTML = 'Overall sentiment: ' +(100 - avg.toPrecision(4)) + '% positive';
         $('#stat1').css( "background-color", getColorFromNum(avg.toPrecision(4) / 100.0) );
         $('#stat1').css( "padding-top", '10px');
-
     }
-
         function goToTweet()
         {
 //            var url = document.getElementById('tweetlink').innerHTML;
 //            console.log(url);
 //            window.location = url;
         }
-
     changeBackgroundColors();
     getRelevance();
     getTweets();
     stats();
-
-
 //    chart stuff
-
     var trace1 = {
         x: relevance,
         y: overall_sentiment,
@@ -343,7 +322,6 @@ textarea {
         hovertext: tweets,
         hoverinfo: 'text'
     };
-
     var myPlot = document.getElementById('sentchart'),
         hoverInfo = document.getElementById('hoverinfo'),
         d3 = Plotly.d3,
@@ -371,7 +349,6 @@ textarea {
                 }
             },
             paper_bgcolor: 'whitesmoke',
-
             font: {
                 family: 'Times New Roman',
                 size: 16,
@@ -382,9 +359,7 @@ textarea {
                 l: 100
             }
         };
-
     Plotly.newPlot('sentchart', data, layout);
-
 </script>
 </body>
 </html>

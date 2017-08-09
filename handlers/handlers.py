@@ -72,25 +72,6 @@ class CastleHandler(webapp2.RequestHandler):
         page = JINJA_ENVIRONMENT.get_template('castle+defense+ai.html')
         self.response.write(page.render())
 
-
-# class SumoHandler(webapp2.RequestHandler):
-#
-#     def get(self):
-#         page = JINJA_ENVIRONMENT.get_template('Sumo/sumo.html')
-#         self.response.write(page.render())
-#
-#
-# class SumoResultsHandler(webapp2.RequestHandler):
-#
-#     def post(self):
-#         page = JINJA_ENVIRONMENT.get_template('Sumo/sumo_results.html')
-#         data = self.request.POST['data']
-#         sumo = Sumo()
-#         items = sumo.run(data)
-#         parameters = {'items': items}
-#         self.response.write(page.render(parameters))
-
-
 class StarsHandler(webapp2.RequestHandler):
 
     def get(self):
@@ -138,17 +119,15 @@ class ResultsHandler(webapp2.RequestHandler):
         lng = float(self.request.get('lng'))
         coor = {'lat': lat, 'lng': lng}
         r = self.request.get('radius')
-        if lat is None or lng is None or r is None:
-            page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_map_page.html')
-            parameters = {'fail': True}
-        else:
-            try:
-                map_items = searcher.search(keyword=k, coordinates=coor, radius=r)
-                parameters = {'map_items': map_items}
-                page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_results_page.html')
-            except TweepError, e:
+        try:
+            # must pass keywords as list
+            map_items = searcher.search(keyword=[k], coordinates=coor, radius=r)
+            parameters = {'map_items': map_items}
+            page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_results_page.html')
+        except TweepError, e:
 
-                print 'error'
+            self.response.write(e)
+            return
 
         self.response.write(page.render(parameters))
 
