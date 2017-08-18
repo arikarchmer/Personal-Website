@@ -4,7 +4,7 @@ import webapp2
 from google.appengine.ext import db
 from TwitterData.searcher import Searcher
 from tweepy import TweepError
-# from Sumo.sumo import Sumo
+
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader('./'),

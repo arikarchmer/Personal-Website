@@ -1,18 +1,13 @@
 import tweepy
-from TwitterData.TDkeys import TDkeys
+from TwitterData.TDKeys import TDKeys
 from sentimentAnalyzer import SentimentAnalyzer
-from TwitterData.geocoder import Geocoder
-import requests
-import httplib
-import json
-import collections
 
 
 class Searcher():
 
     def search(self, keyword=None, coordinates=None, radius=5000):
-        auth = tweepy.OAuthHandler(TDkeys.consumer_key, TDkeys.consumer_secret)
-        auth.set_access_token(TDkeys.access_token, TDkeys.access_token_secret)
+        auth = tweepy.OAuthHandler(TDKeys.consumer_key, TDKeys.consumer_secret)
+        auth.set_access_token(TDKeys.access_token, TDKeys.access_token_secret)
         api = tweepy.API(auth)
 
         if coordinates is None:

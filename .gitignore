@@ -1,4 +1,4 @@
 *.pyc
 /TwitterData/geo_keys.py
-/TwitterData/TDkeys.py
+/TwitterData/TDKeys.py
 botkeys/botkeys.py
