@@ -126,7 +126,7 @@ class ResultsHandler(webapp2.RequestHandler):
             page = JINJA_ENVIRONMENT.get_template('TwitterData/TD_results_page.html')
         except TweepError, e:
 
-            self.response.write(e)
+            self.response.write('Sorry! There has been an error. Refresh in 30 seconds.')
             return
 
         self.response.write(page.render(parameters))

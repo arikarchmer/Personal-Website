@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Cutive+Mono|PT+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cutive+Mono|Raleway" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
@@ -14,8 +14,9 @@
         opacity: 0;
         background-color: white;
         transition: opacity 1s;
-        letter-spacing: 0px;
-        font-weight: 400;
+
+        font: 12px "Raleway";
+        color: gray;
     }
     table {
         /*height: 50vh;*/
@@ -46,169 +47,100 @@
         width: 40%;
         /*height: 15vh;*/
     }
-    /*p {*/
-        /*color: #030303;*/
-        /*font: 12px "Cutive Mono"*/
-    /*}*/
+
     b {
-        font: 12px "Cutive Mono"
-    }
-    .header {
-        color: #030303;
-        font: 36px "Cutive Mono";
-    }
-    .post {
-        font: 12px "Cutive Mono";
-        color: #030303;
-        background-color: transparent;
-        /*border: dashed 1px black;*/
+        font: 24px "Raleway"
     }
     a {
-        font: 12px "Cutive Mono";
-        color: blue;
+        font: 12px "Raleway";
+        color: #030303;
+        background-color: #d8ffe8;
     }
     a:hover {
-        color: blue;
-    }
-    .text-justify {
-        text-align: justify;
+        /*background-color: #ffdce9;*/
+        text-decoration: none;
+        color: #030303;
+        border-bottom: 1px dotted black;
     }
     .project {
-        font: 16px "Cutive Mono";
-        color: black;
+        font: 16px "Raleway";
+        color: #030303;
+        letter-spacing: 1px;
         /*letter-spacing: 1px;*/
     }
     .project:hover {
-        text-decoration: none;
-        background-color: #ffdce9;
-        color: black;
+        color: #030303;
+        border-bottom: 1px dotted black;
     }
-    .demo {
-        font: 16px "Cutive Mono";
-        color: black;
-    }
-    .demo:hover {
-        text-decoration: none;
-        background-color: #ffdce9;
-        color: black;
-    }
-    .hack {
-        font: 16px "Cutive Mono";
-        color: black;
-    }
-    .hack:hover {
-        text-decoration: none;
-        background-color: #ffdce9;
-        color: black;
-    }
-     textarea {
-         border: 1px solid purple;
-         resize: none;
-         outline: none;
-         height: 20vh;
-         width: 55%;
-     }
+
   </style>
 </head>
 <!--#e1f2de-->
-<body id="body" style="padding: 3vw 5vw 5vw 5vw">
-<div class="row">
-    <div class="col-sm-12 col-sm-offset-0 header text-justify">
-        <img src="static/painting.png" style="width: 260px; height: 80px"><br><br>
-        <p>Ari Karchmer<br>.
-        <a href="http://www.github.com/arikarchmer">Github</a> .
-        <a href="mailto:ari.karchmer.s@gmail.com">Email</a> .
-        <a href="https://www.linkedin.com/in/ari-karchmer-a12a7b10b/">Linked In</a> .</p>
+<body id="body" style="padding: 2vw 2vw 2vw 2vw">
+
+
+<div class="text-justify row">
+    <div class="col-sm-10 text-left" style="background-color: white;">
+        <div>
+
+                <!--August 11, 2017-->
+                <!--<a href="#" class="project"><b>Accident Predictions in Manhattan w/ Google Maps Route Evaluations</b></a>-->
+                <!--python, pandas, numpy, scipy, sci-kit learn-->
+                <!--<br><br>-->
+
+                July 31, 2017 -
+                <a href="/twitterdata/map" class="project"><b>Twitter Data w/ sentiment</b></a>
+                - python, javascript, leaflet.js, jinja templates, tweepy, indico, plotly.js
+                <br><br>
+
+                July 13, 2017 -
+                <a href="https://github.com/arikarchmer/tppy" class="project"><b>A command line tool for location based sentiment analysis on Twitter</b></a>
+                - python, tweepy, indico
+                <br><br>
+
+                June 10, 2017 -
+                <a href="/castle" class="project"><b>A computational approach to FiveThirtyEight's 02/03/17 riddle</b></a>
+                - python, pandas, genetic algorithms <a href="https://fivethirtyeight.com/features/can-you-rule-riddler-nation/">the riddle</a>
+                <br><br>
+
+                March 20, 2017 -
+                <a href="/march" class="project"><b>How to pick 29/32 first round NCAA tournament games</b></a>
+                - python, pandas
+                <br><br>
+
+                December 12, 2016 -
+                <a href="https://twitter.com/_waltbot" class="project"><b>A twitter bot that talks in poetry</b></a>
+                - python, Markov chains <a href="https://github.com/arikarchmer/Personal-Website/blob/master/MarkovPoetry/waltbot.py">code</a>
+                <br><br>
+
+                December 7, 2016 -
+                <a href="/particle" class="project"><b>Particles</b></a>
+                - javascript
+                <br><br>
+
+                November 8, 2016 -
+                <a href="/recursivetree" class="project"><b>Recursive art: tree</b></a>
+                - javascript
+                <br><br>
+
+                July 21, 2016 -
+                <a href="/starsakjsdha" class="project"><b>StarSpace</b></a>
+                - python, javascript, d3.js, ajax
+                <br><br>
+
+                June, 2016 -
+                <b style="color: gray; font-size: 18px;">Twitter Data (deprecated)</b>
+
+        </div>
+    </div>
+    <div class="col-sm-2 col-sm-offset-0 text-right">
+        <br>
+        <a href="http://www.github.com/arikarchmer">Github</a><br><br>
+        <a href="mailto:ari.karchmer.s@gmail.com">Email</a><br><br>
+        <a href="https://www.linkedin.com/in/ari-karchmer-a12a7b10b/">Linked In</a></p>
     </div>
 </div>
 
-<div class="text-justify row">
-    <div class="col-sm-12 text-left" style="background-color: white;">
-        <div id="big">
-            <table class="table text-left">
-                <tbody>
-                    <tr class="post">
-                        <td>
-                            July 31, 2017<br>
-                            <a href="/twitterdata/map" class="project">TwitterData 2.0</a><br>
-                            python, javascript, leaflet.js, jinja templates, tweepy, indico, plotly.js
-                        </td>
-                    </tr>
-                    <tr class="post">
-                        <td>
-                            July 13, 2017<br>
-                            <a class="hack" href="https://github.com/arikarchmer/tppy">Tppy: a command line tool for location based sentiment analysis on Twitter</a>
-                            <br>
-                            python, tweepy, indico
-                        </td>
-                    </tr>
-                    <tr class="post">
-                        <td>
-                            June 10, 2017<br>
-                            <a href="/castle" class="hack">A computational approach to FiveThirtyEight's 02-03-17 riddle</a>
-                            <br>
-                            python, pandas, genetic algorithms <br><a href="https://fivethirtyeight.com/features/can-you-rule-riddler-nation/">the riddle</a>
-                        </td>
-                    </tr>
-                    <tr class="post">
-                        <td>
-                            March 20, 2017<br>
-                            <a href="/march" class="hack">How to pick 29/32 first round NCAA tournament games</a>
-                            <br>
-                            python, pandas
-                        </td>
-                    </tr>
-                    <tr class="post">
-                        <td>
-                            December 12, 2016<br>
-                            <a href="https://twitter.com/_waltbot" class="hack">A twitter bot that talks in poetry</a>
-                            <br>
-                            python, Markov chains <br><a href="https://github.com/arikarchmer/Personal-Website/blob/master/MarkovPoetry/waltbot.py">code</a>
-                        </td>
-                    </tr>
-                    <tr class="post">
-                        <td>
-                            December 7, 2016 <br>
-                            <a href="/particle" class="demo">Particles</a><br>
-                            javascript
-                            <!--<iframe src="/particle"></iframe>-->
-                        </td>
-                    </tr>
-                    <tr class="post">
-                        <td>
-                            November 8, 2016 <br>
-                            <a href="/recursivetree" class="demo">Recursive art: tree</a><br>
-                            javascript
-                            <!--<iframe src="/recursivetree"></iframe>-->
-                        </td>
-                    </tr>
-                    <tr class="post">
-                        <td>
-                            July, '16<br>
-                            <a href="/starsakjsdha" class="project">StarSpace</a><br>
-                            python, javascript, d3.js, ajax
-                        </td>
-                    </tr>
-                    <tr class="post" style="color: gray">
-                        <td>
-                            June, '16<br>
-                            <p style="color: gray; font-size: 14px">TwitterData (deprecated)</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <canvas id="canvas" style="position: absolute; background-color: white;"></canvas>
-    </div>
-    <!--<div class="col-sm-2 col-sm-offset-3 text-right" style="background-color: transparent">-->
-        <!--<p style="font: 24px 'Cutive Mono'">Ari Karchmer </p>-->
-        <!--<button class="btn-xs" type="button"><a href="http://www.github.com/arikarchmer" style="font-size: 14px; color: #030303">Github</a></button>-->
-        <!--<button class="btn-xs" type="button"><a href="mailto:ari.karchmer.s@gmail.com" style="font-size: 14px;  color: #030303">Email</a></button>-->
-        <!--<br>-->
-    <!--</div>-->
-</div>
 <script>
    document.getElementById('body').style.opacity = 1;
 </script>
