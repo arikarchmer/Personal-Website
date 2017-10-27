@@ -46,10 +46,10 @@ class MarchHandler(webapp2.RequestHandler):
         self.response.write(page.render())
 
 
-class MonteCarloPiHandler(webapp2.RequestHandler):
+class MotorModelHandler(webapp2.RequestHandler):
 
     def get(self):
-        page = JINJA_ENVIRONMENT.get_template('MonteCarloApproxPi.html')
+        page = JINJA_ENVIRONMENT.get_template('NYC+crash+viz.html')
         self.response.write(page.render())
 
 

@@ -5,17 +5,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Cutive+Mono|Raleway" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Avenir+Next|Montserrat|Monaco" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
     body {
         position: relative;
         opacity: 0;
-        background-color: white;
+        background-color: whitesmoke;
         transition: opacity 1s;
 
-        font: 12px "Raleway";
+        font: 10px "Monaco";
         color: gray;
     }
     table {
@@ -39,96 +39,114 @@
         border: 1px solid #030303;
         width: 40%;
     }
-
+    t {
+        font: 48px "Montserrat";
+        color: black;
+    }
     b {
-        font: 20px "Raleway"
-    }
-    a {
-        font: 12px "Raleway";
-        color: #030303;
-        background-color: #d8ffe8;
-    }
-    a:hover {
-        text-decoration: none;
-        color: #030303;
-        border-bottom: 1px dotted black;
-    }
-    .project {
-        font: 16px "Raleway";
-        color: #030303;
+        font: 14px "Monaco";
         letter-spacing: 1px;
     }
+    a {
+        font: 8px "Monaco";
+        color: gray;
+        background-color: white;
+    }
+    a:hover {
+
+        text-decoration: none;
+        color: black;
+    }
+    .project {
+        font: 8px "Monaco";
+        color: gray;
+
+        /*border-bottom: 1px dotted lightgray;*/
+        padding-bottom: 7px;
+        padding-top: 7px;
+        transition: padding 250ms;
+    }
     .project:hover {
-        color: #030303;
-        border-bottom: 1px dotted black;
+        color: gray;
+        /*border-bottom: 1px dotted black;*/
+        border-left: 1px solid black;
+        padding-left: 15px;
+
     }
 
   </style>
 </head>
 <!--#e1f2de-->
-<body id="body" style="padding: 2vw 2vw 2vw 2vw">
+<body id="body" style="padding: 3vw 4vw 3vw 4vw">
 
 
-<div class="text-justify row">
-    <div class="col-sm-10 text-left" style="background-color: white;">
-        <div>
+<div class="text-justify row" style="">
+    <div class="col-sm-6 col-sm-offset-3 text-justify" style="background-color: white; padding-bottom: 2vh; padding-top: 2vh">
+        <t>arikarchmer.com</t> <br>
+///
+<a href="http://www.github.com/arikarchmer">Github</a> ///
+<a href="mailto:ari.karchmer.s@gmail.com">Email</a> ///
+<a href="https://www.linkedin.com/in/ari-karchmer-a12a7b10b/">Linked In</a>
+<br><br><br>
+        <div style="padding-left: 2vw;">
+            <div class="project">
+                 - October 16, 2017 - <br>
+                <a href="https://github.com/arikarchmer/TPC-DS-Generator"><b>Auto-generate Postgres DB from TPC-DS</b></a><br>
+                 - python, TPC-DS, PostgreSQL -
+            </div>
+            <div class="project">
+                 - August 11, 2017 - <br>
+                <a href="/motormodel"><b>Accident Predictions in Manhattan w/ Google Maps Route Evaluations</b></a><br>
+                 - python, pandas, numpy, scipy, sci-kit learn -
 
-                <!--August 11, 2017-->
-                <!--<a href="#" class="project"><b>Accident Predictions in Manhattan w/ Google Maps Route Evaluations</b></a>-->
-                <!--python, pandas, numpy, scipy, sci-kit learn-->
-                <!--<br><br>-->
+            </div>
+            <div class="project">
+                 - July 31, 2017 - <br>
+                <b>Twitter Data w/ sentiment</b><b style="color: lightcoral"> - Under construction</b><br>
+                 - python, javascript, leaflet.js, jinja templates, tweepy, indico, plotly.js -
 
-                July 31, 2017 -
-                <a href="/twitterdata/map" class="project"><b>Twitter Data w/ sentiment</b></a>
-                - python, javascript, leaflet.js, jinja templates, tweepy, indico, plotly.js
-                <br><br>
+            </div>
+            <div class="project">
+                 - July 13, 2017 - <br>
+                <a href="https://github.com/arikarchmer/tppy"><b>A command line tool for location based sentiment analysis on Twitter</b></a><br>
+                 - python, tweepy, indico -
 
-                July 13, 2017 -
-                <a href="https://github.com/arikarchmer/tppy" class="project"><b>A command line tool for location based sentiment analysis on Twitter</b></a>
-                - python, tweepy, indico
-                <br><br>
+            </div>
+            <div class="project">
+                 - June 10, 2017 - <br>
+                <a href="/castle"><b>A computational approach to FiveThirtyEight's 02/03/17 riddle</b></a><br>
+                 - python, pandas, genetic algorithms <a href="https://fivethirtyeight.com/features/can-you-rule-riddler-nation/">the riddle</a> -
 
-                June 10, 2017 -
-                <a href="/castle" class="project"><b>A computational approach to FiveThirtyEight's 02/03/17 riddle</b></a>
-                - python, pandas, genetic algorithms <a href="https://fivethirtyeight.com/features/can-you-rule-riddler-nation/">the riddle</a>
-                <br><br>
-
-                March 20, 2017 -
-                <a href="/march" class="project"><b>How to pick 29/32 first round NCAA tournament games</b></a>
-                - python, pandas
-                <br><br>
-
-                December 12, 2016 -
-                <a href="https://twitter.com/_waltbot" class="project"><b>A twitter bot that talks in poetry</b></a>
-                - python, Markov chains <a href="https://github.com/arikarchmer/Personal-Website/blob/master/MarkovPoetry/waltbot.py">code</a>
-                <br><br>
-
-                December 7, 2016 -
-                <a href="/particle" class="project"><b>Particles</b></a>
-                - javascript
-                <br><br>
-
-                November 8, 2016 -
-                <a href="/recursivetree" class="project"><b>Recursive art: tree</b></a>
-                - javascript
-                <br><br>
-
-                July 21, 2016 -
-                <a href="/starsakjsdha" class="project"><b>StarSpace</b></a>
-                - python, javascript, d3.js, ajax
-                <br><br>
-
-                June, 2016 -
-                <b style="color: gray; font-size: 18px;">Twitter Data (deprecated)</b>
+            </div>
+            <div class="project">
+                 - March 20, 2017 - <br>
+                <a href="/march"><b>How to pick 29/32 first round NCAA tournament games</b></a><br>
+                 - python, pandas -
+            </div>
+            <div class="project">
+                 - December 12, 2016 - <br>
+                <a href="https://twitter.com/_waltbot"><b>A twitter bot that talks in poetry</b></a><br>
+                 - python, Markov chains <a href="https://github.com/arikarchmer/Personal-Website/blob/master/MarkovPoetry/waltbot.py">code</a> -
+            </div>
+            <div class="project">
+                 - December 7, 2016 - <br>
+                <a href="/particle"><b>Particles</b></a><br>
+                 - javascript -
+            </div>
+            <div class="project">
+                 - November 8, 2016 - <br>
+                <a href="/recursivetree"><b>Recursive art: tree</b></a><br>
+                 - javascript -
+            </div>
+            <div class="project">
+                 - July 21, 2016 - <br>
+                <a href="/starsakjsdha"><b>StarSpace</b></a><br>
+                 - python, javascript, d3.js, ajax -
+            </div>
 
         </div>
     </div>
-    <div class="col-sm-2 col-sm-offset-0 text-right">
-        <br>
-        <a href="http://www.github.com/arikarchmer">Github</a><br><br>
-        <a href="mailto:ari.karchmer.s@gmail.com">Email</a><br><br>
-        <a href="https://www.linkedin.com/in/ari-karchmer-a12a7b10b/">Linked In</a>
-    </div>
+
 </div>
 
 <script>

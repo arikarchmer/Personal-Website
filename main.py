@@ -29,6 +29,7 @@ app = webapp2.WSGIApplication([
     ('/twitterdata/results/(.*)', hh.ResultsHandler),
     ('/twitterdata/map', hh.MapHandler),
     ('/march', hh.MarchHandler),
-    ('/castle', hh.CastleHandler)
+    ('/castle', hh.CastleHandler),
+    ('/motormodel', hh.MotorModelHandler)
 
 ], debug=True)
